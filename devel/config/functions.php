@@ -146,6 +146,11 @@ function fetch($q) {
 	return $r;
 }
 
+function fetch_row($q) {
+	$r = mysql_fetch_row($q);
+	return $r;
+}
+
 function num($q) {
 	return mysql_num_rows($q);
 }
