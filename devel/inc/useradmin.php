@@ -34,7 +34,7 @@ if (($action == "view") || (!isset($action)))
 		echo "<font color=red>$profile[7]</font>";
 	}
 
-	$query = query("SELECT * FROM users WHERE users.ID=".$editID."");
+	$query = query("SELECT * FROM users WHERE users.ID=".mysql_escape_string($editID)."");
 
 	$row = fetch($query);
 	echo "<form method=post action=index.php?inc=useradmin&action=edit&user=$row->ID>";
@@ -123,7 +123,7 @@ if (($action == "view") || (!isset($action)))
 	}
 	else
 	{
-		$groups = query("SELECT * FROM groups WHERE ID = $row->myGroup");
+		$groups = query("SELECT * FROM groups WHERE ID = '".mysql_escape_string($row->myGroup)."'");
 		$Group = fetch($groups);
 		echo $Group->groupname;
 
@@ -176,7 +176,7 @@ if (($action == "view") || (!isset($action)))
 }
 elseif ($action == "edit")
 {
-	$q = query("SELECT * FROM users WHERE ID = $editID");
+	$q = query("SELECT * FROM users WHERE ID = '".mysql_escape_string($editID)."'");
 	$r = fetch($q);
 	$nick = $_POST['nick'];
 	$firstName = $_POST['firstName'];
@@ -209,22 +209,21 @@ elseif ($action == "edit")
 	}
 	
 	$query = query("UPDATE users SET
-		nick='".$nick."',
-		firstName = '$firstName',
-		lastName = '$lastName',
-		aboutMe = '$aboutme',
-		cellphone = '$cellphone',
-		allowPublic = $allowPublic,
-		userDesign = '$userDesign',
-		street = '$street',
-		postNr = '$postNr',
-		postPlace = '$postPlace',
-		birthDAY = '$birthDAY',
-		birthMONTH = '$birthMONTH',
-		birthYEAR = '$birthYEAR',
-		myGroup = $myGroup
-
-		WHERE ID = $editID");
+		nick='".mysql_escape_string($nick)."',
+		firstName = '".mysql_escape_string($firstName)."',
+		lastName = '".mysql_escape_string($lastName)."',
+		aboutMe = '".mysql_escape_string($aboutme)."',
+		cellphone = '".mysql_escape_string($cellphone)."',
+		allowPublic = '".mysql_escape_string($allowPublic)."',
+		userDesign = '".mysql_escape_string($userDesign)."',
+		street = '".mysql_escape_string($street)."',
+		postNr = '".mysql_escape_string($postNr)."',
+		postPlace = '".mysql_escape_string($postPlace)."',
+		birthDAY = '".mysql_escape_string($birthDAY)."',
+		birthMONTH = '".mysql_escape_string($birthMONTH)."',
+		birthYEAR = '".mysql_escape_string($birthYEAR)."',
+		myGroup = '".mysql_escape_string($myGroup)."',
+		WHERE ID = '".$editID."'");
 
 	refresh("index.php?inc=useradmin&user=$editID", "0");
 
@@ -262,13 +261,13 @@ elseif ($action == "doeditpass")
 	else
 	{
 		$cpass = crypt_pwd($pwd1);
-		query("UPDATE users SET users.password='".$cpass."' WHERE users.ID=".$editID."");
+		query("UPDATE users SET users.password='".mysql_escape_string($cpass)."' WHERE users.ID=".mysql_escape_string($editID)."");
 		refresh("index.php?inc=useradmin&mode=pwdsuccess&user=$editID", "0");
 	}
 }
 elseif ($action == "changemail")
 {
-	$query = query("SELECT * FROM users WHERE users.ID=".$editID."");
+	$query = query("SELECT * FROM users WHERE users.ID = '".mysql_escape_string($editID)."'");
 
 	$row = fetch($query);
 	?>
@@ -286,7 +285,7 @@ elseif ($action == "changemail")
 }
 elseif ($action == "dochangemail")
 {
-	$query = query("SELECT * FROM users WHERE users.ID=".$editID."");
+	$query = query("SELECT * FROM users WHERE users.ID=".mysql_escape_string($editID)."");
 
 	$check = fetch($query);
 
@@ -300,7 +299,7 @@ elseif ($action == "dochangemail")
 	else
 	{
 		$ran = createcifer() or nicedie($msg['28']);
-		$update = query("UPDATE users SET users.EMail='".$newmail,"', verified='".$ran."' WHERE users.ID=".$editID."");
+		$update = query("UPDATE users SET users.EMail='".mysql_escape_string($newmail),"', verified='".mysql_escape_string($ran)."' WHERE users.ID = '".mysql_escape_string($editID)."'"));
 
 		if(!mail("$newmail", $mail[0], mail_body($ran), "From: ".$mail[2]))
 		{
