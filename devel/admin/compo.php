@@ -3,7 +3,7 @@
 require 'config/config.php';
 
 if(getuserrank() != 2) 
-	die($admin[noaccess]);
+	nicedie($admin[noaccess]);
 
 $action = $_GET['action'];
 
@@ -30,10 +30,10 @@ if(!isset($action)) {
 	</form>
 	<?php
 } elseif($action == "add") {
-	$shortname = $_POST['shortname'];
-	$longname = $_POST['longname'];
-	$gametype = $_POST['gametype'];
-	$players = $_POST['players'];
+	$shortname = mysql_escape_string ($_POST['shortname']);
+	$longname = mysql_escape_string ($_POST['longname']);
+	$gametype = mysql_escape_string ($_POST['gametype']);
+	$players = mysql_escape_string ($_POST['players']);
 	
 	$insert = query("INSERT INTO compo SET name = '$shortname', 
 		caption = '$longname',
