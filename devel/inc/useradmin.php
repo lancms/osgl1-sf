@@ -16,7 +16,7 @@ if(!acl_access("adminUsers")) {
 
 	$editID = getcurrentuserid();
 
-} elseif(acl_access("adminUsers")) && isset($_GET['user'])) {
+} elseif(acl_access("adminUsers") && isset($_GET['user'])) {
 
 	$editID = $_GET['user'];
 	if($editID != getcurrentuserid()) $doLogs = TRUE;
@@ -53,10 +53,10 @@ if($action == "view" || !isset($action)) {
 	user_table($form[25], "<a href=index.php?inc=useradmin&action=changepass&user=$editID>$form[33]</a>");
 
 	user_table($profile[6], "<a href=index.php?inc=useradmin&action=changemail&user=$editID>$form[34]</a>");
-	
+
 	user_table("Gateadresse/nr", "<input type=text name=street value='$row->street'>");
 	user_table("Postnummer/sted", "<input type=text name=postNr value='$row->postNr' size=5><input type=text name=postPlace value='$row->postPlace'>");
-	
+
 	$birthdayinfo = "<select name=birthDAY>";
 	for($i=1;$i<32;$i++) {
 		if($i != $row->birthDAY) $select = "";
@@ -191,7 +191,7 @@ elseif($action == "edit") {
 		birthDAY = '$birthDAY',
 		birthMONTH = '$birthMONTH',
 		birthYEAR = '$birthYEAR'
-		
+
 		WHERE ID = $editID") or die(mysql_error());
 
 	refresh("index.php?inc=useradmin&user=$editID", "0");
