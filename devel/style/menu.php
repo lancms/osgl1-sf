@@ -36,6 +36,7 @@ if(config("usepage_seat")) write_menu("seat.php", $title['page'][6]);
 if(config("usepage_compo")) write_menu("index.php?inc=compo", $title['page'][8]);
 if(config("usepage_forum")) write_menu("forum.php", $title['page'][12]);
 if(config("usepage_partyweb")) write_menu("partyweb/", $title['page'][16]);
+if(config("usepage_show_stats")) write_menu("index.php?inc=stats", lang("Statistics", "style_menu", "Menuitem for stats"));
 if(getcurrentuserid() == 1) {
 
 }
