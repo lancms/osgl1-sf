@@ -569,14 +569,14 @@ elseif ($action == "AddComment")
 	$query = sprintf ("SELECT * FROM wannabeComment WHERE user = %s AND adminID = %s", escape_string($ID), escape_string($user));
 	$result = query($query);
 	$num = num($result);
-
+	$lastUpdate = time();
 	if ($num != 0)
 	{
-		$query = sprintf ("UPDATE wannabeComment SET comment = '%s', approve = '%s' WHERE user = %s AND adminID = %s", escape_string($Com), escape_string($Like), escape_string($ID), escape_string($user));
+		$query = sprintf ("UPDATE wannabeComment SET comment = '%s', approve = '%s', logUNIX = '$lastUpdate' WHERE user = %s AND adminID = %s", escape_string($Com), escape_string($Like), escape_string($ID), escape_string($user));
 	}
 	else
 	{
-		$query = sprintf ("INSERT INTO wannabeComment (ID, comment, approve, user, adminID) VALUES (NULL, '%s', '%s', '%s', '%s')", escape_string($Com), escape_string($Like), escape_string($ID), escape_string($user));
+		$query = sprintf ("INSERT INTO wannabeComment (ID, comment, approve, user, adminID, logUNIX) VALUES (NULL, '%s', '%s', '%s', '%s', '$lastUpdate')", escape_string($Com), escape_string($Like), escape_string($ID), escape_string($user));
 	}
 	$result = query($query);
 	echo lang("Comment added", "admin_wannabemin", "Text used in wannabemin");
