@@ -92,6 +92,7 @@ $msg[24] = "Hvis du ikke har fått tilsendt noen verifiseringskode, kontakt admin
 $msg[25] = "Du har ikke tilgang til dette av en eller annen merkelig grunn...";
 $msg['26'] = "Du er ikke logget inn.";
 $msg['27'] = "Du er nå logget ut.";
+$msg['28'] = "Kunne ikke generere tilfeldig tall.";
 
 $rank[0] = "Deltager";
 $rank[1] = "Crew";

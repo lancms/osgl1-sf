@@ -25,7 +25,7 @@ if(!acl_access("adminUsers")) {
 
 
 if(getcurrentuserid() == 1)
-	nicedie("Du må logge enn _FØR_ du får gjort noe her");
+	nicedie($msg['26']);
 
 
 if($action == "view" || !isset($action)) {
@@ -33,9 +33,9 @@ if($action == "view" || !isset($action)) {
 	if($_GET['mode'] == "success") echo "<font color=red>$profile[7]</font>";
 	if($_GET['mode'] == "pwdsuccess") echo "<font color=red>$profile[7]</font>";
 
-	$query = mysql_query("SELECT * FROM users WHERE ID = $editID") or nicedie(mysql_error());
+	$query = query("SELECT * FROM users WHERE users.ID=".$editID."");
 
-	$row = mysql_fetch_object($query);
+	$row = fetch($query);
 	echo "<form method=post action=index.php?inc=useradmin&action=edit&user=$row->ID>";
 	echo '<table>';
 	user_table($profile[3],"<input type=text name=name value='$row->name'>");
@@ -203,7 +203,7 @@ elseif($action == "edit") {
 	$birthDAY = $_POST['birthDAY'];
 	$birthMONTH = $_POST['birthMONTH'];
 	$birthYEAR = $_POST['birthYEAR'];
-	$query = mysql_query("UPDATE users SET name = '$name',
+	$query = query("UPDATE users SET name = '$name',
 		aboutMe = '$aboutme',
 		crewField = '$crewField',
 		cellphone = '$cellphone',
@@ -217,7 +217,7 @@ elseif($action == "edit") {
 		birthYEAR = '$birthYEAR',
 		myGroup = $myGroup
 
-		WHERE ID = $editID") or nicedie(mysql_error());
+		WHERE ID = $editID");
 
 	refresh("index.php?inc=useradmin&user=$editID", "0");
 if($doLogs) adminLog("Endret på brukeren. Viktig informasjon som ble gjennomgått var: name = $name, aboutMe = $aboutme, rank = $rank, bursdag = $birthDAY / $birthMONTH $birthYEAR",3, $editID);
@@ -261,7 +261,7 @@ if($doLogs) adminLog("Endret på brukeren. Viktig informasjon som ble gjennomgått
 
 		$cpass = crypt_pwd($pwd1);
 
-		mysql_query("UPDATE users SET password = '$cpass' WHERE ID = $editID") or nicedie(mysql_error());
+		mysql("UPDATE users SET users.password='".$cpass."' WHERE users.ID=".$editID."");
 
 		refresh("index.php?inc=useradmin&mode=pwdsuccess&user=$editID", "0");
 
@@ -269,9 +269,9 @@ if($doLogs) adminLog("Endret på brukeren. Viktig informasjon som ble gjennomgått
 if($doLogs) adminLog("Endret passord",3, $editID);
 } elseif($action == "changemail") {
 
-	$query = mysql_query("SELECT * FROM users WHERE ID = $editID") or nicedie(mysql_error());
+	$query = query("SELECT * FROM users WHERE users.ID=".$editID."");
 
-	$row = mysql_fetch_object($query);
+	$row = fetch($query);
 
 	?>
 
@@ -293,9 +293,9 @@ if($doLogs) adminLog("Endret passord",3, $editID);
 
 } elseif($action == "dochangemail") {
 
-	$query = mysql_query("SELECT * FROM users WHERE ID = $editID") or nicedie(mysql_error());
+	$query = query("SELECT * FROM users WHERE users.ID=".$editID."");
 
-	$check = mysql_fetch_object($query);
+	$check = fetch($query);
 
 	$newmail = $_POST['newmail'];
 
@@ -309,9 +309,9 @@ if($doLogs) adminLog("Endret passord",3, $editID);
 
 	} else {
 
-		$ran = createcifer() or die("Could not create random number!");
+		$ran = createcifer() or nicedie($msg['28']);
 
-		$update = mysql_query("UPDATE users SET EMail = '$newmail', verified = '$ran' WHERE ID = $editID") or nicedie(mysql_error());
+		$update = query("UPDATE users SET users.EMail='".$newmail,"', verified='".$ran."' WHERE users.ID=".$editID."");
 
 
 
