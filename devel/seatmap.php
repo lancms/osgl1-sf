@@ -31,7 +31,7 @@ for($i=0;$i<$height;$i++)
 			case "/":	// door
 				$cur = 5;
 				break;
-			case "k":	// kiosk
+			case "k":	// canteen / shop
 				$cur = 6;
 				break;
 			case "n":	// not opened
