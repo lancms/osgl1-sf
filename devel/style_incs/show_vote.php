@@ -14,7 +14,7 @@ elseif (isset($rQ->ID))
 {
 	echo "<b>$rQ->text</b>";
 
-	$num = query("SELECT * FROM pollVoted WHERE userID = ".getcurrentuserid()." AND pollID = $rQ->ID");
+	$num = query("SELECT * FROM pollVoted WHERE userID = '".escape_string(getcurrentuserid(I)."' AND pollID = '".escape_string$rQ->ID)."'");
 	if(num($num) >= $rQ->maxVotes)
 	{
 		$votable = FALSE;
@@ -28,7 +28,7 @@ elseif (isset($rQ->ID))
 	$votable = TRUE;
 	}
 
-	$qA = query("SELECT * FROM pollA WHERE QID = '".mysql_escape_string($rQ->ID)."'");
+	$qA = query("SELECT * FROM pollA WHERE QID = '".escape_string($rQ->ID)."'");
 	while($rA = fetch($qA)) {
 		echo "<br><br>";
 		if($votable)
