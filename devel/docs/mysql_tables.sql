@@ -404,6 +404,21 @@ CREATE TABLE wannabe (
 ) TYPE=MyISAM;
 
 --
+-- Table structure for table `lang`
+--
+
+DROP TABLE IF EXISTS lang;
+CREATE TABLE lang (
+  ID int(11) NOT NULL auto_increment, 
+  string text NULL,
+  language varchar(30) NOT NULL default 'english',
+  module varchar(30),
+  translated text NULL,
+  PRIMARY KEY (ID)
+);
+
+
+--
 -- Table structure for table `wannabeAdmin`
 --
 
