@@ -55,7 +55,8 @@ function verify($mode="register", $nick, $firstname, $lastname, $email=NULL, $pa
 {
     if($nick == "") // check nick.
         return 8;
-    elseif($email == "") // check there is an e-mail
+
+    elseif (($mode == "register") && ($email == "")) // check there is an e-mail
         return 9;
     
 	 elseif(($mode == "register") && (strlen($password) < $min_pass_length)) // check the length of the password.
@@ -63,7 +64,8 @@ function verify($mode="register", $nick, $firstname, $lastname, $email=NULL, $pa
 
     elseif(($mode = "register") && (!(strchr($email, "@")) && (strchr($email, ".")))) // check if the email contains at least one @ and at least one dot.
         return 11;
-    elseif((!strchr($firstname, " ")) || (!strchr($lastname, " ")))
+
+	elseif((!strchr($firstname, " ")) || (!strchr($lastname, " ")))
 	 	return 12;
 
     else    // if we find no of the above errors, compare user name with the database.
