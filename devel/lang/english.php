@@ -119,6 +119,7 @@ $msg['37'] = "Search by nick or name";
 $msg['38'] = "Change ticket";
 $msg['39'] = "No seat";
 $msg['40'] = "Componame";
+$msg['41'] = "Fill in what you whink of the diffrent composuggestions";
 
 $partyweb['0'] = "Menuname";
 $partyweb['1'] = "Display in menu";

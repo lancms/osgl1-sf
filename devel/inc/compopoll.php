@@ -12,7 +12,7 @@ if(getuserrank() > 0)
 $action = $_GET['action'];
 if(!isset($action)) {
 
-echo "Jauda, er bare å fylle inn det du mener om de forskjellige compoenforslagene....";
+echo $msg['41'];
 echo "<table>";
 echo "<form method=POST action=index.php?inc=compopoll&action=editvote>";
 $q = query("SELECT * FROM compoPoll");

@@ -119,6 +119,7 @@ $msg['37'] = "Søk gjennom nick eller navn";
 $msg['38'] = "Endre billett";
 $msg['39'] = "No seat";
 $msg['40'] = "Componavn";
+$msg['41'] = "Jauda, er bare å fylle inn det du mener om de forskjellige compoenforslagene....";
 
 $partyweb['0'] = "Menynavn";
 $partyweb['1'] = "Vis i meny";
