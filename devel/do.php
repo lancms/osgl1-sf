@@ -19,17 +19,12 @@ if($action=="login") {
 
     $res = log_in($username, $pwd);
 
-    if($res == -1)   // user is not found in database
-    {
-        include $base_path."style/top.php";
-        echo "This user is not registered in the database";
-    }
-    elseif($res == -2) // the password is incorrect
+    elseif($res == -1) // the password is incorrect
     {
         include $base_path."style/top.php";
         echo "The password you entered is incorrect for this user";
     }
-    elseif($res == -3) { // User not verified
+    elseif($res == -2) { // User not verified
         $uid = getuseridx($username, $pwd);
         header("Location: do.php?action=verify&uid=$uid");
     }

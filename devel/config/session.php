@@ -209,11 +209,9 @@ function log_in($nick, $password)
 
     // Returns 0  if the user is already logged in.
 
-    // Returns -1 if the user is not found in the database
+    // Returns -1 if the password does not match.
 
-    // Returns -2 if the password does not match.
-
-    // Returns -3 if the user has not verified yet
+    // Returns -2 if the user has not verified yet
 
     // Returns positive value if the login was successful
 
@@ -222,7 +220,6 @@ function log_in($nick, $password)
     if(getcurrentuserid() != 1)  // this user is already logged in.
 
         return 0;
-
 
 
     $password = crypt_pwd($password); // hash the password
@@ -234,40 +231,21 @@ function log_in($nick, $password)
         or die("Log in failed : ".mysql_error()."\n<br>Please contact the administrator");
 
 
-
-    //if((!$dbs) || (mysql_num_rows($dbs) == 0))
-
-    //    return -1; // this user is not found in the database
-
-
-
     $row = mysql_fetch_row($dbs);
 
-
-
     if($password != $row[1])
-
     {
+        return -1;
+    }
 
+    if($row[2] != 0)
+	 {
         return -2;
-
     }
-
-    if($row[2] != 0) {
-
-        return -3;
-
-    }
-
-
 
     $uid = $row[0]; // get user id
 
-
-
     $sid = session_id(); // get session ID
-
-
 
     $dbs = mysql_query("UPDATE session SET userID = $uid WHERE sID = '$sid'") // update database
 	or die(mysql_error());
