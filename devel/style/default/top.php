@@ -15,7 +15,7 @@ foreach ($_SERVER['argv'] as $name => $value) {
 <head>
 <meta name="Design" content="Design by: wasp^ http://mats.rove.no">
 <title>Globelan 7</title>
-<link href="style/wasp/style.css" rel="stylesheet" type="text/css">
+<link href="style/default/style.css" rel="stylesheet" type="text/css">
 </head>
 
 <body topmargin="0" leftmargin="0">
@@ -36,7 +36,7 @@ foreach ($_SERVER['argv'] as $name => $value) {
     </td>
   </tr>
   <tr>
-    <td width="100%" background="style/wasp/images/logo_bak.gif"><a href="index.php"><img border="0" src="style/wasp/images/logo.jpg" width="591" height="107"></a></td>
+    <td width="100%" background="style/default/images/logo_bak.gif"><a href="index.php"><img border="0" src="style/default/images/logo.jpg" width="591" height="107"></a></td>
   </tr>
   <tr>
     <td width="100%">
