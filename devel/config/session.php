@@ -82,7 +82,7 @@ else
 	} else {
 
 		setcookie($cookiename, "", time()-$session_alive_time);
-		dblog(3, $sID);
+		dblog(3, $sID.":::".$_SERVER['HTTP_REFERER']);
 
 	}
 
