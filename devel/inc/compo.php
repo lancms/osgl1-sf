@@ -155,7 +155,7 @@ elseif (($action == "signmeup") && (isset($compo)))
 
 	$q = query("SELECT * FROM compo WHERE ID = '".mysql_escape_string($compo)."'");
 	$r = fetch($q);
-	query("DELETE FROM compoReg WHERE compoID = '".mysql_escape_string($compo)."' AND userID = '"mysql_escape_string(.getcurrentuserid())."'"); // Just in case he's tries to do something he shouldn't...
+	query("DELETE FROM compoReg WHERE compoID = '".mysql_escape_string($compo)."' AND userID = '".mysql_escape_string(getcurrentuserid())."'"); // Just in case he's tries to do something he shouldn't...
 	if($r->gameType <= 1)
 	{
 		query("INSERT INTO compoReg SET compoID = '".mysql_escape_string($compo)."', userID = '".mysql_escape_string(getcurrentuserid())."'");
