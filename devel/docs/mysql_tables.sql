@@ -31,6 +31,24 @@ CREATE TABLE acls (
 ) TYPE=MyISAM;
 
 
+DROP TABLE IF EXISTS statusTypes;
+CREATE TABLE statusTypes (
+  ID int(11) NOT NULL auto_increment,
+  name varchar(35),
+  PRIMARY KEY (ID)
+) TYPE=MyISAM;
+
+
+DROP TABLE IF EXISTS crewStatus;
+CREATE TABLE crewStatus (
+   userID int(11) NOT NULL default 1,
+   status int(11) NOT NULL default 1,
+   until int(5),
+   PRIMARY KEY (userID)
+) TYPE=MyISAM;
+  
+
+
 --
 -- Table structure for table `compo`
 --
@@ -420,3 +438,6 @@ INSERT INTO pollA SET QID = 1, Atext = 'OOOOOOOOOOH YES!!!', votes = 5000;
 -- No need to create a query just to check if this exists?
 INSERT INTO stats SET config = 'hits', value = 'pageviews', hits = 0;
 INSERT INTO stats SET config = 'hits', value = 'total', hits = 0;
+
+-- Adding the default status with "nothing"
+INSERT INTO statusTypes SET ID = 1, name = '';
