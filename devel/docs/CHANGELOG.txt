@@ -1,37 +1,19 @@
 ---June 02, 2003 Version 0.1 alpha
 
 
-
 First alpha-release, some bugs fixed earlier this day.
-
 -Seatreg
-
 -news
-
 -compo & clan
-
 -very basic admin-features for the system...
 
 
-
-
-
----Somewhere between here... 0.2, added design on forum + made it possible to have more than one vote on
-
-polls
-
-
+---Somewhere between here... 0.2, added design on forum + made it possible to have more than one vote on polls
 
 ---July 13. 2003 Version 0.3 alpha
 
-
-
 On vacation with my laptop (lak), written some more, scripts:
-
 - Webshop-system to be able to order things from the canteen.
-
 - first version of compoadmin
-
 - Possibillety to create webpages directly from the static-admin (discouraged)
-
 - random_quote()
