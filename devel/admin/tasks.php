@@ -51,6 +51,24 @@ elseif($action == "add") {
 elseif($action == "edit" && isset($edit)) {
 	$q = query("SELECT * FROM tasks WHERE ID = $edit");
 	$r = fetch($q);
+	echo lang("Task name: ", "admin_tasks", "Task name in edit").$r->name;
+	echo "<br>";
+	echo lang("Assigned to: ", "admin_tasks", "Assigned to on edit").IDtonick($r->userID);
+	//echo "<br>";
+	echo "<form method=GET action=admin.php>
+			<input type=hidden name=adminmode value=tasks>
+			<input type=hidden name=action value=changeuser>
+			<input type=hidden name=edit value='$edit'>
+		";
+	$users = reverse_acl("tasks"); // Should return a query of all users that has access to tasks...
+	echo "<select name=changeuser>";
+	while($chuser = fetch($users)) {
+		if($chuser->ID == getcurrentuserid()) $selected = "SELECTED";
+		echo "<option value=$chuser->ID $selected>$chuser->nick</option>";
+	}
+	echo "<input type=submit value='".lang("Change assigned user", "admin_tasks", "form-submit to change user in tasks")."'>";
+	echo "</form>";
+			
 	
 	
 	$q2 = query("SELECT * FROM tasks_log WHERE taskID = $edit");
@@ -59,7 +77,7 @@ elseif($action == "edit" && isset($edit)) {
 		echo "<br><br><hr><br>";
 		echo IDtonick($r2->userID).": ".$r2->logText;
 	}
-	echo "<form method=POST action=admin.php?adminmode=tasks&action=addcomment&edit=$edit>";
+	echo "<br><br><form method=POST action=admin.php?adminmode=tasks&action=addcomment&edit=$edit>";
 	echo "<textarea cols=65 rows=10 name=comment>";
 	echo "<br><input type=submit value='".lang("Add comment", "admin_tasks", "Submit-button to add comment on a task")."'>";
 	echo "</form>";
@@ -71,4 +89,14 @@ elseif($action == "addcomment" && isset($edit)) {
 	query("INSERT INTO tasks_log SET userID = ".getcurrentuserid().", taskID = $edit, logUNIX = ".time().", logText = '$comment'");
 	refresh("admin.php?adminmode=tasks&action=edit&edit=$edit", 2);
 	echo lang("Comment added", "admin_tasks", "Text to display after a comment has been added.");
+}
+// admin.php?adminmode=tasks&action=changeuser&edit=<taskID>&changeuser=<userID>
+elseif($action == "changeuser" && isset($edit) && isset($_GET['changeuser'])) {
+	$chuser = $_GET['changeuser'];
+	
+	query("UPDATE tasks SET userID = $chuser WHERE ID = $edit");
+	query("INSERT INTO tasks_log SET userID = ".getcurrentuserid().", taskID = $edit, logUNIX = ".time().", logText = '".lang("Changed assigned to user to: ", "admin_tasks", "What to put into the SQL-table when a user changes who a task is assigned to").IDtonick($chuser)."'");
+	
+	echo lang("Changed assigned user successfully", "admin_tasks", "What to display after we have changed the user a task is assigned to");
+	refresh("admin.php?adminmode=tasks&action=edit&edit=$edit", 2);
 }
