@@ -1,7 +1,8 @@
 <?php
 
 /* This one will define where the root-path of all your files are.... */
-$base_path = "/var/www/devel/";
+#$base_path = "/var/www/devel/"; // Manually specified path
+$base_path = $_SERVER['DOCUMENT_ROOT'];
 
 /* Site-title will show up as the <title></title> text on all the pages.... */
 $sitetitle = "GlobeLAN 4,5 DEVEL";
