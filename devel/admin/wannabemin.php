@@ -54,11 +54,11 @@ if($action == "addQue") {
 elseif($action == "EditQue") {
 
 	$ID		=	$_GET['id'];
-	$ID		=	escape_string($ID);
 
 	if(empty($ID)) nicedie(lang("Something is not right.", "admin_wannabemin", "Text used in wannabemin"));
 
-	$query		= 	"SELECT * FROM wannabeQue WHERE ID = '$ID'";
+					// Nice and easy way to write this :-)
+	$query	=	sprintf ("SELECT * FROM wannabeQue WHERE ID=%s", escape_string($ID));
 	$result 	= 	query($query);
 	$var 		= 	fetch($result);
 
@@ -115,13 +115,9 @@ elseif($action == "DoEditQue") {
 	$Type	=	$_POST['Type'];
 	$ID		=	$_POST['id'];
 
-	$Que	=	escape_string($Que);
-	$Type	=	escape_string($Type);
-	$ID		=	escape_string($ID);
+	if(empty($ID) || empty($Que) || empty($Type)) nicedie(lang("Nope, this is not the way you should do it... Try writing somthing in the fields next time :)", "admin_wannabemin", "Text used in wannabemin"));
 
-	if(empty($ID) || empty($Que) || empty($Type)) nicedie(lang("Nope, this is not the way you shoul do it... Try writing somthing in the fields next time :)", "admin_wannabemin", "Text used in wannabemin"));
-
-	$query	= 	"UPDATE wannabeQue SET content = '$Que', type = '$Type' WHERE ID = '$ID'";
+	$query	=	sprintf ("UPDATE wannabeQue SET content='%s', type='%s' WHERE ID=%s", escape_string($Que), escape_string($Type), escape_string($ID));
 	$result	=	query($query);
 
 	if($Type == 1) {
@@ -141,11 +137,10 @@ elseif($action == "DoEditQue") {
 elseif($action == "DelQue") {
 
 	$ID		=	$_GET['id'];
-	$ID		=	escape_string($ID);
 
 	if(empty($ID)) nicedie(lang("Something is not right.", "admin_wannabemin", "Text used in wannabemin"));
 
-	$query	=	"DELETE FROM wannabeQue WHERE ID = '$ID'";
+	$query	=	sprintf ("DELETE FROM wannabeQue WHERE ID=%s", escape_string($ID));
 	$result = 	query($query);
 
 
@@ -164,11 +159,9 @@ elseif($action == "AddAlt") {
 	 $ID	=	$_POST['id'];
 	}
 
-	$ID		=	escape_string($ID);
-
 	if(empty($ID)) nicedie(lang("Something is not right.", "admin_wannabemin", "Text used in wannabemin"));
 
-	$query	= 	"SELECT * FROM wannabeAlt WHERE QueID = '$ID'";
+	$query	= 	sprintf ("SELECT * FROM wannabeAlt WHERE QueID = %s", escape_string($ID));
 	$result = 	query($query);
 
 	$list	=	"
@@ -217,15 +210,12 @@ elseif($action == "DoAddAlt") {
 	$QueID	=	$_POST['QueID'];
 	$Alt	=	$_POST['Alt'];
 
-	$QueID	=	escape_string($QueID);
-	$Alt	=	escape_string($Alt);
+	if(empty($QueID) || empty($Alt)) nicedie(lang("Nope, this is not the way you should do it... Try writing somthing in the fields next time :)", "admin_wannabemin", "Text used in wannabemin"));
 
-	if(empty($QueID) || empty($Alt)) nicedie(lang("Nope, this is not the way you shoul do it... Try writing somthing in the fields next time :)", "admin_wannabemin", "Text used in wannabemin"));
-
-	$query	= 	"INSERT INTO wannabeAlt (ID, content, queID) VALUES (NULL, '$Alt', '$QueID')";
+	$query	= 	sprintf ("INSERT INTO wannabeAlt (ID, content, queID) VALUES (NULL, '%s', %s)", escape_string($Alt), escape_string($QueID));
 	$result = 	query($query);
 
-	$query	= 	"SELECT * FROM wannabeAlt WHERE queID = '$QueID'";
+	$query	= 	sprintf ("SELECT * FROM wannabeAlt WHERE queID = %s", escape_string($QueID));
 	$result = 	query($query);
 
 	$list	=	"
@@ -272,17 +262,16 @@ elseif($action == "DoAddAlt") {
 elseif($action == "DelAlt") {
 
 	$ID		=	$_GET['id'];
-	$ID		=	escape_string($ID);
 
 	if(empty($ID)) nicedie(lang("Something is not right.", "admin_wannabemin", "Text used in wannabemin"));
 
-	$query		=	"SELECT * FROM wannabeAlt WHERE ID = '$ID'";
+	$query	=	sprintf ("SELECT * FROM wannabeAlt WHERE ID = %s", escape_string($ID));
 	$result 	= 	query($query);
 	$r			=	fetch($result);
 
 	$QueID		=	$r->queID;
 
-	$query		=	"DELETE FROM wannabeAlt WHERE ID = '$ID'";
+	$query		= sprintf ("DELETE FROM wannabeAlt WHERE ID = %s", escape_string($ID));
 	$result 	= 	query($query);
 
 	echo lang("Alternative has been deleted", "admin_wannabemin", "Text used in wannabemin");
@@ -327,13 +316,10 @@ elseif($action == "DoAddNewQue") {
 
 	if(empty($Que) || empty($Type)) nicedie(lang("Nope, this is not the way you shoul do it... Try writing somthing in the fields next time :)", "admin_wannabemin", "Text used in wannabemin")."( Que == $Que AND Type == $Type)");
 
-	$Que		=	escape_string($Que);
-	$Type		=	escape_string($Type);
-
-	$query		= 	"INSERT INTO wannabeQue (ID, content, type) VALUES (NULL, '$Que', '$Type')";
+	$query		= 	sprintf ("INSERT INTO wannabeQue (ID, content, type) VALUES (NULL, '%s', '%s')", escape_string($Que), escape_string($Type));
 	$result		=	query($query);
 
-	$query		=	"SELECT * FROM wannabeQue WHERE content = '$Que' AND type = '$Type'";
+	$query		=	sprintf ("SELECT * FROM wannabeQue WHERE content = '%s' AND type = '%s'", escape_string($Que), escape_string($Type));
 	$result		=	query($query);
 
 	$r			=	fetch($result);
@@ -401,11 +387,10 @@ elseif($action == "ViewUsers") {
 elseif($action == "DoViewUsers") {
 
 	$UID		=	$_GET['id'];
-	$UserID		=	escape_string($UID);
 
 	if(empty($UID)) nicedie(lang("Please specify the userID", "admin_wannabemin", "Text used in wannabemin"));
 
-	$query		=	"SELECT * FROM wannabeUsers WHERE user = '$UserID'";
+	$query	=	sprintf ("SELECT * FROM wannabeUsers WHERE user = %s", escape_string($UID));
 	$result 	= 	query($query);
 
 	$list		=	"
@@ -424,7 +409,7 @@ elseif($action == "DoViewUsers") {
 	$QueID		=	$Get->ID;
 	$Type		=	$Get->type;
 
-	$query2		=	"SELECT * FROM wannabeUsers WHERE user = '$UserID' AND queID = '$QueID'";
+	$query2		=	sprintf ("SELECT * FROM wannabeUsers WHERE user = %s AND queID = %s", escape_string($UID), escape_string($QueID));
 	$result2 	= 	query($query2);
 
 	$var		=	fetch($result2);
@@ -435,7 +420,7 @@ elseif($action == "DoViewUsers") {
 	if($Type == 1) {
 
 	//$query3		=	"SELECT * FROM wannabeAlt WHERE queID = '$QueID'"; // Removed by Lak; wrong!
-	$query3 	= "SELECT * FROM wannabeAlt WHERE ID = '$Ans'";
+	$query3 	= sprintf ("SELECT * FROM wannabeAlt WHERE ID = '%s'", escape_string($Ans));
 	$result3 	= 	query($query3);
 
 	$var2		=	fetch($result3);
@@ -465,7 +450,7 @@ elseif($action == "DoViewUsers") {
 		}
 
   	}
-	$query		= 	"SELECT * FROM wannabeComment WHERE user = '$user'";
+	$query		= sprintf ("SELECT * FROM wannabeComment WHERE user = %s", escape_string($user));
 	$result 	= 	query($query);
 	$var 		= 	fetch($result);
 
@@ -500,7 +485,10 @@ elseif($action == "DoViewUsers") {
 
   echo $list;
 
-  $q = query("SELECT * FROM wannabeComment WHERE user = '$UserID'");
+	// XXX: I'm confused, how does $UserID get set?
+	// BTW: Consistency is a bird, what?
+	$query = sprintf ("SELECT * FROM wannabeComment WHERE user = %s", escape_string($UserID));
+	$q = query($query);
   echo "<table>";
   while($r = fetch($q)) {
 		echo "
@@ -533,10 +521,6 @@ elseif($action == "AddComment") {
 	$Com	=	$_POST['Comment'];
 	$Like	=	$_POST['like'];
 
-	$ID		=	escape_string($ID);
-	$Com	=	escape_string($Com);
-	$Like	=	escape_string($Like);
-
 	if(empty($ID) || empty($Com) || empty($Like)) nicedie(lang("Did you forget something ? Like writing a comment ?", "admin_wannabemin", "Text used in wannabemin"));
 
 	$query	=	"SELECT * FROM `wannabeComment` WHERE `user` = '$ID' AND `by` = '$user'";
@@ -544,9 +528,11 @@ elseif($action == "AddComment") {
 	$num	=	num($result);
 
 	if($num != 0) {
-	 $query	=	"UPDATE `wannabeComment` SET `comment` = '$Com', `like` = '$Like' WHERE `user` = '$ID' AND `by` = '$user'";
-	} else {
-	 $query	= 	"INSERT INTO `wannabeComment` ( `ID` , `comment` , `like` , `user` , `by` ) VALUES (NULL, '$Com', '$Like', '$ID', '$user')";
+		$query = sprintf ("UPDATE wannabeComment SET comment = '%s', like = '%s' WHERE user = %s AND by = %s", escape_string($Com), escape_string($Like), escape_string($ID), escape_string($user));
+	}
+	else
+	{
+		$query = sprintf ("INSERT INTO wannabeComment (ID, comment, like, user, by) VALUES (NULL, '%s', '%s', '%s', '%s')", escape_string($Com), escape_string($Like), escape_string($ID), escape_string($user));
 	}
 	$result	=	query($query);
 
@@ -557,14 +543,17 @@ elseif($action == "AddComment") {
 
 elseif($action == "ViewComment") {
 
+	// Consistency is still a nice bird?
 	$ID		=	$_GET['id'];
-	$ID		=	escape_string($ID);
 
-	if(empty($ID)) nicedie(lang("Something is not right.", "admin_wannabemin", "Text used in wannabemin"));
-
-
-	  $q = query("SELECT * FROM wannabeComment WHERE user = '$ID'");
-	  echo "<table>";
+	if(empty($ID))
+	{
+		nicedie(lang("Something is not right.", "admin_wannabemin", "Text used in wannabemin"));
+	}
+	
+	$query = sprintf ("SELECT * FROM wannabeComment WHERE user = %s", escape_string($ID));
+	$q = query ($query);
+	echo "<table>";
 	  while($r = fetch($q)) {
 			echo "
 			  <tr>
