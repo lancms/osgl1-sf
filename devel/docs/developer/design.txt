@@ -1,0 +1,8 @@
+This is the specifications on how designstuff should be written.
+
+Never use tables in any code, unless it is a table list (crewaddressbook, list of wannabes in wannabemin).
+
+
+
+
+Use osgl_table($left, $right) to display text that should be in two diffrent table columns.
