@@ -145,5 +145,8 @@ chmod the file so that it can be written to by the webserver. Edit it from the a
 
 
 
+- http://www.sourceforge.net/projects/osglobelan :-) *Just playing with CVS, I am* --mathias@globelan.net
+
+
 
 - Wish to contact us: laaknor@globelan.net && cronoman@globelan.net :)
