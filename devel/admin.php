@@ -28,7 +28,9 @@ if(acl_access("ACL")) echo "<br><a href=admin.php?adminmode=acl>".lang("Accessma
 if(acl_access("compomaster")) echo "<br><a href=admin.php?adminmode=compomaster>".lang("CompoMaster", "admin_index", "Menuitem in admin.php to manipulate compos")."</a>";
 if(acl_access("compopoll")) echo "<br><a href=admin.php?adminmode=compopolladmin>".lang("Compopolladmin", "admin_index", "Menuitem in admin.php to view/edit/add compopolls")."</a>";
 
-if(acl_access("config")) echo "<br><a href=admin.php?adminmode=config>".$admin['10']."</a>";
+if(acl_access("config")) echo "<br><a href=admin.php?adminmode=config>".lang("System Configurations", "admin_index", "Menuitem in admin.php to change config")."</a>";
+
+if(acl_access("tasks")) echo "<br><a href=admin.php?adminmode=tasks>".lang("Taskmanager", "admin_index", "Menuitem in admin.php to list and add tasks")."</a>";
 
 
 } elseif($adminmode != "") {

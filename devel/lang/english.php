@@ -377,6 +377,11 @@ $acl[17]['access'] = "ACL";
 $acl[18]['name'] = "List in addressbook";
 $acl[18]['access'] = "listaddress";
 
+$acl[18]['name'] = "Tastlist-member";
+$acl[18]['access'] = "tasks";
+
+
+
 $compotype[0] = "FFA";
 $compotype[1] = "1on1";
 $compotype[2] = "2vs2";
