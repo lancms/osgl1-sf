@@ -1,6 +1,7 @@
 <?php
 
-require_once 'config/config.php';
+require_once ('config/config.php');
+
 if (config("usepage_register") == FALSE)
 {
 	nicedie($msg[1]);
@@ -32,7 +33,7 @@ if ($action == "regme")
 	$postPlace = $_POST['postPlace'];
 
 
-	$checkmail = query("SELECT * FROM users WHERE EMail LIKE '".mysql_escape_string($email)."'");
+	$checkmail = query("SELECT * FROM users WHERE EMail LIKE '".escape_string($email)."'");
 
 	$verify = verify("register", "1", $username, $firstName, $lastName, $email, $p1);
 	if($verify != "allowed")
@@ -61,20 +62,20 @@ if ($action == "regme")
 		}
 
 		$dbs = query("INSERT INTO users SET
-			nick = '".mysql_escape_string($username)."',
-			EMail = '".mysql_escape_string($email)."',
-			firstName = '".mysql_escape_string($firstName)."',
-			lastName = '".mysql_escape_string($lastName)."',
-			password = '".mysql_escape_string($cpass)."',
-			verified = '".mysql_escape_string($r)."',
-			registered = '".time()."',
-			street = '".mysql_escape_string($street)."',
-			postNr = '".mysql_escape_string($postNr)."',
-			postPlace = '".mysql_escape_string($postPlace)."',
-			cellphone = '".mysql_escape_string($cellphone)."',
-			birthDAY = '".mysql_escape_string($birthDAY)."',
-			birthMONTH = '".mysql_escape_string($birthMONTH)."',
-			birthYEAR = '".mysql_escape_string($birthYEAR)."'
+			nick = '".escape_string($username)."',
+			EMail = '".escape_string($email)."',
+			firstName = '".escape_string($firstName)."',
+			lastName = '".escape_string($lastName)."',
+			password = '".escape_string($cpass)."',
+			verified = '".escape_string($r)."',
+			registered = '".escape_string(time())."',
+			street = '".escape_string($street)."',
+			postNr = '".escape_string($postNr)."',
+			postPlace = '".escape_string($postPlace)."',
+			cellphone = '".escape_string($cellphone)."',
+			birthDAY = '".escape_string($birthDAY)."',
+			birthMONTH = '".escape_string($birthMONTH)."',
+			birthYEAR = '".escape_string($birthYEAR)."'
 		");
 
 		echo $msg[6];
