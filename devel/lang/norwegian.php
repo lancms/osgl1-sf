@@ -117,7 +117,7 @@ $title['page'][11] = "Klan oversikt";
 $title['page'][12] = "Forum";
 $title['page'][13] = "Brukerinnlogging";
 $title['page'][14] = "Crewadressebok";
-$title['page'][15] = "Kiosk";
+//$title['page'][15] = "";
 $title['page'][16] = "PartyWeb";
 $title['page'][17] = "WannabeCrew";
 

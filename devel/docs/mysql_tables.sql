@@ -194,32 +194,6 @@ CREATE TABLE groups (
 ) TYPE=MyISAM;
 
 --
--- Table structure for table `kiosk_temp`
---
-
-DROP TABLE IF EXISTS kiosk_temp;
-CREATE TABLE kiosk_temp (
-  ID int(11) NOT NULL auto_increment,
-  nick varchar(25) default NULL,
-  number int(3) default NULL,
-  ware int(11) default NULL,
-  PRIMARY KEY  (ID)
-) TYPE=MyISAM;
-
---
--- Table structure for table `kiosk_warez`
---
-
-DROP TABLE IF EXISTS kiosk_warez;
-CREATE TABLE kiosk_warez (
-  ID int(11) NOT NULL auto_increment,
-  name varchar(25) default NULL,
-  price int(4) default NULL,
-  stock varchar(25) default NULL,
-  PRIMARY KEY  (ID)
-) TYPE=MyISAM;
-
---
 -- Table structure for table `news`
 --
 
