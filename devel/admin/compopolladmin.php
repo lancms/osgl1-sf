@@ -1,7 +1,8 @@
 <?php
 require_once $base_path.'config/config.php';
 
-if(!acl_access("compopoll")) die($admin[noaccess]);
+if(!acl_access("compopoll"))
+	nicedie($admin[noaccess]);
 
 $action = $_GET['action'];
 
@@ -48,7 +49,7 @@ echo "</table>";
 ?>
 <form method=POST action=admin.php?adminmode=compopolladmin&action=addcompo>
 <br><input type=text name=componame size=25>
-<br><input type=submit value='Legg til avstemningsspørsmål'>
+<br><input type=submit value='<?php echo $form['7'];?>'>
 </form>
 <?php
 
