@@ -485,7 +485,6 @@ elseif($action == "DoViewUsers") {
 
   echo $list;
 
-	// XXX: I'm confused, how does $UserID get set?
 	// BTW: Consistency is a bird, what?
 	$query = sprintf ("SELECT * FROM wannabeComment WHERE user = %s", escape_string($UID));
 	$q = query($query);
