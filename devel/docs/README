@@ -7,10 +7,11 @@ http://www.sourceforge.net/projects/osglobelan
 First of all, this is _not_ a finished release.
 There are bugs, lacking features and unfinished documentation.
 
-This project was started by Lars Åge (laaknor) and Jarle (cronoman) sometime to fill the need for a registration system for GlobeLAN.
-[This is a guess, I have no idea, actually... Historic input, Lars Åge? :-) [FIXME]]
+This project started around GlobeLAN 3 (autumn of 2002 I think), when Jarle (CronoMan) wrote our seatreg-system. For Christmas that year, Lars Åge (Laaknor) got a book from Santa (a.k.a. himself) about PHP programming, so before school started again in the beginning of January, he went through all the sourcecode of the system, and making a lot of improvements. The weekend we had GlobeLAN 4 (March of 2003 I think), we discussed rewriting the entire system from scratch, and publish it as open source. A couple of weeks later, the coding started. We started using this code on GlobeLAN 5 (September 2003), and are still using the same codebase (but a lot of changes has been done since that).
 
-The project has grown, so has the team working on it, and a SourceForge project was started to make the project public and to manage it properly.
+A lot of code has been written, rewritten, changed, buried, grieved and said "what the hell was I doing here?" about. We have recieved a lot of feedback from parties in Norway, and now, we are ready to begin getting feedback from international users :)
+
+The project has grown, so has the team working on it, and a SourceForge project was started to make the project public and to manage it properly. If you think you can help us with something, just send us an E-Mail on the mailinglist osglobelan-devel@lists.sourceforge.net, leave a feature-request/bug-report on the project webpage or whatever else you wish to do :)
 
 
 ## License ##
