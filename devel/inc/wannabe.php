@@ -4,45 +4,8 @@ require_once 'config/config.php';
 $action	=	$_GET['action'];
 $user	=	getcurrentuserid();
 
-	## FUNCTIONS ##
+	if(!isset($action)) {
 
-	function ifSel($AltId, $Que, $user) {
-
-	$query		= 	"SELECT * FROM wannabeUsers WHERE user = '$user' AND  queid = '$Que'";
-	$result 	= 	query($query);
-
-	$Sel		= 	fetch_array($result);
-
-		if($Sel['ans'] == $AltId) {
-		 return "checked";
-		}
-
-	}
-
-	function CatBef($user, $id) {
-
-	 $list		=	"";
-
-	 $query		= 	"SELECT * FROM wannabeUsers WHERE user = '$user' AND catid = '$id'";
-	 $result 	= 	query($query);
-
-	 $result	=	num($result);
-
-	    if(!$result) {
-
-		 $list	.=	"<input type='checkbox' name='SelCat[]' value='$id'>\n";
-
-		} else {
-
-		 $list	.=	"<input type='checkbox' name='SelCat[]' value='$id' checked>\n<font color='red'>*</font>\n";
-
-		}
-
-	 return	$list;
-
-	}
-
-	function listCat($user) {
 
 	 $list		=	"";
 
@@ -54,10 +17,27 @@ $user	=	getcurrentuserid();
 	   $id		=	$cat['id'];
 	   $name	=	$cat['name'];
 	   $info	=	$cat['info'];
+	 
+	   $check	=	"";
+
+	   $query2	= 	"SELECT * FROM wannabeUsers WHERE user = '$user' AND catid = '$id'";
+	   $result2 = 	query($query2);
+
+	   $result2	=	num($result2);
+
+	    if(!$result2) {
+
+		 $check	.=	"<input type='checkbox' name='SelCat[]' value='$id'>\n";
+
+		} else {
+
+		 $check	.=	"<input type='checkbox' name='SelCat[]' value='$id' checked>\n<font color='red'>*</font>\n";
+
+		}
 
 	   $list 	.= "
 			<tr>
-			  <td>".CatBef($user, $id)."</td>
+			  <td>".$check."</td>
 			  <td>$name</td>
 			  <td>$info</td>
 			</tr>
@@ -65,38 +45,18 @@ $user	=	getcurrentuserid();
 
 	  }
 
-	  return 		$list;
-
-	}
-
-	function getOldTxt($user, $queid) {
-
-	 $query		= 	"SELECT * FROM wannabeUsers WHERE user = '$user' AND queid = '$queid'";
-	 $result 	= 	query($query);
-	 $Ans		= 	fetch_array($result);
-
-	 return 	$Ans["ans"];
-
-
-
-	}
-
-	## PHP ##
-
-	if(!isset($action)) {
-
 	 echo "
 		<form name='SelCat' method='post' action='index.php?inc=wannabe&action=listQue'>
 		  <table width='400'>
 			<tr>
-			  <td colspan='3'><strong>Wannabe</strong></td>
+			  <td colspan='3'><strong>".lang("Wannabe", "inc_wannabe", "Text to display in wannabe")."</strong></td>
 			</tr>
-			".listCat($user)."
+			".$list."
 			<tr>
-			  <td colspan='3'><input type='submit' name='Submit' value='Neste'></td>
+			  <td colspan='3'><input type='submit' name='Submit' value='".lang("Next", "inc_wannabe", "Text to display in wannabe")."'></td>
 			</tr>
 			<tr>
-			  <td colspan='3'><font color='red'>*</font> = Katogorier du har søk i før.</td>
+			  <td colspan='3'><font color='red'>*</font> = ".lang("WTF ?!.", "inc_wannabe", "Text to display in wannabe")."</td>
 			</tr>
 		  </table>
 		</form>
@@ -107,7 +67,7 @@ $user	=	getcurrentuserid();
 
 	elseif($action == "listQue") {
 
-	$SelCat	=	@$_POST['SelCat'];
+	$SelCat	=	$_POST['SelCat'];
 
 	if(empty($SelCat)) {
 	 refresh("index.php?inc=wannabe", 0);
@@ -139,11 +99,19 @@ $user	=	getcurrentuserid();
 	   ";
 
 	   if(!$type) {
+	 	
+		$query2		= 	"SELECT * FROM wannabeUsers WHERE user = '$user' AND queid = '$queid'";
+	 	$result2 	= 	query($query2);
+	 	$Answ		= 	fetch_array($result2);
+
+	 	$Text		=	$Answ->ans;
+	   
 	    $list 	.= "
 		 <tr>
-		   <td><textarea name='$id'>".getOldTxt($user, $id)."</textarea></td>
+		   <td><textarea name='$id'>".$Text."</textarea></td>
 		 </tr>
 		 ";
+		 
 		} else {
 
 		$query2		= 	"SELECT * FROM wannabeAltRadio WHERE queid = '$id'";
@@ -155,9 +123,19 @@ $user	=	getcurrentuserid();
 			$AltId = $Que['id'];
 			$Quest = $Que['queid'];
 
+			$query3		= 	"SELECT * FROM wannabeUsers WHERE user = '$user' AND  queid = '$Que'";
+			$result3 	= 	query($query3);
+
+			$Sel		= 	fetch_array($result3);
+			$SelAlt		=	$Sel->ans;
+			
+			if($SelAlt == $AltId) {
+		 	 $Check		=	"checked";
+			}
+
 			$list .= "
 			<tr>
-			 <td><input type='radio' name='$id' value='$AltId'".ifSel($AltId, $Quest, $user).">$Alt</td>
+			 <td><input type='radio' name='$id' value='$AltId'".$Check.">$Alt</td>
 			</tr>";
 
 		 }
@@ -166,7 +144,7 @@ $user	=	getcurrentuserid();
 	  }
 	$list .= "
 	<tr>
-	 <td><input type='submit' name='Submit' value='Lagre'></td>
+	 <td><input type='submit' name='Submit' value='".lang("Save", "inc_wannabe", "Text to display in wannabe")."'></td>
 	</tr>
 	</table>
 	</form>";
@@ -181,25 +159,34 @@ $user	=	getcurrentuserid();
 	  while($Res = mysql_fetch_assoc($result)) {
 
 	   $id		=	$Res['id'];
-	   $post	=	@$_POST[$id];
+	   $post	=	$_POST[$id];
+
 
 	   if(!empty($post)) {
 
-	   	$ans		=	@$_POST[$id];
-
+	   	$ans		=	$_POST[$id];
+		$ans		=	escape_string($ans);
+	   
 		$query3		= 	"SELECT * FROM wannabeQue WHERE id = '$id'";
 		$result3	= 	query($query3);
 		$Var		= 	fetch_array($result3);
 
-		$queid		=	$Var['id'];
-		$catid		=	$Var['catid'];
+		$queid		=	$Var->id;
+		$catid		=	$Var->catid;
+		
 
-		$query4		= 	"SELECT * FROM wannabeUsers WHERE id = '$id' AND user = '$user'";
+		$query4		= 	"SELECT * FROM wannabeUsers WHERE queid = '$queid' AND user = '$user'";
 		$result4	= 	query($query4);
 		$num		=	num($result4);
+		
+		$query5		=	"SELECT * FROM users WHERE nick = '$user'";
+		$result5	=	query($query5);
+		$Usr		=	fetch_array($result5);
+		
+		$userID		=	$Usr->ID;
 
 		if($num) {
-		 $query2 	= 	"UPDATE wannabeUsers SET ans = '$ans' WHERE queid = '$queid' AND user = '$user' AND catid = '$catid'";
+		 $query2 	= 	"UPDATE wannabeUsers SET ans = '$ans' WHERE queid = '$queid' AND user = '$userID'";
 		} else {
 	     $query2 	= 	"INSERT INTO wannabeUsers (id, user, ans, queid, catid) VALUES (NULL, '$user', '$ans', '$queid', '$catid')";
 		}
@@ -209,7 +196,7 @@ $user	=	getcurrentuserid();
 
 	  }
 
-	  echo "Søknaden din har nå blitt oppdatert";
+	  echo lang("Updated !", "inc_wannabe", "Text to display in wannabe");
 
 	 }
 
