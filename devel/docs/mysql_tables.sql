@@ -387,7 +387,7 @@ CREATE TABLE users (
   netstatus int(1) default NULL,
   mac varchar(17) default NULL,
   hasvirus int(2) default NULL,
-  myGroup int(11) default '0',
+  myGroup int(11) default '2',
   PRIMARY KEY  (ID)
 ) TYPE=MyISAM;
 
@@ -443,9 +443,11 @@ CREATE TABLE wannabeAdmin (
   PRIMARY KEY  (userID,adminID)
 ) TYPE=MyISAM;
 
-INSERT INTO users SET ID = 1, name = 'Anonymous', nick = 'guest';
-INSERT INTO users SET ID = 2, myGroup = 1, name= 'Admin', nick = 'admin', password = '21232f297a57a5a743894a0e4a801fc3';
+INSERT INTO users SET ID = 1, name = 'Anonymous', nick = 'guest', myGroup = 0;
+INSERT INTO users SET ID = 2, myGroup = 3, name= 'Admin', nick = 'admin', password = '21232f297a57a5a743894a0e4a801fc3';
 INSERT INTO static SET header = 'index', text = 'Welcome to your new installation of OSGlobeLAN. Login as admin with password admin to make changes to the settings. Of course, youve already read all the docs in docs/ ;)';
 
-INSERT INTO groups SET ID = 1, groupname = 'Superbruker';
-INSERT INTO acls SET groupID = 1, access = 'root', value = 1;
+INSERT INTO groups SET ID = 1, groupname = 'Anonymous';
+INSERT INTO groups SET ID = 2, groupname = 'User';
+INSERT INTO groups SET ID = 3, groupname = 'Superuser';
+INSERT INTO acls SET groupID = 3, access = 'root', value = 1;
