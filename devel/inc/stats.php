@@ -55,7 +55,7 @@ echo "Windows";
 echo "</td><td>";
 echo $Windows;
 echo "</td><td>";
-echo $WinPercent;
+echo round($WinPercent)." %";
 echo "</td></tr>";
 
 echo "<tr><td>";
@@ -63,7 +63,7 @@ echo "Linux";
 echo "</td><td>";
 echo $Linux;
 echo "</td><td>";
-echo $LinPercent;
+echo round($LinPercent)." %";
 echo "</td></tr>";
 
 echo "<tr><td>";
@@ -71,7 +71,7 @@ echo lang("Other", "inc_stats", "Text to display if it is another OS than one sp
 echo "</td><td>";
 echo $Other;
 echo "</td><td>";
-echo $OthPercent;
+echo round($OthPercent)." %";
 echo "</td></tr>";
 
 echo "</table>";
