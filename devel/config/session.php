@@ -63,7 +63,7 @@ if(!isset($_COOKIE[$cookiename]))
 
         or die("Could not create session : ".mysql_error());
 
-    dblog(2, $new_session);
+    dblog(2, $new_session.":::".$_SERVER['HTTP_REFERER']);
 
 }
 

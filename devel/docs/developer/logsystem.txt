@@ -10,7 +10,7 @@ Here are the numeric strings for what is logged:
 
 0 = default in DB, something probably happened wrong in query().
 1 = default in dblog(), someone probably left out the type.
-2 = session start, syntax: "sID"
+2 = session start, syntax: "sID:::HTTP_REFERER"
 3 = user came with old session, removed. syntax: "old sID"
 4 = user logged in. syntax: "sID" // We log sID to be able to track a users movement.
 5 = user logged out. syntax: "sID" // same as above.
