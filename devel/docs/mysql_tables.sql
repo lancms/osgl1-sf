@@ -339,6 +339,7 @@ CREATE TABLE users (
   crewField text,
   cellphone varchar(20) default NULL,
   wannabe tinyint(1) NOT NULL default '0',
+  wannabeDenied tinyint(1) NOT NULL default '0',
   seatY smallint(5) default '-1',
   street varchar(50) default NULL,
   postNr varchar(6) default NULL,
@@ -406,6 +407,7 @@ CREATE TABLE `wannabeComment` (
 approve smallint(1) NOT NULL default '0',
 `user` INT(10) NOT NULL ,
 `adminID` INT(10) NOT NULL ,
+logUNIX int(25) unsigned default '0',
 PRIMARY KEY ( `ID` )
 ) TYPE = MYISAM ;
 
@@ -416,6 +418,7 @@ CREATE TABLE `wannabeUsers` (
 `ans` TEXT NOT NULL ,
 `queID` INT( 10 ) NOT NULL ,
 `catID` INT( 10 ) NOT NULL ,
+logUNIX int(25) unsigned default '0',
 PRIMARY KEY ( `ID` )
 ) TYPE = MYISAM ;
 
