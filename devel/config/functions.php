@@ -1,10 +1,9 @@
 <?php
 
-require_once "config.php";
+require_once ("config.php");
 
-
-function db_connect() {
-
+function db_connect()
+{
     global $sql_host;
     global $sql_user;
     global $sql_pass;
@@ -18,11 +17,8 @@ function db_connect() {
     return;
 }
 
-
-
-
-
-function make_seed() {
+function make_seed()
+{
     list($usec, $sec) = explode(' ', microtime());
     return (float) $sec + ((float) $usec * 100000);
 }
@@ -38,15 +34,17 @@ function createcifer()
     return (int)$tmpc;
 }
 
-function crypt_pwd($password) {
+function crypt_pwd($password)
+{
     return md5($password);
 }
 
-function dblog($type = 1,$logNew = "NOTHING LOGGED", $logOld = NULL) {
+function dblog($type = 1,$logNew = "NOTHING LOGGED", $logOld = NULL)
+{
     $IP = $_SERVER['REMOTE_ADDR'];
     $userID = getcurrentuserid();
     $dowhat = stripslashes($logNew);
-    query("INSERT INTO logs SET userIP = '".mysql_escape_string($IP)."', userID = '".mysql_escape_string($userID)."', logType = '".mysql_escape_string($type)."', logWhat = '".mysql_escape_string($dowhat)."', oldLog = '".mysql_escape_string($logOld)."', logUNIX = ".mysql_escape_string(time()));
+    query("INSERT INTO logs SET userIP = '".escape_string($IP)."', userID = '".escape_string($userID)."', logType = '".escape_string($type)."', logWhat = '".escape_string($dowhat)."', oldLog = '".escape_string($logOld)."', logUNIX = ".escape_string(time()));
     return 1;
 }
 
@@ -75,7 +73,7 @@ function verify($mode="register", $userid, $nick, $firstname, $lastname, $email=
 
 	else		// if we find no of the above errors, compare user name with the database.
 	 {
-			$query = query ("SELECT ID FROM users WHERE nick = '".mysql_escape_string($nick)."'");
+			$query = query ("SELECT ID FROM users WHERE nick = '".escape_string($nick)."'");
 			$fetch = fetch ($query);
 			$num = num ($query);
 			
@@ -96,14 +94,16 @@ function verify($mode="register", $userid, $nick, $firstname, $lastname, $email=
 }
 
 
-function refresh($url="index.php",$time="2") {
+function refresh($url="index.php",$time="2")
+{
 	//if(!isset($url)) $url = "index.php";
 	//if(!isset($time)) $time = "2";
 	echo "<meta http-equiv=refresh content=\"$time; url=$url\">";
 	return 1;
 }
 
-function forumText($text) {
+function forumText($text)
+{
 	$text = stripslashes($text);
 	// We probably want to specialchar the text before we create <br>...
 	$text = htmlspecialchars($text);
@@ -111,28 +111,36 @@ function forumText($text) {
 	return $text;
 }
 
-function IDtonick($ID) {
-	$query = query("SELECT * FROM users WHERE ID = $ID");
+function IDtonick($ID)
+{
+	$query = query("SELECT * FROM users WHERE ID = '".escape_string($ID)."'");
 	$row = fetch($query);
 
 	return $row->nick;
 }
 
-function random_quote() {
+function random_quote()
+{
 	global $userand;
 	global $rand_text;
 	$max = query("SELECT * FROM random ORDER BY ID DESC LIMIT 0,1");
 	$maxran = fetch($max);
-	if(!$userand) {
+	if (!$userand)
+	{
 		return FALSE;
 		break;
-	} elseif(num($max) == 0) {
+	}
+	elseif (num($max) == 0)
+	{
 		return FALSE;
 		break;
-	} else {
-		while(!$random_text) {
+	}
+	else
+	{
+		while(!$random_text)
+		{
 			$random_number = rand(1,$maxran->ID);
-			$query = query("SELECT * FROM random WHERE ID = '".mysql_escape_string($random_number)."'");
+			$query = query("SELECT * FROM random WHERE ID = '".escape_string($random_number)."'");
 			$row = fetch($query);
 			$random_text = $row->text;
 		}
@@ -147,7 +155,8 @@ function query($query)
 	return $q;
 }
 
-function fetch($q) {
+function fetch($q)
+{
 	$r = mysql_fetch_object($q);
 	return $r;
 }
@@ -166,8 +175,9 @@ function num($q) {
 	return mysql_num_rows($q);
 }
 
-function user_style() {
-	$query = query("SELECT * FROM users WHERE ID = '".mysql_escape_string(getcurrentuserid())."'");
+function user_style()
+{
+	$query = query("SELECT * FROM users WHERE ID = '".escape_string(getcurrentuserid())."'");
 	$row = fetch($query);
 
 	$design = $row->userDesign;
@@ -179,60 +189,81 @@ function user_style() {
 	return $design;
 }
 
-function config($config, $value = "NOTSET") {
-
-	$query = query("SELECT * FROM config WHERE config = '$config'");
+function config($config, $value = "NOTSET")
+{
+	$query = query("SELECT * FROM config WHERE config = '".escape_string($config)."'");
 	$num = num($query);
-	if($value == "NOTSET") {
+	if ($value == "NOTSET")
+	{
 		$object = fetch($query);
 
-		if($num == 0) return FALSE;
-		elseif($object->value == 0) return FALSE;
-		else {
+		if ($num == 0)
+		{
+			return FALSE;
+		}
+		
+		elseif ($object->value == 0)
+		{
+			return FALSE;
+		}
+		else
+		{
 			return $object->value;
 		}
-
-	} else {
-		if($num == 0) {
-			query("INSERT INTO config SET config = '".mysql_escape_string($config)."', value = '".mysql_escape_string($value)."'");
-		} else {
-			query("UPDATE config SET value = '".mysql_escape_string($value)."' WHERE config = '".mysql_escape_string($config)."'");
+	}
+	else
+	{
+		if ($num == 0)
+		{
+			query("INSERT INTO config SET config = '".escape_string($config)."', value = '".escape_string($value)."'");
 		}
-
+		else
+		{
+			query("UPDATE config SET value = '".escape_string($value)."' WHERE config = '".escape_string($config)."'");
+		}
 	}
 
 }
 
-function display_text($text) {
+function display_text($text)
+{
 	$text = stripslashes($text);
 	$text = nl2br($text);
 	return $text;
-
 }
 
-function convert_seatmap($map) {
-        $len = strlen($map);
-        $s = NULL;
-        $l = 0;
-        for($i=0;$i<$len;$i++) {
-                if($map[$i] == "\n") $l++;
-                else $s[$l][] = $map[$i];
-        }
-        return $s;
+function convert_seatmap($map)
+{
+	$len = strlen($map);
+	$s = NULL;
+	$l = 0;
+	for ($i=0;$i<$len;$i++)
+	{
+		if ($map[$i] == "\n") $l++;
+		else
+		{
+			$s[$l][] = $map[$i];
+		}
+	}
+	return $s;
 }
 
-function display_nick($ID) {
-	$q = query("SELECT * FROM users WHERE ID = '".mysql_escape_string($ID)."'");
+function display_nick($ID)
+{
+	$q = query("SELECT * FROM users WHERE ID = '".escape_string($ID)."'");
 	$r = fetch($q);
-	if($r->allowPublic == 0)
+	if ($r->allowPublic == 0)
 	{
 		echo "<a href=index.php?inc=profile&uid=$ID>$r->nick</a>";
 	}
-	else echo $r->nick;
+	else
+	{
+		echo $r->nick;
+	}
 }
 
-function profile_table($profileLeft, $profileRight) {
-
+function profile_table($profileLeft, $profileRight)
+{
 	echo "<tr><td class=profileLeft width=25%>$profileLeft</td><td class=profileRight>";
 
 	echo $profileRight;
@@ -241,24 +272,28 @@ function profile_table($profileLeft, $profileRight) {
 
 }
 
-function convert_timestamp($timestamp) {
+function convert_timestamp($timestamp)
+{
 	return date("d/m/y H:i:s", $timestamp);
 }
 
-function can_register_clan() {
+function can_register_clan()
+// FIXME: What the heck does this do?
+{
 	return TRUE;
 }
 
-function mayEditClan($clanID) {
+function mayEditClan($clanID)
+{
 	$userID = getcurrentuserid();
 	$rank = getuserrank();
-	$q = query("SELECT * FROM Clan WHERE ID = '".mysql_escape_string($clanID)."'");
+	$q = query("SELECT * FROM Clan WHERE ID = '".escape_string($clanID)."'");
 	$r = fetch($q);
-	if($rank > 0)
+	if ($rank > 0)
 	{
 		return 1;
 	}
-	elseif($r->moderator == $userID)
+	elseif ($r->moderator == $userID)
 	{
 		return 1;
 	}
@@ -268,18 +303,22 @@ function mayEditClan($clanID) {
 	}
 }
 
-function acl_access($acl, $userID = NULL) {
-	if($userID == NULL) $userID = getcurrentuserid();
-	$q = query("SELECT * FROM users WHERE ID = '".mysql_escape_string($userID)."'");
+function acl_access($acl, $userID = NULL)
+{
+	if ($userID == NULL)
+	{
+		$userID = getcurrentuserid();
+	}
+	$q = query("SELECT * FROM users WHERE ID = '".escape_string($userID)."'");
 	$r = fetch($q);
 	$myGroup = $r->myGroup;
-	$root = query("SELECT * FROM acls WHERE groupID = '".mysql_escape_string($myGroup)."' AND access LIKE 'root' AND value = 1");
-	$sel = query("SELECT * FROM acls WHERE groupID = '".mysql_escape_string($myGroup)."' AND access LIKE '".mysql_escape_string($acl)."' AND value = 1");
-	if(num($root) == 1)
+	$root = query("SELECT * FROM acls WHERE groupID = '".escape_string($myGroup)."' AND access LIKE 'root' AND value = 1");
+	$sel = query("SELECT * FROM acls WHERE groupID = '".escape_string($myGroup)."' AND access LIKE '".escape_string($acl)."' AND value = 1");
+	if (num($root) == 1)
 	{
 		return 1;
 	}
-	elseif(num($sel) == 1)
+	elseif (num($sel) == 1)
 	{
 		return 1;
 	}
@@ -289,17 +328,18 @@ function acl_access($acl, $userID = NULL) {
 	}
 }
 
-function reverse_acl($acl) {
-	$q = query("SELECT * FROM acls WHERE (access = '".mysql_escape_string($acl)."' AND value = 1) OR (access = 'root' AND value = 1)");
-	while($r = fetch($q))
+function reverse_acl($acl)
+{
+	$q = query("SELECT * FROM acls WHERE (access = '".escape_string($acl)."' AND value = 1) OR (access = 'root' AND value = 1)");
+	while ($r = fetch($q))
 	{
-		if(empty($query2))
+		if (empty($query2))
 		{
-			$query2 = "WHERE myGroup = $r->groupID";
+			$query2 = "WHERE myGroup = '".escape_string($r->groupID)."'";
 		}
 		else
 		{
-			$query2 .= " OR myGroup = $r->groupID";
+			$query2 .= " OR myGroup = '".escape_string($r->groupID)."'";
 		}
 	}
 	$q2 = query("SELECT * FROM users $query2");
@@ -313,7 +353,7 @@ function resolve_groupname ($uid)
 		$uid = getcurrentuserid();
 	}
 
-	$q = query("SELECT groups.groupname AS 'groupname' from users, groups WHERE users.ID='".mysql_escape_string($uid)."' AND users.myGroup=groups.ID");
+	$q = query("SELECT groups.groupname AS 'groupname' from users, groups WHERE users.ID='".escape_string($uid)."' AND users.myGroup=groups.ID");
 	$r = fetch($q);
    return $r->groupname;
 }
@@ -326,30 +366,35 @@ function nicedie ($reason = "Something bad happened. Please contact the administ
 	die();
 }
 
-function lang($string = "I must remember to put something here", $module = "default", $extra = "No extra info") {
+function lang($string = "I must remember to put something here", $module = "default", $extra = "No extra info")
+{
 	global $language;
 
-	$q = query("SELECT * FROM lang WHERE string = '".mysql_escape_string($string)."' AND language = '".mysql_escape_string($language)."' AND module = '".mysql_escape_string($module)."'");
+	$q = query("SELECT * FROM lang WHERE string = '".escape_string($string)."' AND language = '".escape_string($language)."' AND module = '".escape_string($module)."'");
 	$num = num($q);
-	if($num == 0)
+	if ($num == 0)
 	{
 		/* The string does not exist in the database, add it */
-		query("INSERT INTO lang SET string = '".mysql_escape_string($string)."', language = '".mysql_escape_string($language)."', module = '".mysql_escape_string($module)."', extra = '".mysql_escape_string($extra)."'");
+		query("INSERT INTO lang SET string = '".escape_string($string)."', language = '".escape_string($language)."', module = '".escape_string($module)."', extra = '".escape_string($extra)."'");
 		return $string;
 	} // End not exists
 
-	elseif($num >= 2)
+	elseif ($num >= 2)
 	{
 		nicedie("There is an error in the lang()-function, more than one existance of string: '".$string."' in module: '".$module."' for language: '".$language."'. FIX IT!");
 	}
 	else
 	{
 		$r = fetch($q);
-		if(empty($r->translated) || !isset($r->translated)) return $string;
-		else return $r->translated;
+		if ((empty($r->translated)) || (!isset($r->translated)))
+		{
+			return $string;
+		}
+		else
+		{
+			return $r->translated;
+		}
 	}
-
-
 }
 
 ?>
