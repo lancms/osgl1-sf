@@ -1,0 +1,125 @@
+BODY {
+background-color: 003D70;
+color: white;
+}
+
+
+TABLE {
+border: 0px;
+}
+
+
+.menu {
+background-color: 003D70;
+color: white;
+a {
+   color: green;
+  }
+
+
+.header {
+background-color: 003D70;
+color: white;
+}
+
+
+.bottom {
+background-color: 003D70;
+color: white;
+align: center;
+}
+
+.main {
+background-color: 144D86;
+color: white;
+}
+
+.profileLeft {
+	background-color: black;
+	color: yellow;
+	border-right: black 1px solid;
+	border-top: black 1px solid;
+	border-left: black 1px solid;
+	border-bottom: black 1px solid;
+}
+.profileRight {
+	background-color: white;
+	color: black;
+	border-right: black 1px solid;
+	border-top: black 1px solid;
+	border-left: black 1px solid;
+	border-bottom: black 1px solid;
+}
+
+.newsHeader {
+	font-weight: bold;
+	font-style: italic;
+}
+
+.newsPoster {
+	font-size: 14;
+}
+
+.newsText {
+	font-style: italic;
+}
+
+hr
+{
+    border-right: black 1px solid;
+    border-top: black 1px solid;
+    border-left: black 1px solid;
+    border-bottom: black 1px solid;
+    height: 2px;
+	
+/* Links */
+	
+	}
+A {
+	FONT-WEIGHT: normal; FONT-SIZE: 11px; COLOR: #dddddd; FONT-STYLE: normal; FONT-FAMILY: verdana; TEXT-DECORATION: none
+}
+/*
+A:active {
+	FONT-WEIGHT: normal; FONT-SIZE: 11px; COLOR: #11304c; FONT-STYLE: normal; FONT-FAMILY: verdana; TEXT-DECORATION: none
+}
+*/
+A:hover {
+	FONT-WEIGHT: normal; FONT-SIZE: 11px; COLOR: #000000; FONT-STYLE: normal; FONT-FAMILY: verdana; TEXT-DECORATION: none
+}
+
+.forumCats {
+	border-right: black 1px solid;
+	border-top: black 1px solid;
+	border-left: black 1px solid;
+	border-bottom: black 1px solid;
+}
+.forumCatsCont {
+	color: black;
+}
+
+.forumTopics {
+	border-right: black 1px solid;
+	border-top: black 1px solid;
+	border-left: black 1px solid;
+	border-bottom: black 1px solid;
+}
+
+.forumTopicsCont {
+	color: black;
+}
+
+.forumPost1header {
+	background-color: black;
+}
+
+.forumPost1text {
+	background-color: blue;
+}
+
+.forumPost2header {
+	background-color: black;
+}
+
+.forumPost2text {
+	background-color: red;
+}
