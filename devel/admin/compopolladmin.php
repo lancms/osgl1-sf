@@ -13,7 +13,8 @@ echo "<br><li><a href=admin.php?adminmode=compopolladmin&action=listCompos>Compo
 */
 
 if($action == "listCompos") {
-$q = query("SELECT SUM(answer),pollID FROM compoPollA GROUP BY pollID ORDER BY 'SUM(answer)' DESC;");
+//$q = query("SELECT SUM(answer),pollID FROM compoPollA GROUP BY pollID ORDER BY 'SUM(answer)' DESC;"); // This generates a problem if no users have answered
+$q = query("SELECT ID AS pollID FROM compoPoll");
 
 echo "<table>";
 echo "<tr><th>".$msg['40']."</th>";
