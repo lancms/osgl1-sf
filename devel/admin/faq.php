@@ -5,22 +5,18 @@ if(!acl_access("faq"))
 	nicedie($admin[noaccess]);
 
 
-
-
 if(isset($_GET['action'])) {
 	$action = $_GET['action'];
 }
-
-db_connect();
 
 if(!isset($action)) {
 
 
 
-	$query = mysql_query("SELECT * FROM faq ORDER BY ID ASC");
+	$query = query("SELECT * FROM faq ORDER BY ID ASC");
 
-	for($i=0;$i<mysql_num_rows($query);$i++) {
-		$result = mysql_fetch_object($query);
+	for($i=0;$i<num($query);$i++) {
+		$result = fetch($query);
 
 		echo "<br>$result->question <a href=admin.php?adminmode=faq&action=delete&ID=".
 		$result->ID.
@@ -41,7 +37,7 @@ if(!isset($action)) {
 	if(!isset($_GET['ID']))
 		nicedie($form[6]);
 
-	$delID = $_GET['ID'];
+	$delID = mysql_escape_string ($_GET['ID']);
 
 	$query = query("DELETE FROM faq WHERE ID = '$delID'");
 
@@ -51,9 +47,9 @@ if(!isset($action)) {
 	if(empty($_POST['question'])) nicedie($form[6]);
 	if(empty($_POST['answer'])) nicedie($form[6]);
 
-	$q = $_POST['question'];
-	$a = $_POST['answer'];
-	$poster = $_COOKIE['userID'];
+	$q = mysql_escape_string ($_POST['question']);
+	$a = mysql_escape_string ($_POST['answer']);
+	$poster = mysql_escape_string (getcurrentuserid());
 
 	$query = query("INSERT INTO faq SET
 	posted_by = '$poster',
@@ -64,7 +60,7 @@ if(!isset($action)) {
 	echo $msg['7'];
 	refresh("admin.php?adminmode=faq");
 } elseif($action == "edit") {
-	$editID = $_GET['ID'];
+	$editID = mysql_escape_string ($_GET['ID']);
 	if(!isset($editID)) nicedie();
 
 	$select = query("SELECT * FROM faq WHERE ID = $editID");
@@ -77,10 +73,11 @@ if(!isset($action)) {
 	echo "</form>";
 } elseif($action == "doedit") {
 	$editID = $_GET['edit'];
-	$text = addslashes($_POST['edittext']);
+	$text = mysql_escape_string (addslashes($_POST['edittext']));
 	$update = query("UPDATE faq SET answer = '$text' WHERE ID = '$editID'");
 
 	if($update) refresh("admin.php");
+	
 	echo $msg[7];
 }
 
