@@ -487,7 +487,7 @@ elseif($action == "DoViewUsers") {
   $q = query("SELECT * FROM wannabeComment WHERE user = '$UserID'");
   echo "<table>";
   while($r = fetch($q)) {
-  		osgl_table(display_nick($r->by), $r->comment);
+  		osgl_table(IDtonick($r->by), $r->comment);
 
 
 
