@@ -8,6 +8,7 @@
 -- Table structure for table `Clan`
 --
 
+DROP TABLE IF EXISTS Clan;
 CREATE TABLE Clan (
   ID int(11) NOT NULL auto_increment,
   name varchar(20) default NULL,
@@ -21,6 +22,7 @@ CREATE TABLE Clan (
 -- Table structure for table `compo`
 --
 
+DROP TABLE IF EXISTS compo;
 CREATE TABLE compo (
   ID int(11) NOT NULL auto_increment,
   name varchar(25) default NULL,
@@ -34,6 +36,7 @@ CREATE TABLE compo (
 -- Table structure for table `compoReg`
 --
 
+DROP TABLE IF EXISTS compoReg;
 CREATE TABLE compoReg (
   compoID int(11) default NULL,
   clanID int(11) default NULL,
@@ -44,6 +47,7 @@ CREATE TABLE compoReg (
 -- Table structure for table `config`
 --
 
+DROP TABLE IF EXISTS config;
 CREATE TABLE config (
   ID int(11) NOT NULL auto_increment,
   config varchar(32) NOT NULL default '',
@@ -55,6 +59,7 @@ CREATE TABLE config (
 -- Table structure for table `faq`
 --
 
+DROP TABLE IF EXISTS faq;
 CREATE TABLE faq (
   ID int(6) NOT NULL auto_increment,
   posted_by int(6) default NULL,
@@ -67,6 +72,7 @@ CREATE TABLE faq (
 -- Table structure for table `forumCats`
 --
 
+DROP TABLE IF EXISTS forumCats;
 CREATE TABLE forumCats (
   ID int(11) NOT NULL auto_increment,
   crewOnly tinyint(1) default NULL,
@@ -79,6 +85,7 @@ CREATE TABLE forumCats (
 -- Table structure for table `forumPosts`
 --
 
+DROP TABLE IF EXISTS forumPosts;
 CREATE TABLE forumPosts (
   ID int(11) NOT NULL auto_increment,
   poster int(11) default NULL,
@@ -93,6 +100,7 @@ CREATE TABLE forumPosts (
 -- Table structure for table `forumThread`
 --
 
+DROP TABLE IF EXISTS forumThread;
 CREATE TABLE forumThread (
   ID int(11) NOT NULL auto_increment,
   header varchar(50) default NULL,
@@ -108,6 +116,7 @@ CREATE TABLE forumThread (
 -- Table structure for table `kiosk_temp`
 --
 
+DROP TABLE IF EXISTS kiosk_temp;
 CREATE TABLE kiosk_temp (
   ID int(11) NOT NULL auto_increment,
   nick varchar(25) default NULL,
@@ -120,6 +129,7 @@ CREATE TABLE kiosk_temp (
 -- Table structure for table `kiosk_warez`
 --
 
+DROP TABLE IF EXISTS kiosk_warez;
 CREATE TABLE kiosk_warez (
   ID int(11) NOT NULL auto_increment,
   name varchar(25) default NULL,
@@ -132,6 +142,7 @@ CREATE TABLE kiosk_warez (
 -- Table structure for table `news`
 --
 
+DROP TABLE IF EXISTS news;
 CREATE TABLE news (
   ID int(11) NOT NULL auto_increment,
   header text,
@@ -144,6 +155,7 @@ CREATE TABLE news (
 -- Table structure for table `partyweb`
 --
 
+DROP TABLE IF EXISTS partyweb;
 CREATE TABLE partyweb (
   ID int(11) NOT NULL auto_increment,
   menuname varchar(64) default NULL,
@@ -157,6 +169,7 @@ CREATE TABLE partyweb (
 -- Table structure for table `pollA`
 --
 
+DROP TABLE IF EXISTS pollA;
 CREATE TABLE pollA (
   AID int(6) NOT NULL auto_increment,
   QID int(6) default NULL,
@@ -169,6 +182,7 @@ CREATE TABLE pollA (
 -- Table structure for table `pollQ`
 --
 
+DROP TABLE IF EXISTS pollQ;
 CREATE TABLE pollQ (
   ID int(6) NOT NULL auto_increment,
   text text,
@@ -181,6 +195,7 @@ CREATE TABLE pollQ (
 -- Table structure for table `pollVoted`
 --
 
+DROP TABLE IF EXISTS pollVoted;
 CREATE TABLE pollVoted (
   voteID int(11) NOT NULL auto_increment,
   userID int(6) default NULL,
@@ -192,6 +207,7 @@ CREATE TABLE pollVoted (
 -- Table structure for table `random`
 --
 
+DROP TABLE IF EXISTS random;
 CREATE TABLE random (
   ID int(11) NOT NULL auto_increment,
   text text NOT NULL,
@@ -202,6 +218,7 @@ CREATE TABLE random (
 -- Table structure for table `reserved`
 --
 
+DROP TABLE IF EXISTS reserved;
 CREATE TABLE reserved (
   reservedBy int(11) default NULL,
   seatID int(11) default NULL,
@@ -212,6 +229,7 @@ CREATE TABLE reserved (
 -- Table structure for table `session`
 --
 
+DROP TABLE IF EXISTS session;
 CREATE TABLE session (
   sID varchar(32) NOT NULL default '',
   userID int(11) default NULL,
@@ -224,6 +242,7 @@ CREATE TABLE session (
 -- Table structure for table `static`
 --
 
+DROP TABLE IF EXISTS static;
 CREATE TABLE static (
   ID int(11) NOT NULL auto_increment,
   header varchar(100) NOT NULL default '',
@@ -235,6 +254,7 @@ CREATE TABLE static (
 -- Table structure for table `stats`
 --
 
+DROP TABLE IF EXISTS stats;
 CREATE TABLE stats (
   ID int(5) NOT NULL auto_increment,
   config varchar(30) default NULL,
@@ -247,6 +267,7 @@ CREATE TABLE stats (
 -- Table structure for table `users`
 --
 
+DROP TABLE IF EXISTS users;
 CREATE TABLE users (
   ID int(11) NOT NULL auto_increment,
   name varchar(40) NOT NULL default '',
@@ -270,6 +291,7 @@ CREATE TABLE users (
 -- Table structure for table `waitinglist`
 --
 
+DROP TABLE IF EXISTS waitinglist;
 CREATE TABLE waitinglist (
   ID int(11) NOT NULL auto_increment,
   userID int(11) default NULL,
