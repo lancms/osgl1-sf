@@ -409,7 +409,7 @@ CREATE TABLE wannabeAdmin (
   PRIMARY KEY  (userID,adminID)
 ) TYPE=MyISAM;
 
-INSERT INTO users SET ID = 1, name = 'Anonymous', nick = 'guest', myGroup = 0;
+INSERT INTO users SET ID = 1, name = 'Guestuser', nick = 'NoUser', myGroup = 0;
 INSERT INTO users SET ID = 2, myGroup = 3, name= 'Admin', nick = 'admin', password = '21232f297a57a5a743894a0e4a801fc3';
 INSERT INTO static SET header = 'index', text = 'Welcome to your new installation of OSGlobeLAN. Login as admin with password admin to make changes to the settings. Of course, youve already read all the docs in docs/ ;)';
 
