@@ -127,7 +127,7 @@ function random_quote() {
 		while(!$random_text) {
 			$random_number = rand(1,$maxran->ID);
 			$query = query("SELECT * FROM random WHERE ID = '".mysql_escape_string($random_number)."'");
-			$row = fetch$query);
+			$row = fetch($query);
 			$random_text = $row->text;
 		}
 	echo $rand_text.stripslashes($random_text)."<br>";
