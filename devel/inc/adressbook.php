@@ -1,10 +1,12 @@
 <?php
 
+// XXX: Typo in filename... :-P
+
 require_once ('config/config.php');
 
 if (!acl_access("isCrew"))
 {
-	nicedie ($admin['noaccess']);
+   nicedie(lang("DIIIIIIIIIIIIIE!! No access!", "inc_adressbook", "No access-text in addressbook"));
 }
 
 $query = query ("SELECT users.ID AS '".lang("ID", "addressbook", "UserID-column in SELECT in addressbook")."',
@@ -20,7 +22,7 @@ echo "<table border=1 cellspacing=1>";
 $column_count = num_fields ($query);
 
 echo "<tr>";
-for($column_num = 0;$column_num < $column_count;$column_num++)
+for ($column_num = 0;$column_num < $column_count;$column_num++)
 {
 	/* XXX: Userfunction for this! */
 	$field_name = mysql_field_name($query, $column_num);
@@ -34,17 +36,21 @@ for ($i=0; $i < $num_rows; $i++)
 	echo "<tr>";
 	$field_number = num_fields($query);
 
-	for($y=0; $y < $field_number; $y++)
+	for ($y=0; $y < $field_number; $y++)
 	{
 		/*
 		 * Uh, what does this do?
 		 * XXX: Userfunction.
 		 */
+		 // I still wonder what this do. :-)
 		$k = mysql_result ($query, $i, $y);
 
-		if($y==0) {
+		if ($y==0)
+		{
 			echo "<td><a href=index.php?inc=profile&uid=$k>$k</a></td>\n";
-		} else {
+		}
+		else
+		{
 			echo "<td>$k</td>\n";
 		}
 	}
