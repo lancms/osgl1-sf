@@ -1,196 +1,168 @@
 <?php
+
 require_once 'config/config.php';
 
 $action	=	$_GET['action'];
 $user	=	getcurrentuserid();
 
-	if(!isset($action)) {
-
-
-	 $list		=	"";
-
-	 $query		= 	"SELECT * FROM wannabeCat";
-	 $result 	= 	query($query);
-
-	  while($cat = mysql_fetch_assoc($result)) {
-
-	   $id		=	$cat['id'];
-	   $name	=	$cat['name'];
-	   $info	=	$cat['info'];
-	 
-	   $check	=	"";
-
-	   $query2	= 	"SELECT * FROM wannabeUsers WHERE user = '$user' AND catid = '$id'";
-	   $result2 = 	query($query2);
-
-	   $result2	=	num($result2);
-
-	    if(!$result2) {
-
-		 $check	.=	"<input type='checkbox' name='SelCat[]' value='$id'>\n";
-
-		} else {
-
-		 $check	.=	"<input type='checkbox' name='SelCat[]' value='$id' checked>\n<font color='red'>*</font>\n";
-
-		}
-
-	   $list 	.= "
-			<tr>
-			  <td>".$check."</td>
-			  <td>$name</td>
-			  <td>$info</td>
-			</tr>
-	   ";
-
-	  }
-
-	 echo "
-		<form name='SelCat' method='post' action='index.php?inc=wannabe&action=listQue'>
-		  <table width='400'>
-			<tr>
-			  <td colspan='3'><strong>".lang("Wannabe", "inc_wannabe", "Text to display in wannabe")."</strong></td>
-			</tr>
-			".$list."
-			<tr>
-			  <td colspan='3'><input type='submit' name='Submit' value='".lang("Next", "inc_wannabe", "Text to display in wannabe")."'></td>
-			</tr>
-			<tr>
-			  <td colspan='3'><font color='red'>*</font> = ".lang("WTF ?!.", "inc_wannabe", "Text to display in wannabe")."</td>
-			</tr>
-		  </table>
-		</form>
-
+if(!isset($action)) {
+	
+	$query	=	"SELECT * FROM users WHERE id = '$user'";
+	$result	=	query($query);
+	
+	$var	=	fetch($result);
+	
+	$Agree 	=	$var->wannabe;
+	
+	if($Agree == 1) {
+	 $Agree = " checked";
+	}
+	
+	echo 	"
+	<form name='Agree' method='post' action='index.php?inc=wannabe&action=ListQue'>
+	<input type='checkbox' name='Agree' value='1'".$Agree.">
+	".lang("Yes, I want to be a crew member!", "inc_wannabe", "Text used in wannabe")."
+	<br><input type='submit' name='Submit' value='".lang("Continue", "inc_wannabe", "Text used in wannabe")."'>
+	</form>
 	";
 
-	}
+}
 
-	elseif($action == "listQue") {
+elseif($action == "ListQue") {
 
-	$SelCat	=	$_POST['SelCat'];
-
-	if(empty($SelCat)) {
-	 refresh("index.php?inc=wannabe", 0);
-	}
-
-	$list = "
+	$Agree	=	$_POST['Agree'];
+	
+	if($Agree != 1) {
+		echo lang("You must check the checkbox", "inc_wannabe", "Text used in wannabe");
+		refresh("index.php?inc=wannabe", 2);
+	} else {
+	
+	$list	=	"
 	<form name='SelQue' method='post' action='index.php?inc=wannabe&action=EndQue'>
-	<table>
-	";
+	 <table>
+	  <tr>
+	   <td><b>".lang("Wannabe", "inc_wannabe", "Text to display in wannabe")."</b></td>
+	  </tr>
+	 ";
+	
+	$query	=	"SELECT * FROM wannabeQue";
+	$result	=	query($query);
+	
+		while($var 	= fetch($result)) {
+		
+		$Id		=	$var->id;
+		$Que	=	$var->content;
+		$Type	=	$var->type;
 
-	 foreach ($SelCat as $Cats) {
-
-	 $query		= 	"SELECT * FROM wannabeQue WHERE catid = '$Cats'";
-	 $result 	= 	query($query);
-
-	  while($cat = mysql_fetch_assoc($result)) {
-
-	   $que		=	$cat['content'];
-	   $type	=	$cat['type'];
-	   $id		=	$cat['id'];
-
-	   $list 	.= "
-			<tr>
-			  <td>&nbsp;</td>
-			</tr>
-			<tr>
-			  <td>$que</td>
-			</tr>
-	   ";
-
-	   if(!$type) {
-	 	
-		$query2		= 	"SELECT * FROM wannabeUsers WHERE user = '$user' AND queid = '$queid'";
-	 	$result2 	= 	query($query2);
-	 	$Answ		= 	fetch_array($result2);
-
-	 	$Text		=	$Answ->ans;
-	   
-	    $list 	.= "
-		 <tr>
-		   <td><textarea name='$id'>".$Text."</textarea></td>
-		 </tr>
-		 ";
-		 
-		} else {
-
-		$query2		= 	"SELECT * FROM wannabeAltRadio WHERE queid = '$id'";
-		$result2	= 	query($query2);
-
-		while($Que = mysql_fetch_assoc($result2)) {
-
-			$Alt   = $Que['content'];
-			$AltId = $Que['id'];
-			$Quest = $Que['queid'];
-
-			$query3		= 	"SELECT * FROM wannabeUsers WHERE user = '$user' AND  queid = '$Que'";
+		$list  .= 	"
+		<tr>
+		 <td><b>".$Que."<b></td>
+		</tr>
+		";
+		
+		
+		if($Type == 1) {
+			
+			$query2		=	"SELECT * FROM wannabeAlt WHERE queid = '$Id'";
+			$result2	=	query($query2);
+			
+			while($var2 = fetch($result2)) {
+			
+			$Altid		=	$var2->id;
+			$Alt		=	$var2->content;
+			
+			
+			$query3		= 	"SELECT * FROM wannabeUsers WHERE user = '$user' AND  queid = '$Id'";
 			$result3 	= 	query($query3);
 
-			$Sel		= 	fetch_array($result3);
-			$SelAlt		=	$Sel->ans;
+			$Sel		= 	fetch($result3);
+			$SelId		=	$Sel->ans;
+
+			$Check		=	"";
 			
-			if($SelAlt == $AltId) {
-		 	 $Check		=	"checked";
+			if($SelId == $Altid) {
+		 	 $Check		=	" checked";
 			}
-
-			$list .= "
+			
+			$list   .= "
 			<tr>
-			 <td><input type='radio' name='$id' value='$AltId'".$Check.">$Alt</td>
-			</tr>";
-
-		 }
+			 <td><input type='radio' name='".$Id."' value='".$Altid."'".$Check.">".$Alt."</td>
+			</tr>
+			";	
+			
+			}
+		
+		} else {
+		
+			$query4		= 	"SELECT * FROM wannabeUsers WHERE user = '$user' AND queid = '$Id'";
+			$result4 	= 	query($query4);
+			$Answ		= 	fetch($result4);
+	
+			$Text		=	$Answ->ans;
+		   
+			$list 	.= "
+			 <tr>
+			   <td><textarea name='$Id'>".$Text."</textarea></td>
+			 </tr>
+			 ";
+		
 		}
-	   }
-	  }
-	$list .= "
-	<tr>
-	 <td><input type='submit' name='Submit' value='".lang("Save", "inc_wannabe", "Text to display in wannabe")."'></td>
-	</tr>
-	</table>
-	</form>";
-	echo $list;
+		
+		$list	.= "
+		<tr>
+		 <td>&nbsp;</td>
+		</tr>
+		";
+	
 	}
 
-	elseif($action == "EndQue") {
+
+		
+	$list	.= "
+	  <tr>
+	   <td><input type='submit' name='Submit' value='".lang("Save", "inc_wannabe", "Text to display in wannabe")."'></td>
+	  </tr>
+	 </table>
+	</form>";
+	
+	echo $list;
+	
+	}
+
+}
+
+elseif($action == "EndQue") {
+
 
 	$query	= 	"SELECT * FROM wannabeQue";
 	$result	= 	query($query);
 
-	  while($Res = mysql_fetch_assoc($result)) {
+	  while($Res = fetch($result)) {
 
-	   $id		=	$Res['id'];
+	   $id		=	$Res->id;
 	   $post	=	$_POST[$id];
-
+	   $post	=	escape_string($post);
+	   
+	   if(empty($post)) nicedie(lang("Please answer the questions !", "admin_wannabemin", "Text used in wannabemin"));
 
 	   if(!empty($post)) {
 
 	   	$ans		=	$_POST[$id];
 		$ans		=	escape_string($ans);
 	   
-		$query3		= 	"SELECT * FROM wannabeQue WHERE id = '$id'";
-		$result3	= 	query($query3);
-		$Var		= 	fetch_array($result3);
-
-		$queid		=	$Var->id;
-		$catid		=	$Var->catid;
-		
-
-		$query4		= 	"SELECT * FROM wannabeUsers WHERE queid = '$queid' AND user = '$user'";
+		$query4		= 	"SELECT * FROM wannabeUsers WHERE queid = '$id' AND user = '$user'";
 		$result4	= 	query($query4);
 		$num		=	num($result4);
-		
-		$query5		=	"SELECT * FROM users WHERE nick = '$user'";
-		$result5	=	query($query5);
-		$Usr		=	fetch_array($result5);
-		
-		$userID		=	$Usr->ID;
 
-		if($num) {
-		 $query2 	= 	"UPDATE wannabeUsers SET ans = '$ans' WHERE queid = '$queid' AND user = '$userID'";
+		if($num >= 1) {
+		 $query2 	= 	"UPDATE wannabeUsers SET ans = '$ans' WHERE queid = '$id' AND user = '$user'";
 		} else {
-	     $query2 	= 	"INSERT INTO wannabeUsers (id, user, ans, queid, catid) VALUES (NULL, '$user', '$ans', '$queid', '$catid')";
+	     $query2 	= 	"INSERT INTO wannabeUsers (id, user, ans, queid) VALUES (NULL, '$user', '$ans', '$id')";
 		}
 		$result2	= 	query($query2);
+		
+		$query3		=	"UPDATE users SET wannabe = '1' WHERE id = '$user'";
+		$result4	=	query($query);
 
 	   }
 
@@ -198,7 +170,8 @@ $user	=	getcurrentuserid();
 
 	  echo lang("Updated !", "inc_wannabe", "Text to display in wannabe");
 
-	 }
+	}
+
 
 
 ?>
