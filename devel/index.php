@@ -26,7 +26,7 @@ if(isset($_GET['inc'])) {
 		include 'inc/news.php';
 	}
 }
-
+//echo "<br>".lang("This is a test", "index");
 
 include $base_path."style/bottom.php";
 ?>
