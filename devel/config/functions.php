@@ -238,6 +238,16 @@ function acl_access($acl, $userID = NULL) {
 	else return 0;
 }
 
+function reverse_acl($acl) {
+	$q = query("SELECT * FROM acls WHERE (access = '$acl' AND value = 1) OR (access = 'root' AND value = 1)");
+	while($r = fetch($q)) {
+		if(empty($query2)) $query2 = "WHERE myGroup = $r->groupID";
+		else $query2 .= "OR myGroup = $r->groupID";
+	}
+	$q2 = query("SELECT * FROM users $query2");
+	return $q2;
+}
+
 function resolve_groupname ($uid)
 {
 	if (!isset($uid))
