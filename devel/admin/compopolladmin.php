@@ -58,7 +58,7 @@ echo "</table>";
 } // end action listcompos
 
 elseif($action == "addcompo") {
-$question = stripslashes($_POST['componame']);
+$question = mysql_escape_string(stripslashes($_POST['componame']));
 
 query("INSERT INTO compoPoll SET question = '$question'");
 refresh("admin.php?adminmode=compopolladmin&action=listCompos", 0);
