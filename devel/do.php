@@ -84,6 +84,8 @@ if($action=="login") {
 
 
 } else {
+	include $base_path."style/top.php";
+	echo "No such function here";
 	nicedie();
 }
 
