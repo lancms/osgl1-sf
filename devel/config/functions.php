@@ -50,8 +50,7 @@ function dblog($type = 1,$logNew = "NOTHING LOGGED", $logOld = NULL) {
     return 1;
 }
 
-function verify($mode="register", $nick, $firstname, $lastname, $email=NULL, $password=NULL)
-
+function verify($mode="register", $userid, $nick, $firstname, $lastname, $email=NULL, $password=NULL)
 {
     if($nick == "") // check nick.
         return 8;
@@ -68,15 +67,24 @@ function verify($mode="register", $nick, $firstname, $lastname, $email=NULL, $pa
 	elseif((!strchr($firstname, " ")) || (!strchr($lastname, " ")))
 	 	return 12;
 
-    else    // if we find no of the above errors, compare user name with the database.
-    {
-        $dbs = mysql_query("SELECT nick FROM users WHERE nick LIKE '$nick'")
-            or die("Could not complete task : ".mysql_error());
-
-        if((!$dbs) || (mysql_num_rows($dbs) == 0))
-            return "allowed"; // let the script pass
-        else
+	else		// if we find no of the above errors, compare user name with the database.
+	 {
+			$query = query ("SELECT ID FROM users WHERE nick = '".$nick."'");
+			$fetch = fetch ($query);
+			$num = num ($query);
+			
+			if ($num == 0)
+			{
+				return "allowed";
+			}
+			elseif ($fetch->ID == $userid)
+			{
+				return "allowed";
+			}
+			else
+			{
             return 13;
+			}
     }
 
 }
