@@ -90,7 +90,8 @@ $msg[22] = "Gjester online: ";
 $msg[23] = "Verifiser epostadressen din med verifiseringskoden du har fått tilsendt.";
 $msg[24] = "Hvis du ikke har fått tilsendt noen verifiseringskode, kontakt administratorene.";
 $msg[25] = "Du har ikke tilgang til dette av en eller annen merkelig grunn...";
-$msg[26] = "hmmm, nope; ingen slike ting der";
+$msg['26'] = "Du er ikke logget inn.";
+$msg['27'] = "Du er nå logget ut.";
 
 $rank[0] = "Deltager";
 $rank[1] = "Crew";

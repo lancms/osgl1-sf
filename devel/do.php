@@ -49,9 +49,9 @@ if($action=="login") {
     $res = log_out();
     include $base_path."style/top.php";
     if($res == 0)
-        echo "You are not logged in.";
+        echo $msg['26'];
     else
-        echo "Logged out!";
+        echo $msg['27'];
 
 } elseif($action=="verify") {
     include $base_path."style/top.php";
@@ -72,30 +72,26 @@ if($action=="login") {
     $uid = $_POST['uid'];
     $my_userID = $uid;
     db_connect();
-    $sql_query = "SELECT verified FROM users WHERE ID = $my_userID";
-    $query = mysql_query($sql_query) or die(mysql_error());
-    $result = mysql_fetch_object($query);
+    $query = query("SELECT users.verified FROM users WHERE ID=".$my_userID."");
+    $r = fetch($query);
 
     if($result->verified == $_POST['verifycode']) {
 
         include $base_path."style/top.php";
         echo $msg[3];
-        $query = mysql_query("UPDATE users SET verified = 0 WHERE ID = $my_userID") or die(mysql_error());
+        $query = query("UPDATE users SET users.verified=0 WHERE ID=".$my_userID."");
         $sID = $_COOKIE[$cookiename];
-        $login = mysql_query("UPDATE session SET userID = $my_userID WHERE sID = '$sID'");
-    } else {
+        $login = query("UPDATE session SET users.userID=".$my_userID." WHERE sID='".$sID."'");
+    }
+	 else
+	 {
         echo $msg[4];
     }
 
 
 } else {
-	// Default reason works.
 	nicedie();
 }
-
-
-
-
 
 include $base_path."style/bottom.php";
 ?>

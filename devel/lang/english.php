@@ -90,7 +90,9 @@ $msg[22] = "Guests online: ";
 $msg[23] = "Enter the verificationcode sent to your emailaddress.";
 $msg[24] = "If you have not recieved any verificationcode within a reasonable time, please contact the administrators.";
 $msg[25] = "For some strange reason you do not have access to this";
-$msg[26] = "hmmm, nope; no such thing there";
+$msg['26'] = "You are not logged in.";
+$msg['27'] = "You are now logged out.";
+
 $rank[0] = "User";
 $rank[1] = "Crew";
 $rank[2] = "Admin";
