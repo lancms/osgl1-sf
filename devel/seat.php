@@ -86,7 +86,7 @@ echo "<br><font color=red>".$colour['1']."</font>: ".$seat['0']."
 elseif(($action == "seat") && ($canSit))
 {
     $testQ = query("SELECT * FROM users WHERE seatX = '".escape_string($getX)."' AND seatY = '".escape_string($getY)."'");
-    if(num($testQ) != 0) die("Du kan _IKKE_ plassere deg der noen andre sitter!");
+    if(num($testQ) != 0) die(lang("You may _NOT_ seat here, somebody is already sitting here!", "root_seat", "Text to display if someone sits on a spot that is already taken"));
     $currentuserid = getcurrentuserid();
     query("UPDATE users SET seatX = '".escape_string($getX)."', seatY = '".escape_string($getY)."' WHERE ID = '".escape_string($currentuserid)."'");
     header("Location: seat.php?x=$getX&y=$getY");
@@ -97,6 +97,7 @@ elseif($action == "cancel")
     $currentuserid = getcurrentuserid();
     query("UPDATE users SET seatX = -1, seatY = -1 WHERE ID = '".escape_string($currentuserid)."'");
     header("Location: seat.php");
+    dblog(9, "x-1y-1");
 }
 else
 {

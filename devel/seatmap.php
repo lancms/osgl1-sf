@@ -47,10 +47,13 @@ for($i=0;$i<$height;$i++)
 		$xx = $x + $addwidth;
 		$yy = $y + $yscale;
 
-
-		if(($seat_avail[$cur] > 0) && ($rn + 1  >= $seat_avail[$cur]))	// if seat is availble
+		if($seat_avail[$cur] > 0)
+// OLD		if(($seat_avail[$cur] > 0) && ($rn + 1  >= $seat_avail[$cur]))	// if seat is availble
 		{
-			echo "<area href='seat.php?x=$j&y=$i$zoom' shape=rect coords='$x,$y,$xx,$yy'>\n";
+			if($seat_avail[$cur] == 2 && !$rn) {
+			}
+			else
+				echo "<area href='seat.php?x=$j&y=$i$zoom' shape=rect coords='$x,$y,$xx,$yy'>\n";
 		}
 	}
 }
