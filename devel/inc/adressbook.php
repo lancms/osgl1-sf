@@ -3,7 +3,7 @@
 require_once 'config/config.php';
 if(getuserrank() < 1) die($admin[noaccess]);
 
-$query = mysql_query("SELECT ID,nick,isCrew,seatID,crewField,cellphone,EMail FROM users WHERE isCrew != 0") or die(mysql_error());
+$query = mysql_query("SELECT ID,nick,isCrew,crewField,cellphone,EMail FROM users WHERE isCrew != 0") or die(mysql_error());
 
 $num = mysql_num_rows($query);
 

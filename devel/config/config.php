@@ -9,21 +9,21 @@ $devel_version = "0.3 Alpha";
 
 /* config for the MySQL server! */
 /* As default, I have commented this out, and instead include it from an other file, since this release is automated! */
-#$sql_server = "localhost";
-#$sql_user = "root";
-#$sql_pass = "";
-#$sql_db = "devel";
+$sql_server = "localhost";
+$sql_user = "root";
+$sql_pass = "podem299";
+$sql_db = "devel";
 
 /* Setting this to upgrade will automatically upgrade the database (hopefully) when an admin is logged in.... */
 /* Should probably be disabled when the upgrade is completed */
 #$sql_mode = "upgrade";
 
 /* This file contains the $sql_* variables shown above */
-include_once '/home/lak/inc_devel.php';
+#include_once '/home/lak/inc_devel.php';
 
 /* config for database handling */
 $session_alive_time = 3600;      // How long should a session stay alive? 3600 (one hour) is default.
-$cookiename = "GlObeLAN-DeVeL";
+$cookiename = "GlObeLAN-77777";
 /* The language-files to use.... If your language is not in the lang-folder, make it, translate it, and send it to the creators... */
 $language = "norwegian";
 
@@ -39,6 +39,7 @@ $rand_text = "Tilfeldig: ";
 
 $usemap = $base_path."config/defaultmap.txt";
 
+$seatsize = 10;
 
 /* User information and verification */
 
@@ -57,6 +58,63 @@ $webshop_display_infoline = "Vennligst vær oppmerksom på:
 <br>- Å ha penger tilgjengelig når en fra kiosk-personalet kommer
 <br>- At steking av pizza ol. kan ta tid.
 <br>- Kioskpersonalet vil ta kontakt med deg via epost dersom de lurer på noe. Ha derfor e-post klienten din tilgjengelig.";
+
+$seatsign[0]['name'] = "Vegg";
+$seatsign[0]['color'] = "black";
+$seatsign[0]['level'] = -2;
+
+$seatsign[1]['sign'] = "d";
+$seatsign[1]['name'] = "Deltager";
+$seatsign[1]['level'] = 0;
+$seatsign[1]['color'] = "red";
+
+$seatsign[2]['sign'] = "c";
+$seatsign[2]['name'] = "Crew";
+$seatsign[2]['level'] = 1;
+$seatsign[2]['color'] = "green";
+
+$seatsign[3]['sign'] = "v";
+$seatsign[3]['name'] = "VIP";
+$seatsign[3]['level'] = -2;
+$seatsign[3]['color'] = "grey";
+
+$seatsign[4]['sign'] = "r";
+$seatsign[4]['name'] = "Reservert";
+$seatsign[4]['level'] = -2;
+$seatsign[4]['color'] = "orange";
+
+$seatsign[5]['sign'] = "-";
+$seatsign[5]['name'] = "Åpent";
+$seatsign[5]['color'] = "white";
+$seatsign[5]['level'] = -2;
+
+$seatsign[6]['sign'] = "D";
+$seatsign[6]['name'] = "Dør";
+$seatsign[6]['color'] = "brown";
+$seatsign[6]['level'] = -2;
+
+$seatsign[7]['sign'] = "K";
+$seatsign[7]['name'] = "Kiosk";
+$seatsign[7]['color'] = "yellow";
+$seatsign[7]['level'] = -2;
+
+$seatsign[8]['sign'] = "a";
+$seatsign[8]['name'] = "Admin";
+$seatsign[8]['color'] = "orange";
+$seatsign[8]['level'] = 2;
+
+$seatsign[9]['sign'] = "U";
+$seatsign[9]['name'] = "Utjevning - Deltager";
+$seatsign[9]['color'] = "red";
+$seatsign[9]['level'] = -2;
+
+
+for($i=0;$i<count($seatsign);$i++) {
+        $sign = $seatsign[$i]['sign'];
+
+        $seatsign_number[$sign] = $i;
+}
+
 
 
 ######################################################

@@ -69,7 +69,31 @@ if($action == "view" || !isset($action)) {
 	user_table($form[25], "<a href=index.php?inc=useradmin&action=changepass&user=$editID>$form[33]</a>");
 
 	user_table($profile[6], "<a href=index.php?inc=useradmin&action=changemail&user=$editID>$form[34]</a>");
-
+	
+	user_table("Gateadresse/nr", "<input type=text name=street value='$row->street'>");
+	user_table("Postnummer/sted", "<input type=text name=postNr value='$row->postNr' size=5><input type=text name=postPlace value='$row->postPlace'>");
+	
+	$birthdayinfo = "<select name=birthDAY>";
+	for($i=1;$i<32;$i++) {
+		if($i != $row->birthDAY) $select = "";
+		else $select = "SELECTED";
+		$birthdayinfo .= "<option value=$i $select>$i</option>\n";
+	}
+    	$birthdayinfo .= "</select>";
+	$birthdayinfo .= "<select name=birthMONTH><option value=0></option>\n\n";
+	for($m=1;$m<13;$m++) {
+		if($row->birthMONTH != $m) $select = "";
+		else $select = "SELECTED";
+		$birthdayinfo .= "<option value=$m $select>$month[$m]</option>\n";
+	}
+	$birthdayinfo .= "</select>";
+	$birthdayinfo .= "<select name=birthYEAR>";
+	for($y=1950;$y<2004;$y++) {
+		if($y != $row->birthYEAR) $selected = "";
+		else $selected = "SELECTED";
+		$birthdayinfo .= "<option value=$y $selected>$y</option>\n";
+	}
+	user_table("Bursdag", $birthdayinfo);
 
 
 	echo "<tr><td class=profileLeft width=30%>$profile[9]</td><td class=profileRight>";
@@ -155,40 +179,35 @@ if($action == "view" || !isset($action)) {
 
 
 elseif($action == "edit") {
-
-
-
 	$name = $_POST['name'];
-
 	$mail = $_POST['mail'];
-
 	$aboutme = htmlspecialchars($_POST['aboutme']);
-
 	$rank = $_POST['rank'];
-
 	$crewField = $_POST['crewfield'];
-
 	$cellphone = $_POST['cellphone'];
-
 	$allowPublic = $_POST['allowPublic'];
-
 	$userDesign = $_POST['userDesign'];
-
+	$street = $_POST['street'];
+	$postNr = $_POST['postNr'];
+	$postPlace = $_POST['postPlace'];
+	$birthDAY = $_POST['birthDAY'];
+	$birthMONTH = $_POST['birthMONTH'];
+	$birthYEAR = $_POST['birthYEAR'];
 	$query = mysql_query("UPDATE users SET name = '$name',
-
-		EMail = '$mail',
-
 		aboutMe = '$aboutme',
-
 		crewField = '$crewField',
-
 		cellphone = '$cellphone',
-
 		allowPublic = $allowPublic,
-
 		userDesign = '$userDesign',
-
-		isCrew = '$rank' WHERE ID = $editID") or die(mysql_error());
+		isCrew = '$rank',
+		street = '$street',
+		postNr = '$postNr',
+		postPlace = '$postPlace',
+		birthDAY = '$birthDAY',
+		birthMONTH = '$birthMONTH',
+		birthYEAR = '$birthYEAR'
+		
+		WHERE ID = $editID") or die(mysql_error());
 
 	refresh("index.php?inc=useradmin&user=$editID", "0");
 

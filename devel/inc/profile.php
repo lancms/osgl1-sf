@@ -85,7 +85,7 @@ echo "</table>";
 if(getuserrank() == 2) echo "<br><a href=index.php?inc=useradmin&user=$viewUSER>$profile[11]</a>";
 
 echo "</center>";
-
+/*
 function profile_table($profileLeft, $profileRight) {
 
 	echo "<tr><td class=profileLeft>$profileLeft</td><td class=profileRight>";
@@ -95,5 +95,5 @@ function profile_table($profileLeft, $profileRight) {
 	echo "</td></tr>";
 
 }
-
+*/
 ?>

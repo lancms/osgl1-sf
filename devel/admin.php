@@ -24,6 +24,7 @@ if(!isset($adminmode)) {
 	echo "<br><a href=admin.php?adminmode=forum>ForumAdmin</a>";
     echo "<br><a href=admin.php?adminmode=partyweb>PartyAdmin</a>";
     echo "<br><a href=admin.php?adminmode=config>Config</a>";
+    echo "<br><a href=admin.php?adminmode=wannabemin>Wannabe admin</a>";
 
 } elseif($adminmode != "") {
 	include_once "admin/".$adminmode.".php";

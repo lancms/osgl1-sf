@@ -114,6 +114,7 @@ $title[page][13] = "Brukerinnlogging";
 $title[page][14] = "Crewadressebok";
 $title[page][15] = "Kiosk";
 $title[page][16] = "PartyWeb";
+$title[page][17] = "WannabeCrew";
 
 /* Messages on admin-interface */
 $admin[noaccess] = "DØØØØØØØØØØØ; ingen tilgang!";
@@ -146,6 +147,19 @@ $profile[12] = "Mobiltelefon (kun viktig for crew)";
 $profile[13] = "Tillat visning av profil til";
 $profile[14] = "Design du ønsker å bruke";
 
+$month['1'] = "Januar";
+$month['2'] = "Februar";
+$month['3'] = "Mars";
+$month['4'] = "April";
+$month['5'] = "Mai";
+$month['6'] = "Juni";
+$month['7'] = "Juli";
+$month['8'] = "August";
+$month['9'] = "September";
+$month['10'] = "Oktober";
+$month['11'] = "November";
+$month['12'] = "Desember";
+
 
 $forum[0] = "Siste post av: ";
 $forum[1] = "Send inn";
@@ -155,6 +169,26 @@ $forum[4] = "Lag nytt tema";
 $forum[5] = "Skriv svar";
 $forum[6] = "Flytt tråden til /dev/null";
 
+
+$wannabe[0] = "Jeg ønsker å være crew";
+$wannabe[1] = "Jeg har ikke lyst til å være crew allikevel";
+
+$wannabe['canSecCrew'] = "Jeg er stor og sterk (security)";
+$wannabe['canKioskCrew'] = "Jeg kan steke pizza";
+$wannabe['canTechCrew'] = "Jeg veit hvordan Windows fungerer";
+$wannabe['canTechLinuxCrew'] = "Jeg kan endel om Linux";
+$wannabe['canNetCrew'] = "Jeg kan forklare OSI-modellen";
+$wannabe['canPartyCrew'] = "Jeg lager liv (partycrew)";
+$wannabe['canCarryTablesCrew'] = "Jeg har ingen ryggproblemer (kan bære bord etc.) [anbefales IKKE å prøve å droppe dette uten gyldig grunn....]";
+$wannabe['aboutme'] = "Om meg (ikke anta at de som leser dette kjenner deg....)";
+$wannabe['experience'] = "Tidligere erfaringer som kan være aktuelt å vite noe om (styreverv, elevråd, andre datapartyer (spesifiser hva du jobbet med takk!), arrangering av skoleball; alt som kan være aktuelt)";
+$wannabe['why'] = "Hvorfor ønsker du å være crew? Hvorfor skal vi velge deg?";
+$wannabe['canGameCrew'] = "Jeg kan arrangere gamecompoer (spesifiser mer hvilke/erfaringer)";
+$wannabe['turnOn'] = "Kan du skru på en datamaskin?";
+$wannabe['karaoke'] = "Kan du synge karaoke?";
+$wannabe['canCake'] = "Kan du bake kake?";
+$wannabe['leaderType'] = "Ser du på deg selv som en ledertype?";
+$wannabe['myRequests'] = "Hva slags crew ønsker du selv å havne i/hva ønsker du å drive med? (info, sec, party, game, net). Hva kan du bidra med til det crewet?";
 
 $compo[0] = "Spill";
 $compo[1] = "Tekst";
@@ -188,9 +222,9 @@ $clan[0] = "Disse spillerene er med i denne compoen :";
 $clan[1] = "Denne klanen er med i disse compoene :";
 $clan[2] = "Klan navn :";
 
-$mail[0] = "Du har blitt registrert som bruker på GlobeLAN DEVEL!";
+$mail[0] = "Du har blitt registrert som bruker på GlobeLAN 7!";
 $mail[1] = "$admin[contact][mail]";
-$mail[2] = "GlobeLAN-Devel";
+$mail[2] = "GlobeLAN7";
 
 
 // moved mail_body() to functions..... you should edit that one to!

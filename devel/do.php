@@ -73,7 +73,7 @@ if($action=="login") {
         include $base_path."style/top.php";
         echo $msg[3];
         $query = mysql_query("UPDATE users SET verified = 0 WHERE ID = $my_userID") or die(mysql_error());
-        $sID = $_COOKIE['sessionid'];
+        $sID = $_COOKIE[$cookiename];
         $login = mysql_query("UPDATE session SET userID = $my_userID WHERE sID = '$sID'");
     } else {
         echo $msg[4];

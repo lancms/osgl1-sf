@@ -26,46 +26,46 @@ if($action=="display" && !isset($_GET[poll])) {
     $poll = $_GET[poll];
 
     $queryQ = mysql_query("SELECT * FROM pollQ WHERE ID = $poll") or die(mysql_error());
-    $row = mysql_fetch_object($queryQ);
-    $maxVotes = $row->maxVotes;
-    if($row->isOpen == 0) echo "<font size=18>$msg[8]</font><br>";
+    $row = mysql_fetch_object($queryQ);		// get the poll data (name etc.)
+    $maxVotes = $row->maxVotes;			// maxVotes denotes how many votes is allowed per user.
+    if($row->isOpen == 0) echo "<font size=18>$msg[8]</font><br>";	// find out whether this poll is open or not
 	$totalVotes = mysql_query("SELECT * FROM pollVoted WHERE pollID = $poll");
 	$totalVotes = mysql_num_rows($totalVotes);
     echo $row->text;
 
-    $queryV = mysql_query("SELECT votes FROM pollA WHERE QID = $poll")
+    $queryV = mysql_query("SELECT votes FROM pollA WHERE QID = $poll")	// get how many votes has been made on this poll
         or die(mysql_error());
 
-    if(mysql_num_rows($queryV) < 1)
+    if(mysql_num_rows($queryV) < 1)	// if mysql_num_rows($queryV) is less than one (probably equals 0)
     {
-        echo "Det er ingen ting å stemme på her.";
+        echo "Det er ingen ting å stemme på her.";	// you can't vote on a poll that does not exist.
         return;
     }
-	echo "<br>".$form[46].$totalVotes."<br><br>\n";
-    $mxvotes = 0;
+	echo "<br>".$form[46].$totalVotes."<br><br>\n";	// display total votes
+    $mxvotes = 0;	// set a temporary variable for calculating percent.
 
     for($i=0;$i<mysql_num_rows($queryV);$i++)
     {
         $row = mysql_fetch_object($queryV);
-        $mxvotes += $row->votes;
+        $mxvotes += $row->votes;	// mxvotes is the true votecount.
     }
 
     if($mxvotes > 0)
-        $mxcountvotes = 100 / $mxvotes;
+        $mxcountvotes = 100 / $mxvotes;	// make into percentage.
 
 
-        $uid = getcurrentuserid();
+        $uid = getcurrentuserid();	// check userid.
 
-    $queryU = mysql_query("SELECT * FROM pollVoted WHERE userID = $uid AND pollID = $poll")
+    $queryU = mysql_query("SELECT * FROM pollVoted WHERE userID = $uid AND pollID = $poll")	// create a query that finds out whether this user has voted before or not on this poll.
         or die(mysql_error());
 
-    $denyvote = FALSE;
+    $denyvote = FALSE;	// set default value to FALSE
 
-    if((mysql_num_rows($queryU) >= $maxVotes) or (getcurrentuserid() == 1))
-        $denyvote = TRUE;
+    if((mysql_num_rows($queryU) >= $maxVotes) or (getcurrentuserid() == 1))	// if this user has exceeded the maxvote count,
+        $denyvote = TRUE;	// deny.
 
 
-    $queryV = mysql_query("SELECT * FROM pollA WHERE QID = $poll")
+    $queryV = mysql_query("SELECT * FROM pollA WHERE QID = $poll")	// retrieve all the alternatives.
         or die(mysql_error());
 
 
@@ -74,11 +74,11 @@ if($action=="display" && !isset($_GET[poll])) {
     {
         $row = mysql_fetch_object($queryV);
 
-        $w = $row->votes * $mxcountvotes;
-        $w = round($w, 2);
+        $w = $row->votes * $mxcountvotes; // get percentage of votes.
+        $w = round($w, 2);	// round it down with 2 decimals
 
         if($denyvote)
-            $atxt = $row->Atext;
+            $atxt = $row->Atext;	// if vote is denied, don't display the link.
         else
             $atxt = "<a href=index.php?inc=poll&action=castvote&AID=".$row->AID.">".$row->Atext."</a>";
 

@@ -142,14 +142,22 @@ $q = mysql_query($query) or die("Error with query: $query, error returned: ".mys
 return $q;
 }
 
+function fetch($q) {
+	$r = mysql_fetch_object($q);
+	return $r;
+}
+
+function num($q) {
+	return mysql_num_rows($q);
+}
+
 function user_style() {
 	$q = mysql_query("SELECT * FROM users WHERE ID = ".getcurrentuserid());
 	$r = mysql_fetch_object($q);
 
 	$design = $r->userDesign;
 
-	if(!isset($design)) $design = "default";
-
+	if(!isset($design)) $design = config("default_style");
 	return $design;
 }
 
@@ -185,4 +193,32 @@ function display_text($text) {
 	return $text;
 
 }
+
+function convert_seatmap($map) {
+        $len = strlen($map);
+        $s = NULL;
+        $l = 0;
+        for($i=0;$i<$len;$i++) {
+                if($map[$i] == "\n") $l++;
+                else $s[$l][] = $map[$i];
+        }
+        return $s;
+}
+
+function display_nick($ID) {
+	$q = query("SELECT * FROM users WHERE ID = $ID");
+	$r = fetch($q);
+	echo $r->nick;
+}
+
+function profile_table($profileLeft, $profileRight) {
+
+	echo "<tr><td class=profileLeft width=25%>$profileLeft</td><td class=profileRight>";
+
+	echo $profileRight;
+
+	echo "</td></tr>\n\n";
+
+}
+
 ?>

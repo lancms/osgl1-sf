@@ -1,7 +1,10 @@
 <?php
+require_once 'config/config.php';
 
+if(!config("usepage_kiosk")) die($msg[1]);
 $writable = FALSE;
 if(getuserrank() >= 1) $writable = TRUE;
+
 
 $action = $_GET['action'];
 

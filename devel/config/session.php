@@ -27,6 +27,12 @@ Various functions for session information
 // this MUST run each time the page shall be displayed.
 
 $userIP = $HTTP_SERVER_VARS['REMOTE_ADDR'];
+$URL = $_SERVER['PHP_SELF'];
+foreach ($_SERVER['argv'] as $name => $value) {
+//	if($name == "?") echo "?";
+//	else
+		$URL .= $name."=".$value." ";
+}
 
 
 
@@ -88,7 +94,7 @@ if(getcurrentuserid())
 
 {
 
-    mysql_query("UPDATE session SET logUNIX = ".time()." WHERE userID = ".getcurrentuserid()." AND IP = '$userIP'")
+    mysql_query("UPDATE session SET logUNIX = ".time().", userURL = '$URL' WHERE userID = ".getcurrentuserid()." AND IP = '$userIP'")
 
         or die("Could not update current session : ".mysql_error());
 
@@ -270,9 +276,8 @@ function log_in($nick, $password)
 
 
     $dbs = mysql_query("UPDATE session SET userID = $uid WHERE sID = '$sid'") // update database
-
-        or die(mysql_error());
-
+	or die(mysql_error());
+	mysql_query("UPDATE users SET lastLoggedIn = ".time()." WHERE ID = $uid");
 
 
     return 1;

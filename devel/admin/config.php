@@ -25,6 +25,8 @@ $checkbox[] = "usepage_news";
 $checkbox[] = "usepage_partyweb";
 $checkbox[] = "usepage_compo";
 $checkbox[] = "seatreg_open";
+$checkbox[] = "usepage_wannabe";
+$checkbox[] = "usepage_kiosk";
 
 if(!isset($action)) {
 	echo "<form method=POST action=admin.php?adminmode=config&action=save>";

@@ -284,6 +284,7 @@ CREATE TABLE users (
   isHere tinyint(4) default '0',
   crewField text,
   cellphone int(11) default NULL,
+  wannabe smallint(1) default '0',
   PRIMARY KEY  (ID)
 ) TYPE=MyISAM;
 
