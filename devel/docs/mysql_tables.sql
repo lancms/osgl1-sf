@@ -365,7 +365,7 @@ CREATE TABLE lang (
   PRIMARY KEY (ID)
 );
 
-
+DROP TABLE IF EXISTS wannabeAlt;
 CREATE TABLE `wannabeAlt` (
 `id` INT( 10 ) NOT NULL AUTO_INCREMENT ,
 `content` VARCHAR( 225 ) NOT NULL ,
@@ -373,7 +373,7 @@ CREATE TABLE `wannabeAlt` (
 PRIMARY KEY ( `id` )
 ) TYPE = MYISAM ;
 
-
+DROP TABLE IF EXISTS wannabeQue;
 CREATE TABLE `wannabeQue` (
 `id` INT( 10 ) NOT NULL AUTO_INCREMENT ,
 `content` VARCHAR( 225 ) NOT NULL ,
@@ -381,6 +381,7 @@ CREATE TABLE `wannabeQue` (
 PRIMARY KEY ( `id` )
 ) TYPE = MYISAM ;
 
+DROP TABLE IF EXISTS wannabeComment;
 CREATE TABLE `wannabeComment` (
 `id` INT( 10 ) NOT NULL AUTO_INCREMENT ,
 `comment` VARCHAR( 225 ) NOT NULL ,
@@ -389,6 +390,7 @@ CREATE TABLE `wannabeComment` (
 PRIMARY KEY ( `id` )
 ) TYPE = MYISAM ;
 
+DROP TABLE IF EXISTS wannabeUsers;
 CREATE TABLE `wannabeUsers` (
 `id` INT( 10 ) NOT NULL AUTO_INCREMENT ,
 `user` VARCHAR( 225 ) NOT NULL ,
