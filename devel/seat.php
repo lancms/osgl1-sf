@@ -1,7 +1,7 @@
 <?php
 require_once 'config/config.php';
-$getX = $_GET['x'];
-$getY = $_GET['y'];
+$getX = mysql_escape_string ($_GET['x']);
+$getY = mysql_escape_string ($_GET['y']);
 $action = $_GET['action'];
 //echo "X = $getX AND Y = $getY";
 if(config("seatreg_open") && getcurrentuserid() != 1) $canSit = TRUE;
@@ -37,7 +37,8 @@ include "seatmap.php";
 </form>
 
 <?php
-$hasSeatQ = query("SELECT * FROM users WHERE ID = ".getcurrentuserid());
+$currentuserid = mysql_escape_string (getcurrentuserid());
+$hasSeatQ = query("SELECT * FROM users WHERE ID = ".$currentuserid);
 $hasSeat = fetch($hasSeatQ);
 if($hasSeat->seatX != -1) echo "<a href=seat.php?action=cancel>".$seat['13']."</a><br>";
 if(isset($_GET["x"])) {
@@ -67,12 +68,14 @@ echo "<br><font color=red>".$colour['1']."</font>: ".$seat['0']."
 elseif($action == "seat" && $canSit) {
 	$testQ = query("SELECT * FROM users WHERE seatX = $getX AND seatY = $getY");
 	if(num($testQ) != 0) die("Du kan _IKKE_ plassere deg der noen andre sitter!");
-	query("UPDATE users SET seatX = $getX, seatY = $getY WHERE ID = ".getcurrentuserid());
+	$currentuserid = mysql_escape_string (getcurrentuserid());
+	query("UPDATE users SET seatX = $getX, seatY = $getY WHERE ID = ".$currentuserid);
 	header("Location: seat.php?x=$getX&y=$getY");
 	dblog(9, "x".$getX."y".$getY);
 }
 elseif($action == "cancel") {
-	query("UPDATE users SET seatX = -1, seatY = -1 WHERE ID = ".getcurrentuserid());
+	$currentuserid = mysql_escape_string (getcurrentuserid());
+	query("UPDATE users SET seatX = -1, seatY = -1 WHERE ID = ".$currentuserid);
 	header("Location: seat.php");
 }
 else nicedie();
