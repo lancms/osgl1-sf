@@ -11,8 +11,8 @@ function db_connect() {
     global $sql_db;
     global $is_db_connected;
 
-    $connect = mysql_connect($sql_host, $sql_user, $sql_pass) or die("Connect: ".mysql_error());
-    $db = mysql_select_db($sql_db) or die("DB_SELECT: ".mysql_error());
+    $connect = mysql_connect($sql_host, $sql_user, $sql_pass) or nicedie("Connect: ".mysql_error());
+    $db = mysql_select_db($sql_db) or nicedie("DB_SELECT: ".mysql_error());
 
     $is_db_connected = 1;
     return;
@@ -136,8 +136,7 @@ function random_quote() {
 
 function query($query)
 {
-	$query_escaped = mysql_escape_string ($query);
-	$q = mysql_query($query_escaped) or nicedie("Error with query: $query_escaped, error returned: ".mysql_error());
+	$q = mysql_query($query) or nicedie("Error with query: $query, error returned: ".mysql_error());
 	return $q;
 }
 
@@ -162,7 +161,7 @@ function user_style() {
 
 function config($config, $value = "NOTSET") {
 
-	$query = mysql_query("SELECT * FROM config WHERE config = '$config'") or die(mysql_error());
+	$query = mysql_query("SELECT * FROM config WHERE config = '$config'") or nicedie(mysql_error());
 	$num = mysql_num_rows($query);
 	if($value == "NOTSET") {
 		$object = mysql_fetch_object($query);
@@ -175,10 +174,10 @@ function config($config, $value = "NOTSET") {
 
 	} else {
 		if($num == 0) {
-			mysql_query("INSERT INTO config SET config = '$config', value = '$value'") or die(mysql_error());
+			query("INSERT INTO config SET config = '$config', value = '$value'");
 		//	echo "INSERTET";
 		} else {
-			mysql_query("UPDATE config SET value = '$value' WHERE config = '$config'") or die(mysql_error());
+			query("UPDATE config SET value = '$value' WHERE config = '$config'");
 		//	echo "Oppdatert";
 		}
 
@@ -207,7 +206,10 @@ function convert_seatmap($map) {
 function display_nick($ID) {
 	$q = query("SELECT * FROM users WHERE ID = $ID");
 	$r = fetch($q);
-	if($r->allowPublic == 0) echo "<a href=index.php?inc=profile&uid=$ID>$r->nick</a>";
+	if($r->allowPublic == 0)
+	{
+		echo "<a href=index.php?inc=profile&uid=$ID>$r->nick</a>";
+	}
 	else echo $r->nick;
 }
 
@@ -234,9 +236,18 @@ function mayEditClan($clanID) {
 	$rank = getuserrank();
 	$q = query("SELECT * FROM Clan WHERE ID = $clanID");
 	$r = fetch($q);
-	if($rank > 0) return 1;
-	elseif($r->moderator == $userID) return 1;
-	else return 0;
+	if($rank > 0)
+	{
+		return 1;
+	}
+	elseif($r->moderator == $userID)
+	{
+		return 1;
+	}
+	else
+	{
+		return 0;
+	}
 }
 
 function acl_access($acl, $userID = NULL) {
@@ -246,16 +257,32 @@ function acl_access($acl, $userID = NULL) {
 	$myGroup = $r->myGroup;
 	$root = query("SELECT * FROM acls WHERE groupID = $myGroup AND access LIKE 'root' AND value = 1");
 	$sel = query("SELECT * FROM acls WHERE groupID = $myGroup AND access LIKE '$acl' AND value = 1");
-	if(num($root) == 1) return 1;
-	elseif(num($sel) == 1) return 1;
-	else return 0;
+	if(num($root) == 1)
+	{
+		return 1;
+	}
+	elseif(num($sel) == 1)
+	{
+		return 1;
+	}
+	else
+	{
+		return 0;
+	}
 }
 
 function reverse_acl($acl) {
 	$q = query("SELECT * FROM acls WHERE (access = '$acl' AND value = 1) OR (access = 'root' AND value = 1)");
-	while($r = fetch($q)) {
-		if(empty($query2)) $query2 = "WHERE myGroup = $r->groupID";
-		else $query2 .= " OR myGroup = $r->groupID";
+	while($r = fetch($q))
+	{
+		if(empty($query2))
+		{
+			$query2 = "WHERE myGroup = $r->groupID";
+		}
+		else
+		{
+			$query2 .= " OR myGroup = $r->groupID";
+		}
 	}
 	$q2 = query("SELECT * FROM users $query2");
 	return $q2;
@@ -286,15 +313,19 @@ function lang($string = "I must remember to put something here", $module = "defa
 
 	$q = query("SELECT * FROM lang WHERE string = '$string' AND language = '$language' AND module = '$module'");
 	$num = num($q);
-	if($num == 0) {
+	if($num == 0)
+	{
 		/* The string does not exist in the database, add it */
 		query("INSERT INTO lang SET string = '$string', language = '$language', module = '$module', extra = '$extra'");
 		return $string;
 	} // End not exists
 
-	elseif($num >= 2) nicedie("There is an error in the lang()-function, more than one existance of string: '".$string."' in module: '".$module."' for language: '".$language."'. FIX IT!");
-
-	else {
+	elseif($num >= 2)
+	{
+		nicedie("There is an error in the lang()-function, more than one existance of string: '".$string."' in module: '".$module."' for language: '".$language."'. FIX IT!");
+	}
+	else
+	{
 		$r = fetch($q);
 		if(empty($r->translated) || !isset($r->translated)) return $string;
 		else return $r->translated;
