@@ -44,14 +44,14 @@ if($action == "view" || !isset($action)) {
 	//user_table($profile[6], "<input type=text name=mail value='$row->EMail'>");
 	user_table($profile[4], "<textarea name=aboutme rows=10 cols=60>$row->aboutMe</textarea>");
 
-	user_table($profile[12], "<input type=text name=cellphone value='$row->cellphone'>");
+	user_table($form[76], "<input type=text name=cellphone value='$row->cellphone'>");
 
 	user_table($form[25], "<a href=index.php?inc=useradmin&action=changepass&user=$editID>$form[33]</a>");
 
 	user_table($profile[6], "<a href=index.php?inc=useradmin&action=changemail&user=$editID>$form[34]</a>");
 
-	user_table("Gateadresse/nr", "<input type=text name=street value='$row->street'>");
-	user_table("Postnummer/sted", "<input type=text name=postNr value='$row->postNr' size=5><input type=text name=postPlace value='$row->postPlace'>");
+	user_table($form['74'], "<input type=text name=street value='$row->street'>");
+	user_table($form['75'], "<input type=text name=postNr value='$row->postNr' size=5><input type=text name=postPlace value='$row->postPlace'>");
 
 	$birthdayinfo = "<select name=birthDAY>";
 	for($i=1;$i<32;$i++) {
@@ -73,7 +73,7 @@ if($action == "view" || !isset($action)) {
 		else $selected = "SELECTED";
 		$birthdayinfo .= "<option value=$y $selected>$y</option>\n";
 	}
-	user_table("Bursdag", $birthdayinfo);
+	user_table($form['77'], $birthdayinfo);
 
 
 	echo "<tr><td class=profileLeft width=30%>$profile[9]</td><td class=profileRight>";

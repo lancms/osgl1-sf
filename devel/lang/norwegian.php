@@ -76,6 +76,10 @@ $form['70'] = "Antall spillere per lag"
 $form['71'] = "Antall lag per runde";
 $form['72'] = "Mangler innehold.";
 $form['73'] = "Rediger";
+$form['74'] = "Gateadresse/nr";
+$form['75'] = "Postnummer og sted";
+$form['76'] = "Mobilnummer";
+$form['77'] = "Fødselsdag";
 
 /* Diffrent kinds of messages..... */
 $msg[0] = "Logget inn som: ";
@@ -120,6 +124,7 @@ $msg['38'] = "Endre billett";
 $msg['39'] = "No seat";
 $msg['40'] = "Componavn";
 $msg['41'] = "Jauda, er bare å fylle inn det du mener om de forskjellige compoenforslagene....";
+$msg['42'] = "Du vil motta en verifiseringskode til mailadressen du oppgir. Denne må oppgis ved første pålogging. Merk: Hotmail anser denne mailen som junk av en eller annen merkelig grunn......";
 
 $partyweb['0'] = "Menynavn";
 $partyweb['1'] = "Vis i meny";

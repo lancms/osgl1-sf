@@ -76,6 +76,10 @@ $form['70'] = "Number of players on each team";
 $form['71'] = "Number of teams in each round";
 $form['72'] = "Lacking content.";
 $form['73'] = "Edit";
+$form['74'] = "Streetaddress and number";
+$form['75'] = "Postnumber and place";
+$form['76'] = "Cellphone";
+$form['77'] = "Birthday";
 
 /* Diffrent kinds of messages..... */
 $msg[0] = "Logged in as: ";
@@ -120,6 +124,7 @@ $msg['38'] = "Change ticket";
 $msg['39'] = "No seat";
 $msg['40'] = "Componame";
 $msg['41'] = "Fill in what you whink of the diffrent composuggestions";
+$msg['42'] = "You will recieve a verificationcode to the mailaddress you give here. This code must be given at first login to your new account. Note: Hotmail often marks this mail as junk....";
 
 $partyweb['0'] = "Menuname";
 $partyweb['1'] = "Display in menu";

@@ -92,10 +92,10 @@ else
     <tr><td><?php echo $form[30]; ?> </td><td><input type=text name=email></td></tr>
     <tr><td><?php echo $form[25]; ?> </td><td><input type=password name=p1></td></tr>
     <tr><td><?php echo $form[26]; ?> </td><td><input type=password name=p2></td></tr>
-    <tr><td>Gateadresse </td><td><input type=text name=street></td></tr>
-    <tr><td>PostNummer/Poststed</td><td><input type=text name=postNr size=5><input type=text name=postPlace>
-    <tr><td>Mobilnummer</td><td><input type=text name=cellphone></td></tr>	
-	<tr><td>Fødselsdato</td><td><select name=birthDAY><option value=0></option>
+    <tr><td><?php echo $form['74']; ?></td><td><input type=text name=street></td></tr>
+    <tr><td><?php echo $form['75']; ?></td><td><input type=text name=postNr size=5><input type=text name=postPlace>
+    <tr><td><?php echo $form['76']; ?></td><td><input type=text name=cellphone></td></tr>	
+	<tr><td><?php echo $form['77']; ?></td><td><select name=birthDAY><option value=0></option>
 	
 	<?php
 	for($i=1;$i<32;$i++) echo "<option value=$i>$i</option>\n";
@@ -114,7 +114,7 @@ else
     </table>
     </form>
 			
-	<br><br><b>Du vil motta en verifiseringskode til mailadressen du oppgir. Denne må oppgis ved første pålogging. Merk: Hotmail anser denne mailen som junk av en eller annen merkelig grunn......</b>
+	<br><br><b><?php echo $msg['42']; ?></b>
 
     <?php
 }
