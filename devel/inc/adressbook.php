@@ -10,7 +10,7 @@ $query = query("SELECT users.ID AS '".lang("ID", "addressbook", "UserID-column i
 	users.EMail AS '".lang("EMail", "addressbook", "EMail-column in SELECT in addressbook")."',
 	users.cellphone AS '".lang("Phonenumber", "addressbook", "Phonenumber-column in SELECT in addressbook")."' FROM users, groups, acls WHERE users.myGroup=groups.ID AND acls.groupID=groups.ID AND (acls.access='listaddress' OR acls.access='root') AND acls.value=1 GROUP BY users.ID ORDER BY users.ID");
 
-$num = mysql_num_rows($query);
+$num = num($query);
 
 echo "<table border=1 cellspacing=1>";
 /* Create headers */
