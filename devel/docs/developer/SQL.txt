@@ -1,0 +1,64 @@
+This is a little howto in how the SQL-commands are built up for easier use by the developers.
+
+
+
+First; _NEVER_ use any mysql_ functions unless you have to! Our long-term goals is to be able to use any databasetype (I think even flatfile should be usable). We can't use that if we hardcode
+
+
+
+
+query($query);
+This function is to be used instead of 'mysql_query($query) or die("Error with query: $query because of: ".mysql_error());'
+
+As you can see, this function does everything you need (it prints out an error if the query is wrong with all the info you could get...)
+
+
+
+fetch($query);
+This function is instead of mysql_fetch_object($query). It returns the fetched information and put it into a varable like this:
+
+$q = query("SELECT * FROM users WHERE ID = 2");
+$r = fetch($q);
+
+The result to this will be:
+$r->ID (users.ID == 2)
+$r->nick (users.nick == "admin")
+$r->name (users.name == "Adminuser")
+
+etc.
+
+
+fetch() is the prefered method of fetching the result!
+
+
+
+
+
+
+fetch_array($query)
+
+This function is the same as mysql_fetch_array(), but is _NOT_ recommended to use. We've standardized on fetch()
+
+
+
+
+
+escape_string("string")
+
+This function is instead of "mysql_real_escape_string()", and is to be used around all variables a user may enter into the DB.
+
+examples:
+
+$username = $_POST['username'];
+$username = escape_string($username);
+
+or
+
+$username = escape_string($_POST['username']);
+
+or
+
+query("SELECT password FROM users WHERE nick LIKE '".escape_string($username)."'");
+
+
+No preference is in the code about how you should use this function, but make the code as "clean" and readable as possible ;)
