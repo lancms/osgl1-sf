@@ -157,7 +157,7 @@ elseif ($action == "AddAlt")
 	{
 	 $ID = $_POST['id'];
 	}
-	
+
 	if (empty($ID))
 	{
 		nicedie(lang("Something is not right.", "admin_wannabemin", "Text used in wannabemin"));
@@ -188,7 +188,7 @@ elseif ($action == "AddAlt")
 			</tr>
 			";
 	}
-	
+
 	$list .= "
 		<tr>
 			<td>".lang("New Alternative:", "admin_wannabemin", "Text used in wannabemin")."</td>
@@ -366,29 +366,33 @@ elseif ($action == "ViewUsers")
 			$Nick = $UInfo->nick;
 			$ID = $UInfo->ID;
 
-			$list .= "
-				<tr>
-					"; //<td><a href='admin.php?adminmode=wannabemin&action=DoViewUsers&id=$ID'>$ID</a></td>
-					$q = query("SELECT * FROM wannabeComment WHERE user = ".escape_string($UInfo->ID));
-					$image = NULL;
-					while($r = fetch($q)) {
-						if($r->approve == 1) $image .= "<img src=images/yes.gif>";
-						elseif($r->approve == 2) $image .= "<img src=images/no.gif>";
-						elseif($r->approve == 0) $image .= "<img src=images/dontknow.gif>";
-						
-					}
-					$q = query("SELECT * FROM wannabeComment WHERE user = ".escape_string($UInfo->ID)." AND adminID = ".escape_string(getcurrentuserid()));
-					$r = fetch($q);
-					$rowColor = NULL;
-					if($r->approve == 0) $rowColor = " bgcolor=yellow";
-					elseif($r->approve == 1) $rowColor = " bgcolor=green";
-					elseif($r->approve == 2) $rowColor = " bgcolor=red";
-					$list .= "
-					<td$rowColor>$image</td>
-					<td><a href='admin.php?adminmode=wannabemin&action=DoViewUsers&id=$ID'>$Nick</td>
-					<td>".$UInfo->name."</a></td>
-				</tr>
-				";
+			if(acl_access("isCrew", $ID)); // Do nothing
+			else {
+
+				$list .= "
+					<tr>
+						"; //<td><a href='admin.php?adminmode=wannabemin&action=DoViewUsers&id=$ID'>$ID</a></td>
+						$q = query("SELECT * FROM wannabeComment WHERE user = ".escape_string($UInfo->ID));
+						$image = NULL;
+						while($r = fetch($q)) {
+							if($r->approve == 1) $image .= "<img src=images/yes.gif>";
+							elseif($r->approve == 2) $image .= "<img src=images/no.gif>";
+							elseif($r->approve == 0) $image .= "<img src=images/dontknow.gif>";
+
+						}
+						$q = query("SELECT * FROM wannabeComment WHERE user = ".escape_string($UInfo->ID)." AND adminID = ".escape_string(getcurrentuserid()));
+						$r = fetch($q);
+						$rowColor = NULL;
+						if($r->approve == 0) $rowColor = " bgcolor=yellow";
+						elseif($r->approve == 1) $rowColor = " bgcolor=green";
+						elseif($r->approve == 2) $rowColor = " bgcolor=red";
+						$list .= "
+						<td$rowColor>$image</td>
+						<td><a href='admin.php?adminmode=wannabemin&action=DoViewUsers&id=$ID'>$Nick</td>
+						<td>".$UInfo->name."</a></td>
+					</tr>
+					";
+				}
 		}
 	}
 	$list .= "</table>";
@@ -402,7 +406,7 @@ elseif ($action == "DoViewUsers")
 	{
 		nicedie(lang("Please specify the userID", "admin_wannabemin", "Text used in wannabemin"));
 	}
-	
+
 	$q = query("SELECT * FROM users WHERE ID = ".escape_string($UID));
 	$r = fetch($q);
 	echo "<table>";
@@ -413,9 +417,9 @@ elseif ($action == "DoViewUsers")
 	osgl_table(lang("Cellphone: ", "admin_wannabemin", "DoViewUsers->profile->Cellphone"), $r->cellphone);
 	osgl_table(lang("Street: ", "admin_wannabemin", "DoViewUsers->profile->Street"), $r->street);
 	osgl_table(lang("Post # / place: ", "admin_wannabemin", "DoViewUsers->profile->poststuff"), $r->postNr." ".$r->postPlace);
-	
+
 	echo "</table>";
-	
+
 	$query = sprintf ("SELECT * FROM wannabeUsers WHERE user = %s", escape_string($UID));
 	$result = query($query);
 
@@ -483,7 +487,7 @@ elseif ($action == "DoViewUsers")
 	{
 		$Check1 = " checked";
 	}
-	elseif ($approve == 2) 
+	elseif ($approve == 2)
 	{
 		$Check2 = " checked";
 	}
@@ -530,7 +534,7 @@ elseif ($action == "DoViewUsers")
 			<tr>
 				<td><em>". $r->comment ."</em></td>
 			</tr>
-			
+
 			";
 		// Removeing this, and putting a small smiley "up there" instead
 		/*
@@ -585,7 +589,7 @@ elseif ($action == "ViewComment")
 	{
 		nicedie(lang("Something is not right.", "admin_wannabemin", "Text used in wannabemin"));
 	}
-	
+
 	$query = sprintf ("SELECT * FROM wannabeComment WHERE user = %s", escape_string($ID));
 	$q = query ($query);
 	echo "<table>";
@@ -607,7 +611,7 @@ elseif ($action == "ViewComment")
 		{
 			$approve = lang("Nope", "admin_wannabemin", "Text used in wannabemin");
 		}
-		
+
 		echo "
 			<tr>
 				<td>". lang("Do you like this wannabe?", "admin_wannabemin", "Text used in wannabemin"). " <b>". $approve ."</b></td>
