@@ -539,10 +539,11 @@ elseif ($action == "AddComment")
 	$Com = $_POST['Comment'];
 	$Like = $_POST['approve'];
 
-	if ((empty($ID)) || (empty($Com)) || (empty($Like)))
+	if ((empty($ID)) || (empty($Com)))
 	{
 		nicedie(lang("Did you forget something ? Like writing a comment ?", "admin_wannabemin", "Text used in wannabemin"));
 	}
+	if(empty($Like) $Like = 0;
 	$query = sprintf ("SELECT * FROM wannabeComment WHERE user = %s AND adminID = %s", escape_string($ID), escape_string($user));
 	$result = query($query);
 	$num = num($result);
