@@ -71,7 +71,7 @@ function getuserid($sid)
 	{
 		return 0;   // return 0.
 	}
-	$row = fetch_row($dbs); // get first row (should be the only row returned)
+	$row = fetch_array($dbs); // get first row (should be the only row returned)
 
 	if(!empty($row[0]))
 	{
@@ -90,7 +90,7 @@ function getuseridx($nick, $password)
 
 	$dbs = query("SELECT ID, password FROM users WHERE nick LIKE '".mysql_escape_string($nick)."'");
 
-	$row = fetch_row($dbs);
+	$row = fetch_array($dbs);
 
 	if($row[1] != $password)
 	{
@@ -120,7 +120,7 @@ function getuserrank()
 
 	$query = query("SELECT isCrew FROM users WHERE ID = '".mysql_escape_string($user)."'");
 	
-	$row = fetch_row($query);
+	$row = fetch_array($query);
 
 	return $row[0];
 }
@@ -149,7 +149,7 @@ function log_in($nick, $password)
 
 	$dbs = query("SELECT ID, password, verified FROM users WHERE nick LIKE '".mysql_escape_string($nick)."'");
 
-	$row = fetch_row($dbs);
+	$row = fetch_array($dbs);
 
 	if($password != $row[1])
 	{

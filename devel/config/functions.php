@@ -146,7 +146,7 @@ function fetch($q) {
 	return $r;
 }
 
-function fetch_row($q) {
+function fetch_array($q) {
 	$r = mysql_fetch_row($q);
 	return $r;
 }
