@@ -4,7 +4,11 @@ require_once 'config/config.php';
 if(!acl_access("isCrew"))
 	nicedie($admin[noaccess]);
 
-$query = query("SELECT users.ID AS '".$addressbook['3']."', users.nick AS '".$addressbook['4']."', groups.groupname AS '".$addressbook['0']."', users.EMail AS '".$addressbook['1']."', users.cellphone AS '".$addressbook['2']."' FROM users, groups, acls WHERE users.myGroup=groups.ID AND acls.groupID=groups.ID AND (acls.access='listaddress' OR acls.access='root') AND acls.value=1 GROUP BY users.ID ORDER BY users.ID");
+$query = query("SELECT users.ID AS '".lang("ID", "addressbook", "UserID-column in SELECT in addressbook")."',
+	users.nick AS '".lang("nick", "addressbook", "nick-column in SELECT in addressbook")."',
+	groups.groupname AS '".lang("Groupname", "addressbook", "Groupname-column in SELECT in addressbook")."',
+	users.EMail AS '".lang("EMail", "addressbook", "EMail-column in SELECT in addressbook")."',
+	users.cellphone AS '".lang("Phonenumber", "addressbook", "Phonenumber-column in SELECT in addressbook")."' FROM users, groups, acls WHERE users.myGroup=groups.ID AND acls.groupID=groups.ID AND (acls.access='listaddress' OR acls.access='root') AND acls.value=1 GROUP BY users.ID ORDER BY users.ID");
 
 $num = mysql_num_rows($query);
 
