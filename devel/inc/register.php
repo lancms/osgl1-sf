@@ -32,7 +32,7 @@ if($action == "regme")
 
 	$checkmail = mysql_query("SELECT * FROM users WHERE EMail LIKE '$email'");
 
-	$verify = verify($username, $email, $p1, $realname);
+	$verify = verify($username, $email, $p1, $firstname, $lastname);
 	if($verify != "allowed") {
 		nicedie($form[$verify]);
 	}

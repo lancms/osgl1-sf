@@ -50,7 +50,7 @@ function dblog($type = 1,$logNew = "NOTHING LOGGED", $logOld = NULL) {
     return 1;
 }
 
-function verify($nick, $email, $password, $name)
+function verify($nick, $email, $password, $firstname, $lastname)
 
 {
     if($nick == "") // check nick.
@@ -62,8 +62,8 @@ function verify($nick, $email, $password, $name)
 
     elseif(!(strchr($email, "@") && strchr($email, "."))) // check if the email contains at least one @ and at least one dot.
         return 11;
-    elseif(!strchr($name, " "))
-        return 12;
+    elseif((!strchr($firstname, " ")) || (!strchr($lastname, " ")))
+	 	return 12;
 
     else    // if we find no of the above errors, compare user name with the database.
     {
