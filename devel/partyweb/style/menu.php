@@ -15,9 +15,9 @@ echo "<tr><td><a href=$link>$text</a></td>
 
 
 
-$q = mysql_query("SELECT * FROM partyweb WHERE display_menu = 1") or die(mysql_error());
+$q = query("SELECT * FROM partyweb WHERE display_menu = 1");
 
-while($r = mysql_fetch_object($q)) {
+while($r = fetch($q)) {
 partymenu("?viewpage=$r->ID", $r->menuname);
 
 }
