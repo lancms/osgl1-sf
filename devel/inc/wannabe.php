@@ -143,7 +143,7 @@ elseif($action == "EndQue") {
 	   $post	=	$_POST[$ID];
 	   $post	=	escape_string($post);
 
-	   if(empty($post)) nicedie(lang("Please answer the questions !", "admin_wannabemin", "Text used in wannabemin"));
+	   if(empty($post)) echo lang("Please answer all the questions!<br>\n", "admin_wannabemin", "Text used in wannabemin");
 
 	   if(!empty($post)) {
 
