@@ -15,7 +15,9 @@ if(!isset($action))
 if($action == "regme")
 {
     $username = $_POST["username"];
-    $realname = $_POST["realname"];
+    $firstName = $_POST['firstName'];
+    $lastName = $_POST['lastName'];
+    $realname = $firstName." ".$lastName;
     $email = $_POST["email"];
     $p1 = $_POST["p1"];
     $p2 = $_POST["p2"];
@@ -58,7 +60,8 @@ if($action == "regme")
        $dbs = query("INSERT INTO users SET
        nick = '$username',
        EMail = '$email',
-       name = '$realname',
+       firstName = '$firstName',
+       lastName = '$lastName',
        password = '$cpass',
        verified = $r,
        registered = now(),
@@ -86,7 +89,8 @@ else
     <table border=0>
 
     <tr><td><?php echo $form[24]; ?> </td><td><input type=text name=username></td></tr>
-    <tr><td><?php echo $form[29]; ?> </td><td><input type=text name=realname></td></tr>
+    <tr><td><?php echo lang("Firstname", "inc_register", "Register: Firstname"); ?> </td><td><input type=text name=firstName></td></tr>
+    <tr><td><?php echo lang("Lastname", "inc_register", "Register: Lastname"); ?> </td><td><input type=text name=lastName></td></tr>
     <tr><td><?php echo $form[30]; ?> </td><td><input type=text name=email></td></tr>
     <tr><td><?php echo $form[25]; ?> </td><td><input type=password name=p1></td></tr>
     <tr><td><?php echo $form[26]; ?> </td><td><input type=password name=p2></td></tr>
