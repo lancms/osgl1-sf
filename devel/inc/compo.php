@@ -1,26 +1,44 @@
 <?php
 require_once 'config/config.php';
 if(!config("usepage_compo"))
+{
 	nicedie("Vi bruker IKKE compooppsettet, nei!");
+}
 
 $action = $_GET['action'];
 $compo = $_GET['compo'];
-$hasSeat = query("SELECT * FROM users WHERE seatX != -1 AND seatY != -1 AND ID = ".getcurrentuserid());
+$hasSeat = query("SELECT * FROM users WHERE seatX != -1 AND seatY != -1 AND ID = '".mysql_escape_string(getcurrentuserid())."'");
 
-if(getcurrentuserid() == 1) $canCompete = FALSE;
-elseif(num($hasSeat) == 0) $canCompete = FALSE;
-else $canCompete = TRUE;
+if (getcurrentuserid() == 1)
+{
+	$canCompete = FALSE;
+}
+elseif (num($hasSeat) == 0)
+{
+	$canCompete = FALSE;
+}
+else
+{
+$canCompete = TRUE;
+}
 
-if(!isset($action)) {
-	if(!$canCompete) {
+
+if (!isset($action))
+{
+	if (!$canCompete)
+	{
 		if(getcurrentuserid() == 1);
-		else echo "Du har ikke registrert plass, og kan derfor ikke melde deg på i compoene....";
+		else
+		{
+			echo "Du har ikke registrert plass, og kan derfor ikke melde deg på i compoene....";
+		}
 	}
 	$q = query("SELECT * FROM compo");
 	
 	echo "<table>";
 	
-	while($r = fetch($q)) {
+	while($r = fetch($q))
+	{
 		echo "<tr><td>";
 		echo "<a href=?inc=compo&action=compoinfo&compo=$r->ID>";
 		echo $r->name;
@@ -33,63 +51,91 @@ if(!isset($action)) {
 	echo "</table>";
 }
 
-elseif($action == "viewrules" && isset($compo)) {
+elseif (($action == "viewrules") && (isset($compo)))
+{
 	echo "<a href=?inc=compo>Tilbake til hovedsiden</a><br>";
-	$q = query("SELECT * FROM compo WHERE ID = $compo");
+	$q = query("SELECT * FROM compo WHERE ID = '".mysql_escape_string($compo)."'");
 	$r = fetch($q);
 	echo $r->rules;
 }
-elseif($action == "compoinfo" && isset($compo)) {
-	
+
+elseif (($action == "compoinfo") && (isset($compo)))
+{
 	echo "<a href=?inc=compo>Tilbake til hovedsiden</a><br>";
-	$q = query("SELECT * FROM compo WHERE ID = $compo");
+	$q = query("SELECT * FROM compo WHERE ID = '".mysql_escape_string($compo)."'");
 	$r = fetch($q);
 	$maxPlayers = $r->players;
-	if($r->isOpen == 0) $canCompete = FALSE;
+	if($r->isOpen == 0)
+	{
+		$canCompete = FALSE;
+	}
 	echo $r->name." er en ".$compotype[$r->gameType]." med ".$r->players." i hver runde.";
 	echo "<br>";
 	echo "<table>";
-	
-	if($r->gameType <= 1) {
-		 echo "<tr><th>Spiller</th></tr>";
-		 $q2 = query("SELECT userID FROM compoReg WHERE compoID = $compo");
-		 while($r2 = fetch($q2)) {
-			 echo "<tr><td>";
-			 display_nick($r2->userID);
-			 echo "</td></tr>";
-		 }
+
+	if($r->gameType <= 1)
+	{
+		echo "<tr><th>Spiller</th></tr>";
+		$q2 = query("SELECT userID FROM compoReg WHERE compoID = $compo");
+		while($r2 = fetch($q2))
+		{
+			echo "<tr><td>";
+			display_nick($r2->userID);
+			echo "</td></tr>";
+		}
 		 
-	 }
-	else {
+	}
+	else
+	{
 		echo "<tr><th>Klannavn</th><th>Spillere</th><th>Registrering OK (antall plasser fylt opp)</th></tr>";
-		$q2 = query("SELECT DISTINCT clanID FROM compoReg WHERE compoID = $compo ORDER BY clanID DESC");
-		while($r2 = fetch($q2)) {
-			$clanQ = query("SELECT * FROM Clan WHERE ID = $r2->clanID");
+		$q2 = query("SELECT DISTINCT clanID FROM compoReg WHERE compoID = '".mysql_escape_string($compo)."' ORDER BY clanID DESC");
+		while($r2 = fetch($q2))
+		{
+			$clanQ = query("SELECT * FROM Clan WHERE ID = '".mysql_escape_string($r2->clanID)."'");
 			$clanR = fetch($clanQ);
 			echo "<tr><td>".$clanR->name."</td><td>";
-			$clanPlayersQ = query("SELECT * FROM compoReg WHERE clanID = $r2->clanID AND compoID = $compo");
-			while($clanPlay = fetch($clanPlayersQ)) {
+			$clanPlayersQ = query("SELECT * FROM compoReg WHERE clanID = '".mysql_escape_string($r2->clanID)."' AND compoID = '".mysql_escape_string($compo)."'");
+			while($clanPlay = fetch($clanPlayersQ))
+			{
 				display_nick($clanPlay->userID);
 				echo " ";
 			} // End while for display_nick
 			echo "</td><td>";
-			if(num($clanPlayersQ) == $maxPlayers) echo "<img src=images/ja.gif>";
-			else echo "<img src=images/nei.gif>";
+			if(num($clanPlayersQ) == $maxPlayers)
+			{
+				echo "<img src=images/ja.gif>";
+			}
+			else
+			{
+				echo "<img src=images/nei.gif>";
+			}
 			echo "</td></tr>";
 		} // End while for displaying clans
 		
 	} // end if(gameType != 0)// else
 	echo "</table>";
-	$test = query("SELECT * FROM compoReg WHERE compoID = $compo AND userID = ".getcurrentuserid());
-	if(num($test) != 0) $isPlayingCompo = TRUE;
-	else $isPlayingCompo = FALSE;
+	$test = query("SELECT * FROM compoReg WHERE compoID = '".mysql_escape_string($compo)."' AND userID = '".mysql_escape_string(getcurrentuserid())."'");
+	if(num($test) != 0)
+	{
+		$isPlayingCompo = TRUE;
+	}
+	else
+	{
+		$isPlayingCompo = FALSE;
+	}
 	
-	if($isPlayingCompo && $canCompete) echo "<br><a href=?inc=compo&action=iDontWannaPlay&compo=$compo>nei, nei, nei; dette vil jeg ikke være med på mer!</a>";
-	elseif(!$isPlayingCompo && $canCompete) {
-		if($r->gameType <= 1) {
+	if (($isPlayingCompo) && ($canCompete))
+	{
+		echo "<br><a href=?inc=compo&action=iDontWannaPlay&compo=$compo>nei, nei, nei; dette vil jeg ikke være med på mer!</a>";
+	}
+	elseif ((!$isPlayingCompo) && ($canCompete))
+	{
+		if ($r->gameType <= 1)
+		{
 			echo "<br><a href=?inc=compo&action=signmeup&compo=$compo>Meld meg på!</a>";
 		}
-		else {
+		else
+		{
 			echo "<br><br><b>Meld meg på</b><table>";
 			echo "<form method=POST action=index.php?inc=compo&compo=$compo&action=signmeup>";
 			echo "<tr><td><input type=text name=klan></td><td> Klan</td>";
@@ -100,37 +146,51 @@ elseif($action == "compoinfo" && isset($compo)) {
 	}
 } //end action == compoinfo
 
-elseif($action == "signmeup" && isset($compo)) {
+elseif (($action == "signmeup") && (isset($compo)))
+{
 	if(!$canCompete)
+	{
 		nicedie("Nope; Du får ikke lov til å konkurrere....");
+	}
 
-	$q = query("SELECT * FROM compo WHERE ID = '$compo'");
+	$q = query("SELECT * FROM compo WHERE ID = '".mysql_escape_string($compo)."'");
 	$r = fetch($q);
-	query("DELETE FROM compoReg WHERE compoID = '$compo' AND userID = ".getcurrentuserid()); // Just in case he's tries to do something he shouldn't...
-	if($r->gameType <= 1) query("INSERT INTO compoReg SET compoID = $compo, userID = ".getcurrentuserid());
-	else {
+	query("DELETE FROM compoReg WHERE compoID = '".mysql_escape_string($compo)."' AND userID = '"mysql_escape_string(.getcurrentuserid())."'"); // Just in case he's tries to do something he shouldn't...
+	if($r->gameType <= 1)
+	{
+		query("INSERT INTO compoReg SET compoID = '".mysql_escape_string($compo)."', userID = '".mysql_escape_string(getcurrentuserid())."'");
+	}
+	else
+	{
 		$clanname = $_POST['klan'];
 		$pass = $_POST['pass'];
-		$check = query("SELECT * FROM Clan WHERE name = '$clanname' AND password = '$pass'");
+		$check = query("SELECT * FROM Clan WHERE name = '".mysql_escape_string($clanname)."' AND password = '".mysql_escape_string($pass)."'");
 		$clan = fetch($check);
-		$numCheck = query("SELECT * FROM compoReg WHERE compoID = $compo AND clanID = '$clan->ID'");
+		$numCheck = query("SELECT * FROM compoReg WHERE compoID = '".mysql_escape_string($compo)."' AND clanID = '".mysql_escape_string($clan->ID)."'");
 		if(num($numCheck) >= $r->players)
+		{
 			nicedie("Det er ikke tillatt med flere spillere i klanen enn ".$r->players."!");
+		}
 
 		if(num($check) != 0)
-			query("INSERT INTO compoReg SET clanID = $clan->ID, compoID = $compo, userID = ".getcurrentuserid());
-		else 
+		{
+			query("INSERT INTO compoReg SET clanID = '".mysql_escape_string($clan->ID)."', compoID = '".mysql_escape_string($compo)."', userID = '".mysql_escape_string(getcurrentuserid())."'");
+		}
+		else
+		{
 			nicedie("feil klannavn/passord");
-		
+		}
 	}
 	echo "Du er påmeldt";
 	refresh("?inc=compo&action=compoinfo&compo=$compo", 0);
 }
-
-elseif ($action == "iDontWannaPlay" && isset($compo)) {
-	query("DELETE FROM compoReg WHERE compoID = $compo AND userID = ".getcurrentuserid());
+elseif (($action == "iDontWannaPlay") && (isset($compo)))
+{
+	query("DELETE FROM compoReg WHERE compoID = '".mysql_escape_string($compo)."' AND userID = '".mysql_escape_string(getcurrentuserid())."'");
 	echo "Du er meldt av compoen";
 	refresh("?inc=compo&action=compoinfo&compo=$compo", 0);
 }
 else
-echo "WTF er det du mener? *veit jeg ingenting om*";
+{
+	nicedie();
+}
