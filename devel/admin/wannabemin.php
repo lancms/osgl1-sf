@@ -487,7 +487,7 @@ elseif ($action == "DoViewUsers")
 			</tr>
 			<tr>
 				<td><input type='radio' name='approve' value='1'".$Check1.">".lang("Yes", "admin_wannabemin", "Text to display in wannabemin&action=DoViewUsers")."</td>
-				<td><input type='radio' name='approve' value='0'".$Check0.">!".lang("Not decided yet", "admin_wannabemin", "Text to display in wannabemin&action=DoViewUsers")."</td>";
+				<td><input type='radio' name='approve' value='0'".$Check0.">!".lang("Not decided yet", "admin_wannabemin", "Text to display in wannabemin&action=DoViewUsers")."</td>
 				<td><input type='radio' name='approve' value='2'".$Check2.">".lang("Nope", "admin_wannabemin", "Text to display in wannabemin&action=DoViewUsers")."</td>
 			</tr>
 			<tr>
