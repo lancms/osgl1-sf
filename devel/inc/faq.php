@@ -2,7 +2,8 @@
 
 require_once 'config/config.php';
 
-if(!config("usepage_faq")) die($msg[1]);
+if(!config("usepage_faq"))
+	nicedie($msg[1]);
 
 db_connect();
 
@@ -40,7 +41,7 @@ for($k=0;$k<$rows;$k++) {
 
 	echo "<br><a name=#$ID><b>Q: $q</a></b><br>";
 	if($_COOKIE['userrank'] == 2) {
-		$select = mysql_query("SELECT nick FROM users WHERE ID = '$posted_by'") or die(mysql_error());
+		$select = mysql_query("SELECT nick FROM users WHERE ID = '$posted_by'") or nicedie(mysql_error());
 		$selected = mysql_fetch_row($select);
 		echo "<font size=-1>".$msg[2].$selected[0]."</font>";
 	}

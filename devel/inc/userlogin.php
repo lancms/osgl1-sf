@@ -1,6 +1,7 @@
 <?php
 require_once 'config/config.php';
-if(!acl_access("loginUser")) die($admin[noaccess]);
+if(!acl_access("loginUser"))
+	nicedie($admin['noaccess']);
 
 $action = $_GET['action'];
 $user = $_GET['user'];
@@ -28,7 +29,7 @@ elseif($action == "main") {
 	$search = $_REQUEST['search'];
 	
 	
-	$query = mysql_query("SELECT * FROM users WHERE ID != 1 AND nick LIKE '%$search%' OR ID != 1 AND name LIKE '%$search%'") or die(mysql_error());
+	$query = mysql_query("SELECT * FROM users WHERE ID != 1 AND nick LIKE '%$search%' OR ID != 1 AND name LIKE '%$search%'") or nicedie(mysql_error());
 #echo num($query);
 #die();
 	$num = mysql_num_rows($query);
@@ -72,11 +73,11 @@ elseif($action == "main") {
 echo "</table>";
 
 } elseif($action == "login") {
-	$query = mysql_query("UPDATE users SET isHere = 1 WHERE ID = $user") or die(mysql_error());
+	$query = mysql_query("UPDATE users SET isHere = 1 WHERE ID = $user") or nicedie(mysql_error());
 	refresh("index.php?inc=userlogin", 0);
 	adminLog("Logget inn brukeren",4, $user);
 } elseif($action == "logout") {
-	$query = mysql_query("UPDATE users SET isHere = 0 WHERE ID = $user") or die(mysql_error());
+	$query = mysql_query("UPDATE users SET isHere = 0 WHERE ID = $user") or nicedie(mysql_error());
 	refresh("index.php?inc=userlogin", 0);
 	adminLog("Logget UT! brukeren",4, $user);
 }

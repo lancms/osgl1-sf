@@ -1,7 +1,7 @@
 <?php
 require_once 'config/config.php';
 
-if(!config("usepage_kiosk")) die($msg[1]);
+if(!config("usepage_kiosk")) nicedie($msg[1]);
 $writable = FALSE;
 if(getuserrank() >= 1) $writable = TRUE;
 
@@ -42,14 +42,14 @@ elseif($action == "buy") {
 	$number = $_POST['number'];
 	$nick = $_POST['nick'];
 
-	mysql_query("INSERT INTO kiosk_temp SET ware = $ware, number = $number, nick = '$nick'") or die(mysql_error());
+	mysql_query("INSERT INTO kiosk_temp SET ware = $ware, number = $number, nick = '$nick'") or nicedie(mysql_error());
 	refresh("index.php?inc=kiosk&action=show&show=$ware", 0);
 
 
 } elseif($action == "show") {
 	$show = $_GET['show'];
 
-	$q = mysql_query("SELECT * FROM kiosk_warez WHERE ID = $show") or die(mysql_error());
+	$q = mysql_query("SELECT * FROM kiosk_warez WHERE ID = $show") or nicedie(mysql_error());
 	$r = mysql_fetch_object($q);
 
 	echo "<table align=center>";
@@ -72,7 +72,7 @@ elseif($action == "buy") {
 	echo "</table>";
 	echo "<br><br>";
 	echo "<table>";
-	$q2 = mysql_query("SELECT * FROM kiosk_temp WHERE ware = $show") or die(mysql_error());
+	$q2 = mysql_query("SELECT * FROM kiosk_temp WHERE ware = $show") or nicedie(mysql_error());
 	while($r2 = mysql_fetch_object($q2)) {
 		echo "<tr><td>";
 		echo $r2->nick;
@@ -85,7 +85,7 @@ elseif($action == "buy") {
 
 } elseif($action == "thanksForTheFood") {
 	$food = $_GET['food'];
-	mysql_query("DELETE FROM kiosk_temp WHERE ID = $food") or die(mysql_error());
+	mysql_query("DELETE FROM kiosk_temp WHERE ID = $food") or nicedie(mysql_error());
 	refresh("index.php?inc=kiosk&action=show&show=".$_GET['show'], 0);
 
 }

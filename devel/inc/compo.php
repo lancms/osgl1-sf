@@ -1,6 +1,7 @@
 <?php
 require_once 'config/config.php';
-if(!config("usepage_compo")) die("Vi bruker IKKE compooppsettet, nei!");
+if(!config("usepage_compo"))
+	nicedie("Vi bruker IKKE compooppsettet, nei!");
 
 $action = $_GET['action'];
 $compo = $_GET['compo'];
@@ -100,7 +101,9 @@ elseif($action == "compoinfo" && isset($compo)) {
 } //end action == compoinfo
 
 elseif($action == "signmeup" && isset($compo)) {
-	if(!$canCompete) die("Nope; Du får ikke lov til å konkurrere....");
+	if(!$canCompete)
+		nicedie("Nope; Du får ikke lov til å konkurrere....");
+
 	$q = query("SELECT * FROM compo WHERE ID = '$compo'");
 	$r = fetch($q);
 	query("DELETE FROM compoReg WHERE compoID = '$compo' AND userID = ".getcurrentuserid()); // Just in case he's tries to do something he shouldn't...
@@ -111,10 +114,13 @@ elseif($action == "signmeup" && isset($compo)) {
 		$check = query("SELECT * FROM Clan WHERE name = '$clanname' AND password = '$pass'");
 		$clan = fetch($check);
 		$numCheck = query("SELECT * FROM compoReg WHERE compoID = $compo AND clanID = '$clan->ID'");
-		if(num($numCheck) >= $r->players) die("Det er ikke tillatt med flere spillere i klanen enn ".$r->players."!");
+		if(num($numCheck) >= $r->players)
+			nicedie("Det er ikke tillatt med flere spillere i klanen enn ".$r->players."!");
+
 		if(num($check) != 0)
 			query("INSERT INTO compoReg SET clanID = $clan->ID, compoID = $compo, userID = ".getcurrentuserid());
-		else die("feil klannavn/passord");
+		else 
+			nicedie("feil klannavn/passord");
 		
 	}
 	echo "Du er påmeldt";

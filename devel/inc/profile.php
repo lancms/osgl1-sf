@@ -35,7 +35,7 @@ else
 
 if($action == "display" && isset($viewUSER)) {
 
-	$query = mysql_query("SELECT * FROM users WHERE ID = $viewUSER") or die(mysql_error());
+	$query = mysql_query("SELECT * FROM users WHERE ID = $viewUSER") or nicedie(mysql_error());
 
 
 	if(mysql_num_rows($query) == 0) {

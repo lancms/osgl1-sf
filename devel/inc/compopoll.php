@@ -1,9 +1,13 @@
 <?php
 require_once 'config/config.php';
-if(!config("usepage_compopoll")) die("Vi kjører ikke noen compoavstemning nå......");
+if(!config("usepage_compopoll"))
+	nicedie("Vi kjører ikke noen compoavstemning nå......");
 
-if(getcurrentuserid() == 1) die("Logg inn FØR du prøver å gjøre noe her...");
-if(getuserrank() > 0) die("Sorry, men jeg tror vi dropper at crew fyller ut her.... Lak");
+if(getcurrentuserid() == 1)
+	nicedie("Logg inn FØR du prøver å gjøre noe her...");
+
+if(getuserrank() > 0)
+	nicedie("Sorry, men jeg tror vi dropper at crew fyller ut her.... Lak");
 
 $action = $_GET['action'];
 if(!isset($action)) {

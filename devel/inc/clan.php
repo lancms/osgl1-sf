@@ -1,9 +1,9 @@
 <?php
 require_once 'config/config.php';
-if(!config("usepage_compo")) die("Vi bruker IKKE compooppsettet, nei!");
+if(!config("usepage_compo"))
+	nicedie("Vi bruker IKKE compooppsettet, nei!");
 
 $action = $_GET['action'];
-
 
 if(!isset($action)) {
 	$q = query("SELECT * FROM Clan WHERE moderator = ".getcurrentuserid());
@@ -60,12 +60,15 @@ elseif($action == "edit" && isset($_GET['edit'])) {
 
 elseif($action == "doedit" && isset($_GET['edit'])) {
 	$edit = $_GET['edit'];
-	if(!mayEditClan($edit)) die("Du har ikke tilgang til dette av en eller annen merkelig grunn...");
+	if(!mayEditClan($edit))
+		nicedie("Du har ikke tilgang til dette av en eller annen merkelig grunn...");
+
 	$name = $_POST['name'];
 	$password = $_POST['password'];
 	$about = $_POST['about'];
 	$test = query("SELECT * FROM Clan WHERE name LIKE '$name' AND ID != $edit");
-	if(num($test) != 0) die("Beklager, det klannavnet er allerede i bruk :/ ");
+	if(num($test) != 0)
+		nicedie("Beklager, det klannavnet er allerede i bruk :/ ");
 	
 	query("UPDATE Clan SET name = '$name',
 			password = '$password',

@@ -1,8 +1,11 @@
 <?php
 require_once 'config/config.php';
 
-if(!config("usepage_wannabe")) die($msg[1]);
-if(getcurrentuserid() == 1) die("Hvorfor i HULESTE er du her? logg inn <b>FØRST</b>");
+if(!config("usepage_wannabe"))
+	nicedie($msg[1]);
+
+if(getcurrentuserid() == 1)
+	nicedie("Hvorfor i HULESTE er du her? logg inn <b>FØRST</b>");
 
 $action = $_GET['action'];
 

@@ -1,7 +1,8 @@
 <?php
 
 require_once 'config/config.php';
-if(config("usepage_register") == FALSE) die($msg[1]);
+if(config("usepage_register") == FALSE)
+	nicedie($msg[1]);
 
 db_connect();
 
@@ -33,23 +34,17 @@ if($action == "regme")
 
 	$verify = verify($username, $email, $p1, $realname);
 	if($verify != "allowed") {
-		echo $form[$verify];
-		include $base_path."style/bottom.php";
-		die();
+		nicedie($form[$verify]);
 	}
     elseif($p1 != $p2) // compare the two passwords
     {
-        echo $form[14];
-        include $base_path."style/bottom.php";
-	die();
+	 	nicedie($form[14]);
     }
     elseif(!$birthDAY || !$birthMONTH || !$birthYEAR) {
-	    echo "Du må nok stille inn når du er født. All info er nødvendig!";
-	    die();
+	    nicedie("Du må nok stille inn når du er født. All info er nødvendig!");
     }
     elseif(!isset($street) || !isset($postNr) || !isset($postPlace)) {
-	    echo "Gateadresse, postnummer, poststed er alle nødvendige å sette opp!";
-	    die();
+	 	nicedie("Gateadresse, postnummer, poststed er alle nødvendige å sette opp!");
     }
 
     else
@@ -59,7 +54,7 @@ if($action == "regme")
 
         $r = createcifer();
         if(!mail("$email", $mail[0], mail_body($r), "From: ".$mail[2]))
-                 die($msg[5]);
+                 nicedie($msg[5]);
 
 
        $dbs = mysql_query("INSERT INTO users SET
@@ -77,7 +72,7 @@ if($action == "regme")
 	birthMONTH = '$birthMONTH',
 	birthYEAR = '$birthYEAR'
 	")
-           or die("Could not create new user : ".mysql_error());
+           or nicedie("Could not create new user : ".mysql_error());
 
           echo $msg[6];
 

@@ -1,7 +1,7 @@
 <?php
 
 $query = mysql_query("SELECT userID FROM session WHERE session.userID = 1")
-    or die(mysql_error());
+    or nicedie(mysql_error());
 
 $nr = mysql_num_rows($query);
 
@@ -13,7 +13,7 @@ else
     echo "$nr guests";
 
 $query = mysql_query("SELECT DISTINCT users.Nick, users.ID FROM session INNER JOIN users ON users.ID = session.userID WHERE session.userID > 1 ORDER BY users.nick ASC")
-    or die(mysql_error());
+    or nicedie(mysql_error());
 
 $nr = mysql_num_rows($query);
 
