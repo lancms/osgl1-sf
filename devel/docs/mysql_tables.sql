@@ -97,19 +97,6 @@ CREATE TABLE config (
   PRIMARY KEY  (ID)
 ) TYPE=MyISAM;
 
---
--- Table structure for table `crewlog`
---
-
-DROP TABLE IF EXISTS crewlog;
-CREATE TABLE crewlog (
-  ID int(11) NOT NULL auto_increment,
-  userID int(11) NOT NULL default '0',
-  timestamp datetime NOT NULL default '0000-00-00 00:00:00',
-  reason text NOT NULL,
-  away tinyint(1) unsigned zerofill default '0',
-  PRIMARY KEY  (ID)
-) TYPE=MyISAM;
 
 --
 -- Table structure for table `faq`
