@@ -46,9 +46,9 @@ $seatsize = 10;
 $min_pass_length = 5;           // (RECOMMENDED > 5)
 
 
-$admin[info][mail] = "laaknor@globelan.net";
-$admin[info][nick] = "Laaknor";
-$admin[info][name] = "Lars Åge Kamfjord";
+$admin['info']['mail'] = "laaknor@globelan.net";
+$admin['info']['nick'] = "Laaknor";
+$admin['info']['name'] = "Lars Åge Kamfjord";
 
 
 /* What person should recieve webshop-requests */
@@ -145,5 +145,5 @@ while($read = readdir($dir)) {
 
 
 if($usestats) require_once 'stats_every.php';
-if($sql_mode == "upgrade") include_once $base_path.'sql_upgrade.php';
+#if($sql_mode == "upgrade") include_once $base_path.'sql_upgrade.php';
 ?>

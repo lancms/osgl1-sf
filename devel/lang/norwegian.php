@@ -97,28 +97,28 @@ $allowPublicFor[1] = "Kun registrerte brukere";
 $allowPublicFor[2] = "Kun admins";
 
 /* Titles of pages; visible in menu */
-$title[page][0] = "Hovedsiden";
-$title[page][1] = "FAQ";
-$title[page][2] = "Registrer bruker";
-$title[page][3] = "Logg ut";
-$title[page][4] = "Admin";
-$title[page][5] = "Avstemninger";
-$title[page][6] = "Plassregistrering";
-$title[page][7] = "Rediger profil";
-$title[page][8] = "Compo Registrering";
-$title[page][9] = "Nyheter";
-$title[page][10] = "Legg til klan";
-$title[page][11] = "Klan oversikt";
-$title[page][12] = "Forum";
-$title[page][13] = "Brukerinnlogging";
-$title[page][14] = "Crewadressebok";
-$title[page][15] = "Kiosk";
-$title[page][16] = "PartyWeb";
-$title[page][17] = "WannabeCrew";
+$title['page'][0] = "Hovedsiden";
+$title['page'][1] = "FAQ";
+$title['page'][2] = "Registrer bruker";
+$title['page'][3] = "Logg ut";
+$title['page'][4] = "Admin";
+$title['page'][5] = "Avstemninger";
+$title['page'][6] = "Plassregistrering";
+$title['page'][7] = "Rediger profil";
+$title['page'][8] = "Compo Registrering";
+$title['page'][9] = "Nyheter";
+$title['page'][10] = "Legg til klan";
+$title['page'][11] = "Klan oversikt";
+$title['page'][12] = "Forum";
+$title['page'][13] = "Brukerinnlogging";
+$title['page'][14] = "Crewadressebok";
+$title['page'][15] = "Kiosk";
+$title['page'][16] = "PartyWeb";
+$title['page'][17] = "WannabeCrew";
 
 /* Messages on admin-interface */
-$admin[noaccess] = "Dиииииииииии; ingen tilgang!";
-$admin[contact][mail] = "laaknor@globelan.net";
+$admin['noaccess'] = "Dиииииииииии; ingen tilgang!";
+$admin['contact']['mail'] = "laaknor@globelan.net";
 /* Messages in seat-system */
 $seat[0] = "Ledig";
 $seat[1] = "Crew";

@@ -25,14 +25,15 @@ Various functions for session information
 // update session, or create a new session ID.
 
 // this MUST run each time the page shall be displayed.
+$URL = NULL;
 
 $userIP = $HTTP_SERVER_VARS['REMOTE_ADDR'];
 $URL = $_SERVER['PHP_SELF'];
-foreach ($_SERVER['argv'] as $name => $value) {
+#foreach ($_SERVER['argv'] as $name => $value) {
 //	if($name == "?") echo "?";
 //	else
-		$URL .= $name."=".$value." ";
-}
+#		$URL .= $name."=".$value." ";
+#}
 
 
 
@@ -53,7 +54,7 @@ if(!isset($_COOKIE[$cookiename]))
     session_start(); // start session
 
     setcookie($cookiename, $new_session); // remember session
-    
+
     if($usestats) require_once 'stats_sessionstart.php';
 
     $remUID = $_COOKIE[$cookiename."_remID"];

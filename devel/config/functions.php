@@ -2,13 +2,8 @@
 
 require_once "config.php";
 
-$is_db_connected = 0;
-
 
 function db_connect() {
-
-    if($is_db_connected) // Just in case we are already connected.
-        return;
 
     global $sql_host;
     global $sql_user;
@@ -230,7 +225,7 @@ function mayEditClan($clanID) {
 	if($rank > 0) return 1;
 	elseif($r->moderator == $userID) return 1;
 	else return 0;
-} 
+}
 
 function adminLog($didWhat, $logType = 1, $userID = 0, $adminID = "NOTSET") {
 	if($adminID == "NOTSET") $adminID = getcurrentuserid();
