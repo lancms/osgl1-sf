@@ -367,15 +367,15 @@ CREATE TABLE lang (
 
 DROP TABLE IF EXISTS wannabeAlt;
 CREATE TABLE `wannabeAlt` (
-`id` INT( 10 ) NOT NULL AUTO_INCREMENT ,
+`ID` INT( 10 ) NOT NULL AUTO_INCREMENT ,
 `content` VARCHAR( 225 ) NOT NULL ,
-`queid` INT( 10 ) NOT NULL ,
+`queID` INT( 10 ) NOT NULL ,
 PRIMARY KEY ( `id` )
 ) TYPE = MYISAM ;
 
 DROP TABLE IF EXISTS wannabeQue;
 CREATE TABLE `wannabeQue` (
-`id` INT( 10 ) NOT NULL AUTO_INCREMENT ,
+`ID` INT( 10 ) NOT NULL AUTO_INCREMENT ,
 `content` VARCHAR( 225 ) NOT NULL ,
 `type` SMALLINT(1) NOT NULL ,
 PRIMARY KEY ( `id` )
@@ -383,7 +383,7 @@ PRIMARY KEY ( `id` )
 
 DROP TABLE IF EXISTS wannabeComment;
 CREATE TABLE `wannabeComment` (
-`id` INT( 10 ) NOT NULL AUTO_INCREMENT ,
+`ID` INT( 10 ) NOT NULL AUTO_INCREMENT ,
 `comment` VARCHAR( 225 ) NOT NULL ,
 `user` INT(10) NOT NULL ,
 `by` INT(10) NOT NULL ,
@@ -392,11 +392,11 @@ PRIMARY KEY ( `id` )
 
 DROP TABLE IF EXISTS wannabeUsers;
 CREATE TABLE `wannabeUsers` (
-`id` INT( 10 ) NOT NULL AUTO_INCREMENT ,
+`ID` INT( 10 ) NOT NULL AUTO_INCREMENT ,
 `user` VARCHAR( 225 ) NOT NULL ,
 `ans` TEXT NOT NULL ,
-`queid` INT( 10 ) NOT NULL ,
-`catid` INT( 10 ) NOT NULL ,
+`queID` INT( 10 ) NOT NULL ,
+`catID` INT( 10 ) NOT NULL ,
 PRIMARY KEY ( `id` )
 ) TYPE = MYISAM ;
 

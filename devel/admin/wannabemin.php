@@ -28,7 +28,7 @@ if($action == "addQue") {
 
 		while($var 	= fetch($result)) {
 
-			$Id		=	$var->id;
+			$Id		=	$var->ID;
 			$Que	=	$var->content;
 
 			$list  .=	"
@@ -58,7 +58,7 @@ elseif($action == "EditQue") {
 
 	if(empty($Id)) nicedie(lang("Something is not right.", "admin_wannabemin", "Text used in wannabemin"));
 
-	$query		= 	"SELECT * FROM wannabeQue WHERE id = '$Id'";
+	$query		= 	"SELECT * FROM wannabeQue WHERE ID = '$Id'";
 	$result 	= 	query($query);
 	$var 		= 	fetch($result);
 
@@ -121,7 +121,7 @@ elseif($action == "DoEditQue") {
 
 	if(empty($Id) || empty($Que) || empty($Type)) nicedie(lang("Nope, this is not the way you shoul do it... Try writing somthing in the fields next time :)", "admin_wannabemin", "Text used in wannabemin"));
 
-	$query	= 	"UPDATE wannabeQue SET content = '$Que', type = '$Type' WHERE id = '$Id'";
+	$query	= 	"UPDATE wannabeQue SET content = '$Que', type = '$Type' WHERE ID = '$Id'";
 	$result	=	query($query);
 
 	if($Type == 1) {
@@ -145,7 +145,7 @@ elseif($action == "DelQue") {
 
 	if(empty($Id)) nicedie(lang("Something is not right.", "admin_wannabemin", "Text used in wannabemin"));
 
-	$query	=	"DELETE FROM wannabeQue WHERE id = '$Id'";
+	$query	=	"DELETE FROM wannabeQue WHERE ID = '$Id'";
 	$result = 	query($query);
 
 
@@ -182,7 +182,7 @@ elseif($action == "AddAlt") {
 
 		while($var 	= fetch($result)) {
 
-		$AltId	=	$var->id;
+		$AltId	=	$var->ID;
 		$Alt	=	$var->content;
 
 		$list  .=	"
@@ -222,10 +222,10 @@ elseif($action == "DoAddAlt") {
 
 	if(empty($QueId) || empty($Alt)) nicedie(lang("Nope, this is not the way you shoul do it... Try writing somthing in the fields next time :)", "admin_wannabemin", "Text used in wannabemin"));
 
-	$query	= 	"INSERT INTO wannabeAlt (id, content, queid) VALUES (NULL, '$Alt', '$QueId')";
+	$query	= 	"INSERT INTO wannabeAlt (ID, content, queID) VALUES (NULL, '$Alt', '$QueId')";
 	$result = 	query($query);
 
-	$query	= 	"SELECT * FROM wannabeAlt WHERE queid = '$QueId'";
+	$query	= 	"SELECT * FROM wannabeAlt WHERE queID = '$QueId'";
 	$result = 	query($query);
 
 	$list	=	"
@@ -239,7 +239,7 @@ elseif($action == "DoAddAlt") {
 
 		while($var 	= fetch($result)) {
 
-		$AltId	=	$var->id;
+		$AltId	=	$var->ID;
 		$Alt	=	$var->content;
 
 		$list  .=	"
@@ -276,13 +276,13 @@ elseif($action == "DelAlt") {
 
 	if(empty($Id)) nicedie(lang("Something is not right.", "admin_wannabemin", "Text used in wannabemin"));
 
-	$query		=	"SELECT * FROM wannabeAlt WHERE id = '$Id'";
+	$query		=	"SELECT * FROM wannabeAlt WHERE ID = '$Id'";
 	$result 	= 	query($query);
 	$r			=	fetch($result);
 
-	$QueId		=	$r->queid;
+	$QueId		=	$r->queID;
 
-	$query		=	"DELETE FROM wannabeAlt WHERE id = '$Id'";
+	$query		=	"DELETE FROM wannabeAlt WHERE ID = '$Id'";
 	$result 	= 	query($query);
 
 	echo lang("Alternative has been deleted", "admin_wannabemin", "Text used in wannabemin");
@@ -330,7 +330,7 @@ elseif($action == "DoAddNewQue") {
 	$Que		=	escape_string($Que);
 	$Type		=	escape_string($Type);
 
-	$query		= 	"INSERT INTO wannabeQue (id, content, type) VALUES (NULL, '$Que', '$Type')";
+	$query		= 	"INSERT INTO wannabeQue (ID, content, type) VALUES (NULL, '$Que', '$Type')";
 	$result		=	query($query);
 
 	$query		=	"SELECT * FROM wannabeQue WHERE content = '$Que' AND type = '$Type'";
@@ -338,7 +338,7 @@ elseif($action == "DoAddNewQue") {
 
 	$r			=	fetch($result);
 
-	$Id			=	$r->id;
+	$Id			=	$r->ID;
 
 	if($Type == 1) {
 
@@ -421,10 +421,10 @@ elseif($action == "DoViewUsers") {
 	while($Get = fetch($result)) {
 
 	$Que		=	$Get->content;
-	$QueID		=	$Get->id;
+	$QueID		=	$Get->ID;
 	$Type		=	$Get->type;
 
-	$query2		=	"SELECT * FROM wannabeUsers WHERE user = '$UserID' AND queid = '$QueID'";
+	$query2		=	"SELECT * FROM wannabeUsers WHERE user = '$UserID' AND queID = '$QueID'";
 	$result2 	= 	query($query2);
 
 	$var		=	fetch($result2);
@@ -434,7 +434,7 @@ elseif($action == "DoViewUsers") {
 
 	if($Type == 1) {
 
-	$query3		=	"SELECT * FROM wannabeAlt WHERE queid = '$QueID'";
+	$query3		=	"SELECT * FROM wannabeAlt WHERE queID = '$QueID'";
 	$result3 	= 	query($query3);
 
 	$var2		=	fetch($result3);
@@ -495,7 +495,7 @@ elseif($action == "AddComment") {
 
 	if(empty($Id) || empty($Com)) nicedie(lang("Did you forget something ? Like writing a comment ?", "admin_wannabemin", "Text used in wannabemin"));
 
-	$query	= 	"INSERT INTO `wannabeComment` ( `id` , `comment` , `user` , `by` ) VALUES (NULL, '$Com', '$Id', '$user')";
+	$query	= 	"INSERT INTO `wannabeComment` ( `ID` , `comment` , `user` , `by` ) VALUES (NULL, '$Com', '$Id', '$user')";
 	$result	=	query($query);
 
 	echo lang("Comment added", "admin_wannabemin", "Text used in wannabemin");
@@ -510,7 +510,7 @@ elseif($action == "ViewComment") {
 
 	if(empty($Id)) nicedie(lang("Something is not right.", "admin_wannabemin", "Text used in wannabemin"));
 
-	$query		=	"SELECT * FROM wannabeComment WHERE user = '$Id' ORDER BY id DESC";
+	$query		=	"SELECT * FROM wannabeComment WHERE user = '$Id' ORDER BY ID DESC";
 	$result 	= 	query($query);
 	$list	   .=	"
 	<table>
@@ -521,7 +521,7 @@ elseif($action == "ViewComment") {
 	$Comment	=	$var->comment;
 	$By			=	$var->by;
 
-	$query2		=	"SELECT * FROM users WHERE id = '$By'";
+	$query2		=	"SELECT * FROM users WHERE ID = '$By'";
 	$result2	=	query($query2);
 
 	$get		=	fetch($result2);
