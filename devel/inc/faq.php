@@ -3,20 +3,20 @@
 require_once 'config/config.php';
 
 if(!config("usepage_faq"))
+{
 	nicedie($msg[1]);
+}
 
-db_connect();
-
-$query = mysql_query("SELECT * FROM faq ORDER BY ID");
+$query = query("SELECT * FROM faq ORDER BY ID");
 
 
-$rows = mysql_num_rows($query);
+$rows = num($query);
 if($rows == 0) {
 	echo $form[43];
 	return;
 }
 for($i=0;$i<$rows;$i++) {
-	$result = mysql_fetch_row($query);
+	$result = fetch_array($query);
 	$ID = $result[0];
 	$q = $result[2];
 	$a = $result[3];
@@ -24,11 +24,11 @@ for($i=0;$i<$rows;$i++) {
 	echo "<br><li><a href=#$ID>Q: $q</a>";
 
 }
-$query = mysql_query("SELECT * FROM faq ORDER BY ID");
+$query = query("SELECT * FROM faq ORDER BY ID");
 echo "<br><hr>";
 
 for($k=0;$k<$rows;$k++) {
-	$result = mysql_fetch_row($query);
+	$result = fetch_array($query);
 	$ID = $result[0];
 	$posted_by = $result[1];
 	$q = $result[2];
@@ -41,8 +41,8 @@ for($k=0;$k<$rows;$k++) {
 
 	echo "<br><a name=#$ID><b>Q: $q</a></b><br>";
 	if($_COOKIE['userrank'] == 2) {
-		$select = mysql_query("SELECT nick FROM users WHERE ID = '$posted_by'") or nicedie(mysql_error());
-		$selected = mysql_fetch_row($select);
+		$select = query("SELECT nick FROM users WHERE ID = '".mysql_escape_string($posted_by)."'");
+		$selected = fetch_array($select);
 		echo "<font size=-1>".$msg[2].$selected[0]."</font>";
 	}
 	echo "<br><i>A: </i>$a";
