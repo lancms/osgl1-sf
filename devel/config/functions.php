@@ -125,7 +125,7 @@ function random_quote() {
 }
 
 function query($query) {
-$q = mysql_query($query) or die("Error with query: $query, error returned: ".mysql_error());
+$q = mysql_query($query) or nicedie("Error with query: $query, error returned: ".mysql_error());
 return $q;
 }
 
