@@ -91,30 +91,44 @@ for($i=0;$i<$height;$i++)
 		$y = $i * $yscale;
 		if($seat_color[$cur] != $color_blank)	// Only draw a rectangle where the color differs from $color_blank
 		{
-			$userQ = query("SELECT * FROM users WHERE seatX = $j AND seatY = $i");
+			$esc_j = mysql_escape_string ($j);
+			$esc_i = mysql_escape_string ($i);
+			$userQ = query("SELECT * FROM users WHERE seatX = $esc_j AND seatY = $esc_i");
 			$user = fetch($userQ);
 			
-			if($i == $sely && $j == $selx)
+			if ($i == $sely && $j == $selx)
+			{
 				$clr = $color_selected;
-			elseif((num($userQ) != 0) && ($seat_avail[$cur] == 1))
+			}
+			elseif (((num($userQ) != 0) && ($seat_avail[$cur] == 1)))
+			{
 				if($user->isHere == 1)
+				{
 					$clr = $color_seated;
+				}
 				else
+				{
 					$clr = $color_used;
-			elseif((num($userQ) != 0) && ($seat_avail[$cur] > 1))
+				}
+			}
+			elseif ((num($userQ) != 0) && ($seat_avail[$cur] > 1))
+			{
 				$clr = $color_crewused;
+			}
 			else
+			{
 				$clr = $seat_color[$cur];
-			
-			
-			
+			}
+
+
+
 			imagefilledrectangle($myimg, $x, $y, $x + $addwidth - 1, $y + $yscale - 1, $clr);	// fill a rectangle at seat position
 			imagerectangle($myimg, $x, $y, $x + $addwidth - 1, $y + $yscale - 1, $color_wall);      // fill a rectangle at seat position
-			if($seat_avail[$cur] && $zoomedin)	// if seat is availble and we're zoomed in
+			if (($seat_avail[$cur]) && ($zoomedin))	// if seat is availble and we're zoomed in
 			{
 				$in = $user->nick;		// data input
 				
-				if(strlen($in) >= $name_maxlen + 1 )	// check length of input
+				if (strlen($in) >= $name_maxlen + 1)	// check length of input
 				{
 					$in = substr($in, 0, $name_maxlen + 1);	// size down to $name_maxlen characters
 					//$in .= "..";
@@ -132,11 +146,17 @@ for($i=0;$i<$height;$i++)
 header("Content-type: ".image_type_to_mime_type($imagetype));
 
 if($imagetype == IMAGETYPE_PNG)
+{
 	imagepng($myimg);	// Display the image as a PNG image.
+}
 else if($imagetype == IMAGETYPE_JPEG)
+{
 	imagejpeg($myimg);	// Display the image as a JPEG image.
+}
 else if($imagetype == IMAGETYPE_GIF)
+{
 	imagegif($myimg);	// Display the image as a GIF image (probably not supported)
-	
-imagedestroy($myimg);	// free the resource (or we would get a memory leak)
+}
+
+	imagedestroy($myimg);	// free the resource (or we would get a memory leak)
 ?>
