@@ -2,12 +2,21 @@
 - Fix the lang-system:
 + Not everything is translated (who the hell was stupid enough to hardcode the language into Norwegian?)
 + Only one language is supported, this should be changed somehow so that it is possible to "fall back" on english if the translation isn't complete. This should also make it possible for the user to change the language on his own profile...
+*** Should work with the new lang()-system ***
 
 -Add following features:
 +Canteen (should be possible to use most of the code from my existing system, but I'm not ready to give out the source for it yet [want to have the databases to make stats of])
+** Think I might write this in soon **
 +Forum (needs complete rewrite)
 +Task-list (admins might like to add tasks that has to be done, and assign it to somebody).
+** Done: LAK **
 +WannabeCrew (needs a complete rewrite)
+** wacie: can you do it? **
 +Logging (everything should be logged)
+** backend-system written, only need to write in logging of everything + make a frontend **
 +Stats (need a complete rewrite)
+** Is logged, needs to write a frontend **
+
++Seatmap (should have fallback to tables if PHP-GD isn't installed)
++index.html/.htaccess in a lot of directories
 
