@@ -1,12 +1,9 @@
 <?php
 
-
-
 require 'config/config.php';
 
-
-
-if(!acl_access("poll")) die($admin[noaccess]);
+if(!acl_access("poll"))
+	nicedie($admin[noaccess]);
 
 
 
@@ -30,11 +27,11 @@ if($action == "list") {
 
 
 
-	$query = mysql_query("SELECT * FROM pollQ") or die(mysql_error());
+	$query = query("SELECT * FROM pollQ");
 
 
 
-	$num = mysql_num_rows($query);
+	$num = num($query);
 
 
 
@@ -42,7 +39,7 @@ if($action == "list") {
 
 
 
-		$row = mysql_fetch_object($query);
+		$row = fetch($query);
 
 		echo "<tr><td>$row->text</td>";
 
@@ -88,13 +85,11 @@ if($action == "list") {
 
 } elseif($action == "delete" && isset($poll)) {
 
-	mysql_query("DELETE FROM pollQ WHERE ID = $poll") or die(mysql_error());
+	query("DELETE FROM pollQ WHERE ID = $poll");
 
-	mysql_query("DELETE FROM pollA WHERE QID = $poll") or die(mysql_error());
+	query("DELETE FROM pollA WHERE QID = $poll");
 
-	mysql_query("DELETE FROM pollVoted WHERE pollID = $poll") or die(mysql_error());
-
-
+	query("DELETE FROM pollVoted WHERE pollID = $poll");
 
 	refresh("admin.php?adminmode=poll", "0");
 
@@ -106,23 +101,23 @@ elseif($action == "add") {
 
 	$maxVotes = $_POST['maxV'];
 
-	$query = mysql_query("INSERT INTO pollQ SET text = '$pollQ', maxVotes = $maxVotes") or die(mysql_error());
+	$query = query("INSERT INTO pollQ SET text = '$pollQ', maxVotes = $maxVotes");
 
 	refresh("admin.php?adminmode=poll", "0");
 
 } elseif($action == "edit" && isset($poll)) {
 
-	$queryQ = mysql_query("SELECT * FROM pollQ WHERE ID = $poll") or die(mysql_error());
+	$queryQ = query("SELECT * FROM pollQ WHERE ID = $poll");
 
 
 
-	$queryA = mysql_query("SELECT * FROM pollA WHERE QID = $poll") or die(mysql_error());
+	$queryA = query("SELECT * FROM pollA WHERE QID = $poll");
 
-	$rowQ = mysql_fetch_object($queryQ);
+	$rowQ = fetch($queryQ);
 
 	echo "<center>$rowQ->text</center>";
 
-	if(mysql_num_rows($queryA) == 0) {
+	if(num($queryA) == 0) {
 
 		echo "<br><br>".$form[21];
 
@@ -130,9 +125,9 @@ elseif($action == "add") {
 
 
 
-		for($A=0;$A<mysql_num_rows($queryA);$A++) {
+		for($A=0;$A<num($queryA);$A++) {
 
-			$rowA = mysql_fetch_object($queryA);
+			$rowA = fetch($queryA);
 
 
 
@@ -170,7 +165,7 @@ elseif($action == "add") {
 
 	if(!isset($answer)) die($form[38]);
 
-	$query = mysql_query("INSERT INTO pollA SET Atext = '$answer', QID = $poll") or die(mysql_error());
+	$query = query("INSERT INTO pollA SET Atext = '$answer', QID = $poll");
 
 	refresh("admin.php?adminmode=poll&action=edit&poll=$poll", "0");
 
@@ -178,9 +173,9 @@ elseif($action == "add") {
 
 
 
-	$query = mysql_query("SELECT isOpen FROM pollQ WHERE ID = $poll");
+	$query = query("SELECT isOpen FROM pollQ WHERE ID = $poll");
 
-	$row = mysql_fetch_object($query);
+	$row = fetch($query);
 
 
 
@@ -196,7 +191,7 @@ elseif($action == "add") {
 
 
 
-	mysql_query("UPDATE pollQ SET isOpen = $isOpen WHERE ID = $poll") or die(mysql_error());
+	query("UPDATE pollQ SET isOpen = $isOpen WHERE ID = $poll");
 
 
 
@@ -206,9 +201,9 @@ elseif($action == "add") {
 
 
 
-	mysql_query("UPDATE pollA SET votes = 0 WHERE QID = $poll") or die(mysql_error());
+	query("UPDATE pollA SET votes = 0 WHERE QID = $poll");
 
-	mysql_query("DELETE FROM pollVoted WHERE pollID = $poll") or die(mysql_error());
+	query("DELETE FROM pollVoted WHERE pollID = $poll");
 
 	refresh("admin.php?adminmode=poll", 0);
 
