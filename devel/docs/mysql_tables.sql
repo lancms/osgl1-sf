@@ -403,9 +403,9 @@ DROP TABLE IF EXISTS wannabeComment;
 CREATE TABLE `wannabeComment` (
 `ID` INT( 10 ) NOT NULL AUTO_INCREMENT ,
 `comment` text NOT NULL ,
-`like` smallint(1) NOT NULL default '0',
+approve smallint(1) NOT NULL default '0',
 `user` INT(10) NOT NULL ,
-`by` INT(10) NOT NULL ,
+`adminID` INT(10) NOT NULL ,
 PRIMARY KEY ( `ID` )
 ) TYPE = MYISAM ;
 
