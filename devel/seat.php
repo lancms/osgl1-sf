@@ -12,8 +12,8 @@ $seatopen = config("seatreg_open");
 
 if(!isset($action)) {
 
-	if(!$seatopen) echo "<b>".$seat['9']."</b><br><br>";
-	
+	if(!$seatopen) echo "<b>".lang("The seatreservation has not yet opened!", "seat", "Text to display when the seatreg has not opened yet")."</b><br><br>";
+
 $crewseats = config("crewseats");
 $normalseats = config("normalseats");
 
@@ -25,7 +25,7 @@ echo $seat['10']." ".($normalseats-$cnt)."<br>\n";
 echo $seat['11']." ".($cnt)."<br><br>\n";
 ?>
 
-<a href=index.php><?php echo $msg['31']; ?></a><br>
+<a href=index.php><?php echo lang("Back to main page", "seat", "Link to get back to main page in seat.php"); ?></a><br>
 <map name=roommap>
 <?php
 include "seatmap.php";
@@ -47,7 +47,7 @@ if(isset($_GET["x"])) {
 	if(num($q) != 0) echo "<a href=index.php?inc=profile&uid=$r->ID>".$r->nick."</a> ".$seat['14']."<br>";
 	elseif($canSit && num($q) == 0) echo "<a href=seat.php$coords&action=seat>".$seat['15']."</a><br>";
 	}
-	
+
 else
 	$coords = "?nocoords=true";
 ?>
