@@ -10,8 +10,6 @@
 +Forum (needs complete rewrite)
 +Task-list (admins might like to add tasks that has to be done, and assign it to somebody).
 ** Done: LAK **
-+WannabeCrew (needs a complete rewrite)
-** wacie: can you do it? **
 +Logging (everything should be logged)
 ** backend-system written, only need to write in logging of everything + make a frontend **
 +Stats (need a complete rewrite)
@@ -20,3 +18,9 @@
 +Seatmap (should have fallback to tables if PHP-GD isn't installed)
 +index.html/.htaccess in a lot of directories
 
+
+# Wannabe
+## lists.sf.net doesn't like me, this is supposed to be sent to the devel-list, but it friggin' won't! --Mathias
++ "Do you like this wannabe?" should be seperated from comments!
++ Show "Do I like this wannabe?" and "Have I commented this wannabe?" in the list of users.
++ Perhaps the UserID in the list of users should point to their profile instead?
