@@ -197,6 +197,7 @@ elseif ($action == "edit")
 	$birthDAY = $_POST['birthDAY'];
 	$birthMONTH = $_POST['birthMONTH'];
 	$birthYEAR = $_POST['birthYEAR'];
+	$name = $firstName." ".$lastName;
 
 	$verify = verify("edit", $editID, $nick, $firstName, $lastName);
 	if ($verify != "allowed")
@@ -208,6 +209,7 @@ elseif ($action == "edit")
 		nick='".escape_string($nick)."',
 		firstName = '".escape_string($firstName)."',
 		lastName = '".escape_string($lastName)."',
+		name = '".escape_string($name)."',
 		aboutMe = '".escape_string($aboutme)."',
 		cellphone = '".escape_string($cellphone)."',
 		allowPublic = '".escape_string($allowPublic)."',
