@@ -227,11 +227,6 @@ function mayEditClan($clanID) {
 	else return 0;
 }
 
-function adminLog($didWhat, $logType = 1, $userID = 0, $adminID = "NOTSET") {
-	if($adminID == "NOTSET") $adminID = getcurrentuserid();
-	@mysql_query("INSERT INTO adminLog SET adminID = $adminID, didWhat = '$didWhat', userID = $userID, logType = $logType, logUNIX =".time());
-	return TRUE;
-}
 function acl_access($acl, $userID = NULL) {
 	if($userID == NULL) $userID = getcurrentuserid();
 	$q = query("SELECT * FROM users WHERE ID = $userID");
@@ -265,7 +260,7 @@ function nicedie ($reason = "Something bad happened. Please contact the administ
 
 function lang($string = "I must remember to put something here", $module = "default", $extra = "No extra info") {
 	global $language;
-	
+
 	$q = query("SELECT * FROM lang WHERE string = '$string' AND language = '$language' AND module = '$module'");
 	$num = num($q);
 	if($num == 0) {
@@ -273,15 +268,15 @@ function lang($string = "I must remember to put something here", $module = "defa
 		query("INSERT INTO lang SET string = '$string', language = '$language', module = '$module', extra = '$extra'");
 		return $string;
 	} // End not exists
-	
+
 	elseif($num >= 2) nicedie("There is an error in the lang()-function, more than one existance of string: '".$string."' in module: '".$module."' for language: '".$language."'. FIX IT!");
-	
+
 	else {
 		$r = fetch($q);
 		if(empty($r->translated) || !isset($r->translated)) return $string;
 		else return $r->translated;
 	}
-	
+
 
 }
 

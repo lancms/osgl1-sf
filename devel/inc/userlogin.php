@@ -27,8 +27,8 @@ elseif ($action == "ticketselect") {
 }
 elseif($action == "main") {
 	$search = $_REQUEST['search'];
-	
-	
+
+
 	$query = query("SELECT * FROM users WHERE ID != 1 AND nick LIKE '%$search%' OR ID != 1 AND name LIKE '%$search%'");
 #echo num($query);
 #die();
@@ -43,7 +43,7 @@ elseif($action == "main") {
 		echo "<td><a href=index.php?inc=profile&uid=$row->ID>";
 		echo "$row->nick</a></td>";
 		echo "<td><form method=POST action=index.php?inc=userlogin&action=ticketselect&userID=$row->ID&search=$search>";
-		
+
 		echo "<select name=ticket>";
 		for($i=0;$i<count($tickettype);$i++) {
 		echo "<option value=$i";
@@ -75,10 +75,10 @@ echo "</table>";
 } elseif($action == "login") {
 	$query = mysql_query("UPDATE users SET isHere = 1 WHERE ID = $user") or nicedie(mysql_error());
 	refresh("index.php?inc=userlogin", 0);
-	adminLog("Logget inn brukeren",4, $user);
+
 } elseif($action == "logout") {
 	$query = mysql_query("UPDATE users SET isHere = 0 WHERE ID = $user") or nicedie(mysql_error());
 	refresh("index.php?inc=userlogin", 0);
-	adminLog("Logget UT! brukeren",4, $user);
+
 }
 ?>

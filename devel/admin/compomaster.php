@@ -6,9 +6,9 @@ $action = $_GET['action'];
 
 if(!isset($action)) {
 	$q = query("SELECT * FROM compo");
-	
+
 	echo "<table>";
-	
+
 	while($r = fetch($q)) {
 	echo "<tr><td><a href=admin.php?adminmode=compomaster&action=edit&edit=$r->ID>$r->name</a></td><td>";
 	echo $compotype[$r->gameType];
@@ -26,16 +26,16 @@ if(!isset($action)) {
 	echo num($qU)." ".$compo['20'];
 	if($r->gameType > 1) echo " ".$compo['21']." ".num($qC)." ".$compo['22'];
 	echo "</td></tr>";
-	
+
 	} // End while fetch()
 	echo "</table>";
-	
+
 	echo "<br><br><hr><br>";
 	echo "<form method=POST action=admin.php?adminmode=compomaster&action=addnew>
 		<input type=text name=componame> ".$form['68']."
 		<br><input type=submit value='".$form['7']."'>
 		</form>";
-	
+
 } // End action not set
 
 elseif($action == "addnew") {
@@ -44,17 +44,17 @@ elseif($action == "addnew") {
 		nicedie($form['69']);
 	query("INSERT INTO compo SET name = '$componame'");
 	refresh("admin.php?adminmode=compomaster",5, 0);
-	adminLog("Added compo ".$componame);
+
 }
 
 elseif($action == "edit" && isset($_GET['edit'])) {
 	if(isset($_GET['text'])) echo "<font color=red>".$_GET['text']."</font><br>";
 	echo "<div align=left><a href=admin.php?adminmode=compomaster>".$msg['32']."</a></div><br>";
 	$edit = $_GET['edit'];
-	
+
 	$q = query("SELECT * FROM compo WHERE ID = $edit");
 	$r = fetch($q);
-	
+
 	echo "<form method=POST action=admin.php?adminmode=compomaster&action=doedit&edit=$edit>";
 	echo "<input type=text name=componame value='$r->name'> ".$form['68']."
 	<br><input type=text name=players value='$r->players'> ".$form['70']."
@@ -70,36 +70,36 @@ elseif($action == "edit" && isset($_GET['edit'])) {
 	echo "<br><textarea name=rules rows=30 cols=80>$r->rules</textarea>";
 	echo "<br><input type=submit value='".$form['15']."'>";
 	echo "</form>";
-	
+
 } // end action == edit
 
 elseif($action == "doedit") {
 	$edit = $_GET['edit'];
-	
+
 	$componame = $_POST['componame'];
 	$gameType = $_POST['gameType'];
 	$players = $_POST['players'];
 	$rules = $_POST['rules'];
 	$roundPlayers = $_POST['roundPlayers'];
-	adminLog ("Updated compo ".$edit.": name = $componame, gameType = $gameType, players = $players, rules = $rules, roundPlayers = $roundPlayers",6);
-	
+
+
 	query("UPDATE compo SET name = '$componame',
 			gameType = $gameType,
 			players = $players,
 			rules = '$rules',
 			roundPlayers = $roundPlayers
-			
+
 			WHERE ID = $edit");
 	refresh("admin.php?adminmode=compomaster&action=edit&edit=$edit&text=Redigert", 0);
 } elseif($action == "toggleopen") {
 	$edit = $_GET['edit'];
-	
+
 	$q = query("SELECT * FROM compo WHERE ID = $edit");
 	$r = fetch($q);
-	
+
 	if($r->isOpen == 1) $isOpen = 0;
 	else $isOpen = 1;
-	
+
 	query("UPDATE compo SET isOpen = $isOpen WHERE ID = $edit");
 	refresh("admin.php?adminmode=compomaster", 0);
 }
@@ -123,8 +123,8 @@ elseif($action == "seed") {
 		} // end while fetch
 		echo "</table>";
 	} // end if compotype <= 1
-	
-	
+
+
 } // End if action = seed
 
 elseif($action == "seededit") {

@@ -19,7 +19,6 @@ if(!acl_access("adminUsers")) {
 } elseif(acl_access("adminUsers") && isset($_GET['user'])) {
 
 	$editID = $_GET['user'];
-	if($editID != getcurrentuserid()) $doLogs = TRUE;
 
 }
 
@@ -90,12 +89,12 @@ if($action == "view" || !isset($action)) {
 			if($row->myGroup == $y) echo " SELECTED";
 			echo ">$Group->groupname</option>";
 		}
-		echo "</select>"; 
+		echo "</select>";
 	} else {
 		$groups = query("SELECT * FROM groups WHERE ID = $row->myGroup");
 		$Group = fetch($groups);
 		echo $Group->groupname;
-		
+
 	}
 
 	echo "</td></tr>";
@@ -142,7 +141,6 @@ if($action == "view" || !isset($action)) {
 
 	echo "<br><input type=submit value='$form[15]'>";
 
-if($doLogs) adminLog("Admin så på konfigurasjonen til brukeren",2, $editID);
 
 
 
@@ -161,7 +159,7 @@ elseif($action == "edit") {
 	$aboutme = htmlspecialchars($_POST['aboutme']);
 //	$rank = $_POST['rank'];
 //	if(getuserrank() == 0) $rank = getuserrank();
-	
+
 	if(acl_access("ACL")) $myGroup = $_POST['myGroup'];
 	else $myGroup = $r->myGroup;
 	$cellphone = $_POST['cellphone'];
@@ -173,7 +171,7 @@ elseif($action == "edit") {
 	$birthDAY = $_POST['birthDAY'];
 	$birthMONTH = $_POST['birthMONTH'];
 	$birthYEAR = $_POST['birthYEAR'];
-	$query = query("UPDATE users SET 
+	$query = query("UPDATE users SET
 		nick='".$nick."',
 		name = '$name',
 		aboutMe = '$aboutme',
@@ -191,7 +189,6 @@ elseif($action == "edit") {
 		WHERE ID = $editID");
 
 	refresh("index.php?inc=useradmin&user=$editID", "0");
-if($doLogs) adminLog("Endret på brukeren. Viktig informasjon som ble gjennomgått var: name = $name, aboutMe = $aboutme, rank = $rank, bursdag = $birthDAY / $birthMONTH $birthYEAR",3, $editID);
 
 
 } elseif($action == "changepass") {
@@ -237,7 +234,7 @@ if($doLogs) adminLog("Endret på brukeren. Viktig informasjon som ble gjennomgått
 		refresh("index.php?inc=useradmin&mode=pwdsuccess&user=$editID", "0");
 
 	}
-if($doLogs) adminLog("Endret passord",3, $editID);
+
 } elseif($action == "changemail") {
 
 	$query = query("SELECT * FROM users WHERE users.ID=".$editID."");
@@ -301,7 +298,7 @@ if($doLogs) adminLog("Endret passord",3, $editID);
 		}
 
 	}
-if($doLogs) adminLog("Endret mail til: $newmail",3, $editID);
+
 }
 
 

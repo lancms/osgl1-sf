@@ -30,20 +30,6 @@ CREATE TABLE acls (
   PRIMARY KEY  (groupID,access)
 ) TYPE=MyISAM;
 
---
--- Table structure for table `adminLog`
---
-
-DROP TABLE IF EXISTS adminLog;
-CREATE TABLE adminLog (
-  ID int(11) NOT NULL auto_increment,
-  adminID int(11) default '1',
-  didWhat text,
-  userID int(11) default '0',
-  logType int(3) default '1',
-  logUNIX int(25) default '0',
-  PRIMARY KEY  (ID)
-) TYPE=MyISAM;
 
 --
 -- Table structure for table `compo`
