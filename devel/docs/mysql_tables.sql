@@ -167,6 +167,21 @@ CREATE TABLE groups (
 ) TYPE=MyISAM;
 
 --
+-- Table structure for table 'logs'
+--
+
+DROP TABLE IF EXISTS logs;
+CREATE TABLE logs (
+   ID int(11) NOT NULL auto_increment,
+   userID int(11) NOT NULL default 0,
+   userIP varchar(15) default '000.000.000.000',
+   logType int(11) default 0,
+   logWhat text,
+   logUNIX int(25) default 0,
+   PRIMARY KEY (ID)
+) TYPE=MyISAM;
+
+--
 -- Table structure for table `news`
 --
 

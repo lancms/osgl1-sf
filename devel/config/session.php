@@ -63,6 +63,8 @@ if(!isset($_COOKIE[$cookiename]))
 
         or die("Could not create session : ".mysql_error());
 
+    dblog(2, $new_session);
+
 }
 
 else
@@ -80,6 +82,7 @@ else
 	} else {
 
 		setcookie($cookiename, "", time()-$session_alive_time);
+		dblog(3, $sID);
 
 	}
 
@@ -246,6 +249,7 @@ function log_in($nick, $password)
     $dbs = mysql_query("UPDATE session SET userID = $uid WHERE sID = '$sid'") // update database
 	or die(mysql_error());
 	mysql_query("UPDATE users SET lastLoggedIn = ".time()." WHERE ID = $uid");
+	dblog(4, $sid."::".$uid);
 
 
     return 1;
@@ -264,7 +268,7 @@ function log_out()
 
         return 0;
 
-
+	dblog(5, session_id());
 
     // Update session
 
@@ -276,13 +280,8 @@ function log_out()
 
     //setcookie("sID", "");
 
-    $_SESSION['userrank'] = "";
-
-
 
     return 1;
-
-
 
 }
 

@@ -30,13 +30,7 @@ if($action=="login") {
     }
     elseif($res == 1)
     {
-	    $q = query("SELECT password,ID,rememberMe FROM users WHERE nick LIKE '$username' AND rememberMe = 1");
-	    if(num($q) == 1) {
-		    $r =fetch($q);
-		    setcookie($cookiename."_remID", $r->ID, time()+(24*60*60));
-		    setcookie($cookiename."_remPASS", $r->password, time()+10800);
-	    }
-		    
+
         header("Location: index.php");
     }
     else

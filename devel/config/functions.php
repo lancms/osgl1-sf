@@ -42,12 +42,11 @@ function crypt_pwd($password) {
     return md5($password);
 }
 
-// not currently used, but we will create a log of everything that happens....
-function log_user($dowhat) {
-    db_connect();
-    $IP = $REMOTE_ADDR;
+function dblog($type = 1,$dowhat = "NOTHING LOGGED") {
+    $IP = $_SERVER['REMOTE_ADDR'];
+    $userID = getcurrentuserid();
     $dowhat = stripslashes($dowhat);
-    mysql_query("INSERT INTO log SET IP = '$IP', didWhat = '$dowhat'");
+    query("INSERT INTO logs SET userIP = '$IP', userID = $userID, logType = $type, logWhat = '$dowhat', logUNIX = ".time());
     return 1;
 }
 
