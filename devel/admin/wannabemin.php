@@ -339,7 +339,7 @@ elseif ($action == "DoAddNewQue")
 }
 elseif ($action == "ViewUsers")
 {
-	$query = "SELECT * FROM users WHERE wannabe = '1'";
+	$query = "SELECT * FROM users WHERE wannabe = '1' AND wannabeDenied = 0";
 	$result = query($query);
 
 	$count = num($result);
