@@ -20,6 +20,12 @@ However, you are _not_ allowed to use this software if the purpose of your LAN-p
 These parties should be held for fun, and we actually refuse to help anyone not sharing this idea.
 
 
+## Latest version ##
+
+We haven't yet released any files, but you are welcome to try out the current version from CVS. (You probably are already, by the way. ;-))
+Instructions on how to use CVS are available at http://sourceforge.net/cvs/?group_id=77474.
+
+
 ## Installing ##
 
 You'll find detailed instructions for installing OSGlobeLAN in docs/INSTALL.
