@@ -9,6 +9,7 @@ if (isset($_GET['inc']))
 	if (strchr($_GET['inc'], "."))
 	{
 		nicedie($msg['29']);
+		dblog(10, "User attempted to put . in GET[inc].");
 	}
 	require_once ("inc/".$_GET['inc'].".php");
 }

@@ -18,7 +18,7 @@ if(!isset($adminmode))
 	{
 		echo "<br><a href=admin.php?adminmode=partyweb>".lang("PartyAdmin", "admin_index", "Menuitem in admin.php to view PartyAdmin-interface")."</a>";
 	}
-	
+
 	if(acl_access("faq"))
 	{
 		echo "<br><a href=admin.php?adminmode=faq>".lang("FAQadmin", "admin_index", "Menuitem in admin.php to view FAQadmin-interface")."</a>";
@@ -80,6 +80,11 @@ if(!isset($adminmode))
 elseif ($adminmode != "")
 {
 	// FIXME: Is there any errorchecking at all on this?
+	// LAK: Now it is :)
+	if (strchr($_GET['adminmode'], ".")) {
+		dblog(10, "User attempted to put . in GET[adminmode].");
+		nicedie("Sorry, you are not allowed to put . in URL. Logged!");
+	}
 	require_once ("admin/".$adminmode.".php");
 }
 else
