@@ -314,6 +314,33 @@ CREATE TABLE stats (
 ) TYPE=MyISAM;
 
 --
+-- Table structure for table 'tasks'
+--
+
+DROP TABLE IF EXISTS tasks;
+CREATE TABLE tasks (
+  ID int(11) NOT NULL auto_increment,
+  name varchar(50) default '',
+  userID int(11) default 1,
+  complete int(3) default 0,
+  PRIMARY KEY(ID)
+) TYPE=MyISAM;
+
+--
+-- Table structure for table 'tasks_log'
+--
+
+DROP TABLE IF EXISTS tasks_log;
+CREATE TABLE tasks_log (
+  ID int(11) NOT NULL auto_increment,
+  taskID int(11) default 1,
+  logUNIX int(25) default 0,
+  logText text,
+  userID int(11),
+  PRIMARY KEY(ID)
+) TYPE=MyISAM;
+
+--
 -- Table structure for table `users`
 --
 
