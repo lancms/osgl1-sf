@@ -97,10 +97,12 @@ elseif ($action == "login")
 {
 	$query = query("UPDATE users SET isHere = 1 WHERE ID = '".escape_string($user)."'");
 	refresh("index.php?inc=userlogin", 0);
+	dblog(12, "User arrived");
 }
 elseif($action == "logout")
 {
 	$query = query("UPDATE users SET isHere = 0 WHERE ID = '".escape_string($user)."'");
 	refresh("index.php?inc=userlogin", 0);
+	dblog(13, "User departed");
 }
 ?>
