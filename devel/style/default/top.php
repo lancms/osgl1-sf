@@ -1,14 +1,29 @@
-<?php
-require_once 'config/config.php';
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+"http://www.w3.org/TR/html4/strict.dtd">
 
-$style = user_style();
-#if($style == "default") {
-/*	$q = mysql_query("SELECT * FROM config WHERE config = 'default_style'");
-	$r = mysql_fetch_object($q);
-	$style = $r->value;
-	*/
-#	$style = config("default_style");
-##}
-#echo config("default_style");
-include $base_path."style/".$style."/top.php";
-#die("spam:".$style);
+<html lang="EN">
+
+  <head>
+    <title>OSGlobeLan</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+	<link rel="stylesheet" type="text/css" href="style/default/style.css">
+  </head>
+
+  <body>
+    <div id="box">
+
+	  <div id="header">
+	    <h1>OSGlobeLan</h1>
+	  </div>
+
+	  <div id="menu">
+	    <h2>Menu</h2>
+		 <ul>
+			<?php
+			include_once 'style/menu.php';
+			?>
+
+		</ul>
+	  </div>
+	
+	  <div id="content">

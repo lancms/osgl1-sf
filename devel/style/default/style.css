@@ -1,125 +1,56 @@
-BODY {
-background-color: 003D70;
-color: white;
-}
+/* ### osgl-1a/style.css ### */
 
+/* layout */
+#box{
+	width:60%;
+	border:1px solid #A6A9CB;
+	margin:0 auto;
+	padding:4px;
+	background-color:#D7D8F0;}
+	#header{
+		clear:both;
+		margin-bottom:15px;}
+	#menu{
+		float:right;
+		clear:none;
+		width:20%;
+		padding-bottom:5px;}
+	#content{
+		float:left;
+		clear:none;
+		width:80%;
+		margin-bottom:15px;}
+	#footer{
+		clear:both;
+		border-top:1px dotted #A6A9CB;
+		font-size:0.6em;
+		padding-top:5px;
+		padding-bottom:5px;
+		text-align:center;}
+		
+/* menu formating */
+#menu h2{
+	font-size:1em;}
+#menu li{
+	list-style-type:none;
+	font-size:0.9em;}
 
-TABLE {
-border: 0px;
-}
-
-
-.menu {
-background-color: 003D70;
-color: white;
-a {
-   color: green;
-  }
-
-
-.header {
-background-color: 003D70;
-color: white;
-}
-
-
-.bottom {
-background-color: 003D70;
-color: white;
-align: center;
-}
-
-.main {
-background-color: 144D86;
-color: white;
-}
-
-.profileLeft {
-	background-color: black;
-	color: yellow;
-	border-right: black 1px solid;
-	border-top: black 1px solid;
-	border-left: black 1px solid;
-	border-bottom: black 1px solid;
-}
-.profileRight {
-	background-color: white;
-	color: black;
-	border-right: black 1px solid;
-	border-top: black 1px solid;
-	border-left: black 1px solid;
-	border-bottom: black 1px solid;
-}
-
-.newsHeader {
-	font-weight: bold;
-	font-style: italic;
-}
-
-.newsPoster {
-	font-size: 14;
-}
-
-.newsText {
-	font-style: italic;
-}
-
-hr
-{
-    border-right: black 1px solid;
-    border-top: black 1px solid;
-    border-left: black 1px solid;
-    border-bottom: black 1px solid;
-    height: 2px;
 	
-/* Links */
-	
+/* content formating */
+h2{
+	font-size:1.3em;
+	margin-bottom:1em;}
+h4{	
 	}
-A {
-	FONT-WEIGHT: normal; FONT-SIZE: 11px; COLOR: #dddddd; FONT-STYLE: normal; FONT-FAMILY: verdana; TEXT-DECORATION: none
-}
-/*
-A:active {
-	FONT-WEIGHT: normal; FONT-SIZE: 11px; COLOR: #11304c; FONT-STYLE: normal; FONT-FAMILY: verdana; TEXT-DECORATION: none
-}
-*/
-A:hover {
-	FONT-WEIGHT: normal; FONT-SIZE: 11px; COLOR: #000000; FONT-STYLE: normal; FONT-FAMILY: verdana; TEXT-DECORATION: none
-}
+p{
+	font-size:0.8em;}
 
-.forumCats {
-	border-right: black 1px solid;
-	border-top: black 1px solid;
-	border-left: black 1px solid;
-	border-bottom: black 1px solid;
-}
-.forumCatsCont {
-	color: black;
-}
-
-.forumTopics {
-	border-right: black 1px solid;
-	border-top: black 1px solid;
-	border-left: black 1px solid;
-	border-bottom: black 1px solid;
-}
-
-.forumTopicsCont {
-	color: black;
-}
-
-.forumPost1header {
-	background-color: black;
-}
-
-.forumPost1text {
-	background-color: blue;
-}
-
-.forumPost2header {
-	background-color: black;
-}
-
-.forumPost2text {
-	background-color: red;
-}
+/* random shitt */
+*{
+	margin:0;
+	padding:0;}
+body{
+	padding-top:15px;
+	font-family:Arial, Helvetica, sans-serif;
+	background-color:#FEFEFE;
+	color:#4B4B4B;}
