@@ -23,7 +23,7 @@ if(!isset($_GET['action'])) {
 if ((!isset($_GET['uid'])) && (getcurrentuserid() != 1))
 {
 	$viewUSER = getcurrentuserid();
-} 
+}
 elseif ((!isset($_GET['uid'])) && (getcurrentuserid() == 1))
 {
 	nicedie($profile['15']);
@@ -67,7 +67,7 @@ if($action == "display" && isset($viewUSER)) {
 
 	echo "<table>";
 
-	profile_table($profile[3], $row->name);
+	profile_table($profile[3], $row->firstName." ".$row->lastName);
 
 	profile_table($profile[4],$row->aboutMe);
 
