@@ -46,7 +46,7 @@ elseif ($action == "delete")
 	$query = query("DELETE FROM faq WHERE ID = '".escape_string($delID)."'");
 
 	echo lang("FAQ", "admin_faq", "msg[34]")." ".$delID." ".lang("deleted", "admin_faq", "msg[35]");
-
+	refresh ("admin.php?adminmode=faq");
 }
 elseif ($action == "insert")
 {
@@ -92,7 +92,10 @@ elseif ($action == "doedit")
 	$text = addslashes($_POST['edittext']);
 	$update = query("UPDATE faq SET answer = '".escape_string($text)."' WHERE ID = '".escape_string($editID)."'");
 
-	if($update) refresh("admin.php");
+	if($update)
+	{
+		refresh("admin.php?adminmode=faq");
+	}
 	
 	echo lang ("FAQ saved", "admin_faq", "msg[7]");
 }
