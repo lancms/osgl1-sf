@@ -325,7 +325,7 @@ elseif($action == "DoAddNewQue") {
 	$Que		=	$_POST['Que'];
 	$Type		=	$_POST['Type'];
 
-	if(empty($Que) || empty($Type)) nicedie(lang("Nope, this is not the way you shoul do it... Try writing somthing in the fields next time :)", "admin_wannabemin", "Text used in wannabemin"));
+	if(empty($Que) || empty($Type)) nicedie(lang("Nope, this is not the way you shoul do it... Try writing somthing in the fields next time :)", "admin_wannabemin", "Text used in wannabemin")."( Que == $Que AND Type == $Type)");
 
 	$Que		=	escape_string($Que);
 	$Type		=	escape_string($Type);
