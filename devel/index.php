@@ -4,11 +4,12 @@ require './config/config.php';
 
 include $base_path."style/top.php";
 if(isset($_GET['inc'])) {
-    if(strchr($_GET['inc'], ".")) die("hacking?");
+	if(strchr($_GET['inc'], "."))
+		nicedie("Hacking?");
 
     include "inc/".$_GET['inc'].".php";
 } elseif(isset($_GET['page'])) {
-	$query = mysql_query("SELECT * FROM static WHERE header LIKE '".$_GET['page']."'") or die(mysql_error());
+	$query = mysql_query("SELECT * FROM static WHERE header LIKE '".$_GET['page']."'") or nicedie(mysql_error());
 	$object = mysql_fetch_object($query);
 	if($object->useNL2BR == 1)
 		echo display_text($object->text);
@@ -16,7 +17,7 @@ if(isset($_GET['inc'])) {
 
 
 } else {
-   $query = mysql_query("SELECT * FROM static WHERE header LIKE 'index'") or die(mysql_error());
+   $query = mysql_query("SELECT * FROM static WHERE header LIKE 'index'") or nicedie(mysql_error());
    $o = mysql_fetch_object($query);
    echo display_text($o->text);
 
