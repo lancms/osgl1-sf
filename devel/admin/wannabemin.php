@@ -258,7 +258,7 @@ elseif ($action == "DoAddAlt")
 }
 elseif ($action == "DelAlt")
 {
-	$ID		=	$_GET['id'];
+	$ID = $_GET['id'];
 
 	if (empty($ID))
 	{
@@ -450,7 +450,8 @@ elseif ($action == "DoViewUsers")
 	$Comment = $var->comment;
 	$approve = $var->approve;
 
-	if ($approve == 1){
+	if ($approve == 1)
+	{
 		$Check1 = " checked";
 	}
 	elseif ($approve == 2) 
