@@ -161,18 +161,26 @@ function fetch($q)
 	return $r;
 }
 
-function fetch_array($q) {
+function fetch_array($q)
+{
 	$r = mysql_fetch_row($q);
 	return $r;
 }
 
-function escape_string($var) {
+function escape_string($var)
+{
 	mysql_real_escape_string($var);
 	return $var;
 }
 
-function num($q) {
-	return mysql_num_rows($q);
+function num ($q)
+{
+	return mysql_num_rows ($q);
+}
+
+function num_fields ($q)
+{
+	return mysql_num_fields ($q);
 }
 
 function user_style()
