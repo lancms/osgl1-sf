@@ -125,7 +125,6 @@ elseif ($action == "EndQue")
 		{
 			$ID = $Res->ID;
 			$post = $_POST[$ID];
-			$post = escape_string($post);
 
 			if (empty($post))
 			{
@@ -135,23 +134,24 @@ elseif ($action == "EndQue")
 			if (!empty($post))
 			{
 				$ans = $_POST[$ID];
-				$ans = escape_string($ans);
 
-				$query4 = "SELECT * FROM wannabeUsers WHERE queID = '$ID' AND user = '$user'";
+				// XXX: Is this the first $query4?
+				$query4 = sprintf ("SELECT * FROM wannabeUsers WHERE queID = %s AND user = %s", escape_string($ID), escape_string($user));
 				$result4 = query($query4);
 				$num = num($result4);
 
 				if ($num >= 1)
 				{
-					$query2 = "UPDATE wannabeUsers SET ans = '$ans' WHERE queID = '$ID' AND user = '$user'";
+					$query2 = sprintf ("UPDATE wannabeUsers SET ans = '%s' WHERE queID = %s AND user = %s", escape_string($ans), escape_string($ID), escape_string($user));
 				}
 				else
 				{
-					$query2 = "INSERT INTO wannabeUsers (ID, user, ans, queID) VALUES (NULL, '$user', '$ans', '$ID')";
+					$query2 = sprintf ("INSERT INTO wannabeUsers (ID, user, ans, queID) VALUES (NULL, %s, '%s', %s)", escape_string($user), escape_string($ans), escape_string($ID));
 				}
 				// XXX: This part need some explanation!
 				$result2 = query ($query2);
-				query ("UPDATE users SET wannabe = '1' WHERE ID = '$user'"); // Just as easy
+				// Shortcut?
+				query (sprintf("UPDATE users SET wannabe = '1' WHERE ID = %s", escape_string($user))); // Just as easy
 				$result4 = query($query);
 		   }
 		}
@@ -160,7 +160,8 @@ elseif ($action == "EndQue")
 	else
 	{
 		echo lang("Updated: You will not be a crew member.", "inc_wannabe", "Text to display in wannabe");
-		query("UPDATE users SET wannabe = '0' WHERE ID = '$user'");
+		// Shortcut?
+		query(sprintf("UPDATE users SET wannabe = '0' WHERE ID = %s", escape_string($user)));
 	}
 }
 ?>
