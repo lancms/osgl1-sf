@@ -6,7 +6,7 @@ $action = $_GET['action'];
 
 if(!isset($action)) {
 	require_once $base_path."style/top.php";
-	nicedie("Hacking?");
+	nicedie($msg['29']);
 }
 
 if($action=="login") {
@@ -22,7 +22,7 @@ if($action=="login") {
     if($res == -1) // the password is incorrect
     {
         include $base_path."style/top.php";
-        echo "The password you entered is incorrect for this user";
+        echo $msg['30'];
     }
     elseif($res == -2) { // User not verified
         $uid = getuseridx($username, $pwd);
@@ -42,7 +42,7 @@ if($action=="login") {
     else
     {
         include $base_path."style/top.php";
-        echo "Unknown error : $res";
+		  nicedie();
     }
 
 } elseif($action=="logout") {

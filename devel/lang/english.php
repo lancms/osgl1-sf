@@ -93,7 +93,8 @@ $msg[25] = "For some strange reason you do not have access to this";
 $msg['26'] = "You are not logged in.";
 $msg['27'] = "You are now logged out.";
 $msg['28'] = "Could not create random number.";
-
+$msg['29'] = "Hacking?";
+$msg['30'] = "Wrong username or password.";
 
 $rank[0] = "User";
 $rank[1] = "Crew";
