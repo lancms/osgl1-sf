@@ -255,7 +255,7 @@ CREATE TABLE pollA (
   AID int(6) NOT NULL auto_increment,
   QID int(6) default NULL,
   Atext text,
-  votes tinyint(6) default '0',
+  votes int(6) default '0',
   PRIMARY KEY  (AID)
 ) TYPE=MyISAM;
 
@@ -451,3 +451,8 @@ INSERT INTO groups SET ID = 1, groupname = 'Anonymous';
 INSERT INTO groups SET ID = 2, groupname = 'User';
 INSERT INTO groups SET ID = 3, groupname = 'Superuser';
 INSERT INTO acls SET groupID = 3, access = 'root', value = 1;
+
+-- Add something into the polldatabase...
+INSERT INTO pollQ SET ID = 1, text = 'Do you like this system?', isOpen = 1, maxVotes = 1;
+INSERT INTO pollA SET QID = 1, Atext = 'YES!', votes = 5;
+INSERT INTO pollA SET QID = 1, Atext = 'OOOOOOOOOOH YES!!!', votes = 5000;
