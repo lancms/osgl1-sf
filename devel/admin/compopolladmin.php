@@ -20,10 +20,14 @@ if($action == "listCompos") {
 $q = query("SELECT ID AS pollID FROM compoPoll");
 
 echo "<table>";
-echo "<tr><th>".$msg['40']."</th>";
-for($i=0;$i<count($compopoll);$i++) echo "<th>$compopoll[$i]</th>\n";
+echo "<tr><th>".lang("Componame", "admin_compopolladmin", "msg[40]")."</th>";
+// XXX: Move this to lang().
+for ($i=0; $i < count($compopoll); $i++)
+{
+	echo "<th>$compopoll[$i]</th>\n";
+}
 echo "</tr>";
-while($rordered = fetch($q))
+while ($rordered = fetch($q))
 {
 	$q2 = query("SELECT * FROM compoPoll WHERE ID = '".escape_string($rordered->pollID)."'");
 	$r = fetch($q2);
@@ -33,7 +37,7 @@ while($rordered = fetch($q))
 	echo "<tr><td>";
 	echo $r->question;
 	echo "</td>";
-	for($i=0;$i<count($compopoll);$i++)
+	for ($i=0; $i < count($compopoll); $i++)
 	{
 		$q2 = query("SELECT * FROM compoPollA WHERE pollID = '".escape_string($r->ID)."' AND answer = '".escape_string($i)."'");
 		echo "<td>".num($q2)."</td>";
@@ -61,7 +65,7 @@ echo "</table>";
 ?>
 <form method=POST action=admin.php?adminmode=compopolladmin&action=addcompo>
 <br><input type=text name=componame size=25>
-<br><input type=submit value='<?php echo $form['7'];?>'>
+<br><input type=submit value='<?php echo lang("Add", "admin_compopolladmin", "form[7]");?>'>
 </form>
 <?php
 
@@ -75,3 +79,5 @@ query("INSERT INTO compoPoll SET question = '".escape_string($question)."'");
 refresh("admin.php?adminmode=compopolladmin&action=listCompos", 0);
 
 } // end action addcompo
+
+?>
