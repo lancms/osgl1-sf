@@ -9,7 +9,7 @@ if (($action == "display") || (!isset($action)))
 	{
 		nicedie ($admin['noaccess']);
 	}
-		
+
 	echo "<table>";
 	$query = query("SELECT * FROM users WHERE ID != 1 ORDER BY ID ASC");
 
@@ -31,7 +31,7 @@ elseif ($action == "online")
 	{
 		nicedie($admin['noaccess']);
 	}
-	
+
 	echo "<table>";
 	echo "<tr><th>$profile[8]</th><th>IP</th><th>".$userlist['0']."</th><th>".$userlist['1']."</th></tr>";
 	$query = query("SELECT * FROM session ORDER BY userID");
@@ -41,7 +41,7 @@ elseif ($action == "online")
 	{
 		$row = fetch($query);
 
-		$nick = query("SELECT nick FROM users WHERE ID = '".escape_string($row->userID)."");
+		$nick = query("SELECT nick FROM users WHERE ID = '".escape_string($row->userID)."'");
 		$nick = fetch($nick);
 		$nick = $nick->nick;
 
