@@ -1,0 +1,42 @@
+### Installation instructions ###
+
+## Latest version ##
+
+You should be using the latest version of OSGlobeLAN.
+We haven't yet released any files, but you should get the current version from CVS.
+
+Remember to check the bugtracker for known bugs and so on.
+
+
+## Requirements ##
+
+We haven't done any extended testing of what versions of this software OSGlobeLAN runs on, but this is what we create and tests it on:
+
+* PHP4	- It could work with PHP5 too, but we haven't tested. Needs MySQL-support.
+* Apache	- Or some other webserver that support PHP.
+* MySQL	- Some stable version of MySQL 3 should work just fine.
+
+If you don't get it going on the above, or if you get it working on something else, please let us know.
+
+
+## Installation  ##
+ -----------------
+
+# 1. Documentation
+Read docs/README and the license in docs/LICENSE.
+
+# 2. Database
+Create a database with the structure you'll find in docs/mysql_tables.sql.
+
+# 3. Configuration
+Edit config/config.php for your configuration.
+
+# 4. Login
+ * Log in to the system. Username: admin / Password: admin
+ * Change admin's password.
+ * Activate usepage_register.
+ * Register a user to yourself.
+ * Give yourself root access.
+
+# 5. Customizing
+Read docs/CUSTOMIZE for instructions on how to customize the system.
