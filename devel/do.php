@@ -25,7 +25,7 @@ if ($action == "login")
 
 	if ($res == -1) // the password is incorrect
 	{
-		nicedie ($msg['30']);
+		nicedielang ("Wrong username or password.", "root_do", "Wrong username or password-warning");
 	}
 	elseif ($res == -2) // User not verified
 	{
