@@ -376,8 +376,14 @@ elseif ($action == "ViewUsers")
 						elseif($r->approve == 2) $image .= "<img src=images/no.gif>";
 						
 					}
+					$q = query("SELECT * FROM wannabeComment WHERE user = ".escape_string($UInfo->ID)." AND adminID = ".escape_string(getcurrentuserid()));
+					$r = fetch($q);
+					$rowColor = NULL;
+					if($r->approve == 0) $rowColor = " bgcolor=yellow";
+					elseif($r->approve == 1) $rowColor = " bgcolor=green";
+					elseif($r->approve == 2) $rowColor = " bgcolor=red";
 					$list .= "
-					<td>$image</td>
+					<td$rowColor>$image</td>
 					<td><a href='admin.php?adminmode=wannabemin&action=DoViewUsers&id=$ID'>$Nick</td>
 					<td>".$UInfo->name."</a></td>
 				</tr>
