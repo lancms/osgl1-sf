@@ -282,7 +282,7 @@ function profile_table($profileLeft, $profileRight)
 
 function osgl_table($left, $right) {
 
-	echo "<tr><td class=tbl_left>$left</td><td> class=tbl_right>$right</td></tr>\n\n";
+	echo "<tr><td class=tbl_left>$left</td><td class=tbl_right>$right</td></tr>\n\n";
 
 
 
