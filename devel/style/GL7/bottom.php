@@ -72,8 +72,8 @@
 			  // Skal vi gjøre noe om brukeren er innlogget?
 			$q = query("SELECT * FROM users WHERE ID = ".getcurrentuserid());
 			$r = fetch($q);
-			
-			echo $r->nick." | ".$rank[$r->isCrew]." <br><a href=do.php?action=logout>Logg ut</a>";
+				// Add group name here?
+			echo $r->nick."<br><a href=do.php?action=logout>Logg ut</a>";
 		  }
 		  ?>
 		  <!-- Her slutter loginfeltet.... -->
