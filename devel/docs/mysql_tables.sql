@@ -119,6 +119,7 @@ DROP TABLE IF EXISTS groups;
 CREATE TABLE groups (
   ID int(11) NOT NULL auto_increment,
   groupname varchar(25) default NULL,
+  publicName varchar(25) default NULL,
   PRIMARY KEY  (ID)
 ) TYPE=MyISAM;
 
