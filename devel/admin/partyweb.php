@@ -6,8 +6,7 @@ if(!acl_access("partyweb"))
 	nicedie($admin[noaccess]);
 
 $action = $_GET['action'];
-$edit = $_GET['edit'];
-
+$edit = mysql_escape_string ($_GET['edit']);
 
 
 if(!isset($action)) {
@@ -23,7 +22,7 @@ echo "<tr><td>";
 echo "<a href=admin.php?adminmode=partyweb&action=edit&edit=$r->ID>";
 echo $r->ID;
 echo "</td><td>";
-echo $r->menuname;
+echo $r->menuname;1
 echo "</td><td>";
 echo $true_false[$r->display_menu];
 echo "</td><td>";
@@ -67,13 +66,13 @@ echo "</form>";
 }
 
 elseif($action == "save" && isset($edit) && !isset($_POST['delete'])) {
-$menuname = $_POST['menuname'];
-$text = addslashes($_POST['text']);
+$menuname = mysql_escape_string ($_POST['menuname']);
+$text = mysql_escape_string (addslashes($_POST['text']));
+$display_menu = mysql_escape_string ($_POST['display_menu']);
+$display_partymode = mysql_escape_string ($_POST['display_partymode']);
 
 echo $display_menu;
 echo "<br>".$display_partymode;
-$display_menu = $_POST['display_menu'];
-$display_partymode = $_POST['display_partymode'];
 
 if(!$display_menu) $display_menu = 0;
 else $display_menu = 1;
@@ -93,7 +92,7 @@ refresh("admin.php?adminmode=partyweb", 0);
 }
 
 elseif($action == "add") {
-$menuname = $_POST['menuname'];
+$menuname = mysql_escape_string ($_POST['menuname']);
 
 query("INSERT INTO partyweb SET menuname = '$menuname'");
 refresh("admin.php?adminmode=partyweb", 0);
