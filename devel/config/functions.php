@@ -266,18 +266,19 @@ function nicedie ($reason = "Something bad happened. Please contact the administ
 function lang($string = "I must remember to put something here", $module = "default") {
 	global $language;
 	
-	$q = query("SELECT * FROM lang WHERE string = '$string' WHERE language = '$language' AND module = '$module'");
+	$q = query("SELECT * FROM lang WHERE string = '$string' AND language = '$language' AND module = '$module'");
 	$num = num($q);
 	if($num == 0) {
 		/* The string does not exist in the database, add it */
 		query("INSERT INTO lang SET string = '$string', language = '$language', module = '$module'");
+		return $string;
 	} // End not exists
 	
 	elseif($num >= 2) nicedie("There is an error in the lang()-function, more than one existance of string: '".$string."' in module: '".$module."' for language: '".$language."'. FIX IT!");
 	
 	else {
 		$r = fetch($q);
-		if(empty($r->translated)) return $string;
+		if(empty($r->translated) || !isset($r->translated)) return $string;
 		else return $r->translated;
 	}
 	
