@@ -227,5 +227,12 @@ $mail[1] = "$admin[contact][mail]";
 $mail[2] = "GlobeLAN7";
 
 
-// moved mail_body() to functions..... you should edit that one to!
+
+function mail_body($random) {
+    return "Velkommen som bruker på GlobeLAN DEVEL!\n\r
+    Du har enten endret e-post, eller laget en ny bruker, så venligst logg inn med ditt brukernavn og passord, og fyll inn: ".$random." som ditt verifiseringsnummer!\r\n\r\n
+    Tusen takk\r\n
+    Crewet";
+}
+
 ?>

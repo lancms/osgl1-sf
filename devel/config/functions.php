@@ -107,13 +107,6 @@ function IDtonick($ID) {
 	return $row->nick;
 }
 
-function mail_body($random) {
-    return "Velkommen som bruker på GlobeLAN DEVEL!\n\r
-    Du har enten endret e-post, eller laget en ny bruker, så venligst logg inn med ditt brukernavn og passord, og fyll inn: ".$random." som ditt verifiseringsnummer!\r\n\r\n
-    Tusen takk\r\n
-    Crewet";
-}
-
 function random_quote() {
 	global $userand;
 	global $rand_text;
