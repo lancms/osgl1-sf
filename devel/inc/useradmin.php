@@ -38,16 +38,11 @@ if($action == "view" || !isset($action)) {
 	$row = fetch($query);
 	echo "<form method=post action=index.php?inc=useradmin&action=edit&user=$row->ID>";
 	echo '<table>';
+	user_table($profile['8'],"<input type=text name=nick value='$row->nick'>");
 	user_table($profile[3],"<input type=text name=name value='$row->name'>");
 	// We want a little bit of security, so we have this one on it's own page with verifcation.
 	//user_table($profile[6], "<input type=text name=mail value='$row->EMail'>");
 	user_table($profile[4], "<textarea name=aboutme rows=10 cols=60>$row->aboutMe</textarea>");
-
-	if($row->isCrew >= 1) {
-
-		user_table($profile[10], "<input type=text name=crewfield value='$row->crewField'>");
-
-	}
 
 	user_table($profile[12], "<input type=text name=cellphone value='$row->cellphone'>");
 
@@ -84,31 +79,6 @@ if($action == "view" || !isset($action)) {
 	echo "<tr><td class=profileLeft width=30%>$profile[9]</td><td class=profileRight>";
 
 
-/* This part isn't used any more, since we now use ACLs
-//	if(getuserrank() == 2) {
-
-		echo "<select name=rank>";
-
-		for($y=0;$y<count($rank);$y++) {
-
-			echo "<option value=$y";
-
-			if($row->isCrew == $y) echo " SELECTED";
-
-			echo ">$rank[$y]</option>";
-
-		}
-
-		echo "</select>";
-
-	} else {
-
-		$rank1234 = $row->isCrew;
-
-		echo "<input type=hidden name=rank value=$row->isCrew>$rank[$rank1234]";
-
-	}
-	*/
 	if(acl_access("ACL")) {
 		// User is allowed to make changes to ACL
 		$groups = query("SELECT * FROM groups");
@@ -185,6 +155,7 @@ if($doLogs) adminLog("Admin så på konfigurasjonen til brukeren",2, $editID);
 elseif($action == "edit") {
 	$q = query("SELECT * FROM users WHERE ID = $editID");
 	$r = fetch($q);
+	$nick = $_POST['nick'];
 	$name = $_POST['name'];
 	$mail = $_POST['mail'];
 	$aboutme = htmlspecialchars($_POST['aboutme']);
@@ -193,7 +164,6 @@ elseif($action == "edit") {
 	
 	if(acl_access("ACL")) $myGroup = $_POST['myGroup'];
 	else $myGroup = $r->myGroup;
-	$crewField = $_POST['crewfield'];
 	$cellphone = $_POST['cellphone'];
 	$allowPublic = $_POST['allowPublic'];
 	$userDesign = $_POST['userDesign'];
@@ -203,9 +173,10 @@ elseif($action == "edit") {
 	$birthDAY = $_POST['birthDAY'];
 	$birthMONTH = $_POST['birthMONTH'];
 	$birthYEAR = $_POST['birthYEAR'];
-	$query = query("UPDATE users SET name = '$name',
+	$query = query("UPDATE users SET 
+		nick='".$nick."',
+		name = '$name',
 		aboutMe = '$aboutme',
-		crewField = '$crewField',
 		cellphone = '$cellphone',
 		allowPublic = $allowPublic,
 		userDesign = '$userDesign',
