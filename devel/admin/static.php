@@ -61,8 +61,17 @@ elseif($action == "doedit" && isset($_POST['edit'])) {
 	echo lang("Updated page. Saving to database, stand by", "admin_static", "Text to display when a static file is saved");
 	refresh("admin.php?adminmode=static", 2);
 }
-elseif($action == "new" && isset($_POST['filename'])) {
+elseif(($action == "new") && (isset($_POST['filename'])))
+{
 	$file = $_POST['filename'];
+
+	if (($file == "") || ($file == " "))
+	{
+		refresh ("admin.php?adminmode=static", 2);
+		$errmsg = lang ("Missing filename.", "admin_static", "Text to display when missing filename for static page");
+		nicedie ($errmsg);
+	}
+	
 	query("INSERT INTO static SET header = '$file'");
 
 	refresh("admin.php?adminmode=static&action=edit&edit=$file");
