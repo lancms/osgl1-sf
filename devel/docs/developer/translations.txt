@@ -13,3 +13,6 @@ inc_<file> 		// file in inc/-subdirectory
 
 
 /* Add more as they come */
+
+
+// FIXME: Add a note about how the heck we translate these strings...
