@@ -122,7 +122,7 @@ elseif($action == "DoEditQue") {
 
 	if($Type == 1) {
 
-		echo lang("Time to add som alternatives.", "admin_wannabemin", "Text used in wannabemin");
+		echo lang("Time to add some alternatives.", "admin_wannabemin", "Text used in wannabemin");
 		refresh("admin.php?adminmode=wannabemin&action=AddAlt&id=$ID", 2);
 
 	} else {
@@ -328,7 +328,7 @@ elseif($action == "DoAddNewQue") {
 
 	if($Type == 1) {
 
-		echo lang("Time to add som alternatives.", "admin_wannabemin", "Text used in wannabemin");
+		echo lang("Time to add some alternatives.", "admin_wannabemin", "Text used in wannabemin");
 		refresh("admin.php?adminmode=wannabemin&action=AddAlt&id=$ID", 2);
 
 	} else {
