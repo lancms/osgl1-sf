@@ -22,7 +22,7 @@ echo "<tr><td>";
 echo "<a href=admin.php?adminmode=partyweb&action=edit&edit=$r->ID>";
 echo $r->ID;
 echo "</td><td>";
-echo $r->menuname;1
+echo $r->menuname;
 echo "</td><td>";
 echo $true_false[$r->display_menu];
 echo "</td><td>";
@@ -79,11 +79,11 @@ else $display_menu = 1;
 if(!$display_partymode) $display_partymode = 0;
 else $display_partymode = 1;
 
-query("UPDATE partyweb SET menuname = '$menuname', 
-	text = '$text', 
-        display_menu = $display_menu, 
+query("UPDATE partyweb SET menuname = '$menuname',
+	text = '$text',
+        display_menu = $display_menu,
         display_partymode = $display_partymode WHERE ID = $edit");
- 
+
 refresh("admin.php?adminmode=partyweb", 5);
 echo $partyweb['4'];
 } elseif($action == "save" && isset($edit) && isset($_POST['delete'])) {
