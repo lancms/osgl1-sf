@@ -1,7 +1,8 @@
 <?php
 require 'config/config.php';
 
-if(!acl_access("static")) die($admin[noaccess]);
+if(!acl_access("static"))
+	nicedie($admin[noaccess]);
 
 
 if(isset($_GET['action'])) {
@@ -18,15 +19,15 @@ if(!isset($action)) {
 	<input type=hidden name=action value=edit>
 	<select name=edit>
 	<?php
-	$q = mysql_query("SELECT * FROM static") or die(mysql_error());
-	while($r = mysql_fetch_object($q)) {
+	$q = query("SELECT * FROM static");
+	while($r = fetch($q)) {
 		echo "<option value='$r->header'>$r->header</option>\n";
 	}
 
 	//echo "<option value=index>index</option>\n";
 	?>
 	</select>
-	<input type=submit value='Rediger siden'></form>
+	<input type=submit value='<?php echo $form['73'] ?>'></form>
 	<form method=post action=admin.php?adminmode=static&action=new>
 	<br><br>
 	<input type=text name=filename>
@@ -38,8 +39,8 @@ if(!isset($action)) {
 
 if($action == "edit" && isset($_GET['edit'])) {
 	$file = $_GET['edit'];
-	$q = mysql_query("SELECT * FROM static WHERE header = '$file'");
-	$r = mysql_fetch_object($q);
+	$q = query("SELECT * FROM static WHERE header = '$file'");
+	$r = fetch($q);
 	echo "<form method=post action=admin.php?adminmode=static&action=doedit>";
 	echo "<input type=hidden name=edit value='".$_GET['edit']."'>";
 	echo "<textarea name=edittext rows=15 cols=75>";
@@ -50,18 +51,18 @@ if($action == "edit" && isset($_GET['edit'])) {
 elseif($action == "doedit" && isset($_POST['edit'])) {
 	$edittext = stripslashes($_POST['edittext']);
 	$edit = $_POST['edit'];
-	if(!isset($edittext)) die("WTF????? No text?");
-	if(!isset($edit)) die("WTF??? No file to edit?");
+	if(!isset($edittext)) nicedie($form['72']);
+	if(!isset($edit)) nicedie();
 	$lastEdit = time();
 	$lastEditBy = getcurrentuserid();
 	$text = addslashes($edittext);
-	mysql_query("UPDATE static SET text = '$text', lastEdit = '$lastEdit', lastEditBy = '$lastEditBy' WHERE header = '$edit'") or die(mysql_error());
+	query("UPDATE static SET text = '$text', lastEdit = '$lastEdit', lastEditBy = '$lastEditBy' WHERE header = '$edit'");
 
 	refresh("admin.php?adminmode=static");
 }
 elseif($action == "new" & isset($_POST['filename'])) {
 	$file = $_POST['filename'];
-	mysql_query("INSERT INTO static SET header = '$file'");
+	query("INSERT INTO static SET header = '$file'");
 
 	refresh("admin.php?adminmode=static&action=edit&edit=$file");
 }

@@ -75,6 +75,7 @@ $form['69'] = "Lacking name of the compo.";
 $form['70'] = "Number of players on each team";
 $form['71'] = "Number of teams in each round";
 $form['72'] = "Lacking content.";
+$form['73'] = "Edit";
 
 /* Diffrent kinds of messages..... */
 $msg[0] = "Logged in as: ";
