@@ -1,8 +1,8 @@
--- MySQL dump 9.09
+-- MySQL dump 9.11
 --
 -- Host: localhost    Database: devel
 -- ------------------------------------------------------
--- Server version	4.0.16-log
+-- Server version	4.0.22-log
 
 --
 -- Table structure for table `Clan`
@@ -19,6 +19,33 @@ CREATE TABLE Clan (
 ) TYPE=MyISAM;
 
 --
+-- Table structure for table `acls`
+--
+
+DROP TABLE IF EXISTS acls;
+CREATE TABLE acls (
+  groupID int(11) NOT NULL default '0',
+  access varchar(20) NOT NULL default '',
+  value smallint(1) default NULL,
+  PRIMARY KEY  (groupID,access)
+) TYPE=MyISAM;
+
+--
+-- Table structure for table `adminLog`
+--
+
+DROP TABLE IF EXISTS adminLog;
+CREATE TABLE adminLog (
+  ID int(11) NOT NULL auto_increment,
+  adminID int(11) default '1',
+  didWhat text,
+  userID int(11) default '0',
+  logType int(3) default '1',
+  logUNIX int(25) default '0',
+  PRIMARY KEY  (ID)
+) TYPE=MyISAM;
+
+--
 -- Table structure for table `compo`
 --
 
@@ -26,10 +53,36 @@ DROP TABLE IF EXISTS compo;
 CREATE TABLE compo (
   ID int(11) NOT NULL auto_increment,
   name varchar(25) default NULL,
-  caption text,
-  gameType varchar(20) default NULL,
+  gameType tinyint(1) default NULL,
   players smallint(6) unsigned default NULL,
+  rules text,
+  roundPlayers smallint(2) default '2',
+  isOpen tinyint(1) default '1',
   PRIMARY KEY  (ID)
+) TYPE=MyISAM;
+
+--
+-- Table structure for table `compoPoll`
+--
+
+DROP TABLE IF EXISTS compoPoll;
+CREATE TABLE compoPoll (
+  ID int(11) NOT NULL auto_increment,
+  question varchar(50) default NULL,
+  PRIMARY KEY  (ID)
+) TYPE=MyISAM;
+
+--
+-- Table structure for table `compoPollA`
+--
+
+DROP TABLE IF EXISTS compoPollA;
+CREATE TABLE compoPollA (
+  pollID int(11) NOT NULL default '0',
+  userID int(11) NOT NULL default '0',
+  answer smallint(1) default NULL,
+  moreinfo text,
+  PRIMARY KEY  (pollID,userID)
 ) TYPE=MyISAM;
 
 --
@@ -38,9 +91,11 @@ CREATE TABLE compo (
 
 DROP TABLE IF EXISTS compoReg;
 CREATE TABLE compoReg (
-  compoID int(11) default NULL,
+  compoID int(11) NOT NULL default '0',
+  userID int(11) NOT NULL default '0',
   clanID int(11) default NULL,
-  userID int(11) default NULL
+  seed mediumint(3) default '127',
+  PRIMARY KEY  (compoID,userID)
 ) TYPE=MyISAM;
 
 --
@@ -52,6 +107,21 @@ CREATE TABLE config (
   ID int(11) NOT NULL auto_increment,
   config varchar(32) NOT NULL default '',
   value varchar(32) NOT NULL default '',
+  large text,
+  PRIMARY KEY  (ID)
+) TYPE=MyISAM;
+
+--
+-- Table structure for table `crewlog`
+--
+
+DROP TABLE IF EXISTS crewlog;
+CREATE TABLE crewlog (
+  ID int(11) NOT NULL auto_increment,
+  userID int(11) NOT NULL default '0',
+  timestamp datetime NOT NULL default '0000-00-00 00:00:00',
+  reason text NOT NULL,
+  away tinyint(1) unsigned zerofill default '0',
   PRIMARY KEY  (ID)
 ) TYPE=MyISAM;
 
@@ -109,6 +179,17 @@ CREATE TABLE forumThread (
   catID int(11) NOT NULL default '0',
   lastPostDate int(11) default '0',
   lastPost varchar(11) default NULL,
+  PRIMARY KEY  (ID)
+) TYPE=MyISAM;
+
+--
+-- Table structure for table `groups`
+--
+
+DROP TABLE IF EXISTS groups;
+CREATE TABLE groups (
+  ID int(11) NOT NULL auto_increment,
+  groupname varchar(25) default NULL,
   PRIMARY KEY  (ID)
 ) TYPE=MyISAM;
 
@@ -235,6 +316,7 @@ CREATE TABLE session (
   userID int(11) default NULL,
   IP varchar(15) default '000.000.000.000',
   logUNIX int(25) unsigned default '0',
+  userURL varchar(100) default '',
   PRIMARY KEY  (sID)
 ) TYPE=MyISAM;
 
@@ -247,6 +329,11 @@ CREATE TABLE static (
   ID int(11) NOT NULL auto_increment,
   header varchar(100) NOT NULL default '',
   text text NOT NULL,
+  lastEdit varchar(25) default NULL,
+  lastEditBy int(11) default NULL,
+  showPage smallint(1) default '1',
+  crewOnly smallint(1) default '0',
+  useNL2BR smallint(1) default '1',
   PRIMARY KEY  (ID)
 ) TYPE=MyISAM;
 
@@ -278,13 +365,29 @@ CREATE TABLE users (
   isCrew tinyint(1) NOT NULL default '0',
   verified int(6) default NULL,
   registered datetime default '0000-00-00 00:00:00',
-  seatID int(11) default '0',
+  seatX int(4) default '-1',
   AllowPublic tinyint(1) default '0',
   aboutMe text,
   isHere tinyint(4) default '0',
   crewField text,
-  cellphone int(11) default NULL,
+  cellphone varchar(20) default NULL,
   wannabe smallint(1) default '0',
+  seatY smallint(5) default '-1',
+  street varchar(50) default NULL,
+  postNr varchar(6) default NULL,
+  postPlace varchar(25) default NULL,
+  birthDAY varchar(5) default NULL,
+  birthMONTH varchar(5) default NULL,
+  birthYEAR varchar(5) default NULL,
+  lastLoggedIn int(25) default '0',
+  wannabeDenied smallint(1) default '0',
+  rememberMe smallint(1) default '0',
+  ticketType smallint(2) default '0',
+  ticketAuthorize smallint(2) default '1',
+  netstatus int(1) default NULL,
+  mac varchar(17) default NULL,
+  hasvirus int(2) default NULL,
+  myGroup int(11) default '0',
   PRIMARY KEY  (ID)
 ) TYPE=MyISAM;
 
@@ -299,4 +402,50 @@ CREATE TABLE waitinglist (
   PRIMARY KEY  (ID)
 ) TYPE=MyISAM;
 
+--
+-- Table structure for table `wannabe`
+--
+
+DROP TABLE IF EXISTS wannabe;
+CREATE TABLE wannabe (
+  ID int(11) NOT NULL default '0',
+  aboutme text,
+  canKioskCrew smallint(1) default '0',
+  canTechCrew smallint(1) default '0',
+  canNetCrew smallint(1) default '0',
+  canSecCrew smallint(1) default '0',
+  canPartyCrew smallint(1) default '0',
+  experience text,
+  why text,
+  canTechLinuxCrew smallint(1) default '0',
+  canCarryTablesCrew smallint(1) default '0',
+  canGameCrew smallint(1) default '0',
+  turnOn smallint(1) default '0',
+  karaoke smallint(1) default '0',
+  canCake smallint(1) default '0',
+  leaderType smallint(1) default '0',
+  myRequests text,
+  lastUpdated varchar(25) default '0',
+  PRIMARY KEY  (ID)
+) TYPE=MyISAM;
+
+--
+-- Table structure for table `wannabeAdmin`
+--
+
+DROP TABLE IF EXISTS wannabeAdmin;
+CREATE TABLE wannabeAdmin (
+  userID int(11) NOT NULL default '0',
+  adminID int(11) NOT NULL default '0',
+  shoudBeCrew smallint(1) default '0',
+  moreinfo text,
+  lastUpdated varchar(25) default '0',
+  PRIMARY KEY  (userID,adminID)
+) TYPE=MyISAM;
+
 INSERT INTO users SET ID = 1, name = 'Anonymous', nick = 'guest';
+INSERT INTO users SET ID = 2, myGroup = 1, name= 'Admin', nick = 'admin', password = '21232f297a57a5a743894a0e4a801fc3';
+INSERT INTO static SET header = 'index', text = 'Welcome to your new installation of OSGlobeLAN. Login as admin with password admin to make changes to the settings. Of course, youve already read all the docs in docs/ ;)';
+
+INSERT INTO groups SET ID = 1, groupname = 'Superbruker';
+INSERT INTO acls SET groupID = 1, access = 'root', value = 1;
