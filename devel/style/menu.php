@@ -16,10 +16,8 @@ write_menu("index.php",$title['page'][0]);
 
 /* Insert the static files; they usually contains info, so they should be the first the user comes to */
 if(config("usepage_static"))  {
-	$myRank = getuserrank();
-	if($myRank == 0) $crewOnly = "AND crewOnly = 0";
 
-    $q = mysql_query("SELECT * FROM static WHERE header != 'index' AND showPage = 1 $crewOnly") or die(mysql_error());
+    $q = mysql_query("SELECT * FROM static WHERE header != 'index' AND showPage = 1") or die(mysql_error());
     while($r = mysql_fetch_object($q)) {
 	    $header = $r->header;
 	    $header = str_replace("_", " ", $header);
