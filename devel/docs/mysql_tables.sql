@@ -365,10 +365,11 @@ CREATE TABLE lang (
   PRIMARY KEY (ID)
 );
 
-CREATE TABLE `wannabeCat` (
+
+CREATE TABLE `wannabeAlt` (
 `id` INT( 10 ) NOT NULL AUTO_INCREMENT ,
-`name` VARCHAR( 225 ) NOT NULL ,
-`info` TEXT NOT NULL ,
+`content` VARCHAR( 225 ) NOT NULL ,
+`queid` INT( 10 ) NOT NULL ,
 PRIMARY KEY ( `id` )
 ) TYPE = MYISAM ;
 
@@ -376,19 +377,17 @@ PRIMARY KEY ( `id` )
 CREATE TABLE `wannabeQue` (
 `id` INT( 10 ) NOT NULL AUTO_INCREMENT ,
 `content` VARCHAR( 225 ) NOT NULL ,
-`type` INT( 10 ) NOT NULL ,
-`catid` INT( 10 ) NOT NULL ,
+`type` SMALLINT(1) NOT NULL ,
 PRIMARY KEY ( `id` )
 ) TYPE = MYISAM ;
 
-
-CREATE TABLE `wannabeAltRadio` (
+CREATE TABLE `wannabeComment` (
 `id` INT( 10 ) NOT NULL AUTO_INCREMENT ,
-`content` VARCHAR( 225 ) NOT NULL ,
-`queid` INT( 10 ) NOT NULL ,
+`comment` VARCHAR( 225 ) NOT NULL ,
+`user` INT(10) NOT NULL ,
+`by` INT(10) NOT NULL ,
 PRIMARY KEY ( `id` )
 ) TYPE = MYISAM ;
-
 
 CREATE TABLE `wannabeUsers` (
 `id` INT( 10 ) NOT NULL AUTO_INCREMENT ,
