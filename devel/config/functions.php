@@ -182,9 +182,9 @@ function user_style()
 
 	$design = $row->userDesign;
 
-	if(!isset($design))
+	if(empty($design))
 	{
-		$design = config("default_style");
+		$design = "default";
 	}
 	return $design;
 }
