@@ -403,7 +403,7 @@ elseif($action == "DoViewUsers") {
 	$UID		=	$_GET['id'];
 	$UserID		=	escape_string($UID);
 
-	if(empty($UserID)) nicedie(lang("Something is not right.", "admin_wannabemin", "Text used in wannabemin"));
+	if(empty($UID)) nicedie(lang("Please specify the userID", "admin_wannabemin", "Text used in wannabemin"));
 
 	$query		=	"SELECT * FROM wannabeUsers WHERE user = '$UserID'";
 	$result 	= 	query($query);
@@ -411,7 +411,7 @@ elseif($action == "DoViewUsers") {
 	$list		=	"
 	<table>
 	 <tr>
-	  <td><b>".lang("View Users", "admin_wannabemin", "Text to display in wannabemin&action=ViewUsers")."</b></td>
+	  <td><b><a href=admin.php?adminmode=wannabemin&action=ViewUsers>".lang("View Users", "admin_wannabemin", "Text to display in wannabemin&action=ViewUsers")."</a></b></td>
 	 </tr>
 	 ";
 
