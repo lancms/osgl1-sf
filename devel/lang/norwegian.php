@@ -63,6 +63,13 @@ $form[57] = "Bestill nick";
 $form[58] = "Takk for maten";
 $form[59] = "Verifiser";
 $form['60'] = "Vis";
+$form['61'] = "Legg til gruppe";
+$form['62'] = "Gi nytt navn";
+$form['63'] = "Det finnes allerede en gruppe med det navnet.";
+$form['64'] = "Medlemmer:";
+$form['65'] = "Gruppe slettet.";
+$form['66'] = "Slette gruppen:";
+$form['67'] = "Renamed to";
 
 /* Diffrent kinds of messages..... */
 $msg[0] = "Logget inn som: ";

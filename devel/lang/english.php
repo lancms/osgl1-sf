@@ -63,6 +63,13 @@ $form[57] = "Order nick";
 $form[58] = "Thanks for the food";
 $form[59] = "Verify";
 $form['60'] = "Show";
+$form['61'] = "Add group";
+$form['62'] = "Rename";
+$form['63'] = "A group with that name already exists.";
+$form['64'] = "Members:";
+$form['65'] = "Group deleted.";
+$form['66'] = "Delete group:";
+$form['67'] = "Renamed to";
 
 /* Diffrent kinds of messages..... */
 $msg[0] = "Logged in as: ";

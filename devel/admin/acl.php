@@ -11,23 +11,24 @@ if(!isset($action)) {
 		echo "<tr><td>";
 		echo "<a href=admin.php?adminmode=acl&action=edit&edit=$r->ID>$r->groupname</a>";
 		echo "</td><td>";
-		echo "<a href=admin.php?adminmode=acl&action=rename&edit=$r->ID>Rename</a>";
+		echo "<a href=admin.php?adminmode=acl&action=rename&edit=$r->ID>".$form['62']."</a>";
 		echo "</td><td>";
-		echo "<a href=admin.php?adminmode=acl&action=delete&edit=$r->ID>Delete</a>";
+		echo "<a href=admin.php?adminmode=acl&action=delete&edit=$r->ID>".$form['16']."</a>";
 		echo "</td></tr>";
 	}
 	echo "</table>";
 	
 	echo "<br><br><br><hr><br>";
 	echo "<form method=POST action=admin.php?adminmode=acl&action=add>";
-	echo "<input type=text name=groupname><input type=submit value='Legg til gruppe'>";
+	echo "<input type=text name=groupname><input type=submit value='".$form['61']."'>";
 	echo "</form>";
 }
 
 elseif($action == "add") {
 	$groupname = $_POST['groupname'];
 	$test = query("SELECT * FROM groups WHERE groupname LIKE '$groupname'");
-	if(num($test) != 0) die("Gruppen eksisterer allerede");
+	if(num($test) != 0)
+		nicedie($form['63']);
 	query("INSERT INTO groups SET groupname = '$groupname'");
 	refresh("admin.php?adminmode=acl", 0);
 }
@@ -49,11 +50,11 @@ elseif($action == "edit" && isset($edit)) {
 		echo "</td></tr>";
 	}
 	echo "</table>";
-	echo "<br><input type=submit value='Lagre gruppen'>";
+	echo "<br><input type=submit value='".$form['15']."'>";
 	echo "</form>";
 	
 	$q2 = query("SELECT * FROM users WHERE myGroup = $edit");
-	echo "Members: (".num($q2).")";
+	echo $form['64']." (".num($q2).")";
 	echo "<table>";
 	while($r2 = fetch($q2)) {
 		echo "<tr><td>";
@@ -92,15 +93,15 @@ $confirm = $_GET['confirm'];
 		query("DELETE FROM acls WHERE groupID = $edit");
 		query("UPDATE users SET myGroup = 1 WHERE myGroup = $edit");
 		refresh("admin.php?adminmode=acl", 2);
-		echo "Group deleted";
+		echo $form['65'];
 	}
 	else {
 		$q = query("SELECT * FROM groups WHERE ID = $edit");
 		$r = fetch($q);
-		echo "Delete group: ".$r->groupname."?";
+		echo $form['66']." ".$r->groupname."?";
 		echo "<br>";
-		echo "<a href=admin.php?adminmode=acl&action=delete&edit=$edit&confirm=YES>Yes</a> - ";
-		echo "<a href=admin.php?adminmode=acl>No</a>";
+		echo "<a href=admin.php?adminmode=acl&action=delete&edit=$edit&confirm=YES>".$true_false['1']."</a> - ";
+		echo "<a href=admin.php?adminmode=acl>".$true_false['0']."</a>";
 	}
 	
 }
@@ -108,11 +109,11 @@ elseif($action == "rename" && isset($edit)) {
 	$q = query("SELECT * FROM groups WHERE ID = $edit");
 	$r = fetch($q);
 	echo "<form method=POST action=admin.php?adminmode=acl&action=dorename&edit=$edit>\n";
-	echo "<input type=text name=name value='$r->groupname'><input type=submit value='Change name'>";
+	echo "<input type=text name=name value='$r->groupname'><input type=submit value='".$form['62']."'>";
 	echo "</form>";
 } elseif($action == "dorename" && isset($edit)) {
 	$newName = $_POST['name'];
 	query("UPDATE groups SET groupname = '$newName' WHERE ID = $edit");
-	echo "Groupname changed to $newName";
+	echo $form['67']." $newName";
 	refresh("admin.php?adminmode=acl", 2);
 }
