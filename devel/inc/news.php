@@ -1,5 +1,6 @@
 <?php
-require_once 'config/config.php';
+
+require_once ('config/config.php');
 
 if (!config("usepage_news"))
 {
@@ -30,22 +31,22 @@ if($action == "view")
 
 	$num = num($query);
 
-	if($num == 0)
+	if ($num == 0)
 	{
 		echo $msg[13];
 	}
 
-	for($i=0;$i<$num;$i++)
+	for ($i=0;$i<$num;$i++)
 	{
 		$row = fetch($query);
 
 		echo "<font class=newsHeader>$row->header</font>";
 		echo "<br>";
-		$queryNick = query("SELECT * FROM users WHERE ID = '".mysql_escape_string($row->poster)."'");
+		$queryNick = query("SELECT * FROM users WHERE ID = '".escape_string($row->poster)."'");
 
 		$nickrow = fetch($queryNick);
 
-		if(num($queryNick) == 0)
+		if (num($queryNick) == 0)
 		{
 			$nick_poster = $msg[17];
 		}
@@ -58,7 +59,7 @@ if($action == "view")
 		echo "<font class=newsPoster>".$msg[14].$nick_poster."</font>";
 		echo "<br>";
 		echo "<font class=newsText>".nl2br($row->text)."</font>";
-		if($i < $num-1)
+		if ($i < $num-1)
 		{
 			echo "<br><hr><br>";
 		}
