@@ -61,20 +61,20 @@ if ($action == "regme")
 		}
 
 		$dbs = query("INSERT INTO users SET
-			nick = '$username',
-			EMail = '$email',
-			firstName = '$firstName',
-			lastName = '$lastName',
-			password = '$cpass',
-			verified = $r,
-			registered = now(),
-			street = '$street',
-			postNr = '$postNr',
-			postPlace = '$postPlace',
-			cellphone = '$cellphone',
-			birthDAY = '$birthDAY',
-			birthMONTH = '$birthMONTH',
-			birthYEAR = '$birthYEAR'
+			nick = '".mysql_escape_string($username)."',
+			EMail = '".mysql_escape_string($email)."',
+			firstName = '".mysql_escape_string($firstName)."',
+			lastName = '".mysql_escape_string($lastName)."',
+			password = '".mysql_escape_string($cpass)."',
+			verified = '".mysql_escape_string($r)."',
+			registered = '".mysql_escape_string(now())."',
+			street = '".mysql_escape_string($street)."',
+			postNr = '".mysql_escape_string($postNr)."',
+			postPlace = '".mysql_escape_string($postPlace)."',
+			cellphone = '".mysql_escape_string($cellphone)."',
+			birthDAY = '".mysql_escape_string($birthDAY)."',
+			birthMONTH = '".mysql_escape_string($birthMONTH)."',
+			birthYEAR = '".mysql_escape_string($birthYEAR)."'
 		");
 
 		echo $msg[6];
