@@ -11,7 +11,6 @@ if(isset($_GET['action'])) {
 
 
 /* Define the config-variables we want to have a checkbox on */
-$checkbox[] = "usepage_forum";
 $checkbox[] = "usepage_faq";
 $checkbox[] = "usepage_register";
 $checkbox[] = "usepage_poll";
@@ -23,7 +22,6 @@ $checkbox[] = "usepage_news";
 $checkbox[] = "usepage_partyweb";
 $checkbox[] = "seatreg_open";
 $checkbox[] = "usepage_wannabe";
-#$checkbox[] = "usepage_kiosk"; // Doesn't work
 $checkbox[] = "usepage_compopoll";
 
 if(!isset($action)) {
