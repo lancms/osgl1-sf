@@ -1,36 +1,38 @@
 <?php
 
-
-
 require_once "config/config.php";
-
-
 
 $action = $_GET['action'];
 
-if(!acl_access("adminUsers")) {
-
+if (!acl_access("adminUsers"))
+{
 	$editID = getcurrentuserid();
-
-} elseif(!isset($_GET['user'])) {
-
+}
+elseif (!isset($_GET['user']))
+{
 	$editID = getcurrentuserid();
-
-} elseif(acl_access("adminUsers") && isset($_GET['user'])) {
-
+}
+elseif ((acl_access("adminUsers")) && (isset($_GET['user'])))
+{
 	$editID = $_GET['user'];
-
 }
 
-
-if(getcurrentuserid() == 1)
+if (getcurrentuserid() == 1)
+{
 	nicedie($msg['26']);
+}
 
-
-if($action == "view" || !isset($action)) {
-
-	if($_GET['mode'] == "success") echo "<font color=red>$profile[7]</font>";
-	if($_GET['mode'] == "pwdsuccess") echo "<font color=red>$profile[7]</font>";
+if (($action == "view") || (!isset($action)))
+{
+	if($_GET['mode'] == "success")
+	{
+		echo "<font color=red>$profile[7]</font>";
+	}
+	
+	if($_GET['mode'] == "pwdsuccess")
+	{
+		echo "<font color=red>$profile[7]</font>";
+	}
 
 	$query = query("SELECT * FROM users WHERE users.ID=".$editID."");
 
@@ -57,44 +59,70 @@ if($action == "view" || !isset($action)) {
 	user_table($form['75'], "<input type=text name=postNr value='$row->postNr' size=5><input type=text name=postPlace value='$row->postPlace'>");
 
 	$birthdayinfo = "<select name=birthDAY>";
-	for($i=1;$i<32;$i++) {
-		if($i != $row->birthDAY) $select = "";
-		else $select = "SELECTED";
+	for($i=1;$i<32;$i++)
+	{
+		if($i != $row->birthDAY)
+		{
+			$select = "";
+		}
+		else
+		{
+			$select = "SELECTED";
+		}
+		
 		$birthdayinfo .= "<option value=$i $select>$i</option>\n";
 	}
-    	$birthdayinfo .= "</select>";
+	$birthdayinfo .= "</select>";
 	$birthdayinfo .= "<select name=birthMONTH><option value=0></option>\n\n";
-	for($m=1;$m<13;$m++) {
-		if($row->birthMONTH != $m) $select = "";
-		else $select = "SELECTED";
+	for($m=1;$m<13;$m++)
+	{
+		if($row->birthMONTH != $m)
+		{
+			$select = "";
+		}
+		else
+		{
+			$select = "SELECTED";
+		}
 		$birthdayinfo .= "<option value=$m $select>$month[$m]</option>\n";
 	}
 	$birthdayinfo .= "</select>";
 	$birthdayinfo .= "<select name=birthYEAR>";
-	for($y=1950;$y<2004;$y++) {
-		if($y != $row->birthYEAR) $selected = "";
-		else $selected = "SELECTED";
+	for($y=1950;$y<2004;$y++)
+	{
+		if($y != $row->birthYEAR)
+		{
+			$selected = "";
+		}
+		else
+		{
+			$selected = "SELECTED";
+		}
 		$birthdayinfo .= "<option value=$y $selected>$y</option>\n";
 	}
 	user_table($form['77'], $birthdayinfo);
 
-
 	echo "<tr><td class=profileLeft width=30%>$profile[9]</td><td class=profileRight>";
-
 
 	if(acl_access("ACL")) {
 		// User is allowed to make changes to ACL
 		$groups = query("SELECT * FROM groups");
 		echo "<select name=myGroup>";
 		//$Gnum = num($groups);
-		for($y=1;$Group=fetch($groups);$y++) {
+		for($y=1;$Group=fetch($groups);$y++)
+		{
 			//$Group = fetch($groups)
 			echo "<option value=$Group->ID";
-			if($row->myGroup == $y) echo " SELECTED";
+			if($row->myGroup == $y)
+			{
+				echo " SELECTED";
+			}
 			echo ">$Group->groupname</option>";
 		}
 		echo "</select>";
-	} else {
+	}
+	else
+	{
 		$groups = query("SELECT * FROM groups WHERE ID = $row->myGroup");
 		$Group = fetch($groups);
 		echo $Group->groupname;
@@ -103,38 +131,38 @@ if($action == "view" || !isset($action)) {
 
 	echo "</td></tr>";
 
-
-
 	echo "<tr><td class=profileLeft width=30%>$profile[13]</td><td class=profileRight>";
 
 	echo "<select name=allowPublic>";
 
-	for($y=0;$y<count($allowPublicFor);$y++) {
-
+	for($y=0;$y<count($allowPublicFor);$y++)
+	{
 		echo "<option value=$y";
 
-		if($row->AllowPublic == $y) echo " SELECTED";
+		if($row->AllowPublic == $y)
+		{
+			echo " SELECTED";
+		}
 
 		echo ">$allowPublicFor[$y]</option>";
-
 	}
 
 	echo "</select>";
-
-
 
 	echo "<tr><td class=profileLeft width=30%>$profile[14]</td><td class=profileRight>";
 
 	echo "<select name=userDesign>";
 
-	for ($y=0;$y<count($styles);$y++) {
-
+	for ($y=0;$y<count($styles);$y++)
+	{
 		echo "<option value=$styles[$y]";
 
-		if($row->userDesign == $styles[$y]) echo " SELECTED";
+		if($row->userDesign == $styles[$y])
+		{
+			echo " SELECTED";
+		}
 
 		echo ">$styles[$y]</option>";
-
 	}
 
 	echo "</select>";
@@ -145,29 +173,25 @@ if($action == "view" || !isset($action)) {
 
 	echo "<br><input type=submit value='$form[15]'>";
 
-
-
-
-
-
 }
-
-
-
-elseif($action == "edit") {
+elseif ($action == "edit")
+{
 	$q = query("SELECT * FROM users WHERE ID = $editID");
 	$r = fetch($q);
 	$nick = $_POST['nick'];
-	#$name = $_POST['name'];
 	$firstName = $_POST['firstName'];
 	$lastName = $_POST['lastName'];
 	$mail = $_POST['mail'];
 	$aboutme = htmlspecialchars($_POST['aboutme']);
-//	$rank = $_POST['rank'];
-//	if(getuserrank() == 0) $rank = getuserrank();
 
-	if(acl_access("ACL")) $myGroup = $_POST['myGroup'];
-	else $myGroup = $r->myGroup;
+	if(acl_access("ACL"))
+	{
+		$myGroup = $_POST['myGroup'];
+	}
+	else
+	{
+		$myGroup = $r->myGroup;
+	}
 	$cellphone = $_POST['cellphone'];
 	$allowPublic = $_POST['allowPublic'];
 	$userDesign = $_POST['userDesign'];
@@ -179,7 +203,8 @@ elseif($action == "edit") {
 	$birthYEAR = $_POST['birthYEAR'];
 	
 	$verify = verify("edit", $editID, $nick, $firstName, $lastName);
-	if($verify != "allowed") {
+	if($verify != "allowed")
+	{
 		nicedie($form[$verify]);
 	}
 	
@@ -204,10 +229,9 @@ elseif($action == "edit") {
 	refresh("index.php?inc=useradmin&user=$editID", "0");
 
 
-} elseif($action == "changepass") {
-
-
-
+}
+elseif ($action == "changepass")
+{
 	?>
 
 	<table>
@@ -222,45 +246,35 @@ elseif($action == "edit") {
 
 	user_table("", "<input type=submit value='$form[15]'>");
 
-
-
 	echo '</table>';
 
-} elseif($action == "doeditpass") {
-
+}
+elseif ($action == "doeditpass")
+{
 	$pwd1 = $_POST['pwd1'];
 
 	$pwd2 = $_POST['pwd2'];
 
-
-
-	if($pwd1 != $pwd2) {
-
+	if($pwd1 != $pwd2)
+	{
 		nicedie($form[14]);
-
-	} else {
-
-		$cpass = crypt_pwd($pwd1);
-
-		query("UPDATE users SET users.password='".$cpass."' WHERE users.ID=".$editID."");
-
-		refresh("index.php?inc=useradmin&mode=pwdsuccess&user=$editID", "0");
-
 	}
-
-} elseif($action == "changemail") {
-
+	else
+	{
+		$cpass = crypt_pwd($pwd1);
+		query("UPDATE users SET users.password='".$cpass."' WHERE users.ID=".$editID."");
+		refresh("index.php?inc=useradmin&mode=pwdsuccess&user=$editID", "0");
+	}
+}
+elseif ($action == "changemail")
+{
 	$query = query("SELECT * FROM users WHERE users.ID=".$editID."");
 
 	$row = fetch($query);
-
 	?>
 
 	<table>
-
 	<form method=post action=index.php?inc=useradmin&action=dochangemail&user=<?php echo $editID; echo ">";
-
-
 
 	user_table($profile[6], "<input type=text name=newmail value='$row->EMail'>");
 
@@ -269,67 +283,45 @@ elseif($action == "edit") {
 	echo '</table></form>';
 
 	echo $form[36];
-
-
-
-} elseif($action == "dochangemail") {
-
+}
+elseif ($action == "dochangemail")
+{
 	$query = query("SELECT * FROM users WHERE users.ID=".$editID."");
 
 	$check = fetch($query);
 
 	$newmail = $_POST['newmail'];
 
-
-
-	if($newmail == $check->EMail) {
-
+	if($newmail == $check->EMail) 
+	{
 		echo $form[35];
-
 		refresh("index.php?inc=useradmin&user=$editID");
-
-	} else {
-
+	}
+	else
+	{
 		$ran = createcifer() or nicedie($msg['28']);
-
 		$update = query("UPDATE users SET users.EMail='".$newmail,"', verified='".$ran."' WHERE users.ID=".$editID."");
 
-
-
 		if(!mail("$newmail", $mail[0], mail_body($ran), "From: ".$mail[2]))
-
 		{
-
 			nicedie($msg[5]);
-
 		}
-
-		else {
-
+		else
+		{
 			refresh("index.php?inc=useradmin&edit=$editID&mode=mailsuccess", 0);
-
 		}
-
 	}
-
 }
 
 
-
-
-
-
-
-
-
-function user_table($userLeft, $userRight) {
-
+function user_table($userLeft, $userRight)
+// TODO: Move this to functions.php!
+{
 	echo "<tr><td class=profileLeft width=25%>$userLeft</td><td class=profileRight>";
 
 	echo $userRight;
 
 	echo "</td></tr>\n\n";
-
 }
 
 ?>
