@@ -34,7 +34,8 @@ if(acl_access("compopoll")) echo "<br><a href=admin.php?adminmode=compopolladmin
 } elseif($adminmode != "") {
 	include_once "admin/".$adminmode.".php";
 } else {
-	die("ERROR?");
+	// Default reason works?
+	nicedie();
 }
 include $base_path."style/bottom.php";
 ?>
