@@ -61,7 +61,7 @@ $form[55] = "På lager";
 $form[56] = "Bestill antall";
 $form[57] = "Bestill nick";
 $form[58] = "Takk for maten";
-
+$form[59] = "Verifiser";
 
 /* Diffrent kinds of messages..... */
 $msg[0] = "Logget inn som: ";
@@ -87,6 +87,8 @@ $msg[19] = "Passord er kryptert; ta kontakt med admin for å endre";
 $msg[20] = "Rediger klan";
 $msg[21] = "Medlemmer online: ";
 $msg[22] = "Gjester online: ";
+$msg[23] = "Verifiser epostadressen din med verifiseringskoden du har fått tilsendt.";
+$msg[24] = "Hvis du ikke har fått tilsendt noen verifiseringskode, kontakt administratorene.";
 
 $rank[0] = "Deltager";
 $rank[1] = "Crew";

@@ -61,7 +61,7 @@ $form[55] = "In stock";
 $form[56] = "Order amount";
 $form[57] = "Order nick";
 $form[58] = "Thanks for the food";
-
+$form[59] = "Verify";
 
 /* Diffrent kinds of messages..... */
 $msg[0] = "Logged in as: ";
@@ -87,6 +87,8 @@ $msg[19] = "Password is encrypted. Contact admin to change";
 $msg[20] = "Edit clan";
 $msg[21] = "Members online: ";
 $msg[22] = "Guests online: ";
+$msg[23] = "Enter the verificationcode sent to your emailaddress.";
+$msg[24] = "If you have not recieved any verificationcode within a reasonable time, please contact the administrators.";
 
 $rank[0] = "User";
 $rank[1] = "Crew";

@@ -60,12 +60,17 @@ if($action=="login") {
 } elseif($action=="verify") {
     include $base_path."style/top.php";
     ?>
+	 <?php
+	 echo $msg[23];
+	 echo "<br>";
+	 echo $msg[24];
+	 ?>
     <form method=post action=do.php?action=doverify>
     <input type=text name=verifycode>
-    <input type=submit value='<?php echo $form[2]; ?>'>
+    <input type=submit value='<?php echo $form[59]; ?>'>
     <input type=hidden value='<?php echo $_GET["uid"]; ?>' name="uid">
     </form>
-    <?php
+	 <?php
 } elseif($action=="doverify") {
 
     $uid = $_POST['uid'];
