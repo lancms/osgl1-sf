@@ -25,7 +25,7 @@ $sql_db = "devel";
 $session_alive_time = 3600;      // How long should a session stay alive? 3600 (one hour) is default.
 $cookiename = "GL-D3V3L";
 /* The language-files to use.... If your language is not in the lang-folder, make it, translate it, and send it to the creators... */
-$language = "norwegian";
+$language = "english";
 
 /* Which systems to use... */
 
