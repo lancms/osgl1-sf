@@ -384,8 +384,8 @@ elseif($action == "ViewUsers") {
 	  $list	   .=	"
 	  	<tr>
 		 <td><a href='admin.php?adminmode=wannabemin&action=DoViewUsers&id=$ID'>$ID</a></td>
-		 <td><a href='admin.php?adminmode=wannabemin&action=DoViewUsers&id=$ID'>$Nick</a></td>
-		 <td><a href='admin.php?adminmode=wannabemin&action=ViewComment&id=$ID'>".lang("View comments", "admin_wannabemin", "Text to display in wannabemin")."</a></td>
+		 <td><a href='admin.php?adminmode=wannabemin&action=DoViewUsers&id=$ID'>$Nick</td>
+		 <td>".$UInfo->name."</a></td>
 		</tr>
 	  ";
 
