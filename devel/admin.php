@@ -54,8 +54,7 @@ if(!isset($adminmode))
 		echo "<br><a href=admin.php?adminmode=acl>".lang("Accessmanagement", "admin_index", "Menuitem on admin.php to manipulate groups and ACL-rights")."</a>";
 	}
 
-	// Disabled. Needs rewrite and will be removed sometime soon.
-	//if(acl_access("wannabe")) echo "<br><a href=admin.php?adminmode=wannabemin>Wannabe admin</a>";
+	if(acl_access("wannabe")) echo "<br><a href=admin.php?adminmode=wannabemin>Wannabe admin</a>";
 
 	if(acl_access("compomaster"))
 	{
