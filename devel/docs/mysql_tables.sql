@@ -320,6 +320,7 @@ CREATE TABLE users (
   isHere tinyint(4) default '0',
   crewField text,
   cellphone varchar(20) default NULL,
+  wannabe tinyint(1) NOT NULL default '0',
   seatY smallint(5) default '-1',
   street varchar(50) default NULL,
   postNr varchar(6) default NULL,
