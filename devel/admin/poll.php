@@ -32,18 +32,20 @@ if ($action == "list")
 
 		echo "<tr><td>$row->text</td>";
 
-		echo "<td><a href=admin.php?adminmode=poll&action=delete&poll=$row->ID>$form[16]</a></td>";
+		echo "<td><a href=admin.php?adminmode=poll&action=delete&poll=$row->ID>".lang("Delete", "admin_poll", "form[16]")."</a></td>";
 
-		echo "<td><a href=admin.php?adminmode=poll&action=edit&poll=$row->ID>$form[17]</a></td>";
+		echo "<td><a href=admin.php?adminmode=poll&action=edit&poll=$row->ID>".lang("Edit", "admin_poll", "form[17]")."</a></td>";
 
-		echo "<td><a href=admin.php?adminmode=poll&action=reset&poll=$row->ID>$form[19]</a></td>";
+		echo "<td><a href=admin.php?adminmode=poll&action=reset&poll=$row->ID>".lang("Reset votes", "admin_poll", "form[19]")."</a></td>";
 
 		if($row->isOpen == 1)
 		{
-			$toggle = $form[23];
+			$toggle = lang ("Close", "admin_poll", "form[23]");
 		}
-
-		else $toggle = $form[22];
+		else
+		{
+			$toggle = lang ("Open", "admin_poll", "form[22]");
+		}
 
 		echo "<td><a href=admin.php?adminmode=poll&action=toggle&poll=$row->ID>$toggle</a></td>";
 
@@ -56,11 +58,11 @@ if ($action == "list")
 
 	<form method=post action=admin.php?adminmode=poll&action=add>
 
-	<input type=text name=pollQ size=25> <?php echo $form[45]; ?>
+	<input type=text name=pollQ size=25> <?php echo lang ("Vote-question", "admin_poll", "form[45]"); ?>
 
-	<br><input type=text name=maxV value=1 size=2> <?php echo $form[44]; ?>
+	<br><input type=text name=maxV value=1 size=2> <?php echo lang ("Number of votes per user", "admin_poll", "form[44]"); ?>
 
-	<br><input type=submit value='<?php echo $form[7]; ?>'>
+	<br><input type=submit value='<?php echo lang ("Add", "admin_poll", "form[7]"); ?>'>
 
 	</form>
 
@@ -101,7 +103,7 @@ elseif (($action == "edit") && (isset($poll)))
 
 	if(num($queryA) == 0)
 	{
-		echo "<br><br>".$form[21];
+		echo "<br><br>".lang("Please add some <b>answers</b>!", "admin_poll", "form[21]");
 	}
 	else
 	{
@@ -122,7 +124,7 @@ elseif (($action == "edit") && (isset($poll)))
 
 	<br>
 
-	<input type=submit value='<?php echo $form[7]; ?>'>
+	<input type=submit value='<?php echo lang ("Add", "admin_poll", "form[7]"); ?>'>
 
 	</form>
 
@@ -135,7 +137,7 @@ elseif(($action == "addanswer") && (isset($poll)))
 
 	if (!isset($answer))
 	{
-		nicedie ($form[38]);
+		nicedielang ("Error: You forgot to enter an answer.", "admin_poll", "form[38]");
 	}
 	
 	$query = query("INSERT INTO pollA SET Atext = '".escape_string($answer)."', QID = '".escape_string($poll)."'");
