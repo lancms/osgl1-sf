@@ -369,11 +369,12 @@ elseif ($action == "ViewUsers")
 			$list .= "
 				<tr>
 					"; //<td><a href='admin.php?adminmode=wannabemin&action=DoViewUsers&id=$ID'>$ID</a></td>
-					$q = query("SELECT * FROM wannabeComment WHERE user = ".escape_string($UInfo->ID)." AND approve != 0");
+					$q = query("SELECT * FROM wannabeComment WHERE user = ".escape_string($UInfo->ID));
 					$image = NULL;
 					while($r = fetch($q)) {
 						if($r->approve == 1) $image .= "<img src=images/yes.gif>";
 						elseif($r->approve == 2) $image .= "<img src=images/no.gif>";
+						elseif($r->approve == 0) $image .= "<img src=images/dontknow.gif>";
 						
 					}
 					$q = query("SELECT * FROM wannabeComment WHERE user = ".escape_string($UInfo->ID)." AND adminID = ".escape_string(getcurrentuserid()));
@@ -521,7 +522,7 @@ elseif ($action == "DoViewUsers")
 	{
 		if($r->approve == 1) $smiley = "<img src=images/yes.gif>";
 		elseif($r->approve == 2) $smiley = "<img src=images/no.gif>";
-		else $smiley = ""; // If not set/not "voted"
+		else $smiley = "<img src=images/dontknow.gif>"; // If not set/not "voted"
 		echo "
 			<tr>
 				<td><b>". IDtonick($r->adminID) ." ".$smiley.":</b></td>
