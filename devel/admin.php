@@ -21,7 +21,6 @@ if(acl_access("adminUsers")) echo "<br><a href=admin.php?adminmode=userlist>Edit
 if(acl_access("onlineUsers")) echo "<br><a href=admin.php?adminmode=userlist&action=online>View online users</a>";
 if(acl_access("poll")) echo "<br><a href=admin.php?adminmode=poll>Polls</a>";
 if(acl_access("news")) echo "<br><a href=admin.php?adminmode=news>News-admin</a>";
-#	echo "<br><a href=admin.php?adminmode=kiosk>Kiosk-admin</a>"; // Doesn't work
 #	echo "<br><a href=admin.php?adminmode=random>Random-quote-admin</a>";
 if(acl_access("ACL")) echo "<br><a href=admin.php?adminmode=acl>ACL-admin</a>";
 #	echo "<br><a href=admin.php?adminmode=forum>ForumAdmin</a>";
