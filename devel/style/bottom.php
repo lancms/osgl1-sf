@@ -10,4 +10,4 @@ $style = user_style();
 #}
 
 #include $style."/bottom.php";
-include $base_path."style/".$style."/bottom.php";
+include_once $base_path."style/".$style."/bottom.php";
