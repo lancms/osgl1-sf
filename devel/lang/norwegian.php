@@ -110,6 +110,8 @@ $msg['30'] = "Feil brukernavn eller passord.";
 $msg['31'] = "Tilbake til hovedsiden."
 $msg['32'] = "Tilbake til lista.";
 $msg['33'] = "Oppdaterer...";
+$msg['34'] = "FAQ";
+$msg['35'] = "slettet.";
 
 $rank[0] = "Deltager";
 $rank[1] = "Crew";

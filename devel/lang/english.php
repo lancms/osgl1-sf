@@ -110,6 +110,8 @@ $msg['30'] = "Wrong username or password.";
 $msg['31'] = "Back to the main page.";
 $msg['32'] = "Back to the list.";
 $msg['33'] = "Updating...";
+$msg['34'] = "FAQ";
+$msg['35'] = "deleted.";
 
 $rank[0] = "User";
 $rank[1] = "Crew";

@@ -1,7 +1,8 @@
 <?php
 require 'config/config.php';
 
-if(!acl_access("faq")) die($admin[noaccess]);
+if(!acl_access("faq"))
+	nicedie($admin[noaccess]);
 
 
 
@@ -37,36 +38,37 @@ if(!isset($action)) {
 	<?php
 
 } elseif($action == "delete") {
-	if(!isset($_GET['ID'])) die($form[6]);
+	if(!isset($_GET['ID']))
+		nicedie($form[6]);
 
 	$delID = $_GET['ID'];
 
-	$query = mysql_query("DELETE FROM faq WHERE ID = '$delID'") or die(mysql_error());
+	$query = query("DELETE FROM faq WHERE ID = '$delID'");
 
-	echo "FAQ $delID deleted!";
+	echo $msg['34']." ".$delID." ".$msg['35'];
 
 } elseif($action == "insert") {
-	if(empty($_POST['question'])) die($form[6]);
-	if(empty($_POST['answer'])) die($form[6]);
+	if(empty($_POST['question'])) nicedie($form[6]);
+	if(empty($_POST['answer'])) nicedie($form[6]);
 
 	$q = $_POST['question'];
 	$a = $_POST['answer'];
 	$poster = $_COOKIE['userID'];
 
-	$query = mysql_query("INSERT INTO faq SET
+	$query = query("INSERT INTO faq SET
 	posted_by = '$poster',
 	question = '$q',
 	answer = '$a'
-	") or die(mysql_error());
+	");
 
-	echo "FAQ added!";
+	echo $msg['7'];
 	refresh("admin.php?adminmode=faq");
 } elseif($action == "edit") {
 	$editID = $_GET['ID'];
-	if(!isset($editID)) die("WTF??!?!?!??!");
+	if(!isset($editID)) nicedie();
 
-	$select = mysql_query("SELECT * FROM faq WHERE ID = $editID") or die(mysql_error());
-	$row = mysql_fetch_object($select);
+	$select = query("SELECT * FROM faq WHERE ID = $editID");
+	$row = fetch($select);
 	echo $row->question;
 	echo "<form method=post action=admin.php?adminmode=faq&action=doedit&edit=$editID>";
 	echo "<textarea name=edittext cols=75 rows=10>";
@@ -76,17 +78,10 @@ if(!isset($action)) {
 } elseif($action == "doedit") {
 	$editID = $_GET['edit'];
 	$text = addslashes($_POST['edittext']);
-	$update = mysql_query("UPDATE faq SET answer = '$text' WHERE ID = '$editID'") or die(mysql_error());
+	$update = query("UPDATE faq SET answer = '$text' WHERE ID = '$editID'");
 
 	if($update) refresh("admin.php");
 	echo $msg[7];
 }
-
-
-
-
-
-
-
 
 ?>
