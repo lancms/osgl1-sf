@@ -1,11 +1,15 @@
 <?php
 
-require 'config/config.php';
+require_once ('config/config.php');
 
-if(!acl_access("config")) die($admin[noaccess]);
+if (!acl_access("config"))
+{
+	nicedie($admin['noaccess']);
+}
 
 
-if(isset($_GET['action'])) {
+if (isset($_GET['action']))
+{
 	$action = $_GET['action'];
 }
 
@@ -24,25 +28,37 @@ $checkbox[] = "seatreg_open";
 $checkbox[] = "usepage_wannabe";
 $checkbox[] = "usepage_compopoll";
 
-if(!isset($action)) {
+if (!isset($action))
+{
 	echo "<form method=POST action=admin.php?adminmode=config&action=save>";
-	for($i = 0; $i < count($checkbox); $i++) {
+	for($i = 0; $i < count($checkbox); $i++)
+	{
 		$value = config($checkbox[$i]);
 		echo "<br><input type=checkbox name='".$checkbox[$i]."' ";
-		if($value) echo "CHECKED ";
+		if ($value)
+		{
+			echo "CHECKED ";
+		}
 		echo "value=1> ".$checkbox[$i];
 	}
 	echo "<br><input type=submit value='$form[15]'>";
 	echo "</form>";
 }
 
-elseif($action == "save") {
-	for($i = 0; $i < count($checkbox); $i++) {
+elseif ($action == "save")
+{
+	for($i = 0; $i < count($checkbox); $i++)
+	{
 		$value = $checkbox[$i];
 		$post = $_POST[$value];
 		//echo "<br>".$value." --- ".$post;
-		if(!$post) $post = "0";
+		if (!$post)
+		{
+			$post = "0";
+		}
 		config($checkbox[$i], $post);
 	}
 	refresh("admin.php?adminmode=config");
 }
+
+?>

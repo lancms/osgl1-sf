@@ -34,12 +34,12 @@ if (!isset($action))
 elseif ($action == "add")
 {
 	$groupname = $_POST['groupname'];
-	$test = query("SELECT * FROM groups WHERE groupname LIKE '".mysql_escape_string($groupname)."'");
+	$test = query("SELECT * FROM groups WHERE groupname LIKE '".escape_string($groupname)."'");
 	if(num($test) != 0)
 	{
 		nicedie($form['63']);
 	}
-	query("INSERT INTO groups SET groupname = '".mysql_escape_string($groupname)."'");
+	query("INSERT INTO groups SET groupname = '".escape_string($groupname)."'");
 	refresh("admin.php?adminmode=acl", 0);
 }
 elseif (($action == "edit") && (isset($edit)))
@@ -51,7 +51,7 @@ elseif (($action == "edit") && (isset($edit)))
 	for ($i = 0;$i<count($acl);$i++)
 	{
 		$this_acl = $acl[$i];
-		$q = query("SELECT * FROM acls WHERE groupID = '".mysql_escape_string($edit)."' AND access = '".mysql_escape_string($this_acl['access'])."'");
+		$q = query("SELECT * FROM acls WHERE groupID = '".escape_string($edit)."' AND access = '".escape_string($this_acl['access'])."'");
 		$r = fetch($q);
 		if (num($q) == 0)
 		{
@@ -73,7 +73,7 @@ elseif (($action == "edit") && (isset($edit)))
 	echo "<br><input type=submit value='".$form['15']."'>";
 	echo "</form>";
 	
-	$q2 = query("SELECT * FROM users WHERE myGroup = '".mysql_escape_string($edit)."'");
+	$q2 = query("SELECT * FROM users WHERE myGroup = '".escape_string($edit)."'");
 	echo $form['64']." (".num($q2).")";
 	echo "<table>";
 	
@@ -95,16 +95,16 @@ elseif ($action == "updateGroup")
 		//echo $this_acl['access'];
 		$post = $_POST[$this_access];
 		
-		$test = query("SELECT * FROM acls WHERE groupID = '".mysql_escape_string($edit)."' AND access = '".mysql_escape_string($this_access)."'");
+		$test = query("SELECT * FROM acls WHERE groupID = '".escape_string($edit)."' AND access = '".escape_string($this_access)."'");
 		if(num($test) == 0)
 		{
-			query("INSERT INTO acls SET groupID = '".mysql_escape_string($edit)."',
-					access = '".mysql_escape_string($this_access)."',
-					value = '".mysql_escape_string($post)."'");
+			query("INSERT INTO acls SET groupID = '".escape_string($edit)."',
+					access = '".escape_string($this_access)."',
+					value = '".escape_string($post)."'");
 		}
 		else
 		{
-			query("UPDATE acls SET value = '".mysql_escape_string($post)."' WHERE access = '".mysql_escape_string($this_access)."' AND groupID = '".mysql_escape_string($edit)."'");
+			query("UPDATE acls SET value = '".escape_string($post)."' WHERE access = '".escape_string($this_access)."' AND groupID = '".escape_string($edit)."'");
 		} // End check if acl exists
 		
 	} // End for-loop
@@ -115,15 +115,15 @@ elseif (($action == "delete") && (isset($edit)))
 	$confirm = $_GET['confirm'];
 	if ($confirm == "YES")
 	{
-		query("DELETE FROM groups WHERE ID = '".mysql_escape_string($edit)."'");
-		query("DELETE FROM acls WHERE groupID = '".mysql_escape_string($edit)."'");
-		query("UPDATE users SET myGroup = 1 WHERE myGroup = '".mysql_escape_string($edit)."'");
+		query("DELETE FROM groups WHERE ID = '".escape_string($edit)."'");
+		query("DELETE FROM acls WHERE groupID = '".escape_string($edit)."'");
+		query("UPDATE users SET myGroup = 1 WHERE myGroup = '".escape_string($edit)."'");
 		refresh("admin.php?adminmode=acl", 2);
 		echo $form['65'];
 	}
 	else
 	{
-		$q = query("SELECT * FROM groups WHERE ID = '".mysql_escape_string($edit)."'");
+		$q = query("SELECT * FROM groups WHERE ID = '".escape_string($edit)."'");
 		$r = fetch($q);
 		echo $form['66']." ".$r->groupname."?";
 		echo "<br>";
@@ -134,7 +134,7 @@ elseif (($action == "delete") && (isset($edit)))
 }
 elseif ($action == "rename" && isset($edit))
 {
-	$q = query("SELECT * FROM groups WHERE ID = '".mysql_escape_string($edit)."'");
+	$q = query("SELECT * FROM groups WHERE ID = '".escape_string($edit)."'");
 	$r = fetch($q);
 	echo "<form method=POST action=admin.php?adminmode=acl&action=dorename&edit=$edit>\n";
 	echo "<input type=text name=name value='$r->groupname'><input type=submit value='".$form['62']."'>";
@@ -143,7 +143,7 @@ elseif ($action == "rename" && isset($edit))
 elseif (($action == "dorename") && (isset($edit)))
 {
 	$newName = ($_POST['name']);
-	query("UPDATE groups SET groupname = '".mysql_escape_string($newName)."' WHERE ID = '".mysql_escape_string($edit)."'");
+	query("UPDATE groups SET groupname = '".escape_string($newName)."' WHERE ID = '".escape_string($edit)."'");
 	echo $form['67']." $newName";
 	refresh("admin.php?adminmode=acl", 2);
 }

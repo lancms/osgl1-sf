@@ -1,8 +1,11 @@
 <?php
-require_once $base_path.'config/config.php';
 
-if(!acl_access("compopoll"))
-	nicedie($admin[noaccess]);
+require_once ($base_path.'config/config.php');
+
+if (!acl_access("compopoll"))
+{
+	nicedie ($admin[noaccess]);
+}
 
 $action = $_GET['action'];
 
@@ -20,8 +23,9 @@ echo "<table>";
 echo "<tr><th>".$msg['40']."</th>";
 for($i=0;$i<count($compopoll);$i++) echo "<th>$compopoll[$i]</th>\n";
 echo "</tr>";
-while($rordered = fetch($q)) {
-	$q2 = query("SELECT * FROM compoPoll WHERE ID = ".$rordered->pollID);
+while($rordered = fetch($q))
+{
+	$q2 = query("SELECT * FROM compoPoll WHERE ID = '".escape_string($rordered->pollID)."'");
 	$r = fetch($q2);
 	$data = NULL;
 	$possible = 0;
@@ -29,11 +33,18 @@ while($rordered = fetch($q)) {
 	echo "<tr><td>";
 	echo $r->question;
 	echo "</td>";
-	for($i=0;$i<count($compopoll);$i++) {
-		$q2 = query("SELECT * FROM compoPollA WHERE pollID = $r->ID AND answer = $i");
+	for($i=0;$i<count($compopoll);$i++)
+	{
+		$q2 = query("SELECT * FROM compoPollA WHERE pollID = '".escape_string($r->ID)."' AND answer = '".escape_string($i)."'");
 		echo "<td>".num($q2)."</td>";
-		if($i != 0) $minus = 1;
-		else $minus = 0;
+		if($i != 0)
+		{
+			$minus = 1;
+		}
+		else
+		{
+			$minus = 0;
+		}
 		
 		$total = $total + (num($q2) * ($i - $minus));
 		$possible = num($q2);
@@ -58,9 +69,9 @@ echo "</table>";
 } // end action listcompos
 
 elseif($action == "addcompo") {
-$question = mysql_escape_string(stripslashes($_POST['componame']));
+$question = stripslashes($_POST['componame']);
 
-query("INSERT INTO compoPoll SET question = '$question'");
+query("INSERT INTO compoPoll SET question = '".escape_string($question)."'");
 refresh("admin.php?adminmode=compopolladmin&action=listCompos", 0);
 
 } // end action addcompo

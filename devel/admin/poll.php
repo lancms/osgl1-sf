@@ -1,12 +1,13 @@
 <?php
 
-require 'config/config.php';
+require_once ('config/config.php');
 
-if(!acl_access("poll"))
-	nicedie($admin[noaccess]);
+if (!acl_access("poll"))
+{
+	nicedie ($admin['noaccess']);
+}
 
-
-if(isset($_GET['action']))
+if (isset($_GET['action']))
 {
 	$action = $_GET['action'];
 }
@@ -15,11 +16,9 @@ else
 	$action = "list";
 }
 
-$poll = mysql_escape_string ($_GET['poll']);
+$poll = $_GET['poll'];
 
-
-
-if($action == "list")
+if ($action == "list")
 {
 	echo "<table>";
 
@@ -68,33 +67,33 @@ if($action == "list")
 	<?php
 
 }
-elseif(($action == "delete") && (isset($poll)))
+elseif (($action == "delete") && (isset($poll)))
 {
-	query("DELETE FROM pollQ WHERE ID = $poll");
+	query("DELETE FROM pollQ WHERE ID = '".escape_string($poll)."'");
 
-	query("DELETE FROM pollA WHERE QID = $poll");
+	query("DELETE FROM pollA WHERE QID = '".escape_string($poll)."'");
 
-	query("DELETE FROM pollVoted WHERE pollID = $poll");
+	query("DELETE FROM pollVoted WHERE pollID = '".escape_string($poll)."'");
 
 	refresh("admin.php?adminmode=poll", "0");
 }
 
-elseif($action == "add")
+elseif ($action == "add")
 {
-	$pollQ = mysql_escape_string ($_POST['pollQ']);
+	$pollQ = $_POST['pollQ'];
 
-	$maxVotes = mysql_escape_string ($_POST['maxV']);
+	$maxVotes = $_POST['maxV'];
 
-	$query = query("INSERT INTO pollQ SET text = '$pollQ', maxVotes = $maxVotes");
+	$query = query("INSERT INTO pollQ SET text = '".escape_string($pollQ)."', maxVotes = '".escapestring($maxVotes)."'");
 
 	refresh("admin.php?adminmode=poll", "0");
 
 }
-elseif($action == "edit" && isset($poll))
+elseif (($action == "edit") && (isset($poll)))
 {
-	$queryQ = query("SELECT * FROM pollQ WHERE ID = $poll");
+	$queryQ = query("SELECT * FROM pollQ WHERE ID = '".escape_string($poll)."'");
 
-	$queryA = query("SELECT * FROM pollA WHERE QID = $poll");
+	$queryA = query("SELECT * FROM pollA WHERE QID = '".escape_string($poll)."'");
 
 	$rowQ = fetch($queryQ);
 
@@ -132,21 +131,21 @@ elseif($action == "edit" && isset($poll))
 }
 elseif(($action == "addanswer") && (isset($poll)))
 {
-	$answer = mysql_escape_string ($_POST['answer']);
+	$answer = $_POST['answer'];
 
-	if(!isset($answer))
+	if (!isset($answer))
 	{
-		die($form[38]);
+		nicedie ($form[38]);
 	}
 	
-	$query = query("INSERT INTO pollA SET Atext = '$answer', QID = $poll");
+	$query = query("INSERT INTO pollA SET Atext = '".escape_string($answer)."', QID = '".escape_string($poll)."'");
 
 	refresh("admin.php?adminmode=poll&action=edit&poll=$poll", "0");
 
 }
 elseif(($action == "toggle") && (isset($poll)))
 {
-	$query = query("SELECT isOpen FROM pollQ WHERE ID = $poll");
+	$query = query("SELECT isOpen FROM pollQ WHERE ID = '".escape_string($poll)."'");
 
 	$row = fetch($query);
 
@@ -159,16 +158,16 @@ elseif(($action == "toggle") && (isset($poll)))
 		$isOpen = 1;
 	}
 
-	query("UPDATE pollQ SET isOpen = $isOpen WHERE ID = $poll");
+	query("UPDATE pollQ SET isOpen = '".escape_string($isOpen)."' WHERE ID = '".escape_string($poll)."'");
 
 	refresh("admin.php?adminmode=poll", "0");
 
 }
 elseif($action == "reset" && isset($poll))
 {
-	query("UPDATE pollA SET votes = 0 WHERE QID = $poll");
+	query("UPDATE pollA SET votes = 0 WHERE QID = '".escape_string($poll)."'");
 
-	query("DELETE FROM pollVoted WHERE pollID = $poll");
+	query("DELETE FROM pollVoted WHERE pollID = '".escape_string($poll)."'");
 
 	refresh("admin.php?adminmode=poll", 0);
 }

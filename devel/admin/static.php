@@ -37,10 +37,10 @@
 		echo "<br>$form[48]";
 	}
 
-	if(($action == "edit") && (isset($_GET['edit'])))
+	if (($action == "edit") && (isset($_GET['edit'])))
 	{
-		$file = mysql_escape_string ($_GET['edit']);
-		$q = query("SELECT * FROM static WHERE header = '$file'");
+		$file = $_GET['edit'];
+		$q = query("SELECT * FROM static WHERE header = '".escape_string($file)."'");
 		$r = fetch($q);
 		echo "<form method=post action=admin.php?adminmode=static&action=doedit>";
 		echo "<input type=hidden name=edit value='".$_GET['edit']."'>";
@@ -49,34 +49,34 @@
 		echo "</textarea><input type=submit value='$form[15]'></form>";
 		echo "<br><br><a href=admin.php?adminmode=static&action=delete&edit=$file>".lang("Delete this page!", "admin_static", "Admin->static->edit->Delete this page")."</a>";
 	}
-	elseif(($action == "doedit") && (isset($_POST['edit'])))
+	elseif (($action == "doedit") && (isset($_POST['edit'])))
 	{
-		$edittext = mysql_escape_string (stripslashes ($_POST['edittext']));
-		$edit = mysql_escape_string ($_POST['edit']);
+		$edittext = stripslashes ($_POST['edittext']);
+		$edit = $_POST['edit'];
 		
-		if(!isset($edittext))
+		if (!isset($edittext))
 		{
-			nicedie($form['72']);
+			nicedie ($form['72']);
 		}
 		
-		if(!isset($edit))
+		if (!isset($edit))
 		{
-			nicedie();
+			nicedie ();
 		}
 		
 		$lastEdit = time();
 		$lastEditBy = getcurrentuserid();
 		$text = addslashes($edittext);
 		
-		query("UPDATE static SET text = '$text', lastEdit = '$lastEdit', lastEditBy = '$lastEditBy' WHERE header = '$edit'");
+		query("UPDATE static SET text = '".escape_string($text)."', lastEdit = '".escape_string($lastEdit)."', lastEditBy = '".escape_string($lastEditBy)."' WHERE header = '".escape_string($edit)."'");
 		echo lang("Updated page. Saving to database, stand by", "admin_static", "Text to display when a static file is saved");
 		refresh("admin.php?adminmode=static", 2);
 	}
 	elseif(($action == "new") && (isset($_POST['filename'])))
 	{
-		$file = mysql_escape_string ($_POST['filename']);
+		$file = $_POST['filename'];
 
-		$query = query ("SELECT ID FROM static WHERE header = '".$file."'");
+		$query = query ("SELECT ID FROM static WHERE header = '".escape_string($file)."'");
 		$fetch = fetch ($query);
 		$num = num ($query);
 	
@@ -94,7 +94,7 @@
 		}
 		else
 		{
-			query("INSERT INTO static SET header = '$file'");
+			query("INSERT INTO static SET header = '".escape_string($file)."'");
 			refresh("admin.php?adminmode=static&action=edit&edit=$file");
 			dblog(7, $file);
 		}
@@ -107,15 +107,15 @@
 	}
 	elseif(($action == "delete") && ($_GET['confirmed'] == 1) && (isset($_GET['edit'])))
 	{
-		$edit = mysql_escape_string ($_GET['edit']);
-		$q = query("SELECT * FROM static WHERE header = '$edit'");
+		$edit = $_GET['edit'];
+		$q = query("SELECT * FROM static WHERE header = '".escape_string($edit)."'");
 		
 		if(num($q) == 0)
 		{
 			nicedie("No, there is no such page to be deleted!");
 		}
 
-		query("DELETE FROM static WHERE header = '$edit'");
+		query("DELETE FROM static WHERE header = '".escape_string($edit)."'");
 		refresh("admin.php?adminmode=static", 2);
 		echo lang("File deleted", "admin_static", "Text to display after that file was deleted");
 		dblog(8, $edit);

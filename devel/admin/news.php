@@ -1,40 +1,44 @@
 <?php
 
-require 'config/config.php';
+require_once ('config/config.php');
 
-if(!acl_access("news"))
+if (!acl_access("news"))
+{
 	nicedie($admin[noaccess]);
+}
 
-if(isset($_GET['action'])) {
+if (isset($_GET['action']))
+{
 	$action = $_GET['action'];
-} else {
+}
+else
+{
 	$action = "list";
 }
-$editID = mysql_escape_string ($_GET['editID']);
 
-if($action == "add") {
+$editID = $_GET['editID'];
 
-	$header = mysql_escape_string ($_POST['header']);
+if ($action == "add")
+{
 
-	$text = mysql_escape_string ($_POST['text']);
+	$header = $_POST['header'];
 
-	$me = mysql_escape_string (getcurrentuserid());
+	$text = $_POST['text'];
 
-	$query = query("INSERT INTO news SET header = '$header', text = '$text', poster = $me");
+	$me = getcurrentuserid();
+
+	$query = query("INSERT INTO news SET header = '".escape_string($header)."', text = '".escape_string($text)."', poster = '".escape_string($me)."'");
 
 	refresh("admin.php?adminmode=news", "0");
 }
-
-
-
-elseif($action == "list") {
-
+elseif ($action == "list")
+{
 	$q = query("SELECT * FROM news ORDER BY ID DESC");
 
 	echo "<table>";
 
-	while($r = fetch($q)) {
-
+	while($r = fetch($q))
+	{
 		echo "<tr><td>";
 
 		echo $r->header;
@@ -44,11 +48,8 @@ elseif($action == "list") {
 		echo "<a href=admin.php?adminmode=news&action=delete&editID=$r->ID>$form[16]</a>";
 
 		echo "</td></tr>";
-
 	}
-
 	echo "</table>";
-
 	?>
 
 	<form method=post action=admin.php?adminmode=news&action=add>
@@ -62,15 +63,11 @@ elseif($action == "list") {
 	</form>
 
 	<?php
-
 }
-
-elseif($action == "delete" && isset($editID)) {
-
-	query("DELETE FROM news WHERE ID = $editID");
-
+elseif (($action == "delete") && (isset($editID)))
+{
+	query("DELETE FROM news WHERE ID = '".escape_string($editID)."'");
 	refresh("admin.php?adminmode=news", 0);
-
 }
 
 ?>

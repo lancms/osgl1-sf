@@ -91,9 +91,8 @@ for($i=0;$i<$height;$i++)
 		$y = $i * $yscale;
 		if($seat_color[$cur] != $color_blank)	// Only draw a rectangle where the color differs from $color_blank
 		{
-			$esc_j = mysql_escape_string ($j);
-			$esc_i = mysql_escape_string ($i);
-			$userQ = query("SELECT * FROM users WHERE seatX = $esc_j AND seatY = $esc_i");
+
+			$userQ = query("SELECT * FROM users WHERE seatX = '".escape_string($j)."' AND seatY = '".escape_string($i)."'");
 			$user = fetch($userQ);
 			
 			if ($i == $sely && $j == $selx)

@@ -30,17 +30,20 @@ if(!isset($action)) {
 	</form>
 	<?php
 } elseif($action == "add") {
-	$shortname = mysql_escape_string ($_POST['shortname']);
-	$longname = mysql_escape_string ($_POST['longname']);
-	$gametype = mysql_escape_string ($_POST['gametype']);
-	$players = mysql_escape_string ($_POST['players']);
+	$shortname = $_POST['shortname'];
+	$longname = $_POST['longname'];
+	$gametype = $_POST['gametype'];
+	$players = $_POST['players'];
 	
-	$insert = query("INSERT INTO compo SET name = '$shortname', 
-		caption = '$longname',
-		gameType = '$gametype',
-		players = $players
-		");
+	$insert = query("INSERT INTO compo SET name = '".escape_string($shortname)."', 
+		caption = '".escape_string($longname)."',
+		gameType = '".escape_string($gametype)."',
+		players = '".escape_string($players)."'
+	");
 		
-	if($insert) refresh("admin.php?adminmode=compo", 0);
+	if($insert)
+	{
+		refresh("admin.php?adminmode=compo", 0);
+	}
 	echo "Compo added";
 }

@@ -16,7 +16,7 @@ if (isset($_GET['inc']))
 elseif (isset($_GET['page']))
 {
 	$page = $_GET['page'];
-	$query = query("SELECT * FROM static WHERE header LIKE '".mysql_escape_string($page)."'");
+	$query = query("SELECT * FROM static WHERE header LIKE '".escape_string($page)."'");
 	$object = fetch($query);
 	if($object->useNL2BR == 1)
 	{
