@@ -297,7 +297,7 @@ elseif ($action == "dochangemail")
 	else
 	{
 		$ran = createcifer() or nicedie($msg['28']);
-		$update = query("UPDATE users SET users.EMail='".escape_string($newmail),"', verified='".escape_string($ran)."' WHERE users.ID = '".escape_string($editID)."'");
+		$update = query("UPDATE users SET users.EMail='".escape_string($newmail)."', verified='".escape_string($ran)."' WHERE users.ID = '".escape_string($editID)."'");
 
 		if(!mail("$newmail", $mail[0], mail_body($ran), "From: ".$mail[2]))
 		{
