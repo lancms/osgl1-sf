@@ -11,7 +11,7 @@
 
 /*
  * base_path
- * 
+ *
  * The path to the installation of OSGlobeLAN.
  * Default is the document root of the webserver config or virtualhost.
  *
@@ -149,7 +149,7 @@ $admin['info']['admin'] = "osglobelan@".$_SERVER['SERVER_NAME'];
 
 /*
  * admin['info]['nick']
- * 
+ *
  * Nickname of OSGlobeLAN administrator.
  */
 $admin['info']['nick'] = "OSGlobeLAN";
@@ -176,8 +176,8 @@ if (!$lang_inc)
 	die("Could not find language file");
 }
 
-require_once ("functions.php");
-require_once ("session.php");
+require_once ("shared_functions.php");
+require_once ("shared_session.php");
 
 $styles = NULL;
 $style_folders = $base_path."style/";
