@@ -86,6 +86,8 @@ if($action == "display" && isset($viewUSER)) {
 	profile_table($profile[4],$row->aboutMe);
 
 
+/*
+	// Needs update to new seat-system.
 
 	echo "<tr><td class=profileLeft>$profile[5]</td><td class=profileRight>";
 
@@ -94,6 +96,7 @@ if($action == "display" && isset($viewUSER)) {
 	else echo $msg[10]." ($row->seatX / $row->seatY)";
 
 	echo "</td></tr>";
+*/
 
 	profile_table($profile[9],$rank[$row->isCrew]);
 
