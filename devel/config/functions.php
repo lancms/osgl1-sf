@@ -42,11 +42,11 @@ function crypt_pwd($password) {
     return md5($password);
 }
 
-function dblog($type = 1,$dowhat = "NOTHING LOGGED") {
+function dblog($type = 1,$logNew = "NOTHING LOGGED", $logOld = NULL) {
     $IP = $_SERVER['REMOTE_ADDR'];
     $userID = getcurrentuserid();
     $dowhat = stripslashes($dowhat);
-    query("INSERT INTO logs SET userIP = '$IP', userID = $userID, logType = $type, logWhat = '$dowhat', logUNIX = ".time());
+    query("INSERT INTO logs SET userIP = '$IP', userID = $userID, logType = $type, logWhat = '$dowhat', oldLog = '$logOld', logUNIX = ".time());
     return 1;
 }
 

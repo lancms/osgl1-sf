@@ -177,6 +177,7 @@ CREATE TABLE logs (
    userIP varchar(15) default '000.000.000.000',
    logType int(11) default 0,
    logWhat text,
+   oldLog text,
    logUNIX int(25) default 0,
    PRIMARY KEY (ID)
 ) TYPE=MyISAM;
