@@ -2,7 +2,7 @@
 require_once 'config/config.php';
 if(!acl_access("ACL")) die($admin[noaccess]);
 $action = $_GET['action'];
-$edit = $_GET['edit'];
+$edit = mysql_escape_string ($_GET['edit']);
 
 if(!isset($action)) {
 	$q = query("SELECT * FROM groups");
@@ -25,7 +25,7 @@ if(!isset($action)) {
 }
 
 elseif($action == "add") {
-	$groupname = $_POST['groupname'];
+	$groupname = mysql_escape_string ($_POST['groupname']);
 	$test = query("SELECT * FROM groups WHERE groupname LIKE '$groupname'");
 	if(num($test) != 0)
 		nicedie($form['63']);
@@ -112,7 +112,7 @@ elseif($action == "rename" && isset($edit)) {
 	echo "<input type=text name=name value='$r->groupname'><input type=submit value='".$form['62']."'>";
 	echo "</form>";
 } elseif($action == "dorename" && isset($edit)) {
-	$newName = $_POST['name'];
+	$newName = mysql_escape_string ($_POST['name']);
 	query("UPDATE groups SET groupname = '$newName' WHERE ID = $edit");
 	echo $form['67']." $newName";
 	refresh("admin.php?adminmode=acl", 2);
