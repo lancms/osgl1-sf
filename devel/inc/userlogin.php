@@ -41,7 +41,7 @@ elseif ($action == "main")
 {
 	$search = $_REQUEST['search'];
 
-	$query = query("SELECT * FROM users WHERE ID != 1 AND nick LIKE '%".mysql_escape_string($search)."%' OR ID != 1 AND name LIKE '%".($search)"%'");
+	$query = query("SELECT * FROM users WHERE ID != 1 AND nick LIKE '%".mysql_escape_string($search)."%' OR ID != 1 AND name LIKE '%".mysql_escape_string($search)."%'");
 	$num = num($query);
 	echo "<a href=index.php?inc=userlogin>Tilbake til søkesiden</a>";
 	echo '<table cellspacing=1 border=1>';
