@@ -47,11 +47,11 @@ elseif ($action == "logout")
 	require_once ($base_path."style/top.php");
 	if($res == 0)
 	{
-        echo $msg['26'];
+        nicedielang ("You are not logged in.", "root_do", "Logged out-message");
 	}
 	else
 	{
-		echo $msg['27'];
+		echo lang ("You are now logged in.", "root_do", "Login-message");
 	}
 }
 elseif (($action == "verify") && (isset ($_GET['uid'])))
@@ -59,13 +59,14 @@ elseif (($action == "verify") && (isset ($_GET['uid'])))
 	require_once ($base_path."style/top.php");
 	$uid = $_GET['uid'];
 	
-	echo $msg[23];
+	echo lang ("Please enter the verificationcode that was sent to your emailaddress.", "root_do", "");
 	echo "<br>";
-	echo $msg[24];
+	// XXX: Perhaps we should provide admin-email here?
+	echo lang ("If you have not recieved your verificationcode within a reasonable time, please contact the administrators.", "root_do", "Explains what to do if you've not recieved your verificationcode");
 	?>
 	<form method=post action=do.php?action=doverify>
 	<input type=text name=verifycode>
-	<input type=submit value='<?php echo $form[59]; ?>'>
+	<input type=submit value='<?php echo lang ("Verify", "root_do", "Verify-button-text"); ?>'>
 	<input type=hidden value='<?php echo $_GET["uid"]; ?>' name="uid">
 	</form>
 	<?php
@@ -87,14 +88,14 @@ elseif($action == "doverify")
 	elseif ($result->verified == $_POST['verifycode'])
 	{
 		require_once ($base_path."style/top.php");
-		echo $msg[3];
+		echo lang ("You have been verified.", "root_do", "Text to show when verified");
 		$query = query("UPDATE users SET users.verified=0 WHERE ID='".escape_string($my_userID)."'");
 		$sID = $_COOKIE[$cookiename];
 		$login = query("UPDATE session SET userID=".$my_userID." WHERE sID='".escape_string ($sID)."'");
 	}
 	else
 	{
-		echo $msg[4];
+		echo lang ("The code you entered don't match. Please try again or contact the administrators!", "root_do", "Text to show when verificationcode don't match");
 	}
 }
 elseif($action == "resendValidationMail")
@@ -103,7 +104,7 @@ elseif($action == "resendValidationMail")
 	$q = query("SELECT * FROM users WHERE ID = '".escape_string($uid)."'");
 	$r = fetch($q);
 	mail($r->EMail, $mail[0], mail_body($r->verified), "From: ".$mail[2])
-                or nicedie(lang("Could not send EMail, check the server config!", "root_do", "Text to display when mail could not be sent from do.php?action=resendValidationEMail"));
+                or nicedielang("Could not send EMail, check the server config!", "root_do", "Text to display when mail could not be sent from do.php?action=resendValidationEMail");
 }
 else
 {
