@@ -171,21 +171,30 @@ global $base_path;
 $lang_file = "$base_path"."lang/".$language.".php";
 
 $lang_inc = require_once $lang_file;
-if(!$lang_inc) die("Could not find language file");
+if (!$lang_inc)
+{
+	die("Could not find language file");
+}
 
-require_once "functions.php";
-require_once "session.php";
+require_once ("functions.php");
+require_once ("session.php");
+
 $styles = NULL;
 $style_folders = $base_path."style/";
 $dir = opendir($style_folders);
-while($read = readdir($dir)) {
-   if($read == "." || $read == ".." || !is_dir($style_folders.$read));
-   else {
+while ($read = readdir($dir))
+{
+	// FIXME: I believe there are nicer ways to do this. :-)
+   if (($read == ".") || ($read == "..") || (!is_dir($style_folders.$read)));
+   else
+	{
       $styles[] = $read;
    }
 
 }
 
-if($usestats) require_once 'stats_every.php';
-#if($sql_mode == "upgrade") include_once $base_path.'sql_upgrade.php';
+if ($usestats)
+{
+	require_once ('stats_every.php');
+}
 ?>
