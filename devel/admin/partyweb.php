@@ -69,11 +69,11 @@ elseif (($action == "edit") && (isset($edit)))
 }
 elseif (($action == "save") && (isset($edit)) && (!isset($_POST['delete'])))
 {
-	$menuname = escape_string ($_POST['menuname'];
+	$menuname = escape_string ($_POST['menuname']);
 	$text = addslashes($_POST['text']);
 	$display_menu = $_POST['display_menu'];
 	$display_partymode = $_POST['display_partymode'];
-	
+
 	echo $display_menu;
 	echo "<br>".$display_partymode;
 
