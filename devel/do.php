@@ -51,7 +51,7 @@ elseif ($action == "logout")
 	}
 	else
 	{
-		echo lang ("You are now logged in.", "root_do", "Login-message");
+		echo lang ("You are now logged out.", "root_do", "Logout-message");
 	}
 }
 elseif (($action == "verify") && (isset ($_GET['uid'])))
