@@ -1,0 +1,15 @@
+Every string you write that is to be echo'ed out to the user, or anything else, is to be written with translations. Thei is the way you do this:
+
+lang("string to be translated", "module", "descripsion of the string");
+
+this functions returns a value, so if you are to write it out, you have to "echo lang();".
+
+
+
+These are the modules that will be used:
+admin_index 		// The admin.php file
+admin_<file> 		// File in admin/-subdirecory
+inc_<file> 		// file in inc/-subdirectory
+
+
+/* Add more as they come */
