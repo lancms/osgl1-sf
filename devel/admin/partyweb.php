@@ -74,8 +74,8 @@ elseif (($action == "save") && (isset($edit)) && (!isset($_POST['delete'])))
 	$display_menu = $_POST['display_menu'];
 	$display_partymode = $_POST['display_partymode'];
 
-	echo $display_menu;
-	echo "<br>".$display_partymode;
+#	echo $display_menu;
+#	echo "<br>".$display_partymode;
 
 	if (!$display_menu)
 	{
