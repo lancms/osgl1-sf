@@ -413,4 +413,10 @@ function lang($string = "I must remember to put something here", $module = "defa
 	}
 }
 
+function nicedielang ($string, $module, $desc="")
+{
+	$reason = lang ($string, $module, $desc);
+	nicedie ($reason);
+}
+
 ?>
