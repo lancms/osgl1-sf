@@ -12,15 +12,13 @@ $seatopen = config("seatreg_open");
 
 if(!isset($action)) {
 
-	if(!$seatopen) echo "<b>Plassregistreringa har _IKKE_ åpnet ennå</b><br>";
+	if(!$seatopen) echo "<b>".$seat['9']."</b><br>";
 	
 $crewseats = config("crewseats");
 $normalseats = config("normalseats");
 
-$dbs = mysql_query("SELECT count(*) FROM users WHERE seatX != -1 AND seatY != -1 AND isCrew = 0")
-	or die(mysql_error());
-
-$q = mysql_fetch_row($dbs);
+$dbs = query("SELECT count(*) FROM users WHERE seatX != -1 AND seatY != -1 AND isCrew = 0");
+$q = fetch($dbs);
 $cnt = $q[0];
 
 echo "Ledige seter : ".($normalseats-$cnt)." (altså er $cnt tatt)<br>\n";
