@@ -11,11 +11,11 @@ $action = $_GET['action'];
 if(!isset($action)) {
 	echo '<table cellspacing=1 border=1>';
 	
-	$query = mysql_query("SELECT * FROM compo");
+	$query = query("SELECT * FROM compo");
 	
 	echo "<tr><th>$compo[14]</th><th>$compo[15]</th><th>$compo[16]</th><th>$compo[17]</th></tr>";
 	
-	while($row = mysql_fetch_object($query)) {
+	while($row = fetch($query)) {
 		echo "<tr><td>$row->name</td><td>$row->caption</td><td>$row->gameType</td><td>$row->players</td></tr>";
 	}
 	
@@ -35,11 +35,11 @@ if(!isset($action)) {
 	$gametype = $_POST['gametype'];
 	$players = $_POST['players'];
 	
-	$insert = mysql_query("INSERT INTO compo SET name = '$shortname', 
+	$insert = query("INSERT INTO compo SET name = '$shortname', 
 		caption = '$longname',
 		gameType = '$gametype',
 		players = $players
-		") or die(mysql_error());
+		");
 		
 	if($insert) refresh("admin.php?adminmode=compo", 0);
 	echo "Compo added";
