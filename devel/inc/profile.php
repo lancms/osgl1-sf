@@ -2,9 +2,10 @@
 
 require_once 'config/config.php';
 
-if(!config("usepage_profile")) die($msg[9]);
-
-
+if (!config("usepage_profile"))
+{
+	nicedie($msg[9]);
+}
 
 db_connect();
 
@@ -25,9 +26,7 @@ if ((!isset($_GET['uid'])) && (getcurrentuserid() != 1))
 } 
 elseif ((!isset($_GET['uid'])) && (getcurrentuserid() == 1))
 {
-	echo $profile['15'];
-	include $base_path."style/bottom.php";
-	die();
+	nicedie($profile['15']);
 }
 else
 {
@@ -36,20 +35,11 @@ else
 
 if($action == "display" && isset($viewUSER)) {
 
-
-
 	$query = mysql_query("SELECT * FROM users WHERE ID = $viewUSER") or die(mysql_error());
 
 
-
 	if(mysql_num_rows($query) == 0) {
-
-		echo $form[18];
-
-		include $base_path."style/bottom.php";
-
-		die();
-
+		nicedie($form['18']);
 	}
 
 
@@ -64,15 +54,11 @@ if($action == "display" && isset($viewUSER)) {
 
 	if (($permission == 2) && (!acl_access("isAdmin")))
 	{
-		echo $profile['0'];
-		include $base_path."style/bottom.php";
-		die();
+		nicedie($profile['0']);
 	}
 	elseif (($permission == 1) && (getcurrentuserid() == 1))
 	{
-		echo $profile['1'];
-		include $base_path."style/bottom.php";
-		die();
+		nicedie($profile['1']);
 	}
 
 	// else: it looks like the user allows even anonymous users to view the profile :)
@@ -110,7 +96,11 @@ if(acl_access("adminUsers"))
 }
 
 echo "</center>";
+
+
 /*
+	// This also needs a update for the new seatssytem?
+
 function profile_table($profileLeft, $profileRight) {
 
 	echo "<tr><td class=profileLeft>$profileLeft</td><td class=profileRight>";
@@ -121,4 +111,5 @@ function profile_table($profileLeft, $profileRight) {
 
 }
 */
+
 ?>
