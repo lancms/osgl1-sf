@@ -4,8 +4,6 @@ require_once 'config/config.php';
 if(config("usepage_register") == FALSE)
 	nicedie($msg[1]);
 
-db_connect();
-
 $action = $_GET['action'];
 
 if(!isset($action))
