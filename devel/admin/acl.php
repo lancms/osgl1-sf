@@ -19,16 +19,16 @@ if (!isset($action))
 		echo "<tr><td>";
 		echo "<a href=admin.php?adminmode=acl&action=edit&edit=$r->ID>$r->groupname</a>";
 		echo "</td><td>";
-		echo "<a href=admin.php?adminmode=acl&action=rename&edit=$r->ID>".$form['62']."</a>";
+		echo "<a href=admin.php?adminmode=acl&action=rename&edit=$r->ID>".lang("Rename", "admin_acl", "form[62]")."</a>";
 		echo "</td><td>";
-		echo "<a href=admin.php?adminmode=acl&action=delete&edit=$r->ID>".$form['16']."</a>";
+		echo "<a href=admin.php?adminmode=acl&action=delete&edit=$r->ID>".lang("Delete", "admin_acl", "form[16]")."</a>";
 		echo "</td></tr>";
 	}
 	echo "</table>";
 	
 	echo "<br><br><br><hr><br>";
 	echo "<form method=POST action=admin.php?adminmode=acl&action=add>";
-	echo "<input type=text name=groupname><input type=submit value='".$form['61']."'>";
+	echo "<input type=text name=groupname><input type=submit value='".lang("Add group", "admin_acl", "form[61]")."'>";
 	echo "</form>";
 }
 elseif ($action == "add")
@@ -37,7 +37,7 @@ elseif ($action == "add")
 	$test = query("SELECT * FROM groups WHERE groupname LIKE '".escape_string($groupname)."'");
 	if(num($test) != 0)
 	{
-		nicedie($form['63']);
+		nicedielang ("A group with that name already exists.", "admin_acl", "form[63]");
 	}
 	query("INSERT INTO groups SET groupname = '".escape_string($groupname)."'");
 	refresh("admin.php?adminmode=acl", 0);
@@ -70,11 +70,11 @@ elseif (($action == "edit") && (isset($edit)))
 		echo "</td></tr>";
 	}
 	echo "</table>";
-	echo "<br><input type=submit value='".$form['15']."'>";
+	echo "<br><input type=submit value='".lang("Save", "admin_acl", "form[15]")."'>";
 	echo "</form>";
 	
 	$q2 = query("SELECT * FROM users WHERE myGroup = '".escape_string($edit)."'");
-	echo $form['64']." (".num($q2).")";
+	echo lang("Members:", "admin_acl", "form[64]")." (".num($q2).")";
 	echo "<table>";
 	
 	while ($r2 = fetch($q2))
@@ -119,16 +119,16 @@ elseif (($action == "delete") && (isset($edit)))
 		query("DELETE FROM acls WHERE groupID = '".escape_string($edit)."'");
 		query("UPDATE users SET myGroup = 1 WHERE myGroup = '".escape_string($edit)."'");
 		refresh("admin.php?adminmode=acl", 2);
-		echo $form['65'];
+		echo lang ("Group deleted", "admin_acl", "form[65]");
 	}
 	else
 	{
 		$q = query("SELECT * FROM groups WHERE ID = '".escape_string($edit)."'");
 		$r = fetch($q);
-		echo $form['66']." ".$r->groupname."?";
+		echo lang("Delete group:", "admin_acl", "form[66]")." ".$r->groupname."?";
 		echo "<br>";
-		echo "<a href=admin.php?adminmode=acl&action=delete&edit=$edit&confirm=YES>".$true_false['1']."</a> - ";
-		echo "<a href=admin.php?adminmode=acl>".$true_false['0']."</a>";
+		echo "<a href=admin.php?adminmode=acl&action=delete&edit=$edit&confirm=YES>".lang("Yes", "admin_acl", "true_false[1]")."</a> - ";
+		echo "<a href=admin.php?adminmode=acl>".lang("No", "admin_acl", "true_false[0]")."</a>";
 	}
 	
 }
@@ -137,14 +137,14 @@ elseif ($action == "rename" && isset($edit))
 	$q = query("SELECT * FROM groups WHERE ID = '".escape_string($edit)."'");
 	$r = fetch($q);
 	echo "<form method=POST action=admin.php?adminmode=acl&action=dorename&edit=$edit>\n";
-	echo "<input type=text name=name value='$r->groupname'><input type=submit value='".$form['62']."'>";
+	echo "<input type=text name=name value='$r->groupname'><input type=submit value='".lang("Rename", "admin_acl", "form[62]")."'>";
 	echo "</form>";
 }
 elseif (($action == "dorename") && (isset($edit)))
 {
 	$newName = ($_POST['name']);
 	query("UPDATE groups SET groupname = '".escape_string($newName)."' WHERE ID = '".escape_string($edit)."'");
-	echo $form['67']." $newName";
+	echo lang("Renamed to", "admin_acl", "form[67]")." $newName";
 	refresh("admin.php?adminmode=acl", 2);
 }
 
