@@ -3,7 +3,7 @@
 require 'config/config.php';
 
 if(!acl_access("wannabe"))  
-	die($admin[noaccess]);
+	nicedie($admin[noaccess]);
 
 $action = $_GET['action'];
 
