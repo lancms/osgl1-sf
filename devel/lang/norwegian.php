@@ -115,6 +115,7 @@ $msg['33'] = "Oppdaterer...";
 $msg['34'] = "FAQ";
 $msg['35'] = "slettet.";
 $msg['36'] = "Lagt til.";
+$msg['37'] = "Søk gjennom nick eller navn";
 
 $partyweb['0'] = "Menynavn";
 $partyweb['1'] = "Vis i meny";

@@ -11,7 +11,7 @@ $ticketarray .= "</select>";
 if(!isset($action)) $action = "search";
 if($action == "search") {
 echo "<form method=POST action=index.php?inc=userlogin&action=main>";
-echo "<input type=text name=search> <input type=submit value='Søk etter nick eller navn'>";
+echo "<input type=text name=search> <input type=submit value='".$msg['37']."'>";
 }
 
 elseif ($action == "ticketselect") {

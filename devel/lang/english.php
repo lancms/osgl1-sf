@@ -115,6 +115,7 @@ $msg['33'] = "Updating...";
 $msg['34'] = "FAQ";
 $msg['35'] = "deleted.";
 $msg['36'] = "Added";
+$msg['37'] = "Search by nick or name";
 
 $partyweb['0'] = "Menuname";
 $partyweb['1'] = "Display in menu";
