@@ -14,12 +14,6 @@ if(getcurrentuserid() == 1)
 	nicedie("Logg inn FØR du prøver å gjøre noe her...");
 }
 
-if(getuserrank() > 0)
-{
-	// FIXME: lang() and ACLs.
-	nicedie("Sorry, men jeg tror vi dropper at crew fyller ut her.... Lak");
-}
-
 $action = $_GET['action'];
 
 if (!isset($action))
