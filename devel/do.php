@@ -67,7 +67,7 @@ if($action=="login") {
 } elseif($action=="doverify") {
 
     $uid = $_POST['uid'];
-    $my_userID = $uid;
+    $my_userID = mysql_escape_string ($uid);
     $query = query("SELECT users.verified FROM users WHERE ID=".$my_userID."");
     $result = fetch($query);
 
@@ -83,7 +83,7 @@ if($action=="login") {
 		echo $msg[3];
 		$query = query("UPDATE users SET users.verified=0 WHERE ID=".$my_userID."");
 		$sID = $_COOKIE[$cookiename];
-		$login = query("UPDATE session SET userID=".$my_userID." WHERE sID='".$sID."'");
+		$login = query("UPDATE session SET userID=".$my_userID." WHERE sID='".mysql_escape_string ($sID)."'");
 	}
 	else
 	{
@@ -91,7 +91,7 @@ if($action=="login") {
 	}
 
 } elseif($action == "resendValidationMail") {
-	$uid = $_GET['uid'];
+	$uid = mysql_escape_string ($_GET['uid']);
 	$q = query("SELECT * FROM users WHERE ID = $uid");
 	$r = fetch($q);
 	mail($r->EMail, $mail[0], mail_body($r->verified), "From: ".$mail[2])
