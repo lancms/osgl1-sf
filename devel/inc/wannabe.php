@@ -13,7 +13,7 @@ if(getcurrentuserid() == 1)
 
 $action = $_GET['action'];
 
-$q = query("SELECT * FROM users WHERE ID = '".mysql_escape_string(getcurrentuserid())."'");
+$q = query("SELECT * FROM users WHERE ID = '".escape_string(getcurrentuserid())."'");
 $r = fetch($q);
 $qT = query("SELECT * FROM config WHERE config = 'wannabetext'");
 $rT = fetch($qT);
@@ -38,7 +38,7 @@ if(!isset($action)) {
 
 if((!isset($action)) && ($r->wannabe == 1))
 {
-	$q2 = query("SELECT * FROM wannabe WHERE ID = '".mysql_escape_string(getcurrentuserid())."'");
+	$q2 = query("SELECT * FROM wannabe WHERE ID = '".escape_string(getcurrentuserid())."'");
 	
 	$r2 = fetch($q2);
 	
@@ -92,7 +92,8 @@ if((!isset($action)) && ($r->wannabe == 1))
 	echo "</form></table>";
 }
 
-elseif($action == "editwannabe") {
+elseif($action == "editwannabe")
+{
 	$aboutme = $_POST['aboutme'];
 	$canKioskCrew = $_POST['canKioskCrew'];
 	$canTechCrew = $_POST['canTechCrew'];
@@ -110,30 +111,30 @@ elseif($action == "editwannabe") {
 	$leaderType = $_POST['leaderType'];
 	$myRequests = $_POST['myRequests'];
 	
-	$check = query("SELECT * FROM wannabe WHERE ID = '".mysql_escape_string(getcurrentuserid())."'");
+	$check = query("SELECT * FROM wannabe WHERE ID = '".escape_string(getcurrentuserid())."'");
 	if(num($check) == 0)
 	{
-		query("INSERT INTO wannabe SET ID = '".mysql_escape_string(getcurrentuserid())."'");
+		query("INSERT INTO wannabe SET ID = '".escape_string(getcurrentuserid())."'");
 	}
 	query("UPDATE wannabe SET
-		aboutme = '".mysql_escape_string($aboutme)."',
-		canKioskCrew = '".mysql_escape_string($canKioskCrew)."',
-		canTechCrew = '".mysql_escape_string($canTechCrew)."',
-		canNetCrew = '".mysql_escape_string($canNetCrew)."',
-		canSecCrew = '".mysql_escape_string($canSecCrew)."',
-		canPartyCrew = '".mysql_escape_string($canPartyCrew)."',
-		experience = '".mysql_escape_string($experience)."',
-		why = '".mysql_escape_string($why)."',
-		canTechLinuxCrew = '".mysql_escape_string($canTechLinuxCrew)."',
-		canCarryTablesCrew = '".mysql_escape_string($canCarryTablesCrew)."',
-		canGameCrew = '".mysql_escape_string($canGameCrew)."',
-		turnOn = '".mysql_escape_string($turnOn)."',
-		karaoke = '".mysql_escape_string($karaoke)."',
-		canCake = '".mysql_escape_string($canCake)."',
-		leaderType = '".mysql_escape_string($leaderType)."',
-		myRequests = '".mysql_escape_string($myRequests)."',
+		aboutme = '".escape_string($aboutme)."',
+		canKioskCrew = '".escape_string($canKioskCrew)."',
+		canTechCrew = '".escape_string($canTechCrew)."',
+		canNetCrew = '".escape_string($canNetCrew)."',
+		canSecCrew = '".escape_string($canSecCrew)."',
+		canPartyCrew = '".escape_string($canPartyCrew)."',
+		experience = '".escape_string($experience)."',
+		why = '".escape_string($why)."',
+		canTechLinuxCrew = '".escape_string($canTechLinuxCrew)."',
+		canCarryTablesCrew = '".escape_string($canCarryTablesCrew)."',
+		canGameCrew = '".escape_string($canGameCrew)."',
+		turnOn = '".escape_string($turnOn)."',
+		karaoke = '".escape_string($karaoke)."',
+		canCake = '".escape_string($canCake)."',
+		leaderType = '".escape_string($leaderType)."',
+		myRequests = '".escape_string($myRequests)."',
 		
-		lastUpdated = '".mysql_escape_string(time())."' WHERE ID = ".mysql_escape_string((getcurrentuserid())."'"));
+		lastUpdated = '".escape_string(time())."' WHERE ID = ".escape_string((getcurrentuserid())."'"));
 	refresh("index.php?inc=wannabe", 0);
 
 }
@@ -143,11 +144,13 @@ elseif($action == "cyclewannabe") {
 	if($now == 0) $tobe = 1;
 	else $tobe = 0;
 	
-	query("UPDATE users SET wannabe = '".mysql_escape_string($tobe)."' WHERE ID = ".(getcurrentuserid())."'");
+	query("UPDATE users SET wannabe = '".escape_string($tobe)."' WHERE ID = ".escape_string(getcurrentuserid())."'");
 	refresh("index.php?inc=wannabe");
 }
 
-function display_checkbox($name, $selected) {
-	if($selected) $SELECT = "CHECKED";
+function display_checkbox($name, $selected)
+// TODO: Move this one to functions.php
+{
+if($selected) $SELECT = "CHECKED";
 	return "<input type=checkbox name='$name' value=1 $SELECT>";
 }
