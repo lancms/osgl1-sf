@@ -282,7 +282,8 @@ $acl[16]['access'] = "wannabe";
 $acl[17]['name'] = "ACL-admin";
 $acl[17]['access'] = "ACL";
 
-
+$acl[18]['name'] = "List in addressbook";
+$acl[18]['access'] = "listaddress";
 
 function mail_body($random) {
     return "Welcome as a user of GlobeLAN DEVEL!\n\r
