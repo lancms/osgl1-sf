@@ -446,3 +446,6 @@ INSERT INTO acls SET groupID = 3, access = 'root', value = 1;
 INSERT INTO pollQ SET ID = 1, text = 'Do you like this system?', isOpen = 1, maxVotes = 1;
 INSERT INTO pollA SET QID = 1, Atext = 'YES!', votes = 5;
 INSERT INTO pollA SET QID = 1, Atext = 'OOOOOOOOOOH YES!!!', votes = 5000;
+
+-- No need to create a query just to check if this exists?
+INSERT INTO stats SET config = 'hits', value = 'pageviews', hits = 0;
