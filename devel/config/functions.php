@@ -46,7 +46,7 @@ function dblog($type = 1,$logNew = "NOTHING LOGGED", $logOld = NULL) {
     $IP = $_SERVER['REMOTE_ADDR'];
     $userID = getcurrentuserid();
     $dowhat = stripslashes($logNew);
-    query("INSERT INTO logs SET userIP = '$IP', userID = $userID, logType = $type, logWhat = '$dowhat', oldLog = '$logOld', logUNIX = ".time());
+    query("INSERT INTO logs SET userIP = '".mysql_escape_string($IP)."', userID = '".mysql_escape_string($userID)."', logType = '".mysql_escape_string($type)."', logWhat = '".mysql_escape_string($dowhat)."', oldLog = '".mysql_escape_string($logOld)."', logUNIX = ".mysql_escape_string(time()));
     return 1;
 }
 
@@ -69,7 +69,7 @@ function verify($mode="register", $userid, $nick, $firstname, $lastname, $email=
 
 	else		// if we find no of the above errors, compare user name with the database.
 	 {
-			$query = query ("SELECT ID FROM users WHERE nick = '".$nick."'");
+			$query = query ("SELECT ID FROM users WHERE nick = '".mysql_escape_string($nick)."'");
 			$fetch = fetch ($query);
 			$num = num ($query);
 			
@@ -106,27 +106,28 @@ function forumText($text) {
 }
 
 function IDtonick($ID) {
-	$query = mysql_query("SELECT * FROM users WHERE ID = $ID") or die(mysql_error());
-	$row = mysql_fetch_object($query);
+	$query = query("SELECT * FROM users WHERE ID = $ID");
+	$row = fetch($query);
 
 	return $row->nick;
 }
+
 function random_quote() {
 	global $userand;
 	global $rand_text;
-	$max = mysql_query("SELECT * FROM random ORDER BY ID DESC LIMIT 0,1");
-	$maxran = mysql_fetch_object($max);
+	$max = query("SELECT * FROM random ORDER BY ID DESC LIMIT 0,1");
+	$maxran = fetch($max);
 	if(!$userand) {
 		return FALSE;
 		break;
-	} elseif(mysql_num_rows($max) == 0) {
+	} elseif(num($max) == 0) {
 		return FALSE;
 		break;
 	} else {
 		while(!$random_text) {
 			$random_number = rand(1,$maxran->ID);
-			$query = mysql_query("SELECT * FROM random WHERE ID = $random_number") or die(mysql_error());
-			$row = mysql_fetch_object($query);
+			$query = query("SELECT * FROM random WHERE ID = '".mysql_escape_string($random_number)."'");
+			$row = fetch$query);
 			$random_text = $row->text;
 		}
 	echo $rand_text.stripslashes($random_text)."<br>";
@@ -150,21 +151,24 @@ function num($q) {
 }
 
 function user_style() {
-	$q = mysql_query("SELECT * FROM users WHERE ID = ".getcurrentuserid());
-	$r = mysql_fetch_object($q);
+	$query = query("SELECT * FROM users WHERE ID = '".mysql_escape_string(getcurrentuserid())."'");
+	$row = fetch($query);
 
-	$design = $r->userDesign;
+	$design = $row->userDesign;
 
-	if(!isset($design)) $design = config("default_style");
+	if(!isset($design))
+	{
+		$design = config("default_style");
+	}
 	return $design;
 }
 
 function config($config, $value = "NOTSET") {
 
-	$query = mysql_query("SELECT * FROM config WHERE config = '$config'") or nicedie(mysql_error());
-	$num = mysql_num_rows($query);
+	$query = query("SELECT * FROM config WHERE config = '$config'");
+	$num = num($query);
 	if($value == "NOTSET") {
-		$object = mysql_fetch_object($query);
+		$object = fetch($query);
 
 		if($num == 0) return FALSE;
 		elseif($object->value == 0) return FALSE;
@@ -174,11 +178,9 @@ function config($config, $value = "NOTSET") {
 
 	} else {
 		if($num == 0) {
-			query("INSERT INTO config SET config = '$config', value = '$value'");
-		//	echo "INSERTET";
+			query("INSERT INTO config SET config = '".mysql_escape_string($config)."', value = '".mysql_escape_string($value)."'");
 		} else {
-			query("UPDATE config SET value = '$value' WHERE config = '$config'");
-		//	echo "Oppdatert";
+			query("UPDATE config SET value = '".mysql_escape_string($value)."' WHERE config = '".mysql_escape_string($config)."'");
 		}
 
 	}
@@ -204,7 +206,7 @@ function convert_seatmap($map) {
 }
 
 function display_nick($ID) {
-	$q = query("SELECT * FROM users WHERE ID = $ID");
+	$q = query("SELECT * FROM users WHERE ID = '".mysql_escape_string($ID)."'");
 	$r = fetch($q);
 	if($r->allowPublic == 0)
 	{
@@ -234,7 +236,7 @@ function can_register_clan() {
 function mayEditClan($clanID) {
 	$userID = getcurrentuserid();
 	$rank = getuserrank();
-	$q = query("SELECT * FROM Clan WHERE ID = $clanID");
+	$q = query("SELECT * FROM Clan WHERE ID = '".mysql_escape_string($clanID)."'");
 	$r = fetch($q);
 	if($rank > 0)
 	{
@@ -252,11 +254,11 @@ function mayEditClan($clanID) {
 
 function acl_access($acl, $userID = NULL) {
 	if($userID == NULL) $userID = getcurrentuserid();
-	$q = query("SELECT * FROM users WHERE ID = $userID");
+	$q = query("SELECT * FROM users WHERE ID = '".mysql_escape_string($userID)."'");
 	$r = fetch($q);
 	$myGroup = $r->myGroup;
-	$root = query("SELECT * FROM acls WHERE groupID = $myGroup AND access LIKE 'root' AND value = 1");
-	$sel = query("SELECT * FROM acls WHERE groupID = $myGroup AND access LIKE '$acl' AND value = 1");
+	$root = query("SELECT * FROM acls WHERE groupID = '".mysql_escape_string($myGroup)."' AND access LIKE 'root' AND value = 1");
+	$sel = query("SELECT * FROM acls WHERE groupID = '".mysql_escape_string($myGroup)."' AND access LIKE '".mysql_escape_string($acl)."' AND value = 1");
 	if(num($root) == 1)
 	{
 		return 1;
@@ -272,7 +274,7 @@ function acl_access($acl, $userID = NULL) {
 }
 
 function reverse_acl($acl) {
-	$q = query("SELECT * FROM acls WHERE (access = '$acl' AND value = 1) OR (access = 'root' AND value = 1)");
+	$q = query("SELECT * FROM acls WHERE (access = '".mysql_escape_string($acl)."' AND value = 1) OR (access = 'root' AND value = 1)");
 	while($r = fetch($q))
 	{
 		if(empty($query2))
@@ -295,7 +297,7 @@ function resolve_groupname ($uid)
 		$uid = getcurrentuserid();
 	}
 
-	$q = query("SELECT groups.groupname AS 'groupname' from users, groups WHERE users.ID='".$uid."' AND users.myGroup=groups.ID");
+	$q = query("SELECT groups.groupname AS 'groupname' from users, groups WHERE users.ID='".mysql_escape_string($uid)."' AND users.myGroup=groups.ID");
 	$r = fetch($q);
    return $r->groupname;
 }
@@ -311,12 +313,12 @@ function nicedie ($reason = "Something bad happened. Please contact the administ
 function lang($string = "I must remember to put something here", $module = "default", $extra = "No extra info") {
 	global $language;
 
-	$q = query("SELECT * FROM lang WHERE string = '$string' AND language = '$language' AND module = '$module'");
+	$q = query("SELECT * FROM lang WHERE string = '".mysql_escape_string($string)."' AND language = '".mysql_escape_string($language)."' AND module = '".mysql_escape_string($module)."'");
 	$num = num($q);
 	if($num == 0)
 	{
 		/* The string does not exist in the database, add it */
-		query("INSERT INTO lang SET string = '$string', language = '$language', module = '$module', extra = '$extra'");
+		query("INSERT INTO lang SET string = '".mysql_escape_string($string)."', language = '".mysql_escape_string($language)."', module = '".mysql_escape_string($module)."', extra = '".mysql_escape_string($extra)."'");
 		return $string;
 	} // End not exists
 
