@@ -1,7 +1,7 @@
 This is the syntax of the dblog()-function:
 
 
-dblog(numeric string to show what kind of log this is, logText);
+dblog(numeric string to show what kind of log this is, logText, oldLog[not really needed, but if you change something; use it]);
 
 it always logs what IP a user comes from, timestamp (UNIX) and also what userID it is.
 
@@ -17,3 +17,4 @@ Here are the numeric strings for what is logged:
 6 = User registered. syntax: sID:::username:::email:::name:::verificationcode:::street:::postNr:::postPlace:::cellphone:::birthDAY:::birthMONTH:::birthYEAR
 7 = New static file added. Syntax: "filename"
 8 = Deleted static file. Syntax: "filename"
+9 = User changed seat. Syntax: x<Xseat>y<Yseat>

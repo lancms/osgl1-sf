@@ -69,6 +69,7 @@ elseif($action == "seat" && $canSit) {
 	if(num($testQ) != 0) die("Du kan _IKKE_ plassere deg der noen andre sitter!");
 	query("UPDATE users SET seatX = $getX, seatY = $getY WHERE ID = ".getcurrentuserid());
 	header("Location: seat.php?x=$getX&y=$getY");
+	dblog(9, "x".$getX."y".$getY);
 }
 elseif($action == "cancel") {
 	query("UPDATE users SET seatX = -1, seatY = -1 WHERE ID = ".getcurrentuserid());
