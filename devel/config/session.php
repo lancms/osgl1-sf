@@ -57,11 +57,7 @@ if(!isset($_COOKIE[$cookiename]))
 
     if($usestats) require_once 'stats_sessionstart.php';
 
-    $remUID = $_COOKIE[$cookiename."_remID"];
-    $remPASS = $_COOKIE[$cookiename."_remPASS"];
-	$test = query("SELECT ID FROM users WHERE ID = '$remUID' AND password = '$remPASS'");
-    if(num($test) == 1) $createUID = $remUID;
-    else $createUID = 1;
+    $createUID = 1;
 
     mysql_query("INSERT INTO session (userID, sID, logUNIX, IP) VALUES($createUID, '$new_session',".time().", '$userIP')")
 
