@@ -522,8 +522,7 @@ elseif ($action == "AddComment")
 	{
 		nicedie(lang("Did you forget something ? Like writing a comment ?", "admin_wannabemin", "Text used in wannabemin"));
 	}
-	// XXX: escape_string()
-	$query = "SELECT * FROM `wannabeComment` WHERE `user` = '$ID' AND adminID = '$user'";
+	$query = sprintf ("SELECT * FROM wannabeComment WHERE user = %s AND adminID = %s", escape_string($ID), escape_string($user));
 	$result = query($query);
 	$num = num($result);
 
