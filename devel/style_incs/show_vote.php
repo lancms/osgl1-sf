@@ -14,7 +14,7 @@ elseif (isset($rQ->ID))
 {
 	echo "<b>$rQ->text</b>";
 
-	$num = query("SELECT * FROM pollVoted WHERE userID = '".escape_string(getcurrentuserid(I)."' AND pollID = '".escape_string$rQ->ID)."'");
+	$num = query("SELECT * FROM pollVoted WHERE userID = '".escape_string(getcurrentuserid())."' AND pollID = '".escape_string($rQ->ID)."'");
 	if(num($num) >= $rQ->maxVotes)
 	{
 		$votable = FALSE;
