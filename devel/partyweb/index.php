@@ -24,12 +24,12 @@ die();
 include_once $base_path.'partyweb/style/top.php';
 
 if(empty($mode)) {
-include_once $base_path.'partyweb/style/menu.php';
+require_once $base_path.'partyweb/style/menu.php';
 }
 
 if($viewpage) {
-$q = mysql_query("SELECT * FROM partyweb WHERE ID = $viewpage");
-$r = mysql_fetch_object($q);
+$q = query("SELECT * FROM partyweb WHERE ID = '".mysql_escape_string($viewpage)."'");
+$r = fetch($q);
 
 echo '<td height="100%" align="center" valign="top" class="tbl_main">';
 
@@ -41,9 +41,9 @@ echo text2html($r->text);
 
 elseif($mode == "party") {
 
-$q = mysql_query("SELECT ID FROM partyweb WHERE display_partymode = 1");
+$q = query("SELECT ID FROM partyweb WHERE display_partymode = 1");
 
-while($r = mysql_fetch_object($q)) {
+while($r = fetch($q)) {
 
 $to_random[] = $r->ID;
 
@@ -55,9 +55,9 @@ $display = $to_random[$rand];
 //echo "<br><br>";
 
 
-$query = mysql_query("SELECT * FROM partyweb WHERE ID = $display") or die(mysql_error());
+$query = query("SELECT * FROM partyweb WHERE ID = '".mysql_escape_string($display)."'");
 
-$page = mysql_fetch_object($query);
+$page = fetch($query);
 echo '<td height="100%" align="center" valign="top" class="tbl_main">';
 echo text2html($page->text);
 }
@@ -68,4 +68,4 @@ echo "Sorry, admin has not put in any pages here yet";
 }
 
 
-include_once $base_path.'partyweb/style/bottom.php';
+require_once $base_path.'partyweb/style/bottom.php';
