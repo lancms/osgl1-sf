@@ -15,7 +15,7 @@ if(!isset($action)) {
 	</form>
 	<?php
 } elseif($action == "add") {
-	$text = $_POST['text'];
+	$text = mysql_escape_string ($_POST['text']);
 	
 	if(empty($text) || !isset($text)) 
 		nicedie($form['72']);
