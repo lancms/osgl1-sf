@@ -22,14 +22,14 @@ if(!isset($action))
 
 		echo "<br>$result->question <a href=admin.php?adminmode=faq&action=delete&ID=".
 		$result->ID.
-		">$form[16]</a> <a href=admin.php?adminmode=faq&action=edit&ID=".$result->ID.">$form[17]</a>\n";
+		">".lang("Delete", "admin_faq", "form[16]")."</a> <a href=admin.php?adminmode=faq&action=edit&ID=".$result->ID.">".lang("Edit", "admin_faq", "form[17]")."</a>\n";
 	}
 	?>
 
 	<form method=post action=admin.php?adminmode=faq&action=insert>
 	<br><input type=text size=25 name=question> ?
 	<br><textarea rows=10 cols=75 name=answer></textarea> !
-	<br><input type=submit value='<?php echo $form[7]; ?>'>
+	<br><input type=submit value='<?php echo lang("Add", "admin_faq", "form[7]"); ?>'>
 	</form>
 	<?php
 
@@ -38,25 +38,21 @@ elseif ($action == "delete")
 {
 	if (!isset($_GET['ID']))
 	{
-		nicedie ($form[6]);
+		nicedielang ("Are you sure you didn't forget something?", "admin_faq", "form[6]");
 	}
 	
 	$delID = $_GET['ID'];
 
 	$query = query("DELETE FROM faq WHERE ID = '".escape_string($delID)."'");
 
-	echo $msg['34']." ".$delID." ".$msg['35'];
+	echo lang("FAQ", "admin_faq", "msg[34]")." ".$delID." ".lang("deleted", "admin_faq", "msg[35]");
 
 }
 elseif ($action == "insert")
 {
-	if (empty($_POST['question']))
+	if ((empty($_POST['question'])) || (empty($_POST['answer'])))
 	{
-		nicedie($form[6]);
-	}
-	if (empty($_POST['answer']))
-	{
-		nicedie($form[6]);
+		nicedielang ("Are you sure you didn't forget something?", "admin_faq", "form[6]");
 	}
 
 	$q = $_POST['question'];
@@ -69,7 +65,7 @@ elseif ($action == "insert")
 	answer = '".escape_string($a)."'
 	");
 
-	echo $msg['7'];
+	echo lang ("FAQ saved", "admin_faq", "msg[7]");
 	refresh("admin.php?adminmode=faq");
 }
 elseif ($action == "edit")
@@ -87,7 +83,7 @@ elseif ($action == "edit")
 	echo "<form method=post action=admin.php?adminmode=faq&action=doedit&edit=$editID>";
 	echo "<textarea name=edittext cols=75 rows=10>";
 	echo $row->answer;
-	echo "</textarea><input type=submit value='$form[15]'>";
+	echo "</textarea><input type=submit value='".lang("Save", "admin_faq", "form[15]")."'>";
 	echo "</form>";
 }
 elseif ($action == "doedit")
@@ -98,7 +94,7 @@ elseif ($action == "doedit")
 
 	if($update) refresh("admin.php");
 	
-	echo $msg[7];
+	echo lang ("FAQ saved", "admin_faq", "msg[7]");
 }
 
 ?>
