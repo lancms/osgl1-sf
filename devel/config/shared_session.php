@@ -83,7 +83,10 @@ function getuserid($sid)
 	}
 }
 
-
+/*
+ * Get userid X?!
+ * "I'm X-tatic about logical function names..."? :-p
+ */
 function getuseridx($nick, $password)
 {
 	$password = crypt_pwd($password);
