@@ -78,8 +78,6 @@ if(!isset($adminmode))
 }
 elseif ($adminmode != "")
 {
-	// FIXME: Is there any errorchecking at all on this?
-	// LAK: Now it is :)
 	if (strchr($_GET['adminmode'], ".")) {
 		dblog(10, "User attempted to put . in GET[adminmode].");
 		nicedie("Sorry, you are not allowed to put . in URL. Logged!");
