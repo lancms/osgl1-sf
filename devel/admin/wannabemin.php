@@ -569,7 +569,7 @@ elseif ($action == "AddComment")
 	}
 	$result = query($query);
 	echo lang("Comment added", "admin_wannabemin", "Text used in wannabemin");
-	refresh("admin.php?adminmode=wannabemin&action=ViewComment&id=$ID", 2);
+	refresh("admin.php?adminmode=wannabemin&action=DoViewUsers&id=$ID", 2);
 }
 elseif ($action == "ViewComment")
 {
