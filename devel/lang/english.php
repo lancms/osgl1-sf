@@ -392,7 +392,7 @@ $compotype[5] = "5vs5";
 /* This is the answers in the compopoll users get */
 $compopoll[0] = "No comments"; // No points are given
 $compopoll[1] = "No, thank you";	   // only one point is given
-$compopoll[2] = "Well....";		   
+$compopoll[2] = "Well....";
 $compopoll[3] = "Perhaps";
 $compopoll[4] = "Please";
 $compopoll[5] = "OF COURSE!!!"; // 5 points are given!
@@ -409,5 +409,3 @@ function mail_body($random) {
     Thank you\r\n
     The Crew";
 }
-
-?>
