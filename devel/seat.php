@@ -1,8 +1,4 @@
-<?php
-require_once 'config/config.php';
-$getX = $_GET['x'];
-$getY = $_GET['y'];
-$action = $_GET['action'];
+ction = $_GET['action'];
 //echo "X = $getX AND Y = $getY";
 if(config("seatreg_open") && getcurrentuserid() != 1) $canSit = TRUE;
 elseif(acl_access("isCrew")) $canSit = TRUE;
@@ -12,17 +8,24 @@ $seatopen = config("seatreg_open");
 
 if(!isset($action)) {
 
-	if(!$seatopen) echo "<b>".lang("The seatreservation has not yet opened!", "seat", "Text to display when the seatreg has not opened yet")."</b><br><br>";
+    if(!$seatopen) echo "<b>".lang("The seatreservation has not yet opened!", "seat", "Text to display when the seatreg has not opened yet")."</b><br><br>";
 
 $crewseats = config("crewseats");
-$normalseats = config("normalseats");
 
-$dbs = query("SELECT count(*) FROM users WHERE seatX != -1 AND seatY != -1 AND isCrew = 0");
+//$normalseats = config("normalseats"); //Outdated, using room.ini instead..
+
+$file = file("room.ini");
+foreach($file as $line) {
+$normalseats1 = substr($line,$key);
+$normalseats2 = $normalseats2 + substr_count($normalseats1, "d");
+};
+
+$dbs = query("SELECT count(*) FROM users WHERE seatX != -1 AND seatY != -1");
 $q = fetch($dbs);
 $cnt = $q[0];
 
-echo $seat['10']." ".($normalseats-$cnt)."<br>\n";
-echo $seat['11']." ".($cnt)."<br><br>\n";
+print $seat['10']." ".($normalseats2-$cnt)."<br>";
+print $seat['11']." ".($cnt)."<br><br>";
 ?>
 
 <a href=index.php><?php echo lang("Back to main page", "seat", "Link to get back to main page in seat.php"); ?></a><br>
@@ -42,25 +45,25 @@ $hasSeatQ = query("SELECT * FROM users WHERE ID = '".escape_string($currentuseri
 $hasSeat = fetch($hasSeatQ);
 if($hasSeat->seatX != -1)
 {
-	echo "<a href=seat.php?action=cancel>".$seat['13']."</a><br>";
+    echo "<a href=seat.php?action=cancel>".$seat['13']."</a><br>";
 }
 if(isset($_GET["x"]))
 {
-	$coords = "?x=".$_GET["x"]."&y=".$_GET["y"];
-	$q = query("SELECT * FROM users WHERE seatX = '".escape_string($getX)."' AND seatY = '".escape_string($getY)."'");
-	$r = fetch($q);
-	if(num($q) != 0)
-	{
-		echo "<a href=index.php?inc=profile&uid=$r->ID>".$r->nick."</a> ".$seat['14']."<br>";
-	}
-	elseif(($canSit) && (num($q) == 0))
-	{
-		echo "<a href=seat.php$coords&action=seat>".$seat['15']."</a><br>";
-	}
+    $coords = "?x=".$_GET["x"]."&y=".$_GET["y"];
+    $q = query("SELECT * FROM users WHERE seatX = '".escape_string($getX)."' AND seatY = '".escape_string($getY)."'");
+    $r = fetch($q);
+    if(num($q) != 0)
+    {
+        echo "<a href=index.php?inc=profile&uid=$r->ID>".$r->nick."</a> ".$seat['14']."<br>";
+    }
+    elseif(($canSit) && (num($q) == 0))
+    {
+        echo "<a href=seat.php$coords&action=seat>".$seat['15']."</a><br>";
+    }
 }
 else
 {
-	$coords = "?nocoords=true";
+    $coords = "?nocoords=true";
 }
 ?>
 <img border=0 src="seatsel.php<?php echo $coords; if(isset($_GET["zoom"]) && $_GET["zoom"] == "on") { echo "&zoom=on"; }; ?>" usemap="#roommap">
@@ -78,22 +81,22 @@ echo "<br><font color=red>".$colour['1']."</font>: ".$seat['0']."
 }
 elseif(($action == "seat") && ($canSit))
 {
-	$testQ = query("SELECT * FROM users WHERE seatX = '".escape_string($getX)."' AND seatY = '".escape_string($getY)."'");
-	if(num($testQ) != 0) die("Du kan _IKKE_ plassere deg der noen andre sitter!");
-	$currentuserid = getcurrentuserid();
-	query("UPDATE users SET seatX = '".escape_string($getX)."', seatY = '".escape_string($getY)."' WHERE ID = '".escape_string($currentuserid)."'");
-	header("Location: seat.php?x=$getX&y=$getY");
-	dblog(9, "x".$getX."y".$getY);
+    $testQ = query("SELECT * FROM users WHERE seatX = '".escape_string($getX)."' AND seatY = '".escape_string($getY)."'");
+    if(num($testQ) != 0) die("Du kan _IKKE_ plassere deg der noen andre sitter!");
+    $currentuserid = getcurrentuserid();
+    query("UPDATE users SET seatX = '".escape_string($getX)."', seatY = '".escape_string($getY)."' WHERE ID = '".escape_string($currentuserid)."'");
+    header("Location: seat.php?x=$getX&y=$getY");
+    dblog(9, "x".$getX."y".$getY);
 }
 elseif($action == "cancel")
 {
-	$currentuserid = getcurrentuserid();
-	query("UPDATE users SET seatX = -1, seatY = -1 WHERE ID = '".escape_string($currentuserid)."'");
-	header("Location: seat.php");
+    $currentuserid = getcurrentuserid();
+    query("UPDATE users SET seatX = -1, seatY = -1 WHERE ID = '".escape_string($currentuserid)."'");
+    header("Location: seat.php");
 }
 else
 {
-	nicedie();
+    nicedie();
 }
 
 ?>
