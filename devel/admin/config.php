@@ -43,7 +43,7 @@ if (!isset($action))
 		}
 		echo "value=1> ".lang($checkbox[$i], "admin_config", "checkbox-item in admin/config.php, as they are displayed on the page");
 	}
-	echo "<br><input type=submit value='$form[15]'>";
+	echo "<br><input type=submit value='".lang("Save", "admin_config", "form[15]")."'>";
 	echo "</form>";
 }
 
