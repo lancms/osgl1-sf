@@ -303,6 +303,14 @@ $compotype[3] = "3vs3";
 $compotype[4] = "4vs4";
 $compotype[5] = "5vs5";
 
+/* This is the answers in the compopoll users get */
+$compopoll[0] = "Ingen kommentar"; // No points are given
+$compopoll[1] = "Nei takk";	   // only one point is given
+$compopoll[2] = "Nja";		   
+$compopoll[3] = "Kanskje";
+$compopoll[4] = "Gjerne";
+$compopoll[5] = "SELVFØLGELIG!!!"; // 5 points are given!
+
 
 function mail_body($random) {
     return "Velkommen som bruker på GlobeLAN DEVEL!\n\r
