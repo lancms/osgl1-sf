@@ -213,7 +213,7 @@ elseif ($action == "edit")
 		aboutMe = '".escape_string($aboutme)."',
 		cellphone = '".escape_string($cellphone)."',
 		allowPublic = '".escape_string($allowPublic)."',
-		userDesign = '".escape_string($userDesign)."',
+
 		street = '".escape_string($street)."',
 		postNr = '".escape_string($postNr)."',
 		postPlace = '".escape_string($postPlace)."',
@@ -222,6 +222,7 @@ elseif ($action == "edit")
 		birthYEAR = '".escape_string($birthYEAR)."',
 		myGroup = '".escape_string($myGroup)."'
 		WHERE ID = '".escape_string($editID)."'");
+	if(!config("disable_userstyle")) query("UPDATE users SET userDesign = '".escape_string($userDesign)."' WHERE ID = '".escape_string($editID)."'");
 
 	refresh("index.php?inc=useradmin&user=$editID", "0");
 
