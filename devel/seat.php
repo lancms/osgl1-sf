@@ -74,4 +74,4 @@ elseif($action == "cancel") {
 	query("UPDATE users SET seatX = -1, seatY = -1 WHERE ID = ".getcurrentuserid());
 	header("Location: seat.php");
 }
-else die("Nope, ingenting av interresse her");
+else nicedie();
