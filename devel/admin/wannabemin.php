@@ -465,29 +465,59 @@ elseif($action == "DoViewUsers") {
 		}
 
   	}
-
-  $list	   .= "
-  <form name='AddComment' method='post' action='admin.php?adminmode=wannabemin&action=AddComment'>
-  <input type='hidden' name='UserID' value='$UserID'>
-   <tr>
-    <td><b>".lang("Add comment:", "admin_wannabemin", "Text to display in wannabemin&action=DoViewUsers")."</b></td>
-   </tr>
-   <tr>
-    <td><textarea name='Comment'></textarea></td>
-   </tr>
-   <tr>
-    <td><input type='submit' name='Submit' value='".lang("Add", "admin_wannabemin", "Text used in wannabemin")."'></td>
-   </tr>
-  </form>
-  </table>
-  ";
+	$query		= 	"SELECT * FROM wannabeComment WHERE user = '$user'";
+	$result 	= 	query($query);
+	$var 		= 	fetch($result);
+	
+	$Comment	=	$var->comment;
+	$like		=	$var->like;
+	
+	if($like == 1) $Check1 = " checked";
+	elseif($like == 2) $Check2 = " checked";
+	
+	  $list	   .= "
+	  <form name='AddComment' method='post' action='admin.php?adminmode=wannabemin&action=AddComment'>
+	  <input type='hidden' name='UserID' value='$UserID'>
+	   <tr>
+		<td><b>".lang("Add comment:", "admin_wannabemin", "Text to display in wannabemin&action=DoViewUsers")."</b></td>
+	   </tr>
+	   <tr>
+		<td><textarea name='Comment'>$Comment</textarea></td>
+	   </tr>
+	   <tr>
+		<td>".lang("Do You like this wannabe ?", "admin_wannabemin", "Text to display in wannabemin&action=DoViewUsers")."</td>
+	   </tr>
+	   <tr>
+		<td><input type='radio' name='like' value='1'".$Check1.">".lang("Yes", "admin_wannabemin", "Text to display in wannabemin&action=DoViewUsers")."</td>
+		<td><input type='radio' name='like' value='2'".$Check2.">".lang("Nope", "admin_wannabemin", "Text to display in wannabemin&action=DoViewUsers")."</td>
+	   </tr>
+	   <tr>
+		<td><input type='submit' name='Submit' value='".lang("Add", "admin_wannabemin", "Text used in wannabemin")."'></td>
+	   </tr>
+	  </form>
+	  </table>
+	  ";
 
   echo $list;
 
   $q = query("SELECT * FROM wannabeComment WHERE user = '$UserID'");
   echo "<table>";
   while($r = fetch($q)) {
-  		osgl_table(IDtonick($r->by), $r->comment);
+		echo "
+		  <tr>
+			<td><b>". IDtonick($r->by) .":</b></td>
+		  </tr>
+		  <tr>
+			<td><em>". $r->comment ."</em></td>
+		  </tr>
+		  ";
+		  if($r->like == 1) $like = lang("Yes", "admin_wannabemin", "Text used in wannabemin");
+		  elseif($r->like == 2) $like = lang("Nope", "admin_wannabemin", "Text used in wannabemin");
+		echo "
+		 <tr>
+		  <td>". lang("Do you like this wannabe?", "admin_wannabemin", "Text used in wannabemin"). " <b>". $like ."</b></td>
+		 </tr>
+		 ";
 
 
 
@@ -501,13 +531,23 @@ elseif($action == "AddComment") {
 
 	$ID		=	$_POST['UserID'];
 	$Com	=	$_POST['Comment'];
+	$Like	=	$_POST['like'];
 
 	$ID		=	escape_string($ID);
 	$Com	=	escape_string($Com);
+	$Like	=	escape_string($Like);
 
-	if(empty($ID) || empty($Com)) nicedie(lang("Did you forget something ? Like writing a comment ?", "admin_wannabemin", "Text used in wannabemin"));
+	if(empty($ID) || empty($Com) || empty($Like)) nicedie(lang("Did you forget something ? Like writing a comment ?", "admin_wannabemin", "Text used in wannabemin"));
 
-	$query	= 	"INSERT INTO `wannabeComment` ( `ID` , `comment` , `user` , `by` ) VALUES (NULL, '$Com', '$ID', '$user')";
+	$query	=	"SELECT * FROM wannabeComment WHERE user = '$user'";
+	$result	=	query($query);
+	$result	=	num($result);
+	
+	if($result == 1) {
+	 $query	=	"UPDATE `wannabecomment` SET `comment` = '$Com', `like` = '$Like' WHERE `user` = '$ID' AND `by` = '$user'";
+	} else {
+	 $query	= 	"INSERT INTO `wannabeComment` ( `ID` , `comment` , `like` , `user` , `by` ) VALUES (NULL, '$Com', '$Like', '$ID', '$user')";
+	}
 	$result	=	query($query);
 
 	echo lang("Comment added", "admin_wannabemin", "Text used in wannabemin");
@@ -522,39 +562,29 @@ elseif($action == "ViewComment") {
 
 	if(empty($ID)) nicedie(lang("Something is not right.", "admin_wannabemin", "Text used in wannabemin"));
 
-	$query		=	"SELECT * FROM wannabeComment WHERE user = '$ID' ORDER BY ID DESC";
-	$result 	= 	query($query);
-	$list	   .=	"
-	<table>
-	";
+		
+	  $q = query("SELECT * FROM wannabeComment WHERE user = '$ID'");
+	  echo "<table>";
+	  while($r = fetch($q)) {
+			echo "
+			  <tr>
+				<td><b>". IDtonick($r->by) .":</b></td>
+			  </tr>
+			  <tr>
+				<td><em>". $r->comment ."</em></td>
+			  </tr>
+			  ";
+			  if($r->like == 1) $like = lang("Yes", "admin_wannabemin", "Text used in wannabemin");
+			  elseif($r->like == 2) $like = lang("Nope", "admin_wannabemin", "Text used in wannabemin");
+			echo "
+			 <tr>
+			  <td>". lang("Do you like this wannabe?", "admin_wannabemin", "Text used in wannabemin"). " <b>". $like ."</b></td>
+			 </tr>
+			 ";
 
-	while($var = fetch($result)) {
-
-	$Comment	=	$var->comment;
-	$By			=	$var->by;
-
-	$query2		=	"SELECT * FROM users WHERE ID = '$By'";
-	$result2	=	query($query2);
-
-	$get		=	fetch($result2);
-
-	$By			=	$get->nick;
-
-	$list	   .=	"
-	<tr>
-	 <td><b>".lang("Comment posted by:", "admin_wannabemin", "Text used in wannabemin")."</b> $By</td>
-	</tr>
-	<tr>
-	 <td>$Comment</td>
-	</tr>
-	";
-	}
-
-	$list	  .=	"
-	</table>
-	";
-
-	echo $list;
+		}
+	
+		echo "</table>";
 
 }
 
