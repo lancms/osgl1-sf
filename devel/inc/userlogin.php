@@ -27,7 +27,7 @@ elseif ($action == "ticketselect")
 	$ticket = $_POST['ticket'];
 	$search = $_GET['search'];
 
-	query("UPDATE users SET ticketType = $ticket, ticketAuthorize = $adminID WHERE ID = $user");
+	query("UPDATE users SET ticketType = '".mysql_escape_string($ticket)."', ticketAuthorize = '".mysql_escape_string($adminID)."' WHERE ID = '".mysql_escape_string($user)."'");
 	if(isset($search))
 	{
 		refresh("index.php?inc=userlogin&action=main&search=$search", 0);
@@ -41,8 +41,8 @@ elseif ($action == "main")
 {
 	$search = $_REQUEST['search'];
 
-	$query = query("SELECT * FROM users WHERE ID != 1 AND nick LIKE '%$search%' OR ID != 1 AND name LIKE '%$search%'");
-	$num = mysql_num_rows($query);
+	$query = query("SELECT * FROM users WHERE ID != 1 AND nick LIKE '%".mysql_escape_string($search)."%' OR ID != 1 AND name LIKE '%".($search)"%'");
+	$num = num($query);
 	echo "<a href=index.php?inc=userlogin>Tilbake til søkesiden</a>";
 	echo '<table cellspacing=1 border=1>';
 	while($row = fetch($query))
@@ -95,12 +95,12 @@ echo "</table>";
 } 
 elseif ($action == "login")
 {
-	$query = mysql_query("UPDATE users SET isHere = 1 WHERE ID = $user") or nicedie(mysql_error());
+	$query = query("UPDATE users SET isHere = 1 WHERE ID = '".mysql_escape_string($user)."'");
 	refresh("index.php?inc=userlogin", 0);
 }
 elseif($action == "logout")
 {
-	$query = mysql_query("UPDATE users SET isHere = 0 WHERE ID = $user") or nicedie(mysql_error());
+	$query = query("UPDATE users SET isHere = 0 WHERE ID = '".mysql_escape_string($user)."'");
 	refresh("index.php?inc=userlogin", 0);
 }
 ?>
