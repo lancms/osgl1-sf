@@ -1,4 +1,4 @@
-<?php
+<?PHp
 
 require_once ("config.php");
 
@@ -169,7 +169,7 @@ function fetch_array($q)
 
 function escape_string($var)
 {
-	mysql_real_escape_string($var);
+	$var = mysql_real_escape_string($var);
 	return $var;
 }
 
