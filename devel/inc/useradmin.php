@@ -39,20 +39,20 @@ if (($action == "view") || (!isset($action)))
 	$row = fetch($query);
 	echo "<form method=post action=index.php?inc=useradmin&action=edit&user=$row->ID>";
 	echo '<table>';
-	user_table($profile['8'],"<input type=text name=nick value='$row->nick'>");
-	user_table(lang("Firstname", "inc_useradmin", "Users firstname in useradmin?action=view"), "<input type=text name=firstName value='$row->firstName'>");
-	user_table(lang("Lastname", "inc_useradmin", "Users lastname in useradmin?action=view"), "<input type=text name=lastName value='$row->lastName'>");
+	osgl_table($profile['8'],"<input type=text name=nick value='$row->nick'>");
+	osgl_table(lang("Firstname", "inc_useradmin", "Users firstname in useradmin?action=view"), "<input type=text name=firstName value='$row->firstName'>");
+	osgl_table(lang("Lastname", "inc_useradmin", "Users lastname in useradmin?action=view"), "<input type=text name=lastName value='$row->lastName'>");
 
-	user_table($profile[4], "<textarea name=aboutme rows=10 cols=60>$row->aboutMe</textarea>");
+	osgl_table($profile[4], "<textarea name=aboutme rows=10 cols=60>$row->aboutMe</textarea>");
 
-	user_table($form[76], "<input type=text name=cellphone value='$row->cellphone'>");
+	osgl_table($form[76], "<input type=text name=cellphone value='$row->cellphone'>");
 
-	user_table($form[25], "<a href=index.php?inc=useradmin&action=changepass&user=$editID>$form[33]</a>");
+	osgl_table($form[25], "<a href=index.php?inc=useradmin&action=changepass&user=$editID>$form[33]</a>");
 
-	user_table($profile[6], "<a href=index.php?inc=useradmin&action=changemail&user=$editID>$form[34]</a>");
+	osgl_table($profile[6], "<a href=index.php?inc=useradmin&action=changemail&user=$editID>$form[34]</a>");
 
-	user_table($form['74'], "<input type=text name=street value='$row->street'>");
-	user_table($form['75'], "<input type=text name=postNr value='$row->postNr' size=5><input type=text name=postPlace value='$row->postPlace'>");
+	osgl_table($form['74'], "<input type=text name=street value='$row->street'>");
+	osgl_table($form['75'], "<input type=text name=postNr value='$row->postNr' size=5><input type=text name=postPlace value='$row->postPlace'>");
 
 	$birthdayinfo = "<select name=birthDAY>";
 	for($i=1;$i<32;$i++)
@@ -96,7 +96,7 @@ if (($action == "view") || (!isset($action)))
 		}
 		$birthdayinfo .= "<option value=$y $selected>$y</option>\n";
 	}
-	user_table($form['77'], $birthdayinfo);
+	osgl_table($form['77'], $birthdayinfo);
 
 	echo "<tr><td class=profileLeft width=30%>$profile[9]</td><td class=profileRight>";
 
@@ -242,11 +242,11 @@ elseif ($action == "changepass")
 
 	<?php
 
-	user_table($form[25], "<input type=password name=pwd1>");
+	osgl_table($form[25], "<input type=password name=pwd1>");
 
-	user_table($form[26], "<input type=password name=pwd2>");
+	osgl_table($form[26], "<input type=password name=pwd2>");
 
-	user_table("", "<input type=submit value='$form[15]'>");
+	osgl_table("", "<input type=submit value='$form[15]'>");
 
 	echo '</table>';
 
@@ -278,9 +278,9 @@ elseif ($action == "changemail")
 	<table>
 	<form method=post action=index.php?inc=useradmin&action=dochangemail&user=<?php echo $editID; echo ">";
 
-	user_table($profile[6], "<input type=text name=newmail value='$row->EMail'>");
+	osgl_table($profile[6], "<input type=text name=newmail value='$row->EMail'>");
 
-	user_table("", "<input type=submit value='$form[15]'>");
+	osgl_table("", "<input type=submit value='$form[15]'>");
 
 	echo '</table></form>';
 
@@ -315,7 +315,7 @@ elseif ($action == "dochangemail")
 	}
 }
 
-
+/*
 function user_table($userLeft, $userRight)
 // TODO: Move this to functions.php!
 {
@@ -325,5 +325,5 @@ function user_table($userLeft, $userRight)
 
 	echo "</td></tr>\n\n";
 }
-
+*/
 ?>
