@@ -21,7 +21,6 @@ $checkbox[] = "usepage_seat";
 $checkbox[] = "usepage_compo";
 $checkbox[] = "usepage_news";
 $checkbox[] = "usepage_partyweb";
-$checkbox[] = "usepage_compo";
 $checkbox[] = "seatreg_open";
 $checkbox[] = "usepage_wannabe";
 #$checkbox[] = "usepage_kiosk"; // Doesn't work
