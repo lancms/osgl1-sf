@@ -263,14 +263,14 @@ function nicedie ($reason = "Something bad happened. Please contact the administ
 	die();
 }
 
-function lang($string = "I must remember to put something here", $module = "default") {
+function lang($string = "I must remember to put something here", $module = "default", $extra = "No extra info") {
 	global $language;
 	
 	$q = query("SELECT * FROM lang WHERE string = '$string' AND language = '$language' AND module = '$module'");
 	$num = num($q);
 	if($num == 0) {
 		/* The string does not exist in the database, add it */
-		query("INSERT INTO lang SET string = '$string', language = '$language', module = '$module'");
+		query("INSERT INTO lang SET string = '$string', language = '$language', module = '$module', extra = '$extra'");
 		return $string;
 	} // End not exists
 	

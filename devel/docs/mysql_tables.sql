@@ -414,6 +414,7 @@ CREATE TABLE lang (
   language varchar(30) NOT NULL default 'english',
   module varchar(30),
   translated text NULL,
+  extra text NULL,
   PRIMARY KEY (ID)
 );
 
