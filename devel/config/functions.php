@@ -134,9 +134,11 @@ function random_quote() {
 
 }
 
-function query($query) {
-$q = mysql_query($query) or nicedie("Error with query: $query, error returned: ".mysql_error());
-return $q;
+function query($query)
+{
+	$query_escaped = mysql_escape_string ($query);
+	$q = mysql_query($query_escaped) or nicedie("Error with query: $query_escaped, error returned: ".mysql_error());
+	return $q;
 }
 
 function fetch($q) {
