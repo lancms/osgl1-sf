@@ -27,16 +27,16 @@ if(!isset($_COOKIE[$cookiename]))
 
 	$createUID = 1;
 
-	query("INSERT INTO session (userID, sID, logUNIX, IP) VALUES($createUID, '$new_session',".time().", '$userIP')");
+	query("INSERT INTO session (userID, sID, logUNIX, IP) VALUES('".mysql_escape_string($createUID)."', '".mysql_escape_string($new_session)."', '".mysql_escape_string(time())."', '".mysql_escape_string($userIP)."')");
 	dblog(2, $new_session.":::".$_SERVER['HTTP_REFERER']);
 }
 else
 {
 	$sID = $_COOKIE[$cookiename];
 
-	$check_session = mysql_query("SELECT * FROM session WHERE sID = '$sID'");
+	$check_session = query("SELECT * FROM session WHERE sID = '".mysql_escape_string($sID)."'");
 
-	if(mysql_num_rows($check_session) != 0)
+	if(num($check_session) != 0)
 	{
  	session_id($_COOKIE[$cookiename]); // set session, this cookie must expire after session end.
 	}
@@ -51,7 +51,7 @@ else
 // update current session so it will not be deleted during the clean-up.
 if(getcurrentuserid())
 {
-    query("UPDATE session SET logUNIX = ".time().", userURL = '$URL' WHERE userID = ".getcurrentuserid()." AND IP = '$userIP'");
+    query("UPDATE session SET logUNIX = '".mysql_escape_string(time())."', userURL = '".mysql_escape_string($URL)."' WHERE userID = '".mysql_escape_string(getcurrentuserid())."' AND IP = '".mysql_escape_string($userIP)."'");
 }
 
 
@@ -59,19 +59,19 @@ if(getcurrentuserid())
 $remove_time = time()-$session_alive_time;
 
 
-query("DELETE FROM session WHERE logUNIX < '$remove_time'");
+query("DELETE FROM session WHERE logUNIX < '".mysql_escape_string($remove_time)."'");
 
 
 // getuserid(sID) returns the user ID from a session
 function getuserid($sid)
 {
-	$dbs = query("SELECT userID FROM session WHERE sid = '$sid'"); // search for session ID table "session" in the DB.
+	$dbs = query("SELECT userID FROM session WHERE sid = '".mysql_escape_string($sid)."'"); // search for session ID table "session" in the DB.
 
-	if (($dbs == null) || (!mysql_num_rows($dbs))) // if the user is not logged in, or found in the DB, for various reasons,
+	if (($dbs == null) || (!num($dbs))) // if the user is not logged in, or found in the DB, for various reasons,
 	{
 		return 0;   // return 0.
 	}
-	$row = fetch($dbs); // get first row (should be the only row returned)
+	$row = fetch_row($dbs); // get first row (should be the only row returned)
 
 	if(!empty($row[0]))
 	{
@@ -88,9 +88,9 @@ function getuseridx($nick, $password)
 {
 	$password = crypt_pwd($password);
 
-	$dbs = query("SELECT ID, password FROM users WHERE nick LIKE '$nick'");
+	$dbs = query("SELECT ID, password FROM users WHERE nick LIKE '".mysql_escape_string($nick)."'");
 
-	$row = fetch_array($dbs);
+	$row = fetch_row($dbs);
 
 	if($row[1] != $password)
 	{
@@ -118,9 +118,9 @@ function getuserrank()
 {
 	$user = getcurrentuserid();
 
-	$query = query("SELECT isCrew FROM users WHERE ID = '$user'");
+	$query = query("SELECT isCrew FROM users WHERE ID = '".mysql_escape_string($user)."'");
 	
-	$row = fetch_array($query);
+	$row = fetch_row($query);
 
 	return $row[0];
 }
@@ -132,13 +132,13 @@ function log_in($nick, $password)
 
 {
 
-    // Returns 0  if the user is already logged in.
+	// Returns 0  if the user is already logged in.
 
-    // Returns -1 if the password does not match.
+	// Returns -1 if the password does not match.
 
-    // Returns -2 if the user has not verified yet
+	// Returns -2 if the user has not verified yet
 
-    // Returns positive value if the login was successful
+	// Returns positive value if the login was successful
 
 	if(getcurrentuserid() != 1)  // this user is already logged in.
 	{
@@ -147,7 +147,7 @@ function log_in($nick, $password)
 
 	$password = crypt_pwd($password); // hash the password
 
-	$dbs = query("SELECT ID, password, verified FROM users WHERE nick LIKE '$nick'");
+	$dbs = query("SELECT ID, password, verified FROM users WHERE nick LIKE '".mysql_escape_string($nick)."'");
 
 	$row = fetch_row($dbs);
 
@@ -165,8 +165,8 @@ function log_in($nick, $password)
 
 	$sid = session_id(); // get session ID
 
-	$dbs = query("UPDATE session SET userID = $uid WHERE sID = '$sid'"); // update database
-	query("UPDATE users SET lastLoggedIn = ".time()." WHERE ID = $uid");
+	$dbs = query("UPDATE session SET userID = '".mysql_escape_string($uid)."' WHERE sID = '".mysql_escape_string($sid)."'"); // update database
+	query("UPDATE users SET lastLoggedIn = '".mysql_escape_string(time())."' WHERE ID = '".mysql_escape_string($uid)."'");
 	
 	dblog(4, $sid."::".$uid);
 
@@ -184,7 +184,7 @@ function log_out()
 	dblog(5, session_id());
 
 	// Update session
-	query("UPDATE session SET userID = 1 WHERE sID = '".session_id()."'");
+	query("UPDATE session SET userID = 1 WHERE sID = '".mysql_escape_string(session_id())."'");
 
 	//setcookie("sID", "");
 	return 1;
