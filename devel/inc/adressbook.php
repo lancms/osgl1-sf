@@ -1,8 +1,11 @@
 <?php
 
-require_once 'config/config.php';
-if(!acl_access("isCrew"))
-	nicedie($admin[noaccess]);
+require_once ('config/config.php');
+
+if (!acl_access("isCrew"))
+{
+	nicedie($admin['noaccess']);
+}
 
 $query = query("SELECT users.ID AS '".lang("ID", "addressbook", "UserID-column in SELECT in addressbook")."',
 	users.nick AS '".lang("nick", "addressbook", "nick-column in SELECT in addressbook")."',
@@ -17,19 +20,21 @@ echo "<table border=1 cellspacing=1>";
 $column_count = mysql_num_fields($query);
 
 echo "<tr>";
-for($column_num = 0;$column_num < $column_count;$column_num++) {
+for($column_num = 0;$column_num < $column_count;$column_num++)
+{
 	$field_name = mysql_field_name($query, $column_num);
 	echo "<th>$field_name</th>\n";
 }
 echo "</tr>\n\n";
-$num_rows = mysql_num_rows($query);
+$num_rows = num($query);
 /* Add data from the database */
-for($i=0;$i<mysql_num_rows($query);$i++) {
+for ($i=0;$i<num($query);$i++)
+{
 	echo "<tr>";
 	$field_number = mysql_num_fields($query);
 
-	for($y=0;$y<$field_number;$y++) {
-
+	for($y=0;$y<$field_number;$y++)
+	{
 		$k = mysql_result($query,$i,$y);
 
 		if($y==0) {
@@ -37,12 +42,9 @@ for($i=0;$i<mysql_num_rows($query);$i++) {
 		} else {
 			echo "<td>$k</td>\n";
 		}
-
 	}
 	echo "</tr>";
 }
-
-
 
 echo "</table>";
 echo "<br><br>";
