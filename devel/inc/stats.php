@@ -4,6 +4,7 @@ require_once ('config/config.php');
 
 if (!config("usepage_show_stats"))
 {
+	// FIXME: lang()
 	nicedie($msg[1]);
 }
 
@@ -74,3 +75,5 @@ echo $OthPercent;
 echo "</td></tr>";
 
 echo "</table>";
+
+?>
