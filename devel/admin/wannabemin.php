@@ -400,8 +400,8 @@ elseif($action == "ViewUsers") {
 }
 elseif($action == "DoViewUsers") {
 
-	$UserID		=	$_GET['id'];
-	$UserID		=	escape_string($UserID);
+	$UID		=	$_GET['id'];
+	$UserID		=	escape_string($UID);
 
 	if(empty($UserID)) nicedie(lang("Something is not right.", "admin_wannabemin", "Text used in wannabemin"));
 
@@ -435,7 +435,7 @@ elseif($action == "DoViewUsers") {
 	if($Type == 1) {
 
 	//$query3		=	"SELECT * FROM wannabeAlt WHERE queID = '$QueID'"; // Removed by Lak; wrong!
-	$query3 	= "SELECT * FROM wannabeAlt WHERE ID = $Ans";
+	$query3 	= "SELECT * FROM wannabeAlt WHERE ID = '$Ans'";
 	$result3 	= 	query($query3);
 
 	$var2		=	fetch($result3);
