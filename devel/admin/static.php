@@ -51,7 +51,7 @@
 	}
 	elseif(($action == "doedit") && (isset($_POST['edit'])))
 	{
-		$edittext = mysql_escape_string (stripslashes ($_POST['edittext']))
+		$edittext = mysql_escape_string (stripslashes ($_POST['edittext']));
 		$edit = mysql_escape_string ($_POST['edit']);
 		
 		if(!isset($edittext))
