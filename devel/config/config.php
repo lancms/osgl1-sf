@@ -29,14 +29,6 @@ $sitetitle = "OSGlobeLAN";
 
 
 /*
- * devel_version
- *
- * Sets current version of OSGlobeLAN.
- */
-$devel_version = "CVS";
-
-
-/*
  * sql_server
  *
  * Hostname or IP-address to the MySQL-server.
@@ -130,14 +122,6 @@ $usestats = FALSE;
 
 
 /*
- * usemap
- *
- * Seatmap to use.
- */
-$usemap = $base_path."config/defaultmap.txt";
-
-
-/*
  * seatsize
  *
  * [FIXME]
@@ -177,95 +161,6 @@ $admin['info']['nick'] = "OSGlobeLAN";
  * Name of OSGlobeLAN administrator.
  */
 $admin['info']['name'] = "OSGlobeLAN Administrator";
-
-
-/*
- * webshop_mail_to
- *
- * Who should recieve webshop-orders.
- * Default is "osglobelan@<server>".
- */
-$webshop_mail_to = "osglobelan@".$_SERVER['SERVER_NAME'];
-
-
-/*
- * webshop_display_infoline
- *
- * Information to print before sending the webshop-order.
- */
-$webshop_display_infoline = "
-									Vennligst vær oppmerksom på:
-										<br>- Å ha penger tilgjengelig når kioskpersonalet kommer.
-										<br>- At steking av pizza o.l. kan ta tid.
-										<br>- Kioskpersonalet tar kontakt via epost dersom de har spørsmål. Sjekk derfor eposten din ofte.
-									";
-
-
-
-/*
- * Seatsystem
- *
- * Do not edit unless you know what you're doing.
- */
-$seatsign[0]['name'] = "Wall";
-$seatsign[0]['color'] = "black";
-$seatsign[0]['level'] = -2;
-$seatsign[0]['sign'] = "*";
-
-$seatsign[1]['sign'] = "d";
-$seatsign[1]['name'] = "User";
-$seatsign[1]['level'] = 0;
-$seatsign[1]['color'] = "red";
-
-$seatsign[2]['sign'] = "c";
-$seatsign[2]['name'] = "Crew";
-$seatsign[2]['level'] = 1;
-$seatsign[2]['color'] = "green";
-
-$seatsign[3]['sign'] = "v";
-$seatsign[3]['name'] = "VIP";
-$seatsign[3]['level'] = -2;
-$seatsign[3]['color'] = "grey";
-
-$seatsign[4]['sign'] = "r";
-$seatsign[4]['name'] = "Reservert";
-$seatsign[4]['level'] = -2;
-$seatsign[4]['color'] = "orange";
-
-$seatsign[5]['sign'] = "-";
-$seatsign[5]['name'] = "Open";
-$seatsign[5]['color'] = "white";
-$seatsign[5]['level'] = -2;
-
-$seatsign[6]['sign'] = "D";
-$seatsign[6]['name'] = "Door";
-$seatsign[6]['color'] = "brown";
-$seatsign[6]['level'] = -2;
-
-$seatsign[7]['sign'] = "K";
-$seatsign[7]['name'] = "Kiosk";
-$seatsign[7]['color'] = "yellow";
-$seatsign[7]['level'] = -2;
-
-$seatsign[8]['sign'] = "a";
-$seatsign[8]['name'] = "Admin";
-$seatsign[8]['color'] = "orange";
-$seatsign[8]['level'] = 2;
-
-$seatsign[9]['sign'] = "+";
-$seatsign[9]['name'] = "Extra";
-$seatsign[9]['color'] = "red";
-$seatsign[9]['level'] = -2;
-
-
-/*
- * Do not touch this.
- */
-for($i=0;$i<count($seatsign);$i++) {
-        $sign = $seatsign[$i]['sign'];
-
-        $seatsign_number[$sign] = $i;
-}
 
 
 
