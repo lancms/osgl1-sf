@@ -8,6 +8,7 @@ if (isset($_GET['inc']))
 {
 	if (strchr($_GET['inc'], "."))
 	{
+		// XXX: Generic string. Should be lang()ified.
 		nicedie($msg['29']);
 		dblog(10, "User attempted to put . in GET[inc].");
 	}
