@@ -243,4 +243,16 @@ function acl_access($acl, $userID = NULL) {
 	elseif(num($sel) == 1) return 1;
 	else return 0;
 }
+
+function resolve_groupname ($uid)
+{
+	if (!isset($uid))
+	{
+		$uid = getcurrentuserid();
+	}
+
+	$q = query("SELECT groups.groupname AS 'groupname' from users, groups WHERE users.ID='".$uid."' AND users.myGroup=groups.ID");
+	$r = fetch($q);
+   return $r->groupname;
+}
 ?>

@@ -98,17 +98,16 @@ if($action == "display" && isset($viewUSER)) {
 	echo "</td></tr>";
 */
 
-	profile_table($profile[9],$rank[$row->isCrew]);
-
-	if($row->isCrew >= 1) profile_table($profile[10],$row->crewField);
-
-
+	profile_table($profile[9], resolve_groupname($row->ID));
 
 }
 
 echo "</table>";
 
-if(getuserrank() != 0) echo "<br><a href=index.php?inc=useradmin&user=$viewUSER>$profile[11]</a>";
+if(acl_access("adminUsers"))
+{
+	echo "<br><a href=index.php?inc=useradmin&user=$viewUSER>$profile[11]</a>";
+}
 
 echo "</center>";
 /*
