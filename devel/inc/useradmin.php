@@ -229,7 +229,7 @@ elseif($action == "edit") {
 
 		$cpass = crypt_pwd($pwd1);
 
-		mysql("UPDATE users SET users.password='".$cpass."' WHERE users.ID=".$editID."");
+		query("UPDATE users SET users.password='".$cpass."' WHERE users.ID=".$editID."");
 
 		refresh("index.php?inc=useradmin&mode=pwdsuccess&user=$editID", "0");
 
