@@ -1,13 +1,13 @@
 <?php
 
-require_once 'config/config.php';
+require_once ('config/config.php';)
 
 if (!config("usepage_profile"))
 {
 	nicedie($msg[9]);
 }
 
-if(!isset($_GET['action']))
+if (!isset($_GET['action']))
 {
 	$action = "display";
 
@@ -33,7 +33,7 @@ else
 
 if (($action == "display") && (isset($viewUSER)))
 {
-	$query = query("SELECT * FROM users WHERE ID = '".mysql_escape_string($viewUSER)."'");
+	$query = query("SELECT * FROM users WHERE ID = '".escape_string($viewUSER)."'");
 
 	if(num($query) == 0)
 	{
