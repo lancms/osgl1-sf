@@ -9,10 +9,9 @@ $user	=	getcurrentuserid();
 	function ifSel($AltId, $Que, $user) {
 
 	$query		= 	"SELECT * FROM wannabeUsers WHERE user = '$user' AND  queid = '$Que'";
-	$result 	= 	mysql_query($query) or
-					die(mysql_error());
+	$result 	= 	query($query);
 
-	$Sel		= 	mysql_fetch_array($result);
+	$Sel		= 	fetch_array($result);
 
 		if($Sel['ans'] == $AltId) {
 		 return "checked";
@@ -25,10 +24,9 @@ $user	=	getcurrentuserid();
 	 $list		=	"";
 
 	 $query		= 	"SELECT * FROM wannabeUsers WHERE user = '$user' AND catid = '$id'";
-	 $result 	= 	mysql_query($query) or
-					die(mysql_error());
+	 $result 	= 	query($query);
 
-	 $result	=	mysql_num_rows($result);
+	 $result	=	num($result);
 
 	    if(!$result) {
 
@@ -49,8 +47,7 @@ $user	=	getcurrentuserid();
 	 $list		=	"";
 
 	 $query		= 	"SELECT * FROM wannabeCat";
-	 $result 	= 	mysql_query($query) or
-					die(mysql_error());
+	 $result 	= 	query($query);
 
 	  while($cat = mysql_fetch_assoc($result)) {
 
@@ -75,9 +72,8 @@ $user	=	getcurrentuserid();
 	function getOldTxt($user, $queid) {
 
 	 $query		= 	"SELECT * FROM wannabeUsers WHERE user = '$user' AND queid = '$queid'";
-	 $result 	= 	mysql_query($query) or
-					die(mysql_error());
-	 $Ans		= 	mysql_fetch_array($result);
+	 $result 	= 	query($query);
+	 $Ans		= 	fetch_array($result);
 
 	 return 	$Ans["ans"];
 
@@ -125,8 +121,7 @@ $user	=	getcurrentuserid();
 	 foreach ($SelCat as $Cats) {
 
 	 $query		= 	"SELECT * FROM wannabeQue WHERE catid = '$Cats'";
-	 $result 	= 	mysql_query($query) or
-					die(mysql_error());
+	 $result 	= 	query($query);
 
 	  while($cat = mysql_fetch_assoc($result)) {
 
@@ -152,8 +147,7 @@ $user	=	getcurrentuserid();
 		} else {
 
 		$query2		= 	"SELECT * FROM wannabeAltRadio WHERE queid = '$id'";
-		$result2	= 	mysql_query($query2) or
-						die(mysql_error());
+		$result2	= 	query($query2);
 
 		while($Que = mysql_fetch_assoc($result2)) {
 
@@ -182,8 +176,7 @@ $user	=	getcurrentuserid();
 	elseif($action == "EndQue") {
 
 	$query	= 	"SELECT * FROM wannabeQue";
-	$result	= 	mysql_query($query) or
-				die(mysql_error());
+	$result	= 	query($query);
 
 	  while($Res = mysql_fetch_assoc($result)) {
 
@@ -195,25 +188,22 @@ $user	=	getcurrentuserid();
 	   	$ans		=	@$_POST[$id];
 
 		$query3		= 	"SELECT * FROM wannabeQue WHERE id = '$id'";
-		$result3	= 	mysql_query($query3) or
-						die(mysql_error());
-		$Var		= 	mysql_fetch_array($result3);
+		$result3	= 	query($query3);
+		$Var		= 	fetch_array($result3);
 
 		$queid		=	$Var['id'];
 		$catid		=	$Var['catid'];
 
 		$query4		= 	"SELECT * FROM wannabeUsers WHERE id = '$id' AND user = '$user'";
-		$result4	= 	mysql_query($query4) or
-						die(mysql_error());
-		$num		=	mysql_num_rows($result4);
+		$result4	= 	query($query4);
+		$num		=	num($result4);
 
 		if($num) {
 		 $query2 	= 	"UPDATE wannabeUsers SET ans = '$ans' WHERE queid = '$queid' AND user = '$user' AND catid = '$catid'";
 		} else {
 	     $query2 	= 	"INSERT INTO wannabeUsers (id, user, ans, queid, catid) VALUES (NULL, '$user', '$ans', '$queid', '$catid')";
 		}
-		$result2	= 	mysql_query($query2) or
-					  	die(mysql_error());
+		$result2	= 	query($query2);
 
 	   }
 
