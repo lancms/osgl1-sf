@@ -113,6 +113,13 @@ $msg['33'] = "Updating...";
 $msg['34'] = "FAQ";
 $msg['35'] = "deleted.";
 
+$partyweb['0'] = "Menuname";
+$partyweb['1'] = "Display in menu";
+$partyweb['2'] = "Display in partymode";
+$partyweb['3'] = "Delete page";
+$partyweb['4'] = "Update complete.";
+$partyweb['5'] = "New page added.";
+
 $rank[0] = "User";
 $rank[1] = "Crew";
 $rank[2] = "Admin";

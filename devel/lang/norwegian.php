@@ -113,6 +113,13 @@ $msg['33'] = "Oppdaterer...";
 $msg['34'] = "FAQ";
 $msg['35'] = "slettet.";
 
+$partyweb['0'] = "Menynavn";
+$partyweb['1'] = "Vis i meny";
+$partyweb['2'] = "Vis i partymode";
+$partyweb['3'] = "Slett siden";
+$partyweb['4'] = "Oppdatering vellykket.";
+$partyweb['5'] = "Ny side lagt til.";
+
 $rank[0] = "Deltager";
 $rank[1] = "Crew";
 $rank[2] = "Admin";
