@@ -539,12 +539,12 @@ elseif($action == "AddComment") {
 
 	if(empty($ID) || empty($Com) || empty($Like)) nicedie(lang("Did you forget something ? Like writing a comment ?", "admin_wannabemin", "Text used in wannabemin"));
 
-	$query	=	"SELECT * FROM wannabeComment WHERE user = '$user'";
+	$query	=	"SELECT * FROM `wannabecomment` WHERE `user` = '$ID' AND `by` = '$user'";
 	$result	=	query($query);
 	$num	=	num($result);
 
 	if($num != 0) {
-	 $query	=	"UPDATE `wannabecomment` SET `comment` = '$Com', `like` = '$Like' WHERE `user` = '$ID' AND `by` = '$user' LIMIT 0,1";
+	 $query	=	"UPDATE `wannabecomment` SET `comment` = '$Com', `like` = '$Like' WHERE `user` = '$ID' AND `by` = '$user'";
 	} else {
 	 $query	= 	"INSERT INTO `wannabeComment` ( `ID` , `comment` , `like` , `user` , `by` ) VALUES (NULL, '$Com', '$Like', '$ID', '$user')";
 	}
