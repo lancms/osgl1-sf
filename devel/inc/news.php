@@ -41,7 +41,7 @@ if($action == "view")
 
 		echo "<font class=newsHeader>$row->header</font>";
 		echo "<br>";
-		$queryNick = query("SELECT * FROM users WHERE ID = $row->poster");
+		$queryNick = query("SELECT * FROM users WHERE ID = '".mysql_escape_string($row->poster)."'");
 
 		$nickrow = fetch($queryNick);
 
