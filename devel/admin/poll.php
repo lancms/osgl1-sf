@@ -84,7 +84,7 @@ elseif ($action == "add")
 
 	$maxVotes = $_POST['maxV'];
 
-	$query = query("INSERT INTO pollQ SET text = '".escape_string($pollQ)."', maxVotes = '".escapestring($maxVotes)."'");
+	$query = query("INSERT INTO pollQ SET text = '".escape_string($pollQ)."', maxVotes = '".escape_string($maxVotes)."'");
 
 	refresh("admin.php?adminmode=poll", "0");
 
