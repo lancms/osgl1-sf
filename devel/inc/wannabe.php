@@ -1,156 +1,227 @@
-<?php
+<?
 require_once 'config/config.php';
 
-if(!config("usepage_wannabe"))
-{
-	nicedie($msg[1]);
-}
+$action	=	$_GET['action'];
+$user	=	getcurrentuserid();
 
-if(getcurrentuserid() == 1)
-{
-	nicedie("Hvorfor i HULESTE er du her? logg inn <b>FØRST</b>");
-}
+	## FUNCTIONS ##
 
-$action = $_GET['action'];
+	function ifSel($AltId, $Que, $user) {
 
-$q = query("SELECT * FROM users WHERE ID = '".escape_string(getcurrentuserid())."'");
-$r = fetch($q);
-$qT = query("SELECT * FROM config WHERE config = 'wannabetext'");
-$rT = fetch($qT);
-echo $rT->large;
-if(!isset($action)) {
-	echo "<table><tr><td>";
+	$query		= 	"SELECT * FROM wannabeUsers WHERE user = '$user' AND  queid = '$Que'";
+	$result 	= 	mysql_query($query) or
+					die(mysql_error());
 
-	echo "</td><td><form method=POST action=index.php?inc=wannabe&action=cyclewannabe>";
-	if($r->wannabe == "1")
-	{
-		$buttontext = $wannabe[1];
-	}
-	else
-	{
-		$buttontext = $wannabe[0];
+	$Sel		= 	mysql_fetch_array($result);
+
+		if($Sel['ans'] == $AltId) {
+		 return "checked";
+		}
+
 	}
 
-	echo "<input type=submit value='$buttontext'>";
-	echo "</form>";
-	echo "</table>";
-}
+	function CatBef($user, $id) {
 
-if((!isset($action)) && ($r->wannabe == 1))
-{
-	$q2 = query("SELECT * FROM wannabe WHERE ID = '".escape_string(getcurrentuserid())."'");
+	 $list		=	"";
 
-	$r2 = fetch($q2);
+	 $query		= 	"SELECT * FROM wannabeUsers WHERE user = '$user' AND catid = '$id'";
+	 $result 	= 	mysql_query($query) or
+					die(mysql_error());
 
-	echo "<table>";
-	echo "<form method=POST action=index.php?inc=wannabe&action=editwannabe>";
+	 $result	=	mysql_num_rows($result);
 
-	$canKioskCrew = display_checkbox("canKioskCrew", $r2->canKioskCrew);
-	profile_table($wannabe['canKioskCrew'], $canKioskCrew);
+	    if(!$result) {
 
-	$turnOn = display_checkbox("turnOn", $r2->turnOn);
-	profile_table($wannabe['turnOn'], $turnOn);
+		 $list	.=	"<input type='checkbox' name='SelCat[]' value='$id'>\n";
 
-	$canCake = display_checkbox("canCake", $r2->canCake);
-	profile_table($wannabe['canCake'], $canCake);
+		} else {
 
-	$leaderType = display_checkbox("leaderType", $r2->leaderType);
-	profile_table($wannabe['leaderType'], $leaderType);
+		 $list	.=	"<input type='checkbox' name='SelCat[]' value='$id' checked>\n<font color='red'>*</font>\n";
 
-	$canTechCrew =  display_checkbox("canTechCrew", $r2->canTechCrew);
-	profile_table($wannabe['canTechCrew'], $canTechCrew);
+		}
 
-	$canTechLinuxCrew = display_checkbox("canTechLinuxCrew", $r2->canTechLinuxCrew);
-	profile_table($wannabe['canTechLinuxCrew'], $canTechLinuxCrew);
+	 return	$list;
 
-	$karaoke = display_checkbox("karaoke", $r2->karaoke);
-	profile_table($wannabe['karaoke'], $karaoke);
-
-	$canNetCrew =  display_checkbox("canNetCrew", $r2->canNetCrew);
-	profile_table($wannabe['canNetCrew'], $canNetCrew);
-
-	$canSecCrew = display_checkbox("canSecCrew", $r2->canSecCrew);
-	profile_table($wannabe['canSecCrew'], $canSecCrew);
-
-	$canPartyCrew = display_checkbox("canPartyCrew", $r2->canPartyCrew);
-	profile_table($wannabe['canPartyCrew'], $canPartyCrew);
-	$canGameCrew = display_checkbox("canGameCrew", $r2->canGameCrew);
-	profile_table($wannabe['canGameCrew'], $canGameCrew);
-
-	$canCarryTablesCrew = display_checkbox("canCarryTablesCrew", $r2->canCarryTablesCrew);
-	profile_table($wannabe['canCarryTablesCrew'], $canCarryTablesCrew);
-
-
-	profile_table($wannabe['aboutme'], "<textarea name=aboutme cols=60 rows=15>".$r2->aboutme."</textarea>");
-
-	profile_table($wannabe['experience'], "<textarea name=experience cols=60 rows=15>".$r2->experience."</textarea>");
-	profile_table($wannabe['myRequests'], "<textarea name=myRequests cols=60 rows=15>".$r2->myRequests."</textarea>");
-
-	profile_table($wannabe['why'], "<textarea name=why cols=60 rows=15>".$r2->why."</textarea>");
-
-	echo "<tr><td></td><td><input type=submit value='Lagre'></td></tr>";
-	echo "</form></table>";
-}
-
-elseif($action == "editwannabe")
-{
-	$aboutme = $_POST['aboutme'];
-	$canKioskCrew = $_POST['canKioskCrew'];
-	$canTechCrew = $_POST['canTechCrew'];
-	$canNetCrew = $_POST['canNetCrew'];
-	$canSecCrew = $_POST['canSecCrew'];
-	$canPartyCrew = $_POST['canPartyCrew'];
-	$why = $_POST['why'];
-	$experience = $_POST['experience'];
-	$canTechLinuxCrew = $_POST['canTechLinuxCrew'];
-	$canCarryTablesCrew = $_POST['canCarryTablesCrew'];
-	$canGameCrew = $_POST['canGameCrew'];
-	$turnOn = $_POST['turnOn'];
-	$karaoke = $_POST['karaoke'];
-	$canCake = $_POST['canCake'];
-	$leaderType = $_POST['leaderType'];
-	$myRequests = $_POST['myRequests'];
-
-	$check = query("SELECT * FROM wannabe WHERE ID = '".escape_string(getcurrentuserid())."'");
-	if(num($check) == 0)
-	{
-		query("INSERT INTO wannabe SET ID = '".escape_string(getcurrentuserid())."'");
 	}
-	query("UPDATE wannabe SET
-		aboutme = '".escape_string($aboutme)."',
-		canKioskCrew = '".escape_string($canKioskCrew)."',
-		canTechCrew = '".escape_string($canTechCrew)."',
-		canNetCrew = '".escape_string($canNetCrew)."',
-		canSecCrew = '".escape_string($canSecCrew)."',
-		canPartyCrew = '".escape_string($canPartyCrew)."',
-		experience = '".escape_string($experience)."',
-		why = '".escape_string($why)."',
-		canTechLinuxCrew = '".escape_string($canTechLinuxCrew)."',
-		canCarryTablesCrew = '".escape_string($canCarryTablesCrew)."',
-		canGameCrew = '".escape_string($canGameCrew)."',
-		turnOn = '".escape_string($turnOn)."',
-		karaoke = '".escape_string($karaoke)."',
-		canCake = '".escape_string($canCake)."',
-		leaderType = '".escape_string($leaderType)."',
-		myRequests = '".escape_string($myRequests)."',
 
-		lastUpdated = '".escape_string(time())."' WHERE ID = ".escape_string((getcurrentuserid())."'"));
-	refresh("index.php?inc=wannabe", 0);
+	function listCat($user) {
 
-}
+	 $list		=	"";
 
-elseif($action == "cyclewannabe") {
-	$now = $r->wannabe;
-	if($now == 0) $tobe = 1;
-	else $tobe = 0;
+	 $query		= 	"SELECT * FROM wannabeCat";
+	 $result 	= 	mysql_query($query) or
+					die(mysql_error());
 
-	query("UPDATE users SET wannabe = '".escape_string($tobe)."' WHERE ID = '".escape_string(getcurrentuserid())."'");
-	refresh("index.php?inc=wannabe");
-}
+	  while($cat = mysql_fetch_assoc($result)) {
 
-function display_checkbox($name, $selected)
-// TODO: Move this one to functions.php
-{
-if($selected) $SELECT = "CHECKED";
-	return "<input type=checkbox name='$name' value=1 $SELECT>";
-}
+	   $id		=	$cat['id'];
+	   $name	=	$cat['name'];
+	   $info	=	$cat['info'];
+
+	   $list 	.= "
+			<tr>
+			  <td>".CatBef($user, $id)."</td>
+			  <td>$name</td>
+			  <td>$info</td>
+			</tr>
+	   ";
+
+	  }
+
+	  return 		$list;
+
+	}
+
+	function getOldTxt($user, $queid) {
+
+	 $query		= 	"SELECT * FROM wannabeUsers WHERE user = '$user' AND queid = '$queid'";
+	 $result 	= 	mysql_query($query) or
+					die(mysql_error());
+	 $Ans		= 	mysql_fetch_array($result);
+
+	 return 	$Ans["ans"];
+
+
+
+	}
+
+	## PHP ##
+
+	if(!isset($action)) {
+
+	 echo "
+		<form name='SelCat' method='post' action='index.php?inc=wannabe&action=listQue'>
+		  <table width='400'>
+			<tr>
+			  <td colspan='3'><strong>Wannabe</strong></td>
+			</tr>
+			".listCat($user)."
+			<tr>
+			  <td colspan='3'><input type='submit' name='Submit' value='Neste'></td>
+			</tr>
+			<tr>
+			  <td colspan='3'><font color='red'>*</font> = Katogorier du har søk i før.</td>
+			</tr>
+		  </table>
+		</form>
+
+	";
+
+	}
+
+	elseif($action == "listQue") {
+
+	$SelCat	=	@$_POST['SelCat'];
+
+	if(empty($SelCat)) {
+	 refresh("index.php?inc=wannabe", 0);
+	}
+
+	$list = "
+	<form name='SelQue' method='post' action='index.php?inc=wannabe&action=EndQue'>
+	<table>
+	";
+
+	 foreach ($SelCat as $Cats) {
+
+	 $query		= 	"SELECT * FROM wannabeQue WHERE catid = '$Cats'";
+	 $result 	= 	mysql_query($query) or
+					die(mysql_error());
+
+	  while($cat = mysql_fetch_assoc($result)) {
+
+	   $que		=	$cat['content'];
+	   $type	=	$cat['type'];
+	   $id		=	$cat['id'];
+
+	   $list 	.= "
+			<tr>
+			  <td>&nbsp;</td>
+			</tr>
+			<tr>
+			  <td>$que</td>
+			</tr>
+	   ";
+
+	   if(!$type) {
+	    $list 	.= "
+		 <tr>
+		   <td><textarea name='$id'>".getOldTxt($user, $id)."</textarea></td>
+		 </tr>
+		 ";
+		} else {
+
+		$query2		= 	"SELECT * FROM wannabeAltRadio WHERE queid = '$id'";
+		$result2	= 	mysql_query($query2) or
+						die(mysql_error());
+
+		while($Que = mysql_fetch_assoc($result2)) {
+
+			$Alt   = $Que['content'];
+			$AltId = $Que['id'];
+			$Quest = $Que['queid'];
+
+			$list .= "
+			<tr>
+			 <td><input type='radio' name='$id' value='$AltId'".ifSel($AltId, $Quest, $user).">$Alt</td>
+			</tr>";
+
+		 }
+		}
+	   }
+	  }
+	$list .= "
+	<tr>
+	 <td><input type='submit' name='Submit' value='Lagre'></td>
+	</tr>
+	</table>
+	</form>";
+	echo $list;
+	}
+
+	elseif($action == "EndQue") {
+
+	$query	= 	"SELECT * FROM wannabeQue";
+	$result	= 	mysql_query($query) or
+				die(mysql_error());
+
+	  while($Res = mysql_fetch_assoc($result)) {
+
+	   $id		=	$Res['id'];
+	   $post	=	@$_POST[$id];
+
+	   if(!empty($post)) {
+
+	   	$ans		=	@$_POST[$id];
+
+		$query3		= 	"SELECT * FROM wannabeQue WHERE id = '$id'";
+		$result3	= 	mysql_query($query3) or
+						die(mysql_error());
+		$Var		= 	mysql_fetch_array($result3);
+
+		$queid		=	$Var['id'];
+		$catid		=	$Var['catid'];
+
+		$query4		= 	"SELECT * FROM wannabeUsers WHERE id = '$id' AND user = '$user'";
+		$result4	= 	mysql_query($query4) or
+						die(mysql_error());
+		$num		=	mysql_num_rows($result4);
+
+		if($num) {
+		 $query2 	= 	"UPDATE wannabeUsers SET ans = '$ans' WHERE queid = '$queid' AND user = '$user' AND catid = '$catid'";
+		} else {
+	     $query2 	= 	"INSERT INTO wannabeUsers (id, user, ans, queid, catid) VALUES (NULL, '$user', '$ans', '$queid', '$catid')";
+		}
+		$result2	= 	mysql_query($query2) or
+					  	die(mysql_error());
+
+	   }
+
+	  }
+
+	  echo "Søknaden din har nå blitt oppdatert";
+
+	 }
+
+
+?>

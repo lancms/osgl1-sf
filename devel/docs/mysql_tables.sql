@@ -321,7 +321,6 @@ CREATE TABLE users (
   isHere tinyint(4) default '0',
   crewField text,
   cellphone varchar(20) default NULL,
-  wannabe smallint(1) default '0',
   seatY smallint(5) default '-1',
   street varchar(50) default NULL,
   postNr varchar(6) default NULL,
@@ -330,7 +329,6 @@ CREATE TABLE users (
   birthMONTH varchar(5) default NULL,
   birthYEAR varchar(5) default NULL,
   lastLoggedIn int(25) default '0',
-  wannabeDenied smallint(1) default '0',
   rememberMe smallint(1) default '0',
   ticketType smallint(2) default '0',
   ticketAuthorize smallint(2) default '1',
@@ -353,33 +351,6 @@ CREATE TABLE waitinglist (
 ) TYPE=MyISAM;
 
 --
--- Table structure for table `wannabe`
---
-
-DROP TABLE IF EXISTS wannabe;
-CREATE TABLE wannabe (
-  ID int(11) NOT NULL default '0',
-  aboutme text,
-  canKioskCrew smallint(1) default '0',
-  canTechCrew smallint(1) default '0',
-  canNetCrew smallint(1) default '0',
-  canSecCrew smallint(1) default '0',
-  canPartyCrew smallint(1) default '0',
-  experience text,
-  why text,
-  canTechLinuxCrew smallint(1) default '0',
-  canCarryTablesCrew smallint(1) default '0',
-  canGameCrew smallint(1) default '0',
-  turnOn smallint(1) default '0',
-  karaoke smallint(1) default '0',
-  canCake smallint(1) default '0',
-  leaderType smallint(1) default '0',
-  myRequests text,
-  lastUpdated varchar(25) default '0',
-  PRIMARY KEY  (ID)
-) TYPE=MyISAM;
-
---
 -- Table structure for table `lang`
 --
 
@@ -394,20 +365,42 @@ CREATE TABLE lang (
   PRIMARY KEY (ID)
 );
 
+CREATE TABLE `wannabeCat` (
+`id` INT( 10 ) NOT NULL AUTO_INCREMENT ,
+`name` VARCHAR( 225 ) NOT NULL ,
+`info` TEXT NOT NULL ,
+PRIMARY KEY ( `id` )
+) TYPE = MYISAM ;
 
---
--- Table structure for table `wannabeAdmin`
---
 
-DROP TABLE IF EXISTS wannabeAdmin;
-CREATE TABLE wannabeAdmin (
-  userID int(11) NOT NULL default '0',
-  adminID int(11) NOT NULL default '0',
-  shoudBeCrew smallint(1) default '0',
-  moreinfo text,
-  lastUpdated varchar(25) default '0',
-  PRIMARY KEY  (userID,adminID)
-) TYPE=MyISAM;
+CREATE TABLE `wannabeQue` (
+`id` INT( 10 ) NOT NULL AUTO_INCREMENT ,
+`content` VARCHAR( 225 ) NOT NULL ,
+`type` INT( 10 ) NOT NULL ,
+`catid` INT( 10 ) NOT NULL ,
+PRIMARY KEY ( `id` )
+) TYPE = MYISAM ;
+
+
+CREATE TABLE `wannabeAltRadio` (
+`id` INT( 10 ) NOT NULL AUTO_INCREMENT ,
+`content` VARCHAR( 225 ) NOT NULL ,
+`queid` INT( 10 ) NOT NULL ,
+PRIMARY KEY ( `id` )
+) TYPE = MYISAM ;
+
+
+CREATE TABLE `wannabeUsers` (
+`id` INT( 10 ) NOT NULL AUTO_INCREMENT ,
+`user` VARCHAR( 225 ) NOT NULL ,
+`ans` TEXT NOT NULL ,
+`queid` INT( 10 ) NOT NULL ,
+`catid` INT( 10 ) NOT NULL ,
+PRIMARY KEY ( `id` )
+) TYPE = MYISAM ;
+
+
+
 
 INSERT INTO users SET ID = 1, name = 'Guestuser', nick = 'NoUser', myGroup = 0;
 INSERT INTO users SET ID = 2, myGroup = 3, name= 'Admin', nick = 'admin', password = '21232f297a57a5a743894a0e4a801fc3';
