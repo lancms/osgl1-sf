@@ -368,7 +368,16 @@ elseif ($action == "ViewUsers")
 
 			$list .= "
 				<tr>
-					<td><a href='admin.php?adminmode=wannabemin&action=DoViewUsers&id=$ID'>$ID</a></td>
+					"; //<td><a href='admin.php?adminmode=wannabemin&action=DoViewUsers&id=$ID'>$ID</a></td>
+					$q = query("SELECT * FROM wannabeComment WHERE user = ".escape_string($UInfo->ID)." AND approve != 0");
+					$image = NULL;
+					while($r = fetch($q)) {
+						if($r->approve == 1) $image .= "<img src=images/yes.gif>";
+						elseif($r->approve == 2) $image .= "<img src=images/no.gif>";
+						
+					}
+					$list .= "
+					<td>$image</td>
 					<td><a href='admin.php?adminmode=wannabemin&action=DoViewUsers&id=$ID'>$Nick</td>
 					<td>".$UInfo->name."</a></td>
 				</tr>
