@@ -3,7 +3,7 @@ require_once 'config/config.php';
 include $base_path."style/top.php";
 
 if(!acl_access("displayAdmin")) {
-	die($admin[noaccess]);
+	nicedie($admin['noaccess']);
 }
 
 if(isset($_GET['adminmode'])) {

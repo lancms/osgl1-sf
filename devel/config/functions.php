@@ -255,4 +255,12 @@ function resolve_groupname ($uid)
 	$r = fetch($q);
    return $r->groupname;
 }
+
+function nicedie ($reason = "Something bad happened. Please contact the administrators.")
+{
+	echo $reason;
+   include $base_path."style/bottom.php";
+	die();
+}
+
 ?>
