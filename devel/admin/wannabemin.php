@@ -435,7 +435,7 @@ elseif($action == "DoViewUsers") {
 	if($Type == 1) {
 
 	//$query3		=	"SELECT * FROM wannabeAlt WHERE queID = '$QueID'"; // Removed by Lak; wrong!
-	$query3 	= "SELECT * FROM wannabeAlt WHERE ID = $ans";
+	$query3 	= "SELECT * FROM wannabeAlt WHERE ID = $Ans";
 	$result3 	= 	query($query3);
 
 	$var2		=	fetch($result3);
