@@ -62,7 +62,7 @@ elseif (($action == "verify") && (isset ($_GET['uid'])))
 	echo lang ("Please enter the verificationcode that was sent to your emailaddress.", "root_do", "");
 	echo "<br>";
 	// XXX: Perhaps we should provide admin-email here?
-	echo lang ("If you have not recieved your verificationcode within a reasonable time, please contact the administrators.", "root_do", "Explains what to do if you've not recieved your verificationcode");
+	echo lang ("If you have not recieved your verificationcode within a reasonable time, please contact the administrators.", "root_do", "Explains what to do if youve not recieved your verificationcode");
 	?>
 	<form method=post action=do.php?action=doverify>
 	<input type=text name=verifycode>
