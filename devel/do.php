@@ -98,8 +98,8 @@ if($action=="login") {
                 or nicedie(lang("Could not send EMail, check the server config!", "root_do", "Text to display when mail could not be sent from do.php?action=resendValidationEMail"));
 } else {
 	include $base_path."style/top.php";
-	echo "No such function here";
-	nicedie();
+
+	nicedie("No such function here");
 }
 
 include $base_path."style/bottom.php";
