@@ -89,8 +89,8 @@ $msg[21] = "Members online: ";
 $msg[22] = "Guests online: ";
 $msg[23] = "Enter the verificationcode sent to your emailaddress.";
 $msg[24] = "If you have not recieved any verificationcode within a reasonable time, please contact the administrators.";
-
-
+$msg[25] = "For some strange reason you do not have access to this";
+$msg[26] = "hmmm, nope; no such thing there";
 $rank[0] = "User";
 $rank[1] = "Crew";
 $rank[2] = "Admin";
@@ -224,7 +224,14 @@ $true_false[1] = "Yes";
 
 $clan[0] = "These players have joined this compo :";
 $clan[1] = "This clan has joined these compos :";
-$clan[2] = "Clan name :";
+$clan[2] = "Clan name:";
+$clan[3] = "You are not moderator for any clans :)";
+$clan[4] = "This is a description of my clan";
+$clan[5] = "Add Clan";
+$clan[6] = "<br>Hold on, and you will be redirected to the site";
+$clan[7] = "This clan allready exists";
+$clan[8] = "Save Clan";
+$clan[9] = "Clan Updated";
 
 $mail[0] = "You have been registered as a user on GL-DEVEL!";
 $mail[1] = "$admin[contact][mail]";

@@ -89,6 +89,8 @@ $msg[21] = "Medlemmer online: ";
 $msg[22] = "Gjester online: ";
 $msg[23] = "Verifiser epostadressen din med verifiseringskoden du har fått tilsendt.";
 $msg[24] = "Hvis du ikke har fått tilsendt noen verifiseringskode, kontakt administratorene.";
+$msg[25] = "Du har ikke tilgang til dette av en eller annen merkelig grunn...";
+$msg[26] = "hmmm, nope; ingen slike ting der";
 
 $rank[0] = "Deltager";
 $rank[1] = "Crew";
@@ -223,7 +225,14 @@ $true_false[1] = "Ja";
 
 $clan[0] = "Disse spillerene er med i denne compoen :";
 $clan[1] = "Denne klanen er med i disse compoene :";
-$clan[2] = "Klan navn :";
+$clan[2] = "Klan navn:";
+$clan[3] = "Du er ikke moderator for noen klaner :)";
+$clan[4] = "Dette er en beskrivelse av klanen min";
+$clan[5] = "Legg til klanen";
+$clan[6] = "Vennligst vent, du vil bli videresendt til siden"
+$clan[7] = "Denne klanen eksisterer allerede"
+$clan[8] = "Lagre klan";
+$clan[9] = "Klanen er oppdatert";
 
 $mail[0] = "Du har blitt registrert som bruker på GlobeLAN 7!";
 $mail[1] = "$admin[contact][mail]";
