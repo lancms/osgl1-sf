@@ -173,7 +173,7 @@ $admin['6'] = "News";
 $admin['7'] = "Accessmanagement";
 $admin['8'] = "Compos";
 $admin['9'] = "Compopolls";
-$admin['9'] = "System configuration";
+$admin['10'] = "System configuration";
 
 /* Messages in seat-system */
 $seat['0'] = "Not opened seat";

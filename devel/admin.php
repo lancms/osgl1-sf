@@ -28,7 +28,7 @@ if(acl_access("ACL")) echo "<br><a href=admin.php?adminmode=acl>".$admin['7']."<
 if(acl_access("compomaster")) echo "<br><a href=admin.php?adminmode=compomaster>".$admin['8']."</a>";
 if(acl_access("compopoll")) echo "<br><a href=admin.php?adminmode=compopolladmin>".$admin['9']."</a>";
 
-if(acl_access("config")) echo "<br><br><a href=admin.php?adminmode=config>".$admin['10']."</a>";
+if(acl_access("config")) echo "<br><a href=admin.php?adminmode=config>".$admin['10']."</a>";
 
 
 } elseif($adminmode != "") {

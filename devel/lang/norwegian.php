@@ -171,7 +171,7 @@ $admin['6'] = "Nyheter";
 $admin['7'] = "Tilgangsrettigheter";
 $admin['8'] = "Compoer";
 $admin['9'] = "Compoavstemninger";
-$admin['9'] = "Systemkonfigurasjon";
+$admin['10'] = "Systemkonfigurasjon";
 
 /* Messages in seat-system */
 $seat['0'] = "Ikke åpnet plass";
