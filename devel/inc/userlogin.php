@@ -29,7 +29,7 @@ elseif($action == "main") {
 	$search = $_REQUEST['search'];
 	
 	
-	$query = mysql_query("SELECT * FROM users WHERE ID != 1 AND nick LIKE '%$search%' OR ID != 1 AND name LIKE '%$search%'") or nicedie(mysql_error());
+	$query = query("SELECT * FROM users WHERE ID != 1 AND nick LIKE '%$search%' OR ID != 1 AND name LIKE '%$search%'");
 #echo num($query);
 #die();
 	$num = mysql_num_rows($query);
@@ -51,7 +51,7 @@ elseif($action == "main") {
 		echo ">$tickettype[$i]</option>";
 		}
 		echo "<input type=hidden name=userID value=$row->ID>";
-		echo "</td><td><input type=submit value='Endre billett'>";
+		echo "</td><td><input type=submit value='".$msg['38']."'>";
 		echo "</form></td>";
 		if($row->isHere == 0) echo "<td bgcolor=green><a href=index.php?inc=userlogin&action=login&user=$row->ID>$form[41]</a>";
 		else echo "<td bgcolor=red><a href=index.php?inc=userlogin&action=logout&user=$row->ID>$form[42]</a>";
@@ -59,7 +59,7 @@ elseif($action == "main") {
 		echo "</td><td>";
 		echo $row->name;
 		echo "</td><td>";
-		if($row->seatX == -1 && $row->seatY == -1) $hasSeat = "nei";
+		if($row->seatX == -1 && $row->seatY == -1) $hasSeat = $msg['39'];
 		else $hasSeat = $row->seatX." / ".$row->seatY;
 		echo $hasSeat;
 		echo "</td><td>";

@@ -116,6 +116,8 @@ $msg['34'] = "FAQ";
 $msg['35'] = "slettet.";
 $msg['36'] = "Lagt til.";
 $msg['37'] = "Søk gjennom nick eller navn";
+$msg['38'] = "Endre billett";
+$msg['39'] = "No seat";
 
 $partyweb['0'] = "Menynavn";
 $partyweb['1'] = "Vis i meny";
@@ -381,6 +383,11 @@ $compopoll[2] = "Nja";
 $compopoll[3] = "Kanskje";
 $compopoll[4] = "Gjerne";
 $compopoll[5] = "SELVFØLGELIG!!!"; // 5 points are given!
+
+/* The diffrent tickets a person may have */
+$tickettype[0] = "Ingen billett"; // the default, should be "not ticket"
+$tickettype[1] = "Normal billett";
+$tickettype[2] = "Ingen PC";
 
 
 function mail_body($random) {

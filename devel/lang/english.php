@@ -116,6 +116,8 @@ $msg['34'] = "FAQ";
 $msg['35'] = "deleted.";
 $msg['36'] = "Added";
 $msg['37'] = "Search by nick or name";
+$msg['38'] = "Change ticket";
+$msg['39'] = "No seat";
 
 $partyweb['0'] = "Menuname";
 $partyweb['1'] = "Display in menu";
@@ -383,6 +385,10 @@ $compopoll[3] = "Perhaps";
 $compopoll[4] = "Please";
 $compopoll[5] = "OF COURSE!!!"; // 5 points are given!
 
+/* The diffrent tickets a person may have */
+$tickettype[0] = "No ticket"; // the default, should be "not ticket"
+$tickettype[1] = "Normal ticket";
+$tickettype[2] = "No PC";
 
 
 function mail_body($random) {
