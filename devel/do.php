@@ -19,7 +19,7 @@ if($action=="login") {
 
     $res = log_in($username, $pwd);
 
-    elseif($res == -1) // the password is incorrect
+    if($res == -1) // the password is incorrect
     {
         include $base_path."style/top.php";
         echo "The password you entered is incorrect for this user";
