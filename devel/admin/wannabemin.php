@@ -462,7 +462,7 @@ elseif($action == "DoViewUsers") {
 
 	  $list	   .= "
 	  <form name='AddComment' method='post' action='admin.php?adminmode=wannabemin&action=AddComment'>
-	  <input type='hidden' name='UserID' value='$UserID'>
+	  <input type='hidden' name='UserID' value='$UID'>
 	   <tr>
 		<td><b>".lang("Add comment:", "admin_wannabemin", "Text to display in wannabemin&action=DoViewUsers")."</b></td>
 	   </tr>
@@ -487,7 +487,7 @@ elseif($action == "DoViewUsers") {
 
 	// XXX: I'm confused, how does $UserID get set?
 	// BTW: Consistency is a bird, what?
-	$query = sprintf ("SELECT * FROM wannabeComment WHERE user = %s", escape_string($UserID));
+	$query = sprintf ("SELECT * FROM wannabeComment WHERE user = %s", escape_string($UID));
 	$q = query($query);
   echo "<table>";
   while($r = fetch($q)) {
