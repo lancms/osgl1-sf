@@ -3,7 +3,7 @@
 require 'config/config.php';
 
 if(getuserrank() != 2) 
-	die($admin[noaccess]);
+	nicedie($admin[noaccess]);
 
 $action = $_GET['action'];
 
@@ -17,9 +17,10 @@ if(!isset($action)) {
 } elseif($action == "add") {
 	$text = $_POST['text'];
 	
-	if(empty($text) || !isset($text)) die("You should probably put *something* inside your quote....");
+	if(empty($text) || !isset($text)) 
+		nicedie($form['72']);
 	
-	mysql_query("INSERT INTO random SET text = '$text'") or die(mysql_error());
-	echo "Added";
+	query("INSERT INTO random SET text = '$text'");
+	echo $msg['36'];
 	refresh("admin.php?adminmode=random", 0);
 }

@@ -74,6 +74,7 @@ $form['68'] = "Name of the compo";
 $form['69'] = "Lacking name of the compo.";
 $form['70'] = "Number of players on each team";
 $form['71'] = "Number of teams in each round";
+$form['72'] = "Lacking content.";
 
 /* Diffrent kinds of messages..... */
 $msg[0] = "Logged in as: ";
@@ -112,6 +113,7 @@ $msg['32'] = "Back to the list.";
 $msg['33'] = "Updating...";
 $msg['34'] = "FAQ";
 $msg['35'] = "deleted.";
+$msg['36'] = "Added";
 
 $partyweb['0'] = "Menuname";
 $partyweb['1'] = "Display in menu";
