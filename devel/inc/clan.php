@@ -1,6 +1,7 @@
 <?php
 require_once 'config/config.php';
-if(!config("usepage_compo")) die("Vi bruker IKKE compooppsettet, nei!");
+if(!config("usepage_compo"))
+	nicedie($msg['1']);
 
 $action = $_GET['action'];
 
@@ -20,7 +21,7 @@ if(!isset($action)) {
 	<input type=submit value='<?php echo $clan[5]; ?>'>
 	</form>
 	<?php
-	} // end form hvis man har mindre enn fire klaner
+	} // end if(num($q) < 3)
 	
 }
 
@@ -60,12 +61,15 @@ elseif($action == "edit" && isset($_GET['edit'])) {
 
 elseif($action == "doedit" && isset($_GET['edit'])) {
 	$edit = $_GET['edit'];
-	if(!mayEditClan($edit)) die($msg[25]);
+	if(!mayEditClan($edit))
+		nicedie($msg['25']);
+	
 	$name = $_POST['name'];
 	$password = $_POST['password'];
 	$about = $_POST['about'];
 	$test = query("SELECT * FROM Clan WHERE name LIKE '$name' AND ID != $edit");
-	if(num($test) != 0) die($clan7);
+	if(num($test) != 0)
+		nicedie($clan7);
 	
 	query("UPDATE Clan SET name = '$name',
 			password = '$password',
@@ -75,4 +79,4 @@ elseif($action == "doedit" && isset($_GET['edit'])) {
 	refresh("index.php?inc=clan", 2);
 }
 
-else echo "hmmm, nope; ingen slike ting der";
+else nicedie();
