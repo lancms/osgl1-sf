@@ -55,7 +55,7 @@ function verify($mode="register", $userid, $nick, $firstname, $lastname, $email=
 
     elseif (($mode == "register") && ($email == "")) // check there is an e-mail
         return 9;
-    
+
 	 elseif(($mode == "register") && (strlen($password) < $min_pass_length)) // check the length of the password.
         return 10;
 
@@ -67,7 +67,7 @@ function verify($mode="register", $userid, $nick, $firstname, $lastname, $email=
 
 	elseif (($firstname == "") || ($lastname == ""))
 		return 12;
-		
+
 	elseif ((preg_match('/[[:digit:]]/', $firstname)) || (preg_match('/[[:digit:]]/', $lastname)))
 	 	return 12;
 
@@ -76,7 +76,7 @@ function verify($mode="register", $userid, $nick, $firstname, $lastname, $email=
 			$query = query ("SELECT ID FROM users WHERE nick = '".escape_string($nick)."'");
 			$fetch = fetch ($query);
 			$num = num ($query);
-			
+
 			if ($num == 0)
 			{
 				return "allowed";
@@ -167,7 +167,7 @@ function fetch_array($q) {
 }
 
 function escape_string($var) {
-	mysql_escape_string($var);
+	mysql_real_escape_string($var);
 	return $var;
 }
 
@@ -201,7 +201,7 @@ function config($config, $value = "NOTSET")
 		{
 			return FALSE;
 		}
-		
+
 		elseif ($object->value == 0)
 		{
 			return FALSE;
