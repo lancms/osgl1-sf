@@ -312,7 +312,6 @@ CREATE TABLE users (
   EMail varchar(50) NOT NULL default '',
   userDesign varchar(25) NOT NULL default 'default',
   password varchar(60) NOT NULL default '',
-  isCrew tinyint(1) NOT NULL default '0',
   verified int(6) default NULL,
   registered int(25) default '0',
   seatX int(4) default '-1',

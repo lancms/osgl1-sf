@@ -112,19 +112,19 @@ function getcurrentuserid()
 	return $uid;
 }
 
-
+/* No longer used
 function getuserrank()
 // TODO: ACL!
 {
 	$user = getcurrentuserid();
 
 	$query = query("SELECT isCrew FROM users WHERE ID = '".escape_string($user)."'");
-	
+
 	$row = fetch_array($query);
 
 	return $row[0];
 }
-
+*/
 
 // log_in(nick, password) retrieves the user ID from nick and logs the user in the database.
 
@@ -167,7 +167,7 @@ function log_in($nick, $password)
 
 	$dbs = query("UPDATE session SET userID = '".escape_string($uid)."' WHERE sID = '".escape_string($sid)."'"); // update database
 	query("UPDATE users SET lastLoggedIn = '".escape_string(time())."' WHERE ID = '".escape_string($uid)."'");
-	
+
 	dblog(4, $sid."::".$uid);
 
 	return 1;
