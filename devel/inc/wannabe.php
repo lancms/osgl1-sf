@@ -161,7 +161,7 @@ elseif($action == "EndQue") {
 		}
 		$result2	= 	query($query2);
 
-		$query3		=	"UPDATE users SET wannabe = '1' WHERE ID = '$user'";
+		query("UPDATE users SET wannabe = '1' WHERE ID = '$user'"); // Just as easy
 		$result4	=	query($query);
 
 	   }
