@@ -68,22 +68,27 @@ if($action=="login") {
 
     $uid = $_POST['uid'];
     $my_userID = $uid;
-    db_connect();
     $query = query("SELECT users.verified FROM users WHERE ID=".$my_userID."");
     $result = fetch($query);
 
-    if($result->verified == $_POST['verifycode']) {
-
-        include $base_path."style/top.php";
-        echo $msg[3];
-        $query = query("UPDATE users SET users.verified=0 WHERE ID=".$my_userID."");
-        $sID = $_COOKIE[$cookiename];
-        $login = query("UPDATE session SET userID=".$my_userID." WHERE sID='".$sID."'");
-    }
-	 else
-	 {
-        echo $msg[4];
-    }
+	if (($result->verified == "0") || ($result->verified == NULL))
+	{
+		require_once ($base_path."style/top.php");
+		$errmsg = lang ("User already verified.", "root_do", "Text to display to already verified users");
+		nicedie ($errmsg);
+	}
+	elseif ($result->verified == $_POST['verifycode'])
+	{
+		include $base_path."style/top.php";
+		echo $msg[3];
+		$query = query("UPDATE users SET users.verified=0 WHERE ID=".$my_userID."");
+		$sID = $_COOKIE[$cookiename];
+		$login = query("UPDATE session SET userID=".$my_userID." WHERE sID='".$sID."'");
+	}
+	else
+	{
+		echo $msg[4];
+	}
 
 } elseif($action == "resendValidationMail") {
 	$uid = $_GET['uid'];
