@@ -1,7 +1,8 @@
 <?php
 require_once 'config/config.php';
-
+if(!acl_access("ACL")) die($admin[noaccess]);
 $action = $_GET['action'];
+$edit = $_GET['edit'];
 
 if(!isset($action)) {
 	$q = query("SELECT * FROM groups");
@@ -9,6 +10,10 @@ if(!isset($action)) {
 	while($r = fetch($q)) {
 		echo "<tr><td>";
 		echo "<a href=admin.php?adminmode=acl&action=edit&edit=$r->ID>$r->groupname</a>";
+		echo "</td><td>";
+		echo "<a href=admin.php?adminmode=acl&action=rename&edit=$r->ID>Rename</a>";
+		echo "</td><td>";
+		echo "<a href=admin.php?adminmode=acl&action=delete&edit=$r->ID>Delete</a>";
 		echo "</td></tr>";
 	}
 	echo "</table>";
@@ -29,7 +34,7 @@ elseif($action == "add") {
 
 elseif($action == "edit") {
 	echo "<a href=admin.php?adminmode=acl>Tilbake til Gruppeadmin</a><br>";
-	$edit = $_GET['edit'];
+	
 	echo "<form method=POST action=admin.php?adminmode=acl&action=updateGroup&edit=$edit>";
 	echo "<table>";
 	for($i = 0;$i<count($acl);$i++) {
@@ -68,4 +73,36 @@ elseif($action == "updateGroup") {
 		
 	} // End for-loop
 	refresh("admin.php?adminmode=acl&action=edit&edit=$edit", 0);
+} 
+
+elseif($action == "delete" && isset($edit)) {
+$confirm = $_GET['confirm'];
+	if($confirm == "YES") {
+		query("DELETE FROM groups WHERE ID = $edit");
+		query("DELETE FROM acls WHERE groupID = $edit");
+		query("UPDATE users SET myGroup = 1 WHERE myGroup = $edit");
+		refresh("admin.php?adminmode=acl", 2);
+		echo "Group deleted";
+	}
+	else {
+		$q = query("SELECT * FROM groups WHERE ID = $edit");
+		$r = fetch($q);
+		echo "Delete group: ".$r->groupname."?";
+		echo "<br>";
+		echo "<a href=admin.php?adminmode=acl&action=delete&edit=$edit&confirm=YES>Yes</a> - ";
+		echo "<a href=admin.php?adminmode=acl>No</a>";
+	}
+	
+}
+elseif($action == "rename" && isset($edit)) {
+	$q = query("SELECT * FROM groups WHERE ID = $edit");
+	$r = fetch($q);
+	echo "<form method=POST action=admin.php?adminmode=acl&action=dorename&edit=$edit>\n";
+	echo "<input type=text name=name value='$r->groupname'><input type=submit value='Change name'>";
+	echo "</form>";
+} elseif($action == "dorename" && isset($edit)) {
+	$newName = $_POST['name'];
+	query("UPDATE groups SET groupname = '$newName' WHERE ID = $edit");
+	echo "Groupname changed to $newName";
+	refresh("admin.php?adminmode=acl", 2);
 }
