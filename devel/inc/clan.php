@@ -4,6 +4,7 @@ if(!config("usepage_compo"))
 	nicedie($msg['1']);
 
 $action = $_GET['action'];
+if(getcurrentuserid() == 1) nicedie(lang("You have to be logged in to view this page!", "inc_clan", "Error-msg to display in inc/clan if you are not logged in"));
 
 
 if(!isset($action)) {
@@ -22,7 +23,7 @@ if(!isset($action)) {
 	</form>
 	<?php
 	} // end if(num($q) < 3)
-	
+
 }
 
 elseif($action == "addclan") {
@@ -30,7 +31,7 @@ elseif($action == "addclan") {
 	$password = $_POST['password'];
 	$cpass = crypt_pwd($password);
 	$about = addslashes($_POST['about']);
-	
+
 	$test = query("SELECT * FROM Clan WHERE name LIKE '$name'");
 	if(num($test) != 0) die($clan[7]);
 	query("INSERT INTO Clan SET name = '$name',
@@ -46,7 +47,7 @@ elseif($action == "edit" && isset($_GET['edit'])) {
 	if(!mayEditClan($edit)) die($msg[25]);
 	$q = query("SELECT * FROM Clan WHERE ID = ".$edit);
 	$r = fetch($q);
-	
+
 	echo "<table><form method=POST action=index.php?inc=clan&action=doedit&edit=$r->ID>";
 	echo "<tr><td>";
 	echo "$clan[2]";
@@ -63,14 +64,14 @@ elseif($action == "doedit" && isset($_GET['edit'])) {
 	$edit = $_GET['edit'];
 	if(!mayEditClan($edit))
 		nicedie($msg['25']);
-	
+
 	$name = $_POST['name'];
 	$password = $_POST['password'];
 	$about = $_POST['about'];
 	$test = query("SELECT * FROM Clan WHERE name LIKE '$name' AND ID != $edit");
 	if(num($test) != 0)
 		nicedie($clan7);
-	
+
 	query("UPDATE Clan SET name = '$name',
 			password = '$password',
 			about = '$about'
