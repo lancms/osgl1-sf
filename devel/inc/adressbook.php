@@ -30,9 +30,6 @@ for($i=0;$i<mysql_num_rows($query);$i++) {
 
 		if($y==0) {
 			echo "<td><a href=index.php?inc=profile&uid=$k>$k</a></td>\n";
-		} elseif($y==2) {
-			echo "<td>$rank[$k]</td>";
-
 		} else {
 			echo "<td>$k</td>\n";
 		}
