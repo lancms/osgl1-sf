@@ -1,0 +1,46 @@
+### OSGlobeLAN ###
+
+http://www.sourceforge.net/projects/osglobelan
+
+## Introduction ##
+
+First of all, this is _not_ a finished release.
+There are bugs, lacking features and unfinished documentation.
+
+This project was started by Lars Åge (laaknor) and Jarle (cronoman) sometime to fill the need for a registration system for GlobeLAN.
+[This is a guess, I have no idea, actually... Historic input, Lars Åge? :-) [FIXME]]
+
+The project has grown, so has the team working on it, and a SourceForge project was started to make the project public and to manage it properly.
+
+
+## License ##
+
+This project is licensed under the General Public License (GPL), version 2 or later.
+However, you are _not_ allowed to use this software if the purpose of your LAN-party/computerparty is to make money.
+These parties should be held for fun, and we actually refuse to help anyone not sharing this idea.
+
+
+## Installing ##
+
+You'll find detailed instructions for installing OSGlobeLAN in docs/INSTALL.
+
+
+## Customizing and setup ##
+
+Details about how to customize the system is available in docs/CUSTOMIZE.
+
+
+## Bugs, featurerequests, contact and assistance ##
+
+We are a registrered project at SourceForge.Net and we use their system for bugtracking, RFEs, mailinglists, CVS and so on.
+
+You'll find all this at http://www.sourceforge.net/projects/osglobelan
+
+## Credits ##
+
+The current team list is available at http://sourceforge.net/projects/osglobelan.
+
+Besides whats mentioned in the licence (GPLv2), we require no additional credits...
+You would however propably like to mention our project site, so that your users will know who to contact with bugsreports and so on. :-)
+
+By the way, if you find this project interesting, please let us know that you're using it, or you could even invite us to your party. ;-)
