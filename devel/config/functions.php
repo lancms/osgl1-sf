@@ -273,8 +273,9 @@ function resolve_groupname ($uid)
 
 function nicedie ($reason = "Something bad happened. Please contact the administrators.")
 {
+	require_once ($base_path."style/top.php");
 	echo $reason;
-   include $base_path."style/bottom.php";
+   require_once ($base_path."style/bottom.php");
 	die();
 }
 
