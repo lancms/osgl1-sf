@@ -18,13 +18,14 @@ if (!isset($action))
 
 	$var = fetch($result);
 
-	$Agree = $var->wannabe;
+	//$Agree = $var->wannabe;
 
-	if ($Agree == 1)
+	if ($var->wannabe == 1)
 	{
-		// XXX: Uh, recycling variables, are we?
 		$Agree = " checked";
+		$query = "SELECT * FROM wannabeQue";
 	}
+	else $query = "SELECT * FROM wannabeQue WHERE 0"; // Not showing any questions
 
 	$list = "
 	<form name='SelQue' method='post' action='index.php?inc=wannabe&action=EndQue'>
@@ -36,8 +37,8 @@ if (!isset($action))
 	   <td><input type='checkbox' name='Agree' value='1'".$Agree.">".lang("Yes, I want to be a crew member.", "inc_wannabe", "Text to display in wannabe")."<br><br></td>
 	  </tr>
 	 ";
-
-	$query = "SELECT * FROM wannabeQue";
+	
+	//$query = "SELECT * FROM wannabeQue";
 	$result = query($query);
 
 	while ($var = fetch($result))
@@ -118,6 +119,9 @@ elseif ($action == "EndQue")
 	
 	if ($Agree == 1)
 	{
+		// Shortcut?
+		$q4 = sprintf("UPDATE users SET wannabe = '1' WHERE ID = %s", escape_string($user)); // Just as easy
+		$result4 = query($q4);
 		$query = "SELECT * FROM wannabeQue";
 		$result = query($query);
 
@@ -128,7 +132,8 @@ elseif ($action == "EndQue")
 
 			if (empty($post))
 			{
-				echo lang("Please answer all the questions!<br>\n", "admin_wannabemin", "Text used in wannabemin");
+				// Ugly; ut we do not care if the user has answered the question...d
+				//echo lang("Please answer all the questions!<br>\n", "admin_wannabemin", "Text used in wannabemin");
 			}
 
 			if (!empty($post))
@@ -150,18 +155,18 @@ elseif ($action == "EndQue")
 				}
 				// XXX: This part need some explanation!
 				$result2 = query ($query2);
-				// Shortcut?
-				query (sprintf("UPDATE users SET wannabe = '1' WHERE ID = %s", escape_string($user))); // Just as easy
-				$result4 = query($query);
+				
 		   }
 		}
 		echo lang("Updated !", "inc_wannabe", "Text to display in wannabe");
+		refresh("index.php?inc=wannabe", 2);
 	}
 	else
 	{
 		echo lang("Updated: You will not be a crew member.", "inc_wannabe", "Text to display in wannabe");
 		// Shortcut?
 		query(sprintf("UPDATE users SET wannabe = '0' WHERE ID = %s", escape_string($user)));
+		refresh("index.php?inc=wannabe", 2);
 	}
 }
 ?>
