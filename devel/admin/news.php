@@ -10,15 +10,15 @@ if(isset($_GET['action'])) {
 } else {
 	$action = "list";
 }
-$editID = $_GET['editID'];
+$editID = mysql_escape_string ($_GET['editID']);
 
 if($action == "add") {
 
-	$header = $_POST['header'];
+	$header = mysql_escape_string ($_POST['header']);
 
-	$text = $_POST['text'];
+	$text = mysql_escape_string ($_POST['text']);
 
-	$me = getcurrentuserid();
+	$me = mysql_escape_string (getcurrentuserid());
 
 	$query = query("INSERT INTO news SET header = '$header', text = '$text', poster = $me");
 
