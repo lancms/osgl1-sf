@@ -1,10 +1,10 @@
 <?php
 
 require_once 'config/config.php';
-if(!acl_access("isCreww"))
+if(!acl_access("isCrew"))
 	die($admin[noaccess]);
 
-$query = mysql_query("SELECT ID,nick,isCrew,crewField,cellphone,EMail FROM users WHERE isCrew != 0") or die(mysql_error());
+$query = query("SELECT users.ID AS 'ID', users.nick AS 'Nick', groups.groupname AS 'Group', users.EMail AS 'Email', users.cellphone AS 'Phonenumber', users.street AS 'Address', CONCAT(users.postNr, ' ', users.postPlace) AS 'Zipcode' FROM users, groups, acls WHERE users.myGroup=groups.ID AND acls.groupID=groups.ID AND acls.access='listaddress' AND acls.value=1 GROUP BY users.ID ORDER BY users.ID");
 
 $num = mysql_num_rows($query);
 
