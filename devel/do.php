@@ -75,8 +75,8 @@ elseif (($action == "verify") && (isset ($_GET['uid'])))
 elseif($action == "doverify")
 {
 	$uid = $_POST['uid'];
-	$my_userID = mysql_escape_string ($uid);
-	$query = query("SELECT users.verified FROM users WHERE ID=".$my_userID."");
+	$my_userID = $uid;
+	$query = query("SELECT users.verified FROM users WHERE ID='".escape_string($my_userID)."'");
 	$result = fetch($query);
 
 	if (($result->verified == "0") || ($result->verified == NULL))
@@ -88,9 +88,9 @@ elseif($action == "doverify")
 	{
 		require_once ($base_path."style/top.php");
 		echo $msg[3];
-		$query = query("UPDATE users SET users.verified=0 WHERE ID=".$my_userID."");
+		$query = query("UPDATE users SET users.verified=0 WHERE ID='".escape_string($my_userID)."'");
 		$sID = $_COOKIE[$cookiename];
-		$login = query("UPDATE session SET userID=".$my_userID." WHERE sID='".mysql_escape_string ($sID)."'");
+		$login = query("UPDATE session SET userID=".$my_userID." WHERE sID='".escape_string ($sID)."'");
 	}
 	else
 	{
@@ -100,7 +100,7 @@ elseif($action == "doverify")
 elseif($action == "resendValidationMail")
 {
 	$uid = $_GET['uid'];
-	$q = query("SELECT * FROM users WHERE ID = '".mysql_escape_string($uid)."'");
+	$q = query("SELECT * FROM users WHERE ID = '".escape_string($uid)."'");
 	$r = fetch($q);
 	mail($r->EMail, $mail[0], mail_body($r->verified), "From: ".$mail[2])
                 or nicedie(lang("Could not send EMail, check the server config!", "root_do", "Text to display when mail could not be sent from do.php?action=resendValidationEMail"));
