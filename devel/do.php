@@ -49,6 +49,7 @@ if($action=="login") {
 
 } elseif($action=="verify") {
     include $base_path."style/top.php";
+    $uid = $_GET['uid']
     ?>
 	 <?php
 	 echo $msg[23];
@@ -61,6 +62,8 @@ if($action=="login") {
     <input type=hidden value='<?php echo $_GET["uid"]; ?>' name="uid">
     </form>
 	 <?php
+	 echo "<br><br>";
+	 echo "<a href=do.php?action=resendValidationMail&uid=$uid>".lang("Resend validation EMail", "root_do", "Linktext to resend validation EMail")."</a>";
 } elseif($action=="doverify") {
 
     $uid = $_POST['uid'];
@@ -82,7 +85,12 @@ if($action=="login") {
         echo $msg[4];
     }
 
-
+} elseif($action == "resendValidationMail") {
+	$uid = $_GET['uid'];
+	$q = query("SELECT * FROM users WHERE ID = $uid");
+	$r = fetch($q);
+	mail($r->EMail, $mail[0], mail_body($r->verified), "From: ".$mail[2])
+                or nicedie(lang("Could not send EMail, check the server config!", "root_do", "Text to display when mail could not be sent from do.php?action=resendValidationEMail"));
 } else {
 	include $base_path."style/top.php";
 	echo "No such function here";
