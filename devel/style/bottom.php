@@ -9,4 +9,5 @@ $style = user_style();
 #	$style = $r->value;
 #}
 
-include $style."/bottom.php";
+#include $style."/bottom.php";
+include $base_path."style/".$style."/bottom.php";
