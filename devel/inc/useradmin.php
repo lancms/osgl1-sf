@@ -178,7 +178,7 @@ elseif($action == "edit") {
 	$birthMONTH = $_POST['birthMONTH'];
 	$birthYEAR = $_POST['birthYEAR'];
 	
-	$verify = verify($nick, $mail, $firstName, $lastName);
+	$verify = verify("edit", $nick, $firstName, $lastName);
 	if($verify != "allowed") {
 		nicedie($form[$verify]);
 	}

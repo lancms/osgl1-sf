@@ -50,7 +50,7 @@ function dblog($type = 1,$logNew = "NOTHING LOGGED", $logOld = NULL) {
     return 1;
 }
 
-function verify($nick, $email, $firstname, $lastname, $password=NULL)
+function verify($mode="register", $nick, $firstname, $lastname, $email=NULL, $password=NULL)
 
 {
     if($nick == "") // check nick.
@@ -58,10 +58,10 @@ function verify($nick, $email, $firstname, $lastname, $password=NULL)
     elseif($email == "") // check there is an e-mail
         return 9;
     
-	 elseif(($password != NULL) && (strlen($password) < $min_pass_length)) // check the length of the password.
+	 elseif(($mode == "register") && (strlen($password) < $min_pass_length)) // check the length of the password.
         return 10;
 
-    elseif(!(strchr($email, "@") && strchr($email, "."))) // check if the email contains at least one @ and at least one dot.
+    elseif(($mode = "register") && (!(strchr($email, "@")) && (strchr($email, ".")))) // check if the email contains at least one @ and at least one dot.
         return 11;
     elseif((!strchr($firstname, " ")) || (!strchr($lastname, " ")))
 	 	return 12;
