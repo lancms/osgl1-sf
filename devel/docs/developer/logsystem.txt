@@ -15,3 +15,5 @@ Here are the numeric strings for what is logged:
 4 = user logged in. syntax: "sID" // We log sID to be able to track a users movement.
 5 = user logged out. syntax: "sID" // same as above.
 6 = User registered. syntax: sID:::username:::email:::name:::verificationcode:::street:::postNr:::postPlace:::cellphone:::birthDAY:::birthMONTH:::birthYEAR
+7 = New static file added. Syntax: "filename"
+8 = Deleted static file. Syntax: "filename"

@@ -46,6 +46,7 @@ if($action == "edit" && isset($_GET['edit'])) {
 	echo "<textarea name=edittext rows=15 cols=75>";
 	echo stripslashes($r->text);
 	echo "</textarea><input type=submit value='$form[15]'></form>";
+	echo "<br><br><a href=admin.php?adminmode=static&action=delete&edit=$file>".lang("Delete this page!", "admin_static", "Admin->static->edit->Delete this page")."</a>";
 
 }
 elseif($action == "doedit" && isset($_POST['edit'])) {
@@ -60,10 +61,27 @@ elseif($action == "doedit" && isset($_POST['edit'])) {
 
 	refresh("admin.php?adminmode=static");
 }
-elseif($action == "new" & isset($_POST['filename'])) {
+elseif($action == "new" && isset($_POST['filename'])) {
 	$file = $_POST['filename'];
 	query("INSERT INTO static SET header = '$file'");
 
 	refresh("admin.php?adminmode=static&action=edit&edit=$file");
+	dblog(7, $file);
 }
+elseif($action == "delete" && $_GET['confirmed'] != 1 && isset($_GET['edit'])) {
+	$edit = $_GET['edit'];
+	echo lang("Are you sure you wish to delete this page?", "admin_static", "String to show if you have selected to delete a page");
+	echo " <a href=admin.php?adminmode=static&action=delete&confirmed=1&edit=$edit>".lang("Yes", "admin_static", "Yes, I wish to delete that f**** static page")."</a>&nbsp;&nbsp;&nbsp;";
+	
+}elseif($action == "delete" && $_GET['confirmed'] == 1 && isset($_GET['edit'])) {
+	$edit = $_GET['edit'];
+	$q = query("SELECT * FROM static WHERE header = '$edit'");
+	if(num($q) == 0) nicedie("No, there is no such page to be deleted!");
+	
+	query("DELETE FROM static WHERE header = '$edit'");
+	refresh("admin.php?adminmode=static", 2);
+	echo lang("File deleted", "admin_static", "Text to display after that file was deleted");
+	dblog(8, $edit);
+}
+	
 ?>
