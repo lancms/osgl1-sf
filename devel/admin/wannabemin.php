@@ -28,13 +28,13 @@ if($action == "addQue") {
 
 		while($var 	= fetch($result)) {
 
-			$Id		=	$var->ID;
+			$ID		=	$var->ID;
 			$Que	=	$var->content;
 
 			$list  .=	"
 			<tr>
-			 <td><a href='admin.php?adminmode=wannabemin&action=EditQue&id=$Id'>".$Que."</a></td>
-			 <td><a href='admin.php?adminmode=wannabemin&action=DelQue&id=$Id'>".lang("Delete", "admin_wannabemin", "Text used in wannabemin")."</a></td>
+			 <td><a href='admin.php?adminmode=wannabemin&action=EditQue&id=$ID'>".$Que."</a></td>
+			 <td><a href='admin.php?adminmode=wannabemin&action=DelQue&id=$ID'>".lang("Delete", "admin_wannabemin", "Text used in wannabemin")."</a></td>
 			</tr>
 			";
 
@@ -53,12 +53,12 @@ if($action == "addQue") {
 
 elseif($action == "EditQue") {
 
-	$Id		=	$_GET['id'];
-	$Id		=	escape_string($Id);
+	$ID		=	$_GET['id'];
+	$ID		=	escape_string($ID);
 
-	if(empty($Id)) nicedie(lang("Something is not right.", "admin_wannabemin", "Text used in wannabemin"));
+	if(empty($ID)) nicedie(lang("Something is not right.", "admin_wannabemin", "Text used in wannabemin"));
 
-	$query		= 	"SELECT * FROM wannabeQue WHERE ID = '$Id'";
+	$query		= 	"SELECT * FROM wannabeQue WHERE ID = '$ID'";
 	$result 	= 	query($query);
 	$var 		= 	fetch($result);
 
@@ -68,14 +68,14 @@ elseif($action == "EditQue") {
 	if($Type == 1) {
 
 		$list	=	"
-		 <option value='0'>".lang("Text", "admin_wannabemin", "Text used in wannabemin")."</option>
+		 <option value='2'>".lang("Text", "admin_wannabemin", "Text used in wannabemin")."</option>
 		 <option value='1' selected>".lang("Alternatives", "admin_wannabemin", "Text used in wannabemin")."</option>
 		";
 
 	} else {
 
 		$list	=	"
-		 <option value='0' selected>".lang("Text", "admin_wannabemin", "Text used in wannabemin")."</option>
+		 <option value='2' selected>".lang("Text", "admin_wannabemin", "Text used in wannabemin")."</option>
 		 <option value='1'>".lang("Alternatives", "admin_wannabemin", "Text used in wannabemin")."</option>
 		";
 
@@ -83,14 +83,14 @@ elseif($action == "EditQue") {
 
 	echo	"
 	<form name='editQue' method='post' action='admin.php?adminmode=wannabemin&action=DoEditQue'>
-	<input type='hidden' name='Id' value='".$Id."'>
+	<input type='hidden' name='id' value='".$ID."'>
 	 <table>
 	  <tr>
 	   <td><b>".lang("Edit Question", "admin_wannabemin", "Text used in wannabemin")."</b></td>
 	  </tr>
 	  <tr>
 	   <td>".lang("Question:", "admin_wannabemin", "Text used in wannabemin")."</td>
-	   <td><input type='text' name='Que' value='".$Que."'>
+	   <td><textarea cols=60 rows=10 name='Que'>".$Que."</textarea>
 	  </tr>
 	  <tr>
 	   <td>".lang("Type:", "admin_wannabemin", "Text used in wannabemin")."</td>
@@ -113,21 +113,21 @@ elseif($action == "DoEditQue") {
 
 	$Que	=	$_POST['Que'];
 	$Type	=	$_POST['Type'];
-	$Id		=	$_POST['Id'];
+	$ID		=	$_POST['id'];
 
 	$Que	=	escape_string($Que);
 	$Type	=	escape_string($Type);
-	$Id		=	escape_string($Id);
+	$ID		=	escape_string($ID);
 
-	if(empty($Id) || empty($Que) || empty($Type)) nicedie(lang("Nope, this is not the way you shoul do it... Try writing somthing in the fields next time :)", "admin_wannabemin", "Text used in wannabemin"));
+	if(empty($ID) || empty($Que) || empty($Type)) nicedie(lang("Nope, this is not the way you shoul do it... Try writing somthing in the fields next time :)", "admin_wannabemin", "Text used in wannabemin"));
 
-	$query	= 	"UPDATE wannabeQue SET content = '$Que', type = '$Type' WHERE ID = '$Id'";
+	$query	= 	"UPDATE wannabeQue SET content = '$Que', type = '$Type' WHERE ID = '$ID'";
 	$result	=	query($query);
 
 	if($Type == 1) {
 
 		echo lang("Time to add som alternatives.", "admin_wannabemin", "Text used in wannabemin");
-		refresh("admin.php?adminmode=wannabemin&action=AddAlt&id=$Id", 2);
+		refresh("admin.php?adminmode=wannabemin&action=AddAlt&id=$ID", 2);
 
 	} else {
 
@@ -140,12 +140,12 @@ elseif($action == "DoEditQue") {
 
 elseif($action == "DelQue") {
 
-	$Id		=	$_GET['id'];
-	$Id		=	escape_string($Id);
+	$ID		=	$_GET['id'];
+	$ID		=	escape_string($ID);
 
-	if(empty($Id)) nicedie(lang("Something is not right.", "admin_wannabemin", "Text used in wannabemin"));
+	if(empty($ID)) nicedie(lang("Something is not right.", "admin_wannabemin", "Text used in wannabemin"));
 
-	$query	=	"DELETE FROM wannabeQue WHERE ID = '$Id'";
+	$query	=	"DELETE FROM wannabeQue WHERE ID = '$ID'";
 	$result = 	query($query);
 
 
@@ -158,22 +158,22 @@ elseif($action == "DelQue") {
 
 elseif($action == "AddAlt") {
 
-	$Id		=	$_GET['id'];
+	$ID		=	$_GET['id'];
 
-	if(empty($Id)) {
-	 $Id	=	$_POST['id'];
+	if(empty($ID)) {
+	 $ID	=	$_POST['id'];
 	}
 
-	$Id		=	escape_string($Id);
+	$ID		=	escape_string($ID);
 
-	if(empty($Id)) nicedie(lang("Something is not right.", "admin_wannabemin", "Text used in wannabemin"));
+	if(empty($ID)) nicedie(lang("Something is not right.", "admin_wannabemin", "Text used in wannabemin"));
 
-	$query	= 	"SELECT * FROM wannabeAlt WHERE QueId = '$Id'";
+	$query	= 	"SELECT * FROM wannabeAlt WHERE QueID = '$ID'";
 	$result = 	query($query);
 
 	$list	=	"
 	<form name='addAlt' method='post' action='admin.php?adminmode=wannabemin&action=DoAddAlt'>
-	<input type='hidden' name='QueId' value='".$Id."'>
+	<input type='hidden' name='QueID' value='".$ID."'>
 	<table>
 	 <tr>
 	  <td><b>".lang("Alternatives", "admin_wannabemin", "Text used in wannabemin")."</b></td>
@@ -182,14 +182,14 @@ elseif($action == "AddAlt") {
 
 		while($var 	= fetch($result)) {
 
-		$AltId	=	$var->ID;
+		$AltID	=	$var->ID;
 		$Alt	=	$var->content;
 
 		$list  .=	"
 		<tr>
 		 <td>".lang("Alternative:", "admin_wannabemin", "Text used in wannabemin")."</td>
 		 <td>".$Alt."</td>
-		 <td><a href='admin.php?adminmode=wannabemin&action=DelAlt&id=$AltId'>".lang("Delete", "admin_wannabemin", "Text used in wannabemin")."</a></td>
+		 <td><a href='admin.php?adminmode=wannabemin&action=DelAlt&id=$AltID'>".lang("Delete", "admin_wannabemin", "Text used in wannabemin")."</a></td>
 		</tr>
 		";
 
@@ -214,23 +214,23 @@ elseif($action == "AddAlt") {
 
 elseif($action == "DoAddAlt") {
 
-	$QueId	=	$_POST['QueId'];
+	$QueID	=	$_POST['QueID'];
 	$Alt	=	$_POST['Alt'];
 
-	$QueId	=	escape_string($QueId);
+	$QueID	=	escape_string($QueID);
 	$Alt	=	escape_string($Alt);
 
-	if(empty($QueId) || empty($Alt)) nicedie(lang("Nope, this is not the way you shoul do it... Try writing somthing in the fields next time :)", "admin_wannabemin", "Text used in wannabemin"));
+	if(empty($QueID) || empty($Alt)) nicedie(lang("Nope, this is not the way you shoul do it... Try writing somthing in the fields next time :)", "admin_wannabemin", "Text used in wannabemin"));
 
-	$query	= 	"INSERT INTO wannabeAlt (ID, content, queID) VALUES (NULL, '$Alt', '$QueId')";
+	$query	= 	"INSERT INTO wannabeAlt (ID, content, queID) VALUES (NULL, '$Alt', '$QueID')";
 	$result = 	query($query);
 
-	$query	= 	"SELECT * FROM wannabeAlt WHERE queID = '$QueId'";
+	$query	= 	"SELECT * FROM wannabeAlt WHERE queID = '$QueID'";
 	$result = 	query($query);
 
 	$list	=	"
 	<form name='addAlt' method='post' action='admin.php?adminmode=wannabemin&action=DoAddAlt'>
-	<input type='hidden' name='QueId' value='".$QueId."'>
+	<input type='hidden' name='QueID' value='".$QueID."'>
 	<table>
 	 <tr>
 	  <td><b>".lang("Alternatives", "admin_wannabemin", "Text used in wannabemin")."</b></td>
@@ -239,14 +239,14 @@ elseif($action == "DoAddAlt") {
 
 		while($var 	= fetch($result)) {
 
-		$AltId	=	$var->ID;
+		$AltID	=	$var->ID;
 		$Alt	=	$var->content;
 
 		$list  .=	"
 		<tr>
 		 <td>".lang("Alternative:", "admin_wannabemin", "Text used in wannabemin")."</td>
 		 <td>".$Alt."</td>
-		 <td><a href='admin.php?adminmode=wannabemin&action=DelAlt&id=$AltId'>".lang("Delete", "admin_wannabemin", "Text used in wannabemin")."</a></td>
+		 <td><a href='admin.php?adminmode=wannabemin&action=DelAlt&id=$AltID'>".lang("Delete", "admin_wannabemin", "Text used in wannabemin")."</a></td>
 		</tr>
 		";
 
@@ -271,23 +271,23 @@ elseif($action == "DoAddAlt") {
 
 elseif($action == "DelAlt") {
 
-	$Id		=	$_GET['id'];
-	$Id		=	escape_string($Id);
+	$ID		=	$_GET['id'];
+	$ID		=	escape_string($ID);
 
-	if(empty($Id)) nicedie(lang("Something is not right.", "admin_wannabemin", "Text used in wannabemin"));
+	if(empty($ID)) nicedie(lang("Something is not right.", "admin_wannabemin", "Text used in wannabemin"));
 
-	$query		=	"SELECT * FROM wannabeAlt WHERE ID = '$Id'";
+	$query		=	"SELECT * FROM wannabeAlt WHERE ID = '$ID'";
 	$result 	= 	query($query);
 	$r			=	fetch($result);
 
-	$QueId		=	$r->queID;
+	$QueID		=	$r->queID;
 
-	$query		=	"DELETE FROM wannabeAlt WHERE ID = '$Id'";
+	$query		=	"DELETE FROM wannabeAlt WHERE ID = '$ID'";
 	$result 	= 	query($query);
 
 	echo lang("Alternative has been deleted", "admin_wannabemin", "Text used in wannabemin");
 
-	refresh("admin.php?adminmode=wannabemin&action=AddAlt&id=$QueId", 2);
+	refresh("admin.php?adminmode=wannabemin&action=AddAlt&id=$QueID", 2);
 }
 
 elseif($action == "AddNewQue") {
@@ -306,7 +306,7 @@ elseif($action == "AddNewQue") {
 	   <td>".lang("Type:", "admin_wannabemin", "Text used in wannabemin")."</td>
 	   <td>
 	    <select name='Type'>
-		 <option value='0' selected>".lang("Text", "admin_wannabemin", "Text used in wannabemin")."</option>
+		 <option value='2'>".lang("Text", "admin_wannabemin", "Text used in wannabemin")."</option>
 		 <option value='1'>".lang("Alternatives", "admin_wannabemin", "Text used in wannabemin")."</option>
 		</select>
 	   </td>
@@ -338,12 +338,12 @@ elseif($action == "DoAddNewQue") {
 
 	$r			=	fetch($result);
 
-	$Id			=	$r->ID;
+	$ID			=	$r->ID;
 
 	if($Type == 1) {
 
 		echo lang("Time to add som alternatives.", "admin_wannabemin", "Text used in wannabemin");
-		refresh("admin.php?adminmode=wannabemin&action=AddAlt&id=$Id", 2);
+		refresh("admin.php?adminmode=wannabemin&action=AddAlt&id=$ID", 2);
 
 	} else {
 
@@ -379,13 +379,13 @@ elseif($action == "ViewUsers") {
 	 while($UInfo = fetch($result)) {
 
 	  $Nick		=	$UInfo->nick;
-	  $Id		=	$UInfo->ID;
+	  $ID		=	$UInfo->ID;
 
 	  $list	   .=	"
 	  	<tr>
-		 <td><a href='admin.php?adminmode=wannabemin&action=DoViewUsers&id=$Id'>$Id</a></td>
-		 <td><a href='admin.php?adminmode=wannabemin&action=DoViewUsers&id=$Id'>$Nick</a></td>
-		 <td><a href='admin.php?adminmode=wannabemin&action=ViewComment&id=$Id'>".lang("View comments", "admin_wannabemin", "Text to display in wannabemin")."</a></td>
+		 <td><a href='admin.php?adminmode=wannabemin&action=DoViewUsers&id=$ID'>$ID</a></td>
+		 <td><a href='admin.php?adminmode=wannabemin&action=DoViewUsers&id=$ID'>$Nick</a></td>
+		 <td><a href='admin.php?adminmode=wannabemin&action=ViewComment&id=$ID'>".lang("View comments", "admin_wannabemin", "Text to display in wannabemin")."</a></td>
 		</tr>
 	  ";
 
@@ -487,30 +487,30 @@ elseif($action == "DoViewUsers") {
 
 elseif($action == "AddComment") {
 
-	$Id		=	$_POST['UserID'];
+	$ID		=	$_POST['UserID'];
 	$Com	=	$_POST['Comment'];
 
-	$Id		=	escape_string($Id);
+	$ID		=	escape_string($ID);
 	$Com	=	escape_string($Com);
 
-	if(empty($Id) || empty($Com)) nicedie(lang("Did you forget something ? Like writing a comment ?", "admin_wannabemin", "Text used in wannabemin"));
+	if(empty($ID) || empty($Com)) nicedie(lang("Did you forget something ? Like writing a comment ?", "admin_wannabemin", "Text used in wannabemin"));
 
-	$query	= 	"INSERT INTO `wannabeComment` ( `ID` , `comment` , `user` , `by` ) VALUES (NULL, '$Com', '$Id', '$user')";
+	$query	= 	"INSERT INTO `wannabeComment` ( `ID` , `comment` , `user` , `by` ) VALUES (NULL, '$Com', '$ID', '$user')";
 	$result	=	query($query);
 
 	echo lang("Comment added", "admin_wannabemin", "Text used in wannabemin");
-	refresh("admin.php?adminmode=wannabemin&action=ViewComment&id=$Id", 2);
+	refresh("admin.php?adminmode=wannabemin&action=ViewComment&id=$ID", 2);
 
 }
 
 elseif($action == "ViewComment") {
 
-	$Id		=	$_GET['id'];
-	$Id		=	escape_string($Id);
+	$ID		=	$_GET['id'];
+	$ID		=	escape_string($ID);
 
-	if(empty($Id)) nicedie(lang("Something is not right.", "admin_wannabemin", "Text used in wannabemin"));
+	if(empty($ID)) nicedie(lang("Something is not right.", "admin_wannabemin", "Text used in wannabemin"));
 
-	$query		=	"SELECT * FROM wannabeComment WHERE user = '$Id' ORDER BY ID DESC";
+	$query		=	"SELECT * FROM wannabeComment WHERE user = '$ID' ORDER BY ID DESC";
 	$result 	= 	query($query);
 	$list	   .=	"
 	<table>
