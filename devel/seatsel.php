@@ -2,8 +2,9 @@
 include "seatformats.php";
 require_once 'config/config.php';
 
-$width -= 2;
+if(!function_exists('imagecreate')) die("You do not have PHP-GD installed. Contact your server admin and ask him to install it.");
 
+$width -= 2;
 $myimg = imagecreate($width * $addwidth, $height * $yscale);	// create an image resource
 
 imageinterlace($myimg, 1);					// Turn on interlacing.
