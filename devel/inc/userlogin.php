@@ -78,7 +78,7 @@ elseif ($action == "main")
 		echo "</td><td>";
 		if (($row->seatX == -1) && ($row->seatY == -1))
 		{
-			$hasSeat = $msg['39'];
+			$hasSeat = lang("No seat", "inc_userlogin", "Text to display if the user doesn't have any seat");
 		}
 		else
 		{
@@ -92,7 +92,7 @@ elseif ($action == "main")
 		echo "</td></tr>";
 	}
 echo "</table>";
-} 
+}
 elseif ($action == "login")
 {
 	$query = query("UPDATE users SET isHere = 1 WHERE ID = '".escape_string($user)."'");
