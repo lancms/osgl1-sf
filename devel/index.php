@@ -5,20 +5,20 @@ require './config/config.php';
 include $base_path."style/top.php";
 if(isset($_GET['inc'])) {
 	if(strchr($_GET['inc'], "."))
-		nicedie("Hacking?");
+		nicedie($msg['29']);
 
     include "inc/".$_GET['inc'].".php";
 } elseif(isset($_GET['page'])) {
-	$query = mysql_query("SELECT * FROM static WHERE header LIKE '".$_GET['page']."'") or nicedie(mysql_error());
-	$object = mysql_fetch_object($query);
+	$query = query("SELECT * FROM static WHERE header LIKE '".$_GET['page']."'");
+	$object = fetch($query);
 	if($object->useNL2BR == 1)
 		echo display_text($object->text);
 	else echo $object->text;
 
 
 } else {
-   $query = mysql_query("SELECT * FROM static WHERE header LIKE 'index'") or nicedie(mysql_error());
-   $o = mysql_fetch_object($query);
+   $query = query("SELECT * FROM static WHERE header LIKE 'index'");
+   $o = fetch($query);
    echo display_text($o->text);
 
     if(config("usepage_news") && $usenews) {
