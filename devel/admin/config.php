@@ -28,6 +28,7 @@ $checkbox[] = "seatreg_open";
 $checkbox[] = "usepage_wannabe";
 $checkbox[] = "usepage_compopoll";
 $checkbox[] = "disable_userstyle";
+$checkbox[] = "usepage_show_stats";
 
 if (!isset($action))
 {
