@@ -69,7 +69,11 @@ $form['63'] = "Det finnes allerede en gruppe med det navnet.";
 $form['64'] = "Medlemmer:";
 $form['65'] = "Gruppe slettet.";
 $form['66'] = "Slette gruppen:";
-$form['67'] = "Renamed to";
+$form['67'] = "Navn byttet til";
+$form['68'] = "Navn på compoen";
+$form['69'] = "Mangler navn på compoen.";
+$form['70'] = "Antall spillere per lag"
+$form['71'] = "Antall lag per runde";
 
 /* Diffrent kinds of messages..... */
 $msg[0] = "Logget inn som: ";
@@ -104,6 +108,8 @@ $msg['28'] = "Kunne ikke generere tilfeldig tall.";
 $msg['29'] = "Hacking?";
 $msg['30'] = "Feil brukernavn eller passord.";
 $msg['31'] = "Tilbake til hovedsiden."
+$msg['32'] = "Tilbake til lista.";
+$msg['33'] = "Oppdaterer...";
 
 $rank[0] = "Deltager";
 $rank[1] = "Crew";
@@ -241,6 +247,13 @@ $compo[14] = "Spill";
 $compo[15] = "Beskrivelse";
 $compo[16] = "Type";
 $compo[17] = "Antall spillere pr. klan";
+$compo['18'] = "Seeding";
+$compo['19'] = "Påmeldte:";
+$compo['20'] = "brukere";
+$compo['21'] = "fordelt på";
+$compo['22'] = "klaner.";
+$compo['23'] = "Seed bedre.";
+$compo['24'] = "Seed dårligere.";
 
 $compoerr[1] = "Du skrev inn feil passord for denne klanen";
 $compoerr[2] = "Denne klanen ble ikke funnet i databasen";

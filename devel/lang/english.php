@@ -70,6 +70,10 @@ $form['64'] = "Members:";
 $form['65'] = "Group deleted.";
 $form['66'] = "Delete group:";
 $form['67'] = "Renamed to";
+$form['68'] = "Name of the compo";
+$form['69'] = "Lacking name of the compo.";
+$form['70'] = "Number of players on each team";
+$form['71'] = "Number of teams in each round";
 
 /* Diffrent kinds of messages..... */
 $msg[0] = "Logged in as: ";
@@ -104,6 +108,8 @@ $msg['28'] = "Could not create random number.";
 $msg['29'] = "Hacking?";
 $msg['30'] = "Wrong username or password.";
 $msg['31'] = "Back to the main page.";
+$msg['32'] = "Back to the list.";
+$msg['33'] = "Updating...";
 
 $rank[0] = "User";
 $rank[1] = "Crew";
@@ -241,12 +247,18 @@ $compo[14] = "Game";
 $compo[15] = "Description";
 $compo[16] = "Type";
 $compo[17] = "Number of players in each clan";
+$compo['18'] = "Seeding";
+$compo['19'] = "Signed up:";
+$compo['20'] = "users";
+$compo['21'] = "distributed on";
+$compo['22'] = "clans.";
+$compo['23'] = "Seed higher.";
+$compo['24'] = "Seed lower.";
 
 $compoerr[1] = "Error: that was the wrong password for that clan";
 $compoerr[2] = "Error: That clan was not found in the database";
 $compoerr[3] = "Error: write Clan and password please";
 $compoerr[4] = "Sorry, there are no more seats in that clan for that compo";
-
 
 $true_false[0] = "No";
 $true_false[1] = "Yes";

@@ -14,17 +14,17 @@ if(!isset($action)) {
 	echo $compotype[$r->gameType];
 	echo "</td><td>";
 	echo "<a href=?adminmode=compomaster&action=toggleopen&edit=$r->ID>";
-	if($r->isOpen == 1) echo "Steng compoen";
-	else echo "Åpne compo";
+	if($r->isOpen == 1) echo $form['23'];
+	else echo $form['22'];
 	echo "</a>";
 	echo "</td><td>";
-	echo "<a href=?adminmode=compomaster&action=seed&edit=$r->ID>Seeding</a>";
+	echo "<a href=?adminmode=compomaster&action=seed&edit=$r->ID>".$compo['18']."</a>";
 	echo "</td><td>";
-	echo "Påmeldte: ";
+	echo $compo['19']." ";
 	$qU = query("SELECT * FROM compoReg WHERE compoID = $r->ID");
 	$qC = query("SELECT DISTINCT clanID FROM compoReg WHERE compoID = $r->ID");
-	echo num($qU)." brukere";
-	if($r->gameType > 1) echo " fordelt på ".num($qC)." klaner";
+	echo num($qU)." ".$compo['20'];
+	if($r->gameType > 1) echo " ".$compo['21']." ".num($qC)." ".$compo['22'];
 	echo "</td></tr>";
 	
 	} // End while fetch()
@@ -32,15 +32,16 @@ if(!isset($action)) {
 	
 	echo "<br><br><hr><br>";
 	echo "<form method=POST action=admin.php?adminmode=compomaster&action=addnew>
-		<input type=text name=componame> Navn på compoen
-		<br><input type=submit value='Legg til compoen'>
+		<input type=text name=componame> ".$form['68']."
+		<br><input type=submit value='".$form['7']."'>
 		</form>";
 	
 } // End action not set
 
 elseif($action == "addnew") {
 	$componame = $_POST['componame'];
-	if(empty($componame)) die("Nei takk, ikke en så dum compo");
+	if(empty($componame))
+		nicedie($form['69']);
 	query("INSERT INTO compo SET name = '$componame'");
 	refresh("admin.php?adminmode=compomaster",5, 0);
 	adminLog("Added compo ".$componame);
@@ -48,16 +49,16 @@ elseif($action == "addnew") {
 
 elseif($action == "edit" && isset($_GET['edit'])) {
 	if(isset($_GET['text'])) echo "<font color=red>".$_GET['text']."</font><br>";
-	echo "<div align=left><a href=admin.php?adminmode=compomaster>Tilbake til compolista</a></div><br>";
+	echo "<div align=left><a href=admin.php?adminmode=compomaster>".$msg['32']."</a></div><br>";
 	$edit = $_GET['edit'];
 	
 	$q = query("SELECT * FROM compo WHERE ID = $edit");
 	$r = fetch($q);
 	
 	echo "<form method=POST action=admin.php?adminmode=compomaster&action=doedit&edit=$edit>";
-	echo "<input type=text name=componame value='$r->name'> Navn på compoen
-	<br><input type=text name=players value='$r->players'> Antall spillere pr. lag
-	<br><input type=text name=roundPlayers value='$r->roundPlayers'> Antall spillere/klaner pr. runde
+	echo "<input type=text name=componame value='$r->name'> ".$form['68']."
+	<br><input type=text name=players value='$r->players'> ".$form['70']."
+	<br><input type=text name=roundPlayers value='$r->roundPlayers'> ".$form['71']."
 	<br>";
 	echo "<select name=gameType>";
 	for($i=0;$i<count($compotype);$i++) {
@@ -67,7 +68,7 @@ elseif($action == "edit" && isset($_GET['edit'])) {
 	} // End for
 	echo "</select>";
 	echo "<br><textarea name=rules rows=30 cols=80>$r->rules</textarea>";
-	echo "<br><input type=submit value='Lagre'>";
+	echo "<br><input type=submit value='".$form['15']."'>";
 	echo "</form>";
 	
 } // end action == edit
@@ -115,9 +116,9 @@ elseif($action == "seed") {
 			echo "</td><td>";
 			echo $r->seed;
 			echo "</td><td>";
-			echo "<a href=?adminmode=compomaster&action=seededit&seed=up&edit=$edit&user=$r->userID>Seed bedre</a>";
+			echo "<a href=?adminmode=compomaster&action=seededit&seed=up&edit=$edit&user=$r->userID>".$compo['23']."</a>";
 			echo "</td><td>";
-			echo "<a href=?adminmode=compomaster&action=seededit&seed=down&edit=$edit&user=$r->userID>Seed dårligere</a>";
+			echo "<a href=?adminmode=compomaster&action=seededit&seed=down&edit=$edit&user=$r->userID>".$compo['24']."</a>";
 			echo "</td></tr>";
 		} // end while fetch
 		echo "</table>";
@@ -127,7 +128,7 @@ elseif($action == "seed") {
 } // End if action = seed
 
 elseif($action == "seededit") {
-	echo "updateing";
+	echo $msg['33'];
 	$seed = $_GET['seed'];
 	$compo = $_GET['edit'];
 	$user = $_GET['user'];
@@ -144,4 +145,4 @@ elseif($action == "seededit") {
 	} // End if clancompo
 	refresh ("admin.php?adminmode=compomaster&action=seed&edit=$compo", 0);
 }
-else echo "hmmm, I know nothing about that!";
+else nicedie();
