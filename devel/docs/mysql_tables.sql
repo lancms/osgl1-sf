@@ -319,7 +319,7 @@ DROP TABLE IF EXISTS stats;
 CREATE TABLE stats (
   ID int(5) NOT NULL auto_increment,
   config varchar(60) default NULL,
-  value varchar(60) default NULL,
+  value varchar(100) default NULL,
   hits int(11) default NULL,
   PRIMARY KEY  (ID)
 ) TYPE=MyISAM;
