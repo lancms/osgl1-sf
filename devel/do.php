@@ -67,7 +67,7 @@ if($action=="login") {
     $my_userID = $uid;
     db_connect();
     $query = query("SELECT users.verified FROM users WHERE ID=".$my_userID."");
-    $r = fetch($query);
+    $result = fetch($query);
 
     if($result->verified == $_POST['verifycode']) {
 
@@ -75,7 +75,7 @@ if($action=="login") {
         echo $msg[3];
         $query = query("UPDATE users SET users.verified=0 WHERE ID=".$my_userID."");
         $sID = $_COOKIE[$cookiename];
-        $login = query("UPDATE session SET users.userID=".$my_userID." WHERE sID='".$sID."'");
+        $login = query("UPDATE session SET userID=".$my_userID." WHERE sID='".$sID."'");
     }
 	 else
 	 {
