@@ -122,7 +122,7 @@ elseif (($action == "addcomment") && (isset($edit)))
 // admin.php?adminmode=tasks&action=changeuser&edit=<taskID>&changeuser=<userID>
 elseif (($action == "changeuser") && (isset($edit)) && (isset($_GET['changeuser'])))
 {
-	$chuser = mysql_escape_string ($_GET['changeuser']);
+	$chuser = escape_string ($_GET['changeuser']);
 
 	query("UPDATE tasks SET userID = '".escape_string($chuser)."' WHERE ID = '".escape_string($edit)."'");
 	query("INSERT INTO tasks_log SET userID = '".escape_string(getcurrentuserid())."', taskID = '".escape_string($edit)."', logUNIX = '".escape_string(time())."', logText = '".escape_string(lang("Changed assigned to user to: ", "admin_tasks", "What to put into the SQL-table when a user changes who a task is assigned to").IDtonick($chuser))."'");
