@@ -1,7 +1,8 @@
 <?php
 
 require_once 'config/config.php';
-if(getuserrank() < 1) die($admin[noaccess]);
+if(!acl_access("isCreww"))
+	die($admin[noaccess]);
 
 $query = mysql_query("SELECT ID,nick,isCrew,crewField,cellphone,EMail FROM users WHERE isCrew != 0") or die(mysql_error());
 
