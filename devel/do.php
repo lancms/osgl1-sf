@@ -47,7 +47,7 @@ if($action=="login") {
     else
         echo $msg['27'];
 
-} elseif($action=="verify") {
+} elseif($action=="verify" && isset($_GET['uid'])) {
     include $base_path."style/top.php";
     $uid = $_GET['uid']
     ?>
