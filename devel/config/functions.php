@@ -45,7 +45,7 @@ function crypt_pwd($password) {
 function dblog($type = 1,$logNew = "NOTHING LOGGED", $logOld = NULL) {
     $IP = $_SERVER['REMOTE_ADDR'];
     $userID = getcurrentuserid();
-    $dowhat = stripslashes($dowhat);
+    $dowhat = stripslashes($logNew);
     query("INSERT INTO logs SET userIP = '$IP', userID = $userID, logType = $type, logWhat = '$dowhat', oldLog = '$logOld', logUNIX = ".time());
     return 1;
 }
