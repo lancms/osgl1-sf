@@ -148,6 +148,7 @@ $profile[11] = "Rediger denne brukeren";
 $profile[12] = "Mobiltelefon (kun viktig for crew)";
 $profile[13] = "Tillat visning av profil til";
 $profile[14] = "Design du ønsker å bruke";
+$profile['15'] = "Du må logge inn eller velge en profil å se på.";
 
 $month['1'] = "Januar";
 $month['2'] = "Februar";

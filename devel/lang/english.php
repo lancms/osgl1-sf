@@ -90,6 +90,7 @@ $msg[22] = "Guests online: ";
 $msg[23] = "Enter the verificationcode sent to your emailaddress.";
 $msg[24] = "If you have not recieved any verificationcode within a reasonable time, please contact the administrators.";
 
+
 $rank[0] = "User";
 $rank[1] = "Crew";
 $rank[2] = "Admin";
@@ -148,6 +149,7 @@ $profile[11] = "Edit this user";
 $profile[12] = "Cellphone";
 $profile[13] = "Allow display of profile to";
 $profile[14] = "Desired design";
+$profile['15'] = "You need to log in or select an user which profile you want to see.";
 
 $month['1'] = "January";
 $month['2'] = "February";

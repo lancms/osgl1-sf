@@ -18,7 +18,21 @@ if(!isset($_GET['action'])) {
 
 }
 
-$viewUSER = $_GET['uid'];
+
+if ((!isset($_GET['uid'])) && (getcurrentuserid() != 1))
+{
+	$viewUSER = getcurrentuserid();
+} 
+elseif ((!isset($_GET['uid'])) && (getcurrentuserid() == 1))
+{
+	echo $profile['15'];
+	include $base_path."style/bottom.php";
+	die();
+}
+else
+{
+	$viewUSER = $_GET['uid'];
+}
 
 if($action == "display" && isset($viewUSER)) {
 
