@@ -2,9 +2,7 @@
 
 require 'config/config.php';
 
-if(getuserrank() != 2) {
-	die($admin[noaccess]);
-}
+if(!acl_access("config")) die($admin[noaccess]);
 
 
 if(isset($_GET['action'])) {
@@ -26,7 +24,8 @@ $checkbox[] = "usepage_partyweb";
 $checkbox[] = "usepage_compo";
 $checkbox[] = "seatreg_open";
 $checkbox[] = "usepage_wannabe";
-$checkbox[] = "usepage_kiosk";
+#$checkbox[] = "usepage_kiosk"; // Doesn't work
+$checkbox[] = "usepage_compopoll";
 
 if(!isset($action)) {
 	echo "<form method=POST action=admin.php?adminmode=config&action=save>";

@@ -1,361 +1,130 @@
 <?php
+require_once 'config/config.php';
+if(!config("usepage_compo")) die("Vi bruker IKKE compooppsettet, nei!");
 
-if(!config("usepage_compo")) die($msg[1]);
+$action = $_GET['action'];
+$compo = $_GET['compo'];
+$hasSeat = query("SELECT * FROM users WHERE seatX != -1 AND seatY != -1 AND ID = ".getcurrentuserid());
 
+if(getcurrentuserid() == 1) $canCompete = FALSE;
+elseif(num($hasSeat) == 0) $canCompete = FALSE;
+else $canCompete = TRUE;
 
+if(!isset($action)) {
+	if(!$canCompete) {
+		if(getcurrentuserid() == 1);
+		else echo "Du har ikke registrert plass, og kan derfor ikke melde deg på i compoene....";
+	}
+	$q = query("SELECT * FROM compo");
+	
+	echo "<table>";
+	
+	while($r = fetch($q)) {
+		echo "<tr><td>";
+		echo "<a href=?inc=compo&action=compoinfo&compo=$r->ID>";
+		echo $r->name;
+		echo "</a></td><td>";
+		echo $compotype[$r->gameType];
+		echo "</td><td>";
+		echo "<a href=?inc=compo&action=viewrules&compo=$r->ID>Vis regler</a>";
+		echo "</td></tr>";
+	}
+	echo "</table>";
+}
 
-if(!isset($_GET["action"]))
+elseif($action == "viewrules" && isset($compo)) {
+	echo "<a href=?inc=compo>Tilbake til hovedsiden</a><br>";
+	$q = query("SELECT * FROM compo WHERE ID = $compo");
+	$r = fetch($q);
+	echo $r->rules;
+}
+elseif($action == "compoinfo" && isset($compo)) {
+	
+	echo "<a href=?inc=compo>Tilbake til hovedsiden</a><br>";
+	$q = query("SELECT * FROM compo WHERE ID = $compo");
+	$r = fetch($q);
+	$maxPlayers = $r->players;
+	if($r->isOpen == 0) $canCompete = FALSE;
+	echo $r->name." er en ".$compotype[$r->gameType]." med ".$r->players." i hver runde.";
+	echo "<br>";
+	echo "<table>";
+	
+	if($r->gameType <= 1) {
+		 echo "<tr><th>Spiller</th></tr>";
+		 $q2 = query("SELECT userID FROM compoReg WHERE compoID = $compo");
+		 while($r2 = fetch($q2)) {
+			 echo "<tr><td>";
+			 display_nick($r2->userID);
+			 echo "</td></tr>";
+		 }
+		 
+	 }
+	else {
+		echo "<tr><th>Klannavn</th><th>Spillere</th><th>Registrering OK (antall plasser fylt opp)</th></tr>";
+		$q2 = query("SELECT DISTINCT clanID FROM compoReg WHERE compoID = $compo ORDER BY clanID DESC");
+		while($r2 = fetch($q2)) {
+			$clanQ = query("SELECT * FROM Clan WHERE ID = $r2->clanID");
+			$clanR = fetch($clanQ);
+			echo "<tr><td>".$clanR->name."</td><td>";
+			$clanPlayersQ = query("SELECT * FROM compoReg WHERE clanID = $r2->clanID AND compoID = $compo");
+			while($clanPlay = fetch($clanPlayersQ)) {
+				display_nick($clanPlay->userID);
+				echo " ";
+			} // End while for display_nick
+			echo "</td><td>";
+			if(num($clanPlayersQ) == $maxPlayers) echo "<img src=images/ja.gif>";
+			else echo "<img src=images/nei.gif>";
+			echo "</td></tr>";
+		} // End while for displaying clans
+		
+	} // end if(gameType != 0)// else
+	echo "</table>";
+	$test = query("SELECT * FROM compoReg WHERE compoID = $compo AND userID = ".getcurrentuserid());
+	if(num($test) != 0) $isPlayingCompo = TRUE;
+	else $isPlayingCompo = FALSE;
+	
+	if($isPlayingCompo && $canCompete) echo "<br><a href=?inc=compo&action=iDontWannaPlay&compo=$compo>nei, nei, nei; dette vil jeg ikke være med på mer!</a>";
+	elseif(!$isPlayingCompo && $canCompete) {
+		if($r->gameType <= 1) {
+			echo "<br><a href=?inc=compo&action=signmeup&compo=$compo>Meld meg på!</a>";
+		}
+		else {
+			echo "<br><br><b>Meld meg på</b><table>";
+			echo "<form method=POST action=index.php?inc=compo&compo=$compo&action=signmeup>";
+			echo "<tr><td><input type=text name=klan></td><td> Klan</td>";
+			echo "<tr><td><input type=password name=pass></td><td>klanpassord (fåes av klanleder)</td></tr>";
+			echo "<tr><td></td><td><input type=submit value='I want to play!'></form></td></tr>";
+			echo "</table>";
+		}
+	}
+} //end action == compoinfo
 
-    $action = "displaycompos";
+elseif($action == "signmeup" && isset($compo)) {
+	if(!$canCompete) die("Nope; Du får ikke lov til å konkurrere....");
+	$q = query("SELECT * FROM compo WHERE ID = '$compo'");
+	$r = fetch($q);
+	query("DELETE FROM compoReg WHERE compoID = '$compo' AND userID = ".getcurrentuserid()); // Just in case he's tries to do something he shouldn't...
+	if($r->gameType <= 1) query("INSERT INTO compoReg SET compoID = $compo, userID = ".getcurrentuserid());
+	else {
+		$clanname = $_POST['klan'];
+		$pass = $_POST['pass'];
+		$check = query("SELECT * FROM Clan WHERE name = '$clanname' AND password = '$pass'");
+		$clan = fetch($check);
+		$numCheck = query("SELECT * FROM compoReg WHERE compoID = $compo AND clanID = '$clan->ID'");
+		if(num($numCheck) >= $r->players) die("Det er ikke tillatt med flere spillere i klanen enn ".$r->players."!");
+		if(num($check) != 0)
+			query("INSERT INTO compoReg SET clanID = $clan->ID, compoID = $compo, userID = ".getcurrentuserid());
+		else die("feil klannavn/passord");
+		
+	}
+	echo "Du er påmeldt";
+	refresh("?inc=compo&action=compoinfo&compo=$compo", 0);
+}
 
+elseif ($action == "iDontWannaPlay" && isset($compo)) {
+	query("DELETE FROM compoReg WHERE compoID = $compo AND userID = ".getcurrentuserid());
+	echo "Du er meldt av compoen";
+	refresh("?inc=compo&action=compoinfo&compo=$compo", 0);
+}
 else
-
-    $action = $_GET["action"];
-
-
-
-if($action == "displaycompos")
-
-{
-
-
-
-    $query = mysql_query("SELECT * FROM compo")
-
-        or die(mysql_error());
-
-
-
-    echo "<table border=1 bordercolor=black cellspacing=0 width=100%><tr bgcolor=black><td>$compo[0]</td><td>$compo[1]</td><td>$compo[2]</td><td>$compo[3]</td></tr>\n";
-
-
-
-    for($i=0;$i<mysql_num_rows($query);$i++)
-
-    {
-
-        $row = mysql_fetch_object($query);
-
-        echo "<tr bgcolor=darkgray><td><a href='index.php?inc=compo&action=viewcompo&compoID=$row->ID'>$row->name</a></td><td>$row->caption</td><td>$row->gameType</td><td><center>$row->players</center></td></tr>\n";
-
-    }
-
-
-
-    echo "</table><br><br>\n";
-
-    echo "<h1>$compo[4]</h1>";
-
-
-
-    showclans();
-
-}
-
-elseif($action == "viewcompo")
-
-{
-
-    if(!isset($_GET["compoID"]))
-
-    {
-
-        echo "Hacking?";
-
-        return;
-
-    }
-
-    $compoID = $_GET["compoID"];
-
-
-
-    $query = mysql_query("SELECT DISTINCT compoReg.clanID, Clan.name, Clan.about FROM compoReg INNER JOIN Clan ON Clan.ID = compoReg.clanID WHERE compoReg.compoID = $compoID")
-
-        or die(mysql_error());
-
-
-
-    $nq = mysql_num_rows($query);
-
-
-
-    echo "<a href='index.php?inc=compo&action=displaycompos'>&laquo; $msg[15]</a><br><br>\n";
-
-
-
-    echo "<center><table width=80% cellspacing=0 bordercolor=black border=1><tr bgcolor=black><td>$compo[11]</td><td>$compo[12]</td><td>$compo[13]</td></tr>\n";
-
-
-
-    for($i=0;$i<$nq;$i++)
-
-    {
-
-
-
-        $row = mysql_fetch_object($query);
-
-
-
-        $qv = mysql_query("SELECT users.nick, users.ID FROM users INNER JOIN compoReg ON compoReg.userID = users.ID WHERE compoReg.compoID = $compoID AND compoReg.clanID = $row->clanID")
-
-            or die(mysql_error());
-
-
-
-        echo "<tr bgcolor=darkgray><td><a href=index.php?inc=clan&action=viewclan&compoID=$compoID&clanID=$row->clanID>$row->name</a></td><td valign=top>$row->about</td><td>";
-
-
-
-        $r = mysql_fetch_object($qv);
-
-        echo "<a href=index.php?inc=profile&uid=$r->ID>$r->nick</a>";
-
-
-
-        for($j=1;$j<mysql_num_rows($qv);$j++)
-
-        {
-
-            if($j > 6)
-
-            {
-
-                echo ", ...";
-
-                break;
-
-            }
-
-
-
-            $r = mysql_fetch_object($qv);
-
-            echo ", <a href=index.php?inc=profile&uid=$r->ID>$r->nick</a>";
-
-        }
-
-        echo "</td></tr>";
-
-    }
-
-
-
-    echo "</table></center><br><br>\n";
-
-
-
-
-
-    if(getcurrentuserid() != 1)
-
-    {
-
-        $uid = getcurrentuserid();
-
-        $query = mysql_query("SELECT * FROM compoReg WHERE userID = $uid AND compoID = $compoID")
-
-            or die(mysql_error());
-
-
-
-        if(isset($_GET["errormsg"]))
-
-        {
-
-            $i = $_GET["errormsg"];
-
-            if(isset($compoerr[$i]))
-
-                echo "<b><font color=red>$compoerr[$i]</font></b><br>";
-
-        }
-
-
-
-        if(mysql_num_rows($query) == 0)
-
-        {
-
-            echo "$compo[5]<br><br>";
-
-            echo "<form name=signon action=index.php?inc=compo&action=signon method=post>\n";
-
-            echo "$compo[7] <input type=text name=clan><br>\n";
-
-            echo "$compo[8] <input type=password name=pwd><br>\n";
-
-            echo "<input type=submit value='$compo[6]'><br>\n";
-
-            echo "<input type=hidden value=$compoID name=compoID>\n";
-
-            echo "</form>\n";
-
-        }
-
-        else
-
-        {
-
-            echo "$compo[10]<br>\n";
-
-            echo "<a href='index.php?inc=compo&action=signoff&compoID=$compoID'>$compo[9]</a><br>\n";
-
-        }
-
-    }
-
-}
-
-elseif($action == "signon")
-
-{
-
-    $compoID = $_POST["compoID"];
-
-
-
-    if((!isset($_POST["clan"]) || !isset($_POST["pwd"])) || (getcurrentuserid() == 1))
-
-    {
-
-        refresh("index.php?inc=compo&action=viewcompo&compoID=$compoID&errormsg=3", 0);
-
-    }
-
-
-
-    $cn = $_POST["clan"];
-
-    $pwd = $_POST["pwd"];
-
-    $pwd = crypt_pwd($pwd);
-
-
-
-    $query = mysql_query("SELECT password, ID FROM Clan WHERE name LIKE '$cn'")
-
-        or die(mysql_error());
-
-
-
-    if(($query) && mysql_num_rows($query))
-
-    {
-
-        $row = mysql_fetch_object($query);
-
-	$q = mysql_query("SELECT * FROM compo WHERE ID = $compoID");
-        $r = mysql_fetch_object($q);
-
-        $num = mysql_query("SELECT * FROM compoReg WHERE compoID = $compoID AND clanID = $row->ID") or die(mysql_error());
-        if($r->players <= mysql_num_rows($num)) die($compoerr[4]);
-
-        elseif($row->password == $pwd)
-
-        {
-
-            $uid = getcurrentuserid();
-
-            $query = mysql_query("INSERT INTO compoReg (userID, clanID, compoID) VALUES($uid, $row->ID, $compoID)")
-
-                or die(mysql_error());
-
-            refresh("index.php?inc=compo&action=viewcompo&compoID=$compoID", 0);
-
-        }
-
-        else
-
-        {
-
-            refresh("index.php?inc=compo&action=viewcompo&compoID=$compoID&errormsg=1", 0);
-
-        }
-
-    }
-
-    else
-
-    {
-
-        refresh("index.php?inc=compo&action=viewcompo&compoID=$compoID&errormsg=2", 0);
-
-    }
-
-}
-
-elseif($action == "signoff")
-
-{
-
-
-
-    if(!isset($_GET["compoID"]))
-
-    {
-
-        echo "Hacking?";
-
-    }
-
-    else
-
-    {
-
-        $compoID = $_GET["compoID"];
-
-
-
-        $uid = getcurrentuserid();
-
-
-
-        $query = mysql_query("DELETE FROM compoReg WHERE compoID = $compoID AND userID = $uid")
-
-            or die(mysql_error());
-
-    }
-
-    refresh("index.php?inc=compo&action=viewcompo&compoID=$compoID", 0);
-
-}
-
-
-
-?>
-
-
-
-
-
-<?php
-
-function showclans()
-
-{
-
-    $query = mysql_query("SELECT * FROM Clan")
-
-        or die(mysql_error());
-
-
-
-    for($i=0;$i<mysql_num_rows($query);$i++)
-
-    {
-
-        $row = mysql_fetch_object($query);
-
-
-
-        echo "<a href='index.php?inc=clan&action=viewclan&clanID=$row->ID'>".stripslashes($row->name)."</a> - ".stripslashes($row->about)."<br>\n";
-
-    }
-
-}
-
-
-
-?>
+echo "WTF er det du mener? *veit jeg ingenting om*";

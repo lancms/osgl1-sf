@@ -1,9 +1,7 @@
 <?php
 require 'config/config.php';
 
-if(getuserrank() != 2) {
-	die($admin[noaccess]);
-}
+if(!acl_access("faq")) die($admin[noaccess]);
 
 
 

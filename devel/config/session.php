@@ -56,9 +56,13 @@ if(!isset($_COOKIE[$cookiename]))
     
     if($usestats) require_once 'stats_sessionstart.php';
 
+    $remUID = $_COOKIE[$cookiename."_remID"];
+    $remPASS = $_COOKIE[$cookiename."_remPASS"];
+	$test = query("SELECT ID FROM users WHERE ID = '$remUID' AND password = '$remPASS'");
+    if(num($test) == 1) $createUID = $remUID;
+    else $createUID = 1;
 
-
-    mysql_query("INSERT INTO session (userID, sID, logUNIX, IP) VALUES(1, '$new_session',".time().", '$userIP')")
+    mysql_query("INSERT INTO session (userID, sID, logUNIX, IP) VALUES($createUID, '$new_session',".time().", '$userIP')")
 
         or die("Could not create session : ".mysql_error());
 
@@ -121,23 +125,12 @@ mysql_query("DELETE FROM session WHERE logUNIX < '$remove_time'")
 function getuserid($sid)
 
 {
-
-
-
     $dbs = mysql_query("SELECT userID FROM session WHERE sid = '$sid'") // search for session ID table "session" in the DB.
-
         or die(mysql_error());
 
-
-
     if(($dbs == null) || (!mysql_num_rows($dbs))) // if the user is not logged in, or found in the DB, for various reasons,
-
         return 0;   // return 0.
-
-
-
     $row = mysql_fetch_row($dbs); // get first row (should be the only row returned)
-
 
 	if(!empty($row[0]))
     return $row[0]; // return userID

@@ -8,10 +8,9 @@ $sitetitle = "GlobeLAN 4,5 DEVEL";
 $devel_version = "0.3 Alpha";
 
 /* config for the MySQL server! */
-/* As default, I have commented this out, and instead include it from an other file, since this release is automated! */
 $sql_server = "localhost";
-$sql_user = "root";
-$sql_pass = "podem299";
+$sql_user = "devel";
+$sql_pass = "devel";
 $sql_db = "devel";
 
 /* Setting this to upgrade will automatically upgrade the database (hopefully) when an admin is logged in.... */
@@ -23,7 +22,7 @@ $sql_db = "devel";
 
 /* config for database handling */
 $session_alive_time = 3600;      // How long should a session stay alive? 3600 (one hour) is default.
-$cookiename = "GlObeLAN-77777";
+$cookiename = "GL-D3V3L";
 /* The language-files to use.... If your language is not in the lang-folder, make it, translate it, and send it to the creators... */
 $language = "norwegian";
 
@@ -59,12 +58,13 @@ $webshop_display_infoline = "Vennligst vær oppmerksom på:
 <br>- At steking av pizza ol. kan ta tid.
 <br>- Kioskpersonalet vil ta kontakt med deg via epost dersom de lurer på noe. Ha derfor e-post klienten din tilgjengelig.";
 
-$seatsign[0]['name'] = "Vegg";
+$seatsign[0]['name'] = "Wall";
 $seatsign[0]['color'] = "black";
 $seatsign[0]['level'] = -2;
+$seatsign[0]['sign'] = "*";
 
 $seatsign[1]['sign'] = "d";
-$seatsign[1]['name'] = "Deltager";
+$seatsign[1]['name'] = "User";
 $seatsign[1]['level'] = 0;
 $seatsign[1]['color'] = "red";
 
@@ -84,12 +84,12 @@ $seatsign[4]['level'] = -2;
 $seatsign[4]['color'] = "orange";
 
 $seatsign[5]['sign'] = "-";
-$seatsign[5]['name'] = "Åpent";
+$seatsign[5]['name'] = "Open";
 $seatsign[5]['color'] = "white";
 $seatsign[5]['level'] = -2;
 
 $seatsign[6]['sign'] = "D";
-$seatsign[6]['name'] = "Dør";
+$seatsign[6]['name'] = "Door";
 $seatsign[6]['color'] = "brown";
 $seatsign[6]['level'] = -2;
 
@@ -103,8 +103,8 @@ $seatsign[8]['name'] = "Admin";
 $seatsign[8]['color'] = "orange";
 $seatsign[8]['level'] = 2;
 
-$seatsign[9]['sign'] = "U";
-$seatsign[9]['name'] = "Utjevning - Deltager";
+$seatsign[9]['sign'] = "+";
+$seatsign[9]['name'] = "Extra";
 $seatsign[9]['color'] = "red";
 $seatsign[9]['level'] = -2;
 
@@ -126,7 +126,7 @@ global $base_path;
 $lang_file = "$base_path"."lang/".$language.".php";
 
 
-$lang_inc = require_once "$lang_file";
+$lang_inc = require_once $lang_file;
 if(!$lang_inc) die("Could not find language file");
 
 require_once "functions.php";

@@ -1,6 +1,6 @@
 <?php
 
-$browser = get_browser( $HTTP_SERVER_VARS['HTTP_USER_AGENT']);
+/*$browser = get_browser( $HTTP_SERVER_VARS['HTTP_USER_AGENT']);
 
 $q = query("SELECT * FROM stats WHERE config = 'hits' AND value = 'pageviews'");
 
@@ -10,5 +10,5 @@ value = 'pageviews',
 hits = 0");
 
 query("UPDATE stats SET hits = hits + 1 WHERE
-config = 'hits' AND value = 'pageviews'");
+config = 'hits' AND value = 'pageviews'");*/
 

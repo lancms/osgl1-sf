@@ -69,7 +69,7 @@ if($action=="display" && !isset($_GET[poll])) {
         or die(mysql_error());
 
 
-
+    echo "<table border=0><tr><td>\n";
     for($i=0;$i<mysql_num_rows($queryV);$i++)
     {
         $row = mysql_fetch_object($queryV);
@@ -84,6 +84,8 @@ if($action=="display" && !isset($_GET[poll])) {
 
         echo ($i + 1).". $atxt<br><table border=0 cellspacing=0 cellpadding=0><tr><td><table bgcolor=red height=8 border=0 cellspacing=0 cellpadding=0 width=$w><tr><td></td></tr></table></td><td><font size=-2>&nbsp;&nbsp; $w %</font></td></tr></table>\n";
     }
+	echo "</td></tr></table>\n";
+	
 	echo "<br>".$form[44].$maxVotes;
 }
 elseif($action == "castvote" && isset($_GET['AID']))

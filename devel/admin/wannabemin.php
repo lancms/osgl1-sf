@@ -2,7 +2,7 @@
 
 require 'config/config.php';
 
-if(getuserrank() != 2) 
+if(!acl_access("wannabe"))  
 	die($admin[noaccess]);
 
 $action = $_GET['action'];
@@ -30,20 +30,38 @@ elseif($action == "doedittext") {
 }
 
 elseif($action == "listWannabes") {
-	$q = query("SELECT * FROM users WHERE wannabe = 1");
+	$q = query("SELECT * FROM users WHERE wannabe = 1 AND isCrew = 0 AND wannabeDenied != 1");
+	echo "<table>";
 	while($r = fetch($q)) {
+		
 		$test = query("SELECT * FROM wannabe WHERE ID = $r->ID");
 		if(num($test) == 1) {
-			echo "<br><a href=?adminmode=wannabemin&action=viewUserApplication&user=$r->ID>$r->nick</a>";
+			$haveIQ = query("SELECT * FROM wannabeAdmin WHERE userID = $r->ID AND adminID = ".getcurrentuserid());
+			$haveI = fetch($haveIQ);
+			if($haveI->shoudBeCrew == 1) $image = "ja";
+			else $image = "nei";
+			echo "<tr><td>";
+			if(num($haveIQ) != 0) echo "<img src=images/".$image.".gif>";
+			echo "</td><td>";
+			echo "<a href=?adminmode=wannabemin&action=viewUserApplication&user=$r->ID>$r->nick</a>";
+			echo "</td><td>";
 		
 			$comments = query("SELECT * FROM wannabeAdmin WHERE userID =
 					'$r->ID'");
-			echo "&nbsp;&nbsp;&nbsp;(".num($comments).")";
+			echo "(".num($comments).")";
+			echo "</td><td>";
+			echo $r->name;
+			echo "</td><td>";
+			echo $r->cellphone;
+			echo "</td><td>";
+			echo $r->EMail;
+			echo "</td></tr>";
 			
 		}
 		else;
 			//echo "<br>".$r->nick;
 	}
+	echo "</table>";
 
 }
 
@@ -68,6 +86,7 @@ for($column_num = 1;$column_num < $column_count;$column_num++) {
 	$data = $r[$column_num];
 	if($data == "1") $data = "<img src=images/ja.gif>";
 	elseif($data == "0") $data = "<img src=images/nei.gif>";
+	if($field_name == "lastUpdated") $data = convert_timestamp($data);
 	else $data = nl2br($data);
 	$Right = $data;
 	profile_table($Left, $Right);
@@ -115,7 +134,63 @@ while($ru = fetch($qu)) {
 	$adminID = getcurrentuserid();
 	query("UPDATE wannabeAdmin SET
 			moreinfo = '$moreinfo',
-			shoudBeCrew = '$shoudBeCrew'
+			shoudBeCrew = '$shoudBeCrew',
+			lastUpdated = ".time()."
 			WHERE userID = '$user' AND adminID = '$adminID'");
 	refresh("?adminmode=wannabemin&action=viewUserApplication&user=$user", 0);
+}
+
+
+elseif($action == "viewAllApplication") {
+	
+	$q = query("SELECT * FROM wannabe");
+	while($r = mysql_fetch_row($q)) {
+	$user = $r[0];
+	
+	$column_count = mysql_num_fields($q);
+	
+	echo "<table><tr><td>";
+	echo "<a href=admin.php?adminmode=wannabemin&action=listWannabes>Tilbake til listen</a></td><td>";
+	echo "Info om: ";
+	display_nick($user);
+	echo "</td></tr>";
+	
+
+
+for($column_num = 1;$column_num < $column_count;$column_num++) {
+	$field_name = mysql_field_name($q, $column_num);
+	$Left = $wannabe[$field_name];
+	$data = $r[$column_num];
+	if($data == "1") $data = "<img src=images/ja.gif>";
+	elseif($data == "0") $data = "<img src=images/nei.gif>";
+	if($field_name == "lastUpdated") $data = convert_timestamp($data);
+	else $data = nl2br($data);
+	$Right = $data;
+	profile_table($Left, $Right);
+}
+echo "</table>\n\n";
+
+$qu = query("SELECT * FROM wannabeAdmin WHERE userID = $user");
+echo "<table>";
+while($ru = fetch($qu)) {
+	
+		echo "<tr><td>";
+		echo display_nick($ru->adminID);
+		echo "</td><td>";
+		$data = $ru->shoudBeCrew;
+		if($data == "1") $data = "<img src=images/ja.gif>";
+		elseif($data == "0") $data = "<img src=images/nei.gif>";
+		echo $data;
+		echo "</td><td>$ru->moreinfo</td></tr>";
+	
+	
+	
+	
+}
+	$test = query("SELECT * FROM wannabeAdmin WHERE adminID = ".getcurrentuserid()." AND userID = $user");
+	if(num($test) == 0) echo "<tr><td><a href=?adminmode=wannabemin&action=addComment&user=$user>Legg til kommentar</a></td></tr>";
+	//else echo "<tr><td>Du har vist lagt inn fra før på denne brukeren....</td></tr>";
+	echo "</table>";
+}
+	
 }

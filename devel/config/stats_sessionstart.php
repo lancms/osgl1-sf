@@ -1,6 +1,6 @@
 <?php
 require_once 'config.php';
-
+/*
 $browser = get_browser($HTTP_USER_AGENT);
 
 
@@ -36,4 +36,4 @@ value = 'uniq',
 hits = 0");
 
 else query("UPDATE stats SET hits = hits + 1 WHERE
-config = 'hits' AND value = 'uniq'");
+config = 'hits' AND value = 'uniq'");*/

@@ -10,8 +10,9 @@ if(isset($_GET['inc'])) {
 } elseif(isset($_GET['page'])) {
 	$query = mysql_query("SELECT * FROM static WHERE header LIKE '".$_GET['page']."'") or die(mysql_error());
 	$object = mysql_fetch_object($query);
-
-	echo display_text($object->text);
+	if($object->useNL2BR == 1)
+		echo display_text($object->text);
+	else echo $object->text;
 
 
 } else {

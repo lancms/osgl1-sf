@@ -107,6 +107,13 @@ function IDtonick($ID) {
 	return $row->nick;
 }
 
+function mail_body($random) {
+    return "Velkommen som bruker på GlobeLAN DEVEL!\n\r
+    Du har enten endret e-post, eller laget en ny bruker, så venligst logg inn med ditt brukernavn og passord, og fyll inn: ".$random." som ditt verifiseringsnummer!\r\n\r\n
+    Tusen takk\r\n
+    Crewet";
+}
+
 function random_quote() {
 	global $userand;
 	global $rand_text;
@@ -201,7 +208,8 @@ function convert_seatmap($map) {
 function display_nick($ID) {
 	$q = query("SELECT * FROM users WHERE ID = $ID");
 	$r = fetch($q);
-	echo $r->nick;
+	if($r->allowPublic == 0) echo "<a href=index.php?inc=profile&uid=$ID>$r->nick</a>";
+	else echo $r->nick;
 }
 
 function profile_table($profileLeft, $profileRight) {
@@ -214,4 +222,38 @@ function profile_table($profileLeft, $profileRight) {
 
 }
 
+function convert_timestamp($timestamp) {
+	return date("d/m/y H:i:s", $timestamp);
+}
+
+function can_register_clan() {
+	return TRUE;
+}
+
+function mayEditClan($clanID) {
+	$userID = getcurrentuserid();
+	$rank = getuserrank();
+	$q = query("SELECT * FROM Clan WHERE ID = $clanID");
+	$r = fetch($q);
+	if($rank > 0) return 1;
+	elseif($r->moderator == $userID) return 1;
+	else return 0;
+} 
+
+function adminLog($didWhat, $logType = 1, $userID = 0, $adminID = "NOTSET") {
+	if($adminID == "NOTSET") $adminID = getcurrentuserid();
+	@mysql_query("INSERT INTO adminLog SET adminID = $adminID, didWhat = '$didWhat', userID = $userID, logType = $logType, logUNIX =".time());
+	return TRUE;
+}
+function acl_access($acl, $userID = NULL) {
+	if($userID == NULL) $userID = getcurrentuserid();
+	$q = query("SELECT * FROM users WHERE ID = $userID");
+	$r = fetch($q);
+	$myGroup = $r->myGroup;
+	$root = query("SELECT * FROM acls WHERE groupID = $myGroup AND access LIKE 'root' AND value = 1");
+	$sel = query("SELECT * FROM acls WHERE groupID = $myGroup AND access LIKE '$acl' AND value = 1");
+	if(num($root) == 1) return 1;
+	elseif(num($sel) == 1) return 1;
+	else return 0;
+}
 ?>

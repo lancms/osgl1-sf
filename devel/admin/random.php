@@ -1,5 +1,5 @@
 <?php
-
+/* This module is not maintained any more! */
 require 'config/config.php';
 
 if(getuserrank() != 2) 

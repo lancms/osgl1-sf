@@ -1,9 +1,7 @@
 <?php
 require 'config/config.php';
 
-if(getuserrank() != 2) {
-	die($admin[noaccess]);
-}
+if(!acl_access("static")) die($admin[noaccess]);
 
 
 if(isset($_GET['action'])) {
@@ -54,9 +52,10 @@ elseif($action == "doedit" && isset($_POST['edit'])) {
 	$edit = $_POST['edit'];
 	if(!isset($edittext)) die("WTF????? No text?");
 	if(!isset($edit)) die("WTF??? No file to edit?");
-
+	$lastEdit = time();
+	$lastEditBy = getcurrentuserid();
 	$text = addslashes($edittext);
-	mysql_query("UPDATE static SET text = '$text' WHERE header = '$edit'") or die(mysql_error());
+	mysql_query("UPDATE static SET text = '$text', lastEdit = '$lastEdit', lastEditBy = '$lastEditBy' WHERE header = '$edit'") or die(mysql_error());
 
 	refresh("admin.php?adminmode=static");
 }

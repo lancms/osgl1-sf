@@ -2,9 +2,8 @@
 
 require_once $base_path.'config/config.php';
 
-if(getuserrank() != 2) {
-	die($admin[noaccess]);
-}
+if(!acl_access("partyweb")) die($admin[noaccess]);
+
 $action = $_GET['action'];
 $edit = $_GET['edit'];
 

@@ -4,6 +4,8 @@ require_once 'config/config.php';
 if(!config("usepage_wannabe")) die($msg[1]);
 if(getcurrentuserid() == 1) die("Hvorfor i HULESTE er du her? logg inn <b>FØRST</b>");
 
+$action = $_GET['action'];
+
 $q = query("SELECT * FROM users WHERE ID = ".getcurrentuserid());
 $r = fetch($q);
 $qT = query("SELECT * FROM config WHERE config = 'wannabetext'");
@@ -112,9 +114,9 @@ elseif($action == "editwannabe") {
 		karaoke = '$karaoke',
 		canCake = '$canCake',
 		leaderType = '$leaderType',
-		myRequests = '$myRequests'
+		myRequests = '$myRequests',
 		
-		WHERE ID = ".getcurrentuserid());
+		lastUpdated = ".time()." WHERE ID = ".getcurrentuserid());
 	refresh("index.php?inc=wannabe", 0);
 
 }

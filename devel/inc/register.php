@@ -118,6 +118,8 @@ else
     <tr><td><input type=submit value=" Register "></td></tr>
     </table>
     </form>
+			
+	<br><br><b>Du vil motta en verifiseringskode til mailadressen du oppgir. Denne må oppgis ved første pålogging. Merk: Hotmail anser denne mailen som junk av en eller annen merkelig grunn......</b>
 
     <?php
 }

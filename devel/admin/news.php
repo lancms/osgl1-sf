@@ -2,31 +2,14 @@
 
 require 'config/config.php';
 
-
-
-if(getuserrank() != 2) {
-
-	die($admin[noaccess]);
-
-}
-
-
-
-
+if(!acl_access("news")) die($admin[noaccess]);
 
 if(isset($_GET['action'])) {
-
 	$action = $_GET['action'];
-
 } else {
-
 	$action = "list";
-
 }
-
 $editID = $_GET['editID'];
-
-
 
 if($action == "add") {
 

@@ -8,54 +8,38 @@ require_once "config/config.php";
 
 $action = $_GET['action'];
 
-if(getuserrank() != 2) {
-
-
+if(!acl_access("adminUsers")) {
 
 	$editID = getcurrentuserid();
 
 } elseif(!isset($_GET['user'])) {
 
-
-
 	$editID = getcurrentuserid();
 
-} elseif(getuserrank() == 2 && isset($_GET['user'])) {
+} elseif(acl_access("adminUsers")) && isset($_GET['user'])) {
 
 	$editID = $_GET['user'];
+	if($editID != getcurrentuserid()) $doLogs = TRUE;
 
 }
 
 
-
+if(getcurrentuserid() == 1) die("Du må logge enn _FØR_ du får gjort noe her");
 
 
 if($action == "view" || !isset($action)) {
 
-
-
 	if($_GET['mode'] == "success") echo "<font color=red>$profile[7]</font>";
-
 	if($_GET['mode'] == "pwdsuccess") echo "<font color=red>$profile[7]</font>";
-
-
 
 	$query = mysql_query("SELECT * FROM users WHERE ID = $editID") or die(mysql_error());
 
 	$row = mysql_fetch_object($query);
-
-
-
 	echo "<form method=post action=index.php?inc=useradmin&action=edit&user=$row->ID>";
-
 	echo '<table>';
-
 	user_table($profile[3],"<input type=text name=name value='$row->name'>");
-
 	// We want a little bit of security, so we have this one on it's own page with verifcation.
-
 	//user_table($profile[6], "<input type=text name=mail value='$row->EMail'>");
-
 	user_table($profile[4], "<textarea name=aboutme rows=10 cols=60>$row->aboutMe</textarea>");
 
 	if($row->isCrew >= 1) {
@@ -99,8 +83,8 @@ if($action == "view" || !isset($action)) {
 	echo "<tr><td class=profileLeft width=30%>$profile[9]</td><td class=profileRight>";
 
 
-
-	if(getuserrank() == 2) {
+/* This part isn't used any more, since we now use ACLs
+//	if(getuserrank() == 2) {
 
 		echo "<select name=rank>";
 
@@ -123,6 +107,7 @@ if($action == "view" || !isset($action)) {
 		echo "<input type=hidden name=rank value=$row->isCrew>$rank[$rank1234]";
 
 	}
+	*/
 
 	echo "</td></tr>";
 
@@ -168,7 +153,7 @@ if($action == "view" || !isset($action)) {
 
 	echo "<br><input type=submit value='$form[15]'>";
 
-
+if($doLogs) adminLog("Admin så på konfigurasjonen til brukeren",2, $editID);
 
 
 
@@ -182,7 +167,8 @@ elseif($action == "edit") {
 	$name = $_POST['name'];
 	$mail = $_POST['mail'];
 	$aboutme = htmlspecialchars($_POST['aboutme']);
-	$rank = $_POST['rank'];
+//	$rank = $_POST['rank'];
+//	if(getuserrank() == 0) $rank = getuserrank();
 	$crewField = $_POST['crewfield'];
 	$cellphone = $_POST['cellphone'];
 	$allowPublic = $_POST['allowPublic'];
@@ -199,7 +185,6 @@ elseif($action == "edit") {
 		cellphone = '$cellphone',
 		allowPublic = $allowPublic,
 		userDesign = '$userDesign',
-		isCrew = '$rank',
 		street = '$street',
 		postNr = '$postNr',
 		postPlace = '$postPlace',
@@ -210,7 +195,7 @@ elseif($action == "edit") {
 		WHERE ID = $editID") or die(mysql_error());
 
 	refresh("index.php?inc=useradmin&user=$editID", "0");
-
+if($doLogs) adminLog("Endret på brukeren. Viktig informasjon som ble gjennomgått var: name = $name, aboutMe = $aboutme, rank = $rank, bursdag = $birthDAY / $birthMONTH $birthYEAR",3, $editID);
 
 
 } elseif($action == "changepass") {
@@ -256,7 +241,7 @@ elseif($action == "edit") {
 		refresh("index.php?inc=useradmin&mode=pwdsuccess&user=$editID", "0");
 
 	}
-
+if($doLogs) adminLog("Endret passord",3, $editID);
 } elseif($action == "changemail") {
 
 	$query = mysql_query("SELECT * FROM users WHERE ID = $editID") or die(mysql_error());
@@ -320,7 +305,7 @@ elseif($action == "edit") {
 		}
 
 	}
-
+if($doLogs) adminLog("Endret mail til: $newmail",3, $editID);
 }
 
 

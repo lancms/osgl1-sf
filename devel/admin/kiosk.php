@@ -1,6 +1,8 @@
 <?php
 require 'config/config.php';
 
+/* This module is not maintained any more */
+
 if(getuserrank() != 2) {
 	die($admin[noaccess]);
 }

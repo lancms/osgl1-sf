@@ -48,7 +48,7 @@ if($action == "display" && isset($viewUSER)) {
 
 	// Check if the user allows others than admins to see his profile.
 
-	if($permission == 2 && getuserrank() != 2) die($profile[0]);
+	if($permission == 2 && getuserrank() == 0) die($profile[0]);
 
 	elseif($permission == 1 && getcurrentuserid() == 1) die($profile[1]);
 
@@ -66,9 +66,9 @@ if($action == "display" && isset($viewUSER)) {
 
 	echo "<tr><td class=profileLeft>$profile[5]</td><td class=profileRight>";
 
-	if($row->seatID == 0) echo $msg[11];
+	if($row->seatX == -1 && $row->seatY == -1) echo $msg[11];
 
-	else echo $msg[10]." ($row->seatID)";
+	else echo $msg[10]." ($row->seatX / $row->seatY)";
 
 	echo "</td></tr>";
 
@@ -82,7 +82,7 @@ if($action == "display" && isset($viewUSER)) {
 
 echo "</table>";
 
-if(getuserrank() == 2) echo "<br><a href=index.php?inc=useradmin&user=$viewUSER>$profile[11]</a>";
+if(getuserrank() != 0) echo "<br><a href=index.php?inc=useradmin&user=$viewUSER>$profile[11]</a>";
 
 echo "</center>";
 /*
