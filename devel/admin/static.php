@@ -65,17 +65,28 @@ elseif(($action == "new") && (isset($_POST['filename'])))
 {
 	$file = $_POST['filename'];
 
+	$query = query ("SELECT ID FROM static WHERE header = '".$file."'");
+	$fetch = fetch ($query);
+	$num = num ($query);
+	
 	if (($file == "") || ($file == " "))
 	{
 		refresh ("admin.php?adminmode=static", 2);
 		$errmsg = lang ("Missing filename.", "admin_static", "Text to display when missing filename for static page");
 		nicedie ($errmsg);
 	}
-	
-	query("INSERT INTO static SET header = '$file'");
-
-	refresh("admin.php?adminmode=static&action=edit&edit=$file");
-	dblog(7, $file);
+	elseif ($num != "0")
+	{
+		refresh ("admin.php?adminmode=static", 2);
+		$errmsg = lang ("A page with that name already exists.", "admin_static", "Text to display when filenames for static pages conflict");
+		nicedie ($errmsg);
+	}
+	else
+	{
+		query("INSERT INTO static SET header = '$file'");
+		refresh("admin.php?adminmode=static&action=edit&edit=$file");
+		dblog(7, $file);
+	}
 }
 elseif($action == "delete" && $_GET['confirmed'] != 1 && isset($_GET['edit'])) {
 	$edit = $_GET['edit'];
