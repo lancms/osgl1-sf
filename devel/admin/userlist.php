@@ -39,7 +39,7 @@ elseif($action == "online") {
 
 		$nick = query("SELECT nick FROM users WHERE ID = $row->userID");
 		$nick = fetch($nick);
-		$nick = $nick[0];
+		$nick = $nick->nick;
 
 		echo "<tr><td>$nick</td><td>$row->IP</td><td>";
 		echo date("H:i",$row->logUNIX)."";
