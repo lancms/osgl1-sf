@@ -11,16 +11,19 @@ return $text;
 
 }
 
-if(empty($viewpage) && $mode != "party") {
-$q = mysql_query("SELECT ID FROM partyweb WHERE display_menu = 1 ORDER BY ID DESC LIMIT 0,1");
-$r = mysql_fetch_object($q);
-header("Location: ?viewpage=$r->ID");
+if(empty($viewpage) && empty($mode)) {
+$q = query("SELECT ID FROM partyweb WHERE display_menu = 1 ORDER BY ID DESC LIMIT 0,1");
+if(num($q) == 0) header("Location: ?mode=nopage");
+else {
+	$r = fetch($q);
+	header("Location: ?viewpage=$r->ID");
+	}
 die();
 }
 
 include_once $base_path.'partyweb/style/top.php';
 
-if($mode != "party") {
+if(empty($mode)) {
 include_once $base_path.'partyweb/style/menu.php';
 }
 
@@ -59,6 +62,10 @@ echo '<td height="100%" align="center" valign="top" class="tbl_main">';
 echo text2html($page->text);
 }
 
+elseif($mode == "nopage") {
+echo '<td height="100%" align="center" valign="top" class="tbl_main">';
+echo "Sorry, admin has not put in any pages here yet";
+}
 
 
 include_once $base_path.'partyweb/style/bottom.php';
