@@ -50,7 +50,7 @@ elseif($action == "ListQue") {
 
 		while($var 	= fetch($result)) {
 
-		$Id		=	$var->ID;
+		$ID		=	$var->ID;
 		$Que	=	$var->content;
 		$Type	=	$var->type;
 
@@ -63,30 +63,30 @@ elseif($action == "ListQue") {
 
 		if($Type == 1) {
 
-			$query2		=	"SELECT * FROM wannabeAlt WHERE queID = '$Id'";
+			$query2		=	"SELECT * FROM wannabeAlt WHERE queID = '$ID'";
 			$result2	=	query($query2);
 
 			while($var2 = fetch($result2)) {
 
-			$Altid		=	$var2->ID;
+			$AltID		=	$var2->ID;
 			$Alt		=	$var2->content;
 
 
-			$query3		= 	"SELECT * FROM wannabeUsers WHERE user = '$user' AND  queID = '$Id'";
+			$query3		= 	"SELECT * FROM wannabeUsers WHERE user = '$user' AND  queID = '$ID'";
 			$result3 	= 	query($query3);
 
 			$Sel		= 	fetch($result3);
-			$SelId		=	$Sel->ans;
+			$SelID		=	$Sel->ans;
 
 			$Check		=	"";
 
-			if($SelId == $Altid) {
+			if($SelID == $AltID) {
 		 	 $Check		=	" checked";
 			}
 
 			$list   .= "
 			<tr>
-			 <td><input type='radio' name='".$Id."' value='".$Altid."'".$Check.">".$Alt."</td>
+			 <td><input type='radio' name='".$ID."' value='".$AltID."'".$Check.">".$Alt."</td>
 			</tr>
 			";
 
@@ -94,7 +94,7 @@ elseif($action == "ListQue") {
 
 		} else {
 
-			$query4		= 	"SELECT * FROM wannabeUsers WHERE user = '$user' AND queID = '$Id'";
+			$query4		= 	"SELECT * FROM wannabeUsers WHERE user = '$user' AND queID = '$ID'";
 			$result4 	= 	query($query4);
 			$Answ		= 	fetch($result4);
 
@@ -102,7 +102,7 @@ elseif($action == "ListQue") {
 
 			$list 	.= "
 			 <tr>
-			   <td><textarea name='$Id'>".$Text."</textarea></td>
+			   <td><textarea name='$ID'>".$Text."</textarea></td>
 			 </tr>
 			 ";
 
@@ -139,25 +139,25 @@ elseif($action == "EndQue") {
 
 	  while($Res = fetch($result)) {
 
-	   $id		=	$Res->ID;
-	   $post	=	$_POST[$id];
+	   $ID		=	$Res->ID;
+	   $post	=	$_POST[$ID];
 	   $post	=	escape_string($post);
 
 	   if(empty($post)) nicedie(lang("Please answer the questions !", "admin_wannabemin", "Text used in wannabemin"));
 
 	   if(!empty($post)) {
 
-	   	$ans		=	$_POST[$id];
+	   	$ans		=	$_POST[$ID];
 		$ans		=	escape_string($ans);
 
-		$query4		= 	"SELECT * FROM wannabeUsers WHERE queID = '$id' AND user = '$user'";
+		$query4		= 	"SELECT * FROM wannabeUsers WHERE queID = '$ID' AND user = '$user'";
 		$result4	= 	query($query4);
 		$num		=	num($result4);
 
 		if($num >= 1) {
-		 $query2 	= 	"UPDATE wannabeUsers SET ans = '$ans' WHERE queID = '$id' AND user = '$user'";
+		 $query2 	= 	"UPDATE wannabeUsers SET ans = '$ans' WHERE queID = '$ID' AND user = '$user'";
 		} else {
-	     $query2 	= 	"INSERT INTO wannabeUsers (ID, user, ans, queID) VALUES (NULL, '$user', '$ans', '$id')";
+	     $query2 	= 	"INSERT INTO wannabeUsers (ID, user, ans, queID) VALUES (NULL, '$user', '$ans', '$ID')";
 		}
 		$result2	= 	query($query2);
 
