@@ -388,7 +388,7 @@ CREATE TABLE `wannabeAlt` (
 `ID` INT( 10 ) NOT NULL AUTO_INCREMENT ,
 `content` VARCHAR( 225 ) NOT NULL ,
 `queID` INT( 10 ) NOT NULL ,
-PRIMARY KEY ( `id` )
+PRIMARY KEY ( `ID` )
 ) TYPE = MYISAM ;
 
 DROP TABLE IF EXISTS wannabeQue;
@@ -396,7 +396,7 @@ CREATE TABLE `wannabeQue` (
 `ID` INT( 10 ) NOT NULL AUTO_INCREMENT ,
 `content` VARCHAR( 225 ) NOT NULL ,
 `type` SMALLINT(1) NOT NULL ,
-PRIMARY KEY ( `id` )
+PRIMARY KEY ( `ID` )
 ) TYPE = MYISAM ;
 
 DROP TABLE IF EXISTS wannabeComment;
@@ -405,7 +405,7 @@ CREATE TABLE `wannabeComment` (
 `comment` VARCHAR( 225 ) NOT NULL ,
 `user` INT(10) NOT NULL ,
 `by` INT(10) NOT NULL ,
-PRIMARY KEY ( `id` )
+PRIMARY KEY ( `ID` )
 ) TYPE = MYISAM ;
 
 DROP TABLE IF EXISTS wannabeUsers;
@@ -415,7 +415,7 @@ CREATE TABLE `wannabeUsers` (
 `ans` TEXT NOT NULL ,
 `queID` INT( 10 ) NOT NULL ,
 `catID` INT( 10 ) NOT NULL ,
-PRIMARY KEY ( `id` )
+PRIMARY KEY ( `ID` )
 ) TYPE = MYISAM ;
 
 
