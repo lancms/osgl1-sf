@@ -387,6 +387,19 @@ elseif ($action == "DoViewUsers")
 		nicedie(lang("Please specify the userID", "admin_wannabemin", "Text used in wannabemin"));
 	}
 	
+	$q = query("SELECT * FROM users WHERE ID = ".escape_string($UID));
+	$r = fetch($q);
+	echo "<table>";
+	osgl_table(lang("Nick: ", "admin_wannabemin", "DoViewUsers->profile->nick"), $r->nick);
+	osgl_table(lang("Name: ", "admin_wannabemin", "DoViewUsers->profile->name"), $r->name);
+	osgl_table(lang("Birthday: ", "admin_wannabemin", "DoViewUsers->profile->birthday"), $r->birthDAY." / ".$r->birthMONTH." ".$r->birthYEAR );
+	osgl_table(lang("EMail: ", "admin_wannabemin", "DoViewUsers->profile->EMail"), $r->EMail);
+	osgl_table(lang("Cellphone: ", "admin_wannabemin", "DoViewUsers->profile->Cellphone"), $r->cellphone);
+	osgl_table(lang("Street: ", "admin_wannabemin", "DoViewUsers->profile->Street"), $r->street);
+	osgl_table(lang("Post # / place: ", "admin_wannabemin", "DoViewUsers->profile->poststuff"), $r->postNr." ".$r->postPlace);
+	
+	echo "</table>";
+	
 	$query = sprintf ("SELECT * FROM wannabeUsers WHERE user = %s", escape_string($UID));
 	$result = query($query);
 
