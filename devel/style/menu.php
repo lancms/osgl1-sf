@@ -48,7 +48,7 @@ else
     write_menu ("index.php?inc=useradmin", $title['page'][7]);
 //    if(config("usepage_kiosk")) write_menu ("index.php?inc=kiosk", $title['page'][15]); // Doesn't work
     if(config("usepage_compo")) write_menu("index.php?inc=clan", $title['page'][10]);
-    if(config("usepage_compopoll")) write_menu("index.php?inc=compopoll", "Compoavstemning");
+    if(config("usepage_compopoll")) write_menu("index.php?inc=compopoll", $title['page'][15]);
     if(config("usepage_wannabe")) write_menu("index.php?inc=wannabe", $title['page'][17]);
 
 

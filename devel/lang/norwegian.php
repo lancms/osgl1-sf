@@ -118,6 +118,7 @@ $msg['36'] = "Lagt til.";
 $msg['37'] = "Søk gjennom nick eller navn";
 $msg['38'] = "Endre billett";
 $msg['39'] = "No seat";
+$msg['40'] = "Componavn";
 
 $partyweb['0'] = "Menynavn";
 $partyweb['1'] = "Vis i meny";
@@ -157,7 +158,7 @@ $title['page'][11] = "Klan oversikt";
 $title['page'][12] = "Forum";
 $title['page'][13] = "Brukerinnlogging";
 $title['page'][14] = "Crewadressebok";
-//$title['page'][15] = "";
+$title['page'][15] = "Compoavstemning";
 $title['page'][16] = "PartyWeb";
 $title['page'][17] = "WannabeCrew";
 

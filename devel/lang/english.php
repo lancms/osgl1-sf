@@ -118,6 +118,7 @@ $msg['36'] = "Added";
 $msg['37'] = "Search by nick or name";
 $msg['38'] = "Change ticket";
 $msg['39'] = "No seat";
+$msg['40'] = "Componame";
 
 $partyweb['0'] = "Menuname";
 $partyweb['1'] = "Display in menu";
@@ -144,24 +145,24 @@ $allowPublicFor[1] = "Only registered users";
 $allowPublicFor[2] = "Only admins";
 
 /* Titles of pages; visible in menu */
-$title[page][0] = "Main page";
-$title[page][1] = "FAQ";
-$title[page][2] = "Register user";
-$title[page][3] = "Logout";
-$title[page][4] = "Admin";
-$title[page][5] = "Votes";
-$title[page][6] = "Seatmap";
-$title[page][7] = "Edit profile";
-$title[page][8] = "Comporegistration";
-$title[page][9] = "News";
-$title[page][10] = "Register Clan";
-$title[page][11] = "Clan list";
-$title[page][12] = "Forum";
-$title[page][13] = "Userlogin";
-$title[page][14] = "Crewadressbook";
-//$title[page][15] = "";
-$title[page][16] = "PartyWeb";
-$title[page][17] = "WannabeCrew";
+$title['page'][0] = "Main page";
+$title['page'][1] = "FAQ";
+$title['page'][2] = "Register user";
+$title['page'][3] = "Logout";
+$title['page'][4] = "Admin";
+$title['page'][5] = "Votes";
+$title['page'][6] = "Seatmap";
+$title['page'][7] = "Edit profile";
+$title['page'][8] = "Comporegistration";
+$title['page'][9] = "News";
+$title['page'][10] = "Register Clan";
+$title['page'][11] = "Clan list";
+$title['page'][12] = "Forum";
+$title['page'][13] = "Userlogin";
+$title['page'][14] = "Crewadressbook";
+$title['page'][15] = "Compopoll";
+$title['page'][16] = "PartyWeb";
+$title['page'][17] = "WannabeCrew";
 
 /* Messages on admin-interface */
 $admin['noaccess'] = "DIIIIIIIIIIIIIE!! No access!";

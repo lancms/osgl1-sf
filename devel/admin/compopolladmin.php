@@ -16,7 +16,7 @@ if($action == "listCompos") {
 $q = query("SELECT SUM(answer),pollID FROM compoPollA GROUP BY pollID ORDER BY 'SUM(answer)' DESC;");
 
 echo "<table>";
-echo "<tr><th>Componavn</th>";
+echo "<tr><th>".$msg['40']."</th>";
 for($i=0;$i<count($compopoll);$i++) echo "<th>$compopoll[$i]</th>\n";
 echo "</tr>";
 while($rordered = fetch($q)) {
