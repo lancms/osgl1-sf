@@ -2,7 +2,8 @@
 
 require 'config/config.php';
 
-if(!acl_access("news")) die($admin[noaccess]);
+if(!acl_access("news"))
+	nicedie($admin[noaccess]);
 
 if(isset($_GET['action'])) {
 	$action = $_GET['action'];
@@ -19,25 +20,20 @@ if($action == "add") {
 
 	$me = getcurrentuserid();
 
-	$query = mysql_query("INSERT INTO news SET header = '$header', text = '$text', poster = $me") or die(mysql_error());
-
-
+	$query = query("INSERT INTO news SET header = '$header', text = '$text', poster = $me");
 
 	refresh("admin.php?adminmode=news", "0");
-
-
-
 }
 
 
 
 elseif($action == "list") {
 
-	$q = mysql_query("SELECT * FROM news ORDER BY ID DESC") or die(mysql_error());
+	$q = query("SELECT * FROM news ORDER BY ID DESC");
 
 	echo "<table>";
 
-	while($r = mysql_fetch_object($q)) {
+	while($r = fetch($q)) {
 
 		echo "<tr><td>";
 
@@ -71,7 +67,7 @@ elseif($action == "list") {
 
 elseif($action == "delete" && isset($editID)) {
 
-	mysql_query("DELETE FROM news WHERE ID = $editID");
+	query("DELETE FROM news WHERE ID = $editID");
 
 	refresh("admin.php?adminmode=news", 0);
 
