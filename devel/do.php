@@ -5,7 +5,8 @@ require_once 'config/config.php';
 $action = $_GET['action'];
 
 if(!isset($action)) {
-    DIE("hacking?");
+	require_once $base_path."style/top.php";
+	nicedie("Hacking?");
 }
 
 if($action=="login") {
@@ -13,7 +14,7 @@ if($action=="login") {
         $username = $_POST['username'];
         $pwd = $_POST['password'];
     } else {
-        die();
+        nicedie();
     }
 
     $res = log_in($username, $pwd);
@@ -93,7 +94,8 @@ if($action=="login") {
 
 
 } else {
-    die("Manglende funksjon..... noen som har glemt noe???");
+	// Default reason works.
+	nicedie();
 }
 
 
