@@ -19,3 +19,5 @@ Here are the numeric strings for what is logged:
 8 = Deleted static file. Syntax: "filename"
 9 = User changed seat. Syntax: x<Xseat>y<Yseat>
 10 = hackingattempt: syntax: english text about what happend
+11 = Changed userinfo. old and new logged. Syntax: "userID:::username:::firstname:::lastname:::aboutMe:::cellphone:::allowpublic:::street:::postNr:::postPlace \
+birthDAY:::birthMONTH:::birthYEAR:::myGroup:::userDesign"
