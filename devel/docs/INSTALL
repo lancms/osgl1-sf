@@ -12,7 +12,7 @@ Remember to check the bugtracker for known bugs and so on.
 
 We haven't done any extended testing of what versions of this software OSGlobeLAN runs on, but this is what we create and tests it on:
 
-* PHP4	- It could work with PHP5 too, but we haven't tested. Needs MySQL-support.
+* PHP4	- It could work with PHP5 too, but we haven't tested. Needs MySQL- and GD-support. (php4-mysql and php4-gd)
 * Apache	- Or some other webserver that support PHP.
 * MySQL	- Some stable version of MySQL 3 should work just fine.
 
