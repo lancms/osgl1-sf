@@ -17,3 +17,11 @@ On vacation with my laptop (lak), written some more, scripts:
 - first version of compoadmin
 - Possibillety to create webpages directly from the static-admin (discouraged)
 - random_quote()
+
+
+---December 13, 2004 Version <lost track of that long time ago>
+
+"Restarting" sf.net/projects/osglobelan :-)
+Probably gonna happen some redoing of documentation and so on. :-)
+ 
+ -- Mathias a.k.a. alfa <mathias@globelan.net>
