@@ -1,6 +1,6 @@
 <?php
 require_once 'config/config.php';
-if(!acl_access("compomaster")) die($admin[noaccess]);
+if(!acl_access("compomaster")) nicedie($admin[noaccess]);
 
 $action = $_GET['action'];
 
@@ -21,8 +21,8 @@ if(!isset($action)) {
 	echo "<a href=?adminmode=compomaster&action=seed&edit=$r->ID>".$compo['18']."</a>";
 	echo "</td><td>";
 	echo $compo['19']." ";
-	$qU = query("SELECT * FROM compoReg WHERE compoID = $r->ID");
-	$qC = query("SELECT DISTINCT clanID FROM compoReg WHERE compoID = $r->ID");
+	$qU = query("SELECT * FROM compoReg WHERE compoID = ".mysql_escape_string ($r->ID));
+	$qC = query("SELECT DISTINCT clanID FROM compoReg WHERE compoID = ".mysql_escape_string ($r->ID));
 	echo num($qU)." ".$compo['20'];
 	if($r->gameType > 1) echo " ".$compo['21']." ".num($qC)." ".$compo['22'];
 	echo "</td></tr>";
@@ -39,10 +39,12 @@ if(!isset($action)) {
 } // End action not set
 
 elseif($action == "addnew") {
-	$componame = $_POST['componame'];
+	$componame = mysql_escape_string ($_POST['componame']);
 	if(empty($componame))
+	{
 		nicedie($form['69']);
-	query("INSERT INTO compo SET name = '$componame'");
+	}
+	query("INSERT INTO compo SET name = '".$componame."'");
 	refresh("admin.php?adminmode=compomaster",5, 0);
 
 }
@@ -50,7 +52,7 @@ elseif($action == "addnew") {
 elseif($action == "edit" && isset($_GET['edit'])) {
 	if(isset($_GET['text'])) echo "<font color=red>".$_GET['text']."</font><br>";
 	echo "<div align=left><a href=admin.php?adminmode=compomaster>".$msg['32']."</a></div><br>";
-	$edit = $_GET['edit'];
+	$edit = mysql_escape_string ($_GET['edit']);
 
 	$q = query("SELECT * FROM compo WHERE ID = $edit");
 	$r = fetch($q);
@@ -74,13 +76,13 @@ elseif($action == "edit" && isset($_GET['edit'])) {
 } // end action == edit
 
 elseif($action == "doedit") {
-	$edit = $_GET['edit'];
+	$edit = mysql_escape_string ($_GET['edit']);
 
-	$componame = $_POST['componame'];
-	$gameType = $_POST['gameType'];
-	$players = $_POST['players'];
-	$rules = $_POST['rules'];
-	$roundPlayers = $_POST['roundPlayers'];
+	$componame = mysql_escape_string ($_POST['componame']);
+	$gameType = mysql_escape_string ($_POST['gameType']);
+	$players = mysql_escape_string ($_POST['players']);
+	$rules = mysql_escape_string ($_POST['rules']);
+	$roundPlayers = mysql_escape_string ($_POST['roundPlayers']);
 
 
 	query("UPDATE compo SET name = '$componame',
@@ -92,7 +94,7 @@ elseif($action == "doedit") {
 			WHERE ID = $edit");
 	refresh("admin.php?adminmode=compomaster&action=edit&edit=$edit&text=Redigert", 0);
 } elseif($action == "toggleopen") {
-	$edit = $_GET['edit'];
+	$edit = mysql_escape_string ($_GET['edit']);
 
 	$q = query("SELECT * FROM compo WHERE ID = $edit");
 	$r = fetch($q);
@@ -104,7 +106,7 @@ elseif($action == "doedit") {
 	refresh("admin.php?adminmode=compomaster", 0);
 }
 elseif($action == "seed") {
-	$edit = $_GET['edit'];
+	$edit = mysql_escape_string ($_GET['edit']);
 	$compo = query("SELECT * FROM compo WHERE ID = $edit");
 	$compR = fetch($compo);
 	if($compR->gameType <= 1) {
@@ -131,8 +133,8 @@ elseif($action == "seededit") {
 	echo $msg['33'];
 	$seed = $_GET['seed'];
 	$compo = $_GET['edit'];
-	$user = $_GET['user'];
-	$clan = $_GET['clan'];
+	$user = mysql_escape_string ($_GET['user']);
+	$clan = mysql_escape_string ($_GET['clan']);
 	if(isset($user) && $user > 1) {
 		// Dette er en oneplayer-compo
 		if($seed == "up") query("UPDATE compoReg SET seed = seed + 10 WHERE compoID = $compo AND userID = $user");
