@@ -57,7 +57,7 @@ elseif ($action == "logout")
 elseif (($action == "verify") && (isset ($_GET['uid'])))
 {
 	require_once ($base_path."style/top.php");
-	$uid = $_GET['uid']
+	$uid = $_GET['uid'];
 	
 	echo $msg[23];
 	echo "<br>";
