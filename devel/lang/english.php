@@ -296,6 +296,13 @@ $acl[17]['access'] = "ACL";
 $acl[18]['name'] = "List in addressbook";
 $acl[18]['access'] = "listaddress";
 
+$compotype[0] = "FFA";
+$compotype[1] = "1on1";
+$compotype[2] = "2vs2";
+$compotype[3] = "3vs3";
+$compotype[4] = "4vs4";
+$compotype[5] = "5vs5";
+
 function mail_body($random) {
     return "Welcome as a user of GlobeLAN DEVEL!\n\r
     You have either changed you EMail, or added a new user, so please login with you username and password and enter: ".$random." as you verificationnumber!\r\n\r\n

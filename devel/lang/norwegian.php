@@ -296,7 +296,12 @@ $acl[17]['access'] = "ACL";
 $acl[18]['name'] = "List i adresselista";
 $acl[18]['access'] = "listaddress";
 
-
+$compotype[0] = "FFA";
+$compotype[1] = "1on1";
+$compotype[2] = "2vs2";
+$compotype[3] = "3vs3";
+$compotype[4] = "4vs4";
+$compotype[5] = "5vs5";
 
 
 function mail_body($random) {
