@@ -75,6 +75,7 @@ $form['69'] = "Mangler navn på compoen.";
 $form['70'] = "Antall spillere per lag"
 $form['71'] = "Antall lag per runde";
 $form['72'] = "Mangler innehold.";
+$form['73'] = "Rediger";
 
 /* Diffrent kinds of messages..... */
 $msg[0] = "Logget inn som: ";
@@ -121,6 +122,9 @@ $partyweb['2'] = "Vis i partymode";
 $partyweb['3'] = "Slett siden";
 $partyweb['4'] = "Oppdatering vellykket.";
 $partyweb['5'] = "Ny side lagt til.";
+
+$userlist['0'] = "Siste visning";
+$userlist['1'] = "Side";
 
 $rank[0] = "Deltager";
 $rank[1] = "Crew";

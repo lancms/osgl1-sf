@@ -4,16 +4,18 @@ require 'config/config.php';
 $action = $_GET['action'];
 
 if($action == "display" || !isset($action)) {
-	if(!acl_access("adminUsers")) die($admin[noaccess]);
+	if(!acl_access("adminUsers"))
+		nicedie($admin[noaccess]);
+		
 	echo "<table>";
-	$query = mysql_query("SELECT * FROM users WHERE ID != 1 ORDER BY ID ASC") or die(mysql_error());
+	$query = query("SELECT * FROM users WHERE ID != 1 ORDER BY ID ASC");
 
-	$num = mysql_num_rows($query);
+	$num = num($query);
 	echo "<tr><th>$profile[8]</th>";
 	echo "</tr>";
 	for($i=0;$i<$num;$i++) {
 
-		$row = mysql_fetch_object($query);
+		$row = fetch($query);
 
 		echo "<tr><td><a href=index.php?inc=useradmin&user=$row->ID>$row->nick</a></td>";
 		echo "</tr>";
@@ -23,19 +25,20 @@ if($action == "display" || !isset($action)) {
 }
 
 elseif($action == "online") {
-	if(!acl_access("onlineUsers")) die($admin[noaccess]);
+	if(!acl_access("onlineUsers"))
+		nicedie($admin[noaccess]);
 
 	echo "<table>";
-	echo "<tr><th>$profile[8]</th><th>IP</th><th>Last page-view</th><th>Side</th></tr>";
-	$query = mysql_query("SELECT * FROM session ORDER BY userID") or die(mysql_error());
-	$num = mysql_num_rows($query);
+	echo "<tr><th>$profile[8]</th><th>IP</th><th>".$userlist['0']."</th><th>".$userlist['1']."</th></tr>";
+	$query = query("SELECT * FROM session ORDER BY userID");
+	$num = num($query);
 
 	for($i=0;$i<$num;$i++) {
 
-		$row = mysql_fetch_object($query);
+		$row = fetch($query);
 
-		$nick = mysql_query("SELECT nick FROM users WHERE ID = $row->userID");
-		$nick = mysql_fetch_row($nick);
+		$nick = query("SELECT nick FROM users WHERE ID = $row->userID");
+		$nick = fetch($nick);
 		$nick = $nick[0];
 
 		echo "<tr><td>$nick</td><td>$row->IP</td><td>";

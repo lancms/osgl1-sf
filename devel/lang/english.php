@@ -123,6 +123,9 @@ $partyweb['3'] = "Delete page";
 $partyweb['4'] = "Update complete.";
 $partyweb['5'] = "New page added.";
 
+$userlist['0'] = "Last view";
+$userlist['1'] = "Page";
+
 $rank[0] = "User";
 $rank[1] = "Crew";
 $rank[2] = "Admin";
