@@ -73,5 +73,5 @@ if(acl_access("adminUsers"))
 
 echo "</center>";
 echo "</td></tr>";
-}
+
 ?>
