@@ -40,7 +40,7 @@ if (!isset($action))
 		echo num($qU)." ".lang("users", "admin_compomaster", "compo[20]");
 		if ($r->gameType > 1)
 		{
-			echo " ".lang("distributed on", "admin_compomaster", "compo[21]")." ".num($qC)." "lang("clans", "admin_compomaster", "compo[22]");
+			echo " ".lang("distributed on", "admin_compomaster", "compo[21]")." ".num($qC)." ".lang("clans", "admin_compomaster", "compo[22]");
 		}
 		echo "</td></tr>";
 	} // End while fetch()
@@ -49,7 +49,7 @@ if (!isset($action))
 	echo "<br><br><hr><br>";
 	echo "<form method=POST action=admin.php?adminmode=compomaster&action=addnew>
 		<input type=text name=componame> ".lang("Name of the compo", "admin_compomaster", "form[68]")."
-		<br><input type=submit value='"lang("Add", "admin_compomaster", "form[7]")."'>
+		<br><input type=submit value='".lang("Add", "admin_compomaster", "form[7]")."'>
 		</form>";
 
 } // End action not set
