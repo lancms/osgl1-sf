@@ -52,7 +52,7 @@ if($action == "display" && isset($viewUSER)) {
 
 	// Check if the user allows others than admins to see his profile.
 
-	if (($permission == 2) && (!acl_access("isAdmin")))
+	if (($permission == 2) && (!acl_access("isAdmin") && (!acl_access("isChief")) && (!acl_access("adminUsers")))
 	{
 		nicedie($profile['0']);
 	}
