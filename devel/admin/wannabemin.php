@@ -468,13 +468,13 @@ elseif($action == "DoViewUsers") {
 	$query		= 	"SELECT * FROM wannabeComment WHERE user = '$user'";
 	$result 	= 	query($query);
 	$var 		= 	fetch($result);
-	
+
 	$Comment	=	$var->comment;
 	$like		=	$var->like;
-	
+
 	if($like == 1) $Check1 = " checked";
 	elseif($like == 2) $Check2 = " checked";
-	
+
 	  $list	   .= "
 	  <form name='AddComment' method='post' action='admin.php?adminmode=wannabemin&action=AddComment'>
 	  <input type='hidden' name='UserID' value='$UserID'>
@@ -541,10 +541,10 @@ elseif($action == "AddComment") {
 
 	$query	=	"SELECT * FROM wannabeComment WHERE user = '$user'";
 	$result	=	query($query);
-	$result	=	num($result);
-	
-	if($result == 1) {
-	 $query	=	"UPDATE `wannabecomment` SET `comment` = '$Com', `like` = '$Like' WHERE `user` = '$ID' AND `by` = '$user'";
+	$num	=	num($result);
+
+	if($num != 0) {
+	 $query	=	"UPDATE `wannabecomment` SET `comment` = '$Com', `like` = '$Like' WHERE `user` = '$ID' AND `by` = '$user' LIMIT 0,1";
 	} else {
 	 $query	= 	"INSERT INTO `wannabeComment` ( `ID` , `comment` , `like` , `user` , `by` ) VALUES (NULL, '$Com', '$Like', '$ID', '$user')";
 	}
@@ -562,7 +562,7 @@ elseif($action == "ViewComment") {
 
 	if(empty($ID)) nicedie(lang("Something is not right.", "admin_wannabemin", "Text used in wannabemin"));
 
-		
+
 	  $q = query("SELECT * FROM wannabeComment WHERE user = '$ID'");
 	  echo "<table>";
 	  while($r = fetch($q)) {
@@ -583,7 +583,7 @@ elseif($action == "ViewComment") {
 			 ";
 
 		}
-	
+
 		echo "</table>";
 
 }
