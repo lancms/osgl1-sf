@@ -4,10 +4,10 @@ require_once 'config.php';
 
 // This should be a quick hack for now, need some more info on how diffrent browsers act
 $user_agent = $_SERVER['HTTP_USER_AGENT'];
-$q = query("SELECT * FROM stats WHERE config LIKE 'user_agent' AND value LIKE '$user_agent'");
+$q = query("SELECT * FROM stats WHERE config LIKE 'user_agent' AND value LIKE '".mysql_escape_string($user_agent)."'");
 $num = num($q);
-if($num == 0) query("INSERT INTO stats SET config = 'user_agent', value = '$user_agent', hits = 1");
-else query("UPDATE stats SET hits = hits + 1 WHERE config = 'user_agent' AND value = '$user_agent'");
+if($num == 0) query("INSERT INTO stats SET config = 'user_agent', value = '".mysql_escape_string($user_agent)."', hits = 1");
+else query("UPDATE stats SET hits = hits + 1 WHERE config = 'user_agent' AND value = '".mysql_escape_string($user_agent)."'");
 
 // Update total visitors with one
 query("UPDATE stats SET hits = hits + 1 WHERE config LIKE 'hits' AND value LIKE 'total'");
