@@ -116,9 +116,9 @@ $rand_text = "Tilfeldig: ";
  * usestats
  *
  * Enable use of the statistics.
- * Set to TRUE to enable.
+ * Set to FALSE to disable.
  */
-$usestats = FALSE;
+$usestats = TRUE;
 
 
 /*
