@@ -12,21 +12,21 @@ if(isset($_GET['adminmode'])) {
 
 if(!isset($adminmode)) {
 
-if(acl_access("partyweb")) echo "<br><a href=admin.php?adminmode=partyweb>".$admin['0']."</a>";
+if(acl_access("partyweb")) echo "<br><a href=admin.php?adminmode=partyweb>".lang("PartyAdmin", "admin_index", "Menuitem in admin.php to view PartyAdmin-interface")."</a>";
 	
-if(acl_access("faq")) echo "<br><a href=admin.php?adminmode=faq>".$admin['1']."</a>";
-if(acl_access("static")) echo "<br><a href=admin.php?adminmode=static>".$admin['2']."</a>";
-if(acl_access("adminUsers")) echo "<br><a href=admin.php?adminmode=userlist>".$admin['3']."</a>";
-if(acl_access("onlineUsers")) echo "<br><a href=admin.php?adminmode=userlist&action=online>".$admin['4']."</a>";
-if(acl_access("poll")) echo "<br><a href=admin.php?adminmode=poll>".$admin['5']."</a>";
-if(acl_access("news")) echo "<br><a href=admin.php?adminmode=news>".$admin['6']."</a>";
-if(acl_access("ACL")) echo "<br><a href=admin.php?adminmode=acl>".$admin['7']."</a>";
+if(acl_access("faq")) echo "<br><a href=admin.php?adminmode=faq>".lang("FAQadmin", "admin_index", "Menuitem in admin.php to view FAQadmin-interface")."</a>";
+if(acl_access("static")) echo "<br><a href=admin.php?adminmode=static>".lang("StaticAdmin", "admin_index", "Menuitem in admin.php to view static files")."</a>";
+if(acl_access("adminUsers")) echo "<br><a href=admin.php?adminmode=userlist>".lang("Users", "admin_index", "Menuitem in admin.php to edit users")."</a>";
+if(acl_access("onlineUsers")) echo "<br><a href=admin.php?adminmode=userlist&action=online>".lang("Online Users", "admin_index", "Menuitem in admin.php to list users currently online")."</a>";
+if(acl_access("poll")) echo "<br><a href=admin.php?adminmode=poll>".lang("Polls", "admin_index", "Menuitem in admin.php to view and edit polls")."</a>";
+if(acl_access("news")) echo "<br><a href=admin.php?adminmode=news>".lang("News", "admin_index", "Menuitem in admin.php to view/edit/add news")."</a>";
+if(acl_access("ACL")) echo "<br><a href=admin.php?adminmode=acl>".lang("Accessmanagement", "admin_index", "Menuitem on admin.php to manipulate groups and ACL-rights")."</a>";
 
 // Disabled. Needs rewrite and will be removed sometime soon.
 //if(acl_access("wannabe")) echo "<br><a href=admin.php?adminmode=wannabemin>Wannabe admin</a>";
 
-if(acl_access("compomaster")) echo "<br><a href=admin.php?adminmode=compomaster>".$admin['8']."</a>";
-if(acl_access("compopoll")) echo "<br><a href=admin.php?adminmode=compopolladmin>".$admin['9']."</a>";
+if(acl_access("compomaster")) echo "<br><a href=admin.php?adminmode=compomaster>".lang("CompoMaster", "admin_index", "Menuitem in admin.php to manipulate compos")."</a>";
+if(acl_access("compopoll")) echo "<br><a href=admin.php?adminmode=compopolladmin>".lang("Compopolladmin", "admin_index", "Menuitem in admin.php to view/edit/add compopolls")."</a>";
 
 if(acl_access("config")) echo "<br><a href=admin.php?adminmode=config>".$admin['10']."</a>";
 
