@@ -19,6 +19,10 @@ if (!isset($action))
 	$var = fetch($result);
 
 	//$Agree = $var->wannabe;
+	if($var->wannabeDenied == 1) {
+		echo lang("Sorry, your application has been denied by the admins. You are not allowed to view or edit your application again. Please apply again at our next event.", "inc_wannabe", "Text to display if users.wannabeDenied == 1");
+		nicedie();
+	}
 
 	if ($var->wannabe == 1)
 	{
