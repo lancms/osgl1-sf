@@ -225,6 +225,10 @@ elseif ($action == "edit")
 	if(!config("disable_userstyle")) query("UPDATE users SET userDesign = '".escape_string($userDesign)."' WHERE ID = '".escape_string($editID)."'");
 
 	refresh("index.php?inc=useradmin&user=$editID", "0");
+	/* userID:username:firstname:lastname:aboutMe:cellphone:allowpublic:street:postNr:postPlace:birthDAY:birthMONTH:birthYEAR:myGroup:userDesign" */
+	$a = ":::";
+	dblog(11, $editID.$a.$nick.$a.$firstName.$a.$lastName.$a.$aboutme.$a.$cellphone.$a.$allowPublic.$a.$street.$a.$postNr.$a.$postPlace.$a.$birthDAY.$a.$birthMONTH.$a.$birthYEAR.$a.$myGroup.$a.$userDesign,
+	$r->ID.$a.$r->nick.$a.$r->firstName.$a.$r->lastName.$a.$r->aboutMe.$a.$r->cellphone.$a.$r->AllowPublic.$a.$r->street.$a.$r->postNr.$a.$r->postPlace.$a.$r->birthDAY.$a.$r->birthMONTH.$a.$r->birthYEAR.$a.$r->myGroup.$a.$r->userDesign);
 
 
 }
