@@ -5,6 +5,8 @@ require_once 'config/config.php';
 $action	=	$_GET['action'];
 $user	=	getcurrentuserid();
 
+if(getcurrentuserid() == 1) nicedie(lang("Please login and try again"));
+
 if(!isset($action)) {
 
 	$query	=	"SELECT * FROM users WHERE ID = '$user'";
