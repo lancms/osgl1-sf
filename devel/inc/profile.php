@@ -62,9 +62,18 @@ if($action == "display" && isset($viewUSER)) {
 
 	// Check if the user allows others than admins to see his profile.
 
-	if($permission == 2 && getuserrank() == 0) die($profile[0]);
-
-	elseif($permission == 1 && getcurrentuserid() == 1) die($profile[1]);
+	if (($permission == 2) && (!acl_access("isAdmin")))
+	{
+		echo $profile['0'];
+		include $base_path."style/bottom.php";
+		die();
+	}
+	elseif (($permission == 1) && (getcurrentuserid() == 1))
+	{
+		echo $profile['1'];
+		include $base_path."style/bottom.php";
+		die();
+	}
 
 	// else: it looks like the user allows even anonymous users to view the profile :)
 
