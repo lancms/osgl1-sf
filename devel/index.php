@@ -9,7 +9,8 @@ if(isset($_GET['inc'])) {
 
     include "inc/".$_GET['inc'].".php";
 } elseif(isset($_GET['page'])) {
-	$query = query("SELECT * FROM static WHERE header LIKE '".$_GET['page']."'");
+	$page = mysql_escape_string ($_GET['page']);
+	$query = query("SELECT * FROM static WHERE header LIKE '".$page."'");
 	$object = fetch($query);
 	if($object->useNL2BR == 1)
 		echo display_text($object->text);
