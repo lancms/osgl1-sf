@@ -1,6 +1,6 @@
 <?php
 require_once 'config/config.php';
-if(!acl_access("loginUser") die($admin[noaccess]);
+if(!acl_access("loginUser")) die($admin[noaccess]);
 
 $action = $_GET['action'];
 $user = $_GET['user'];
