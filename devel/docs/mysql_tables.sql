@@ -356,7 +356,7 @@ CREATE TABLE users (
   password varchar(60) NOT NULL default '',
   isCrew tinyint(1) NOT NULL default '0',
   verified int(6) default NULL,
-  registered datetime default '0000-00-00 00:00:00',
+  registered int(25) default '0',
   seatX int(4) default '-1',
   AllowPublic tinyint(1) default '0',
   aboutMe text,

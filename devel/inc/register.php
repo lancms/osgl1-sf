@@ -67,7 +67,7 @@ if ($action == "regme")
 			lastName = '".mysql_escape_string($lastName)."',
 			password = '".mysql_escape_string($cpass)."',
 			verified = '".mysql_escape_string($r)."',
-			registered = 'NOW()',
+			registered = '".time()."',
 			street = '".mysql_escape_string($street)."',
 			postNr = '".mysql_escape_string($postNr)."',
 			postPlace = '".mysql_escape_string($postPlace)."',
@@ -103,7 +103,7 @@ if ($action == "regme")
 	<tr><td><?php echo $form['77']; ?></td><td><select name=birthDAY><option value=0></option>
 
 	<?php
-	for($i=1;$i<32;$i++) 
+	for($i=1;$i<32;$i++)
 	{
 		echo "<option value=$i>$i</option>\n";
 	}
