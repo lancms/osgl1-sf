@@ -16,7 +16,7 @@ if (!isset($action))
 	$query = query("SELECT * FROM partyweb ORDER BY menuname ASC");
 
 	echo "<table>";
-	echo "<tr><th>ID/edit</th><th>".$partyweb['0']."</th><th>".$partyweb['1']."</th><th>".$partyweb['2']."</th></tr>";
+	echo "<tr><th>ID/edit</th><th>".lang("Menuname", "admin_partyweb", "partyweb[0]")."</th><th>".lang("Display in menu", "admin_partyweb", "partyweb[1]")."</th><th>".lang("Display in partymode", "admin_partyweb", "partyweb[2]")."</th></tr>";
 
 	while($r = fetch($query))
 	{
@@ -34,8 +34,8 @@ if (!isset($action))
 	echo "</table>";
 
 	echo "<form method=POST action=admin.php?adminmode=partyweb&action=add>";
-	echo "<input type=text name='menuname'> ".$partyweb['0'];
-	echo "<br><input type=submit value='$form[15]'>";
+	echo "<input type=text name='menuname'> ".lang("Menuname", "admin_partyweb", "partyweb[0]");
+	echo "<br><input type=submit value='".lang("Save", "admin_partyweb", "form[15]")."'>";
 	echo "</form>";
 
 }
@@ -46,25 +46,25 @@ elseif (($action == "edit") && (isset($edit)))
 
 	echo "<form method=post action=admin.php?adminmode=partyweb&edit=$edit&action=save>";
 
-	echo "<br><input type=text name=menuname size=20 value='$row->menuname'> ".$partyweb['0'];
+	echo "<br><input type=text name=menuname size=20 value='$row->menuname'> ".lang("Menuname", "admin_partyweb", "partyweb[0]");
 	echo "<br><textarea name=text cols=65 rows=15>$row->text</textarea>";
 	echo "<br><input type=checkbox name=display_menu";
 	if ($row->display_menu == 1)
 	{
 		echo " CHECKED";
 	}
-	echo " value=1> ".$partyweb['1'];
+	echo " value=1> ".lang("Display in menu", "admin_partyweb", "partyweb[1]");
 
 	echo "<br><input type=checkbox name=display_partymode";
 	if ($row->display_partymode == 1)
 	{
 		echo " CHECKED";
 	}
-	echo " value=1> ".$partyweb['2'];
+	echo " value=1> ".lang("Display in partymode", "admin_partyweb", "partyweb[2]");
 
-	echo "<br><input type=checkbox name=delete> ".$partyweb['3'];
+	echo "<br><input type=checkbox name=delete> ".lang("Delete page", "admin_partyweb", "partyweb[3]");
 
-	echo "<br><input type=submit value='$form[15]'>";
+	echo "<br><input type=submit value='".lang("Save", "admin_partyweb", "form[15]")."'>";
 	echo "</form>";
 }
 elseif (($action == "save") && (isset($edit)) && (!isset($_POST['delete'])))
@@ -101,7 +101,7 @@ elseif (($action == "save") && (isset($edit)) && (!isset($_POST['delete'])))
 	");
 
 	refresh("admin.php?adminmode=partyweb", 5);
-	echo $partyweb['4'];
+	echo lang("Update complete.", "admin_partyweb", "partyweb[4]");
 }
 elseif (($action == "save") && (isset($edit)) && (isset($_POST['delete'])))
 {
@@ -113,7 +113,7 @@ elseif ($action == "add")
 	$menuname = $_POST['menuname'];
 	query("INSERT INTO partyweb SET menuname = '".escape_string($menuname)."'");
 	refresh("admin.php?adminmode=partyweb", 0);
-	echo $partyweb['5'];
+	echo lang("New page added.", "admin_partyweb", "partyweb[5]");
 }
 
 ?>
