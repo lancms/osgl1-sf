@@ -95,7 +95,7 @@ refresh("admin.php?adminmode=partyweb", 0);
 elseif($action == "add") {
 $menuname = $_POST['menuname'];
 
-_query("INSERT INTO partyweb SET menuname = '$menuname'");
+query("INSERT INTO partyweb SET menuname = '$menuname'");
 refresh("admin.php?adminmode=partyweb", 0);
 echo $partyweb['5'];
 }
