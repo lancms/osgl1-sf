@@ -2,14 +2,18 @@
 require_once 'config/config.php';
 
 if(!config("usepage_wannabe"))
+{
 	nicedie($msg[1]);
+}
 
 if(getcurrentuserid() == 1)
+{
 	nicedie("Hvorfor i HULESTE er du her? logg inn <b>FØRST</b>");
+}
 
 $action = $_GET['action'];
 
-$q = query("SELECT * FROM users WHERE ID = ".getcurrentuserid());
+$q = query("SELECT * FROM users WHERE ID = '".mysql_escape_string(getcurrentuserid())."'");
 $r = fetch($q);
 $qT = query("SELECT * FROM config WHERE config = 'wannabetext'");
 $rT = fetch($qT);
@@ -18,16 +22,22 @@ if(!isset($action)) {
 	echo "<table><tr><td>";
 
 	echo "</td><td><form method=POST action=index.php?inc=wannabe&action=cyclewannabe>";
-	if($r->wannabe == "1") $buttontext = $wannabe[1];
-	else $buttontext = $wannabe[0];
+	if($r->wannabe == "1")
+	{
+		$buttontext = $wannabe[1];
+	}
+	else
+	{
+		$buttontext = $wannabe[0];
+	}
 
 	echo "<input type=submit value='$buttontext'>";
 	echo "</form>";
 	echo "</table>";
 }
 
-if(!isset($action) && $r->wannabe == 1) {
-	$q2 = query("SELECT * FROM wannabe WHERE ID = ".getcurrentuserid());
+if((!isset($action)) && ($r->wannabe == 1) {
+	$q2 = query("SELECT * FROM wannabe WHERE ID = '".mysql_escape_string(getcurrentuserid())."'");
 	$r2 = fetch($q2);
 	
 	echo "<table>";
@@ -98,28 +108,28 @@ elseif($action == "editwannabe") {
 	$leaderType = $_POST['leaderType'];
 	$myRequests = $_POST['myRequests'];
 	
-	$check = query("SELECT * FROM wannabe WHERE ID = ".getcurrentuserid());
-	if(num($check) == 0) query("INSERT INTO wannabe SET ID = ".getcurrentuserid());
+	$check = query("SELECT * FROM wannabe WHERE ID = '".mysql_escape_string(getcurrentuserid())."'");
+	if(num($check) == 0) query("INSERT INTO wannabe SET ID = '".(mysql_escape_string(getcurrentuserid())."'");
 	
 	query("UPDATE wannabe SET
-		aboutme = '$aboutme',
-		canKioskCrew = '$canKioskCrew',
-		canTechCrew = '$canTechCrew',
-		canNetCrew = '$canNetCrew',
-		canSecCrew = '$canSecCrew',
-		canPartyCrew = '$canPartyCrew',
-		experience = '$experience',
-		why = '$why',
-		canTechLinuxCrew = '$canTechLinuxCrew',
-		canCarryTablesCrew = '$canCarryTablesCrew',
-		canGameCrew = '$canGameCrew',
-		turnOn = '$turnOn',
-		karaoke = '$karaoke',
-		canCake = '$canCake',
-		leaderType = '$leaderType',
-		myRequests = '$myRequests',
+		aboutme = '".mysql_escape_string($aboutme)."',
+		canKioskCrew = '".mysql_escape_string($canKioskCrew)."',
+		canTechCrew = '".mysql_escape_string($canTechCrew)."',
+		canNetCrew = '".mysql_escape_string($canNetCrew)."',
+		canSecCrew = '".mysql_escape_string($canSecCrew)".',
+		canPartyCrew = '".mysql_escape_string($canPartyCrew)."',
+		experience = '".mysql_escape_string($experience)."',
+		why = '".mysql_escape_string($why)."',
+		canTechLinuxCrew = '".mysql_escape_string($canTechLinuxCrew)."',
+		canCarryTablesCrew = '".mysql_escape_string($canCarryTablesCrew)."',
+		canGameCrew = '".mysql_escape_string($canGameCrew)."',
+		turnOn = '".mysql_escape_string($turnOn)."',
+		karaoke = '."mysql_escape_string($karaoke)."',
+		canCake = '".mysql_escape_string($canCake)."',
+		leaderType = '".mysql_escape_string($leaderType)."',
+		myRequests = '".mysql_escape_string($myRequests)."',
 		
-		lastUpdated = ".time()." WHERE ID = ".getcurrentuserid());
+		lastUpdated = '".time()."' WHERE ID = ".mysql_escape_string((getcurrentuserid())"'"));
 	refresh("index.php?inc=wannabe", 0);
 
 }
@@ -129,7 +139,7 @@ elseif($action == "cyclewannabe") {
 	if($now == 0) $tobe = 1;
 	else $tobe = 0;
 	
-	query("UPDATE users SET wannabe = $tobe WHERE ID = ".getcurrentuserid());
+	query("UPDATE users SET wannabe = '".mysql_escape_string($tobe)."' WHERE ID = ".(getcurrentuserid())."'");
 	refresh("index.php?inc=wannabe");
 }
 
