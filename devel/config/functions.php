@@ -157,6 +157,11 @@ function fetch_array($q) {
 	return $r;
 }
 
+function escape_string($var) {
+	mysql_escape_string($var);
+	return $var;
+}
+
 function num($q) {
 	return mysql_num_rows($q);
 }
