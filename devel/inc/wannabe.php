@@ -18,30 +18,14 @@ if(!isset($action)) {
 	 $Agree = " checked";
 	}
 
-	echo 	"
-	<form name='Agree' method='post' action='index.php?inc=wannabe&action=ListQue'>
-	<input type='checkbox' name='Agree' value='1'".$Agree.">
-	".lang("Yes, I want to be a crew member!", "inc_wannabe", "Text used in wannabe")."
-	<br><input type='submit' name='Submit' value='".lang("Continue", "inc_wannabe", "Text used in wannabe")."'>
-	</form>
-	";
-
-}
-
-elseif($action == "ListQue") {
-
-	$Agree	=	$_POST['Agree'];
-
-	if($Agree != 1) {
-		echo lang("You must check the checkbox", "inc_wannabe", "Text used in wannabe");
-		refresh("index.php?inc=wannabe", 2);
-	} else {
-
 	$list	=	"
 	<form name='SelQue' method='post' action='index.php?inc=wannabe&action=EndQue'>
 	 <table>
 	  <tr>
 	   <td><b>".lang("Wannabe", "inc_wannabe", "Text to display in wannabe")."</b></td>
+	  </tr>
+	  <tr>
+	   <td><input type='checkbox' name='Agree' value='1'".$Agree.">".lang("Yes, I want to be a crew member.", "inc_wannabe", "Text to display in wannabe")."<br><br></td>
 	  </tr>
 	 ";
 
@@ -127,12 +111,14 @@ elseif($action == "ListQue") {
 
 	echo $list;
 
-	}
-
 }
+
 
 elseif($action == "EndQue") {
 
+	$Agree	=	$_POST['Agree'];
+	
+	if($Agree == 1) {
 
 	$query	= 	"SELECT * FROM wannabeQue";
 	$result	= 	query($query);
@@ -169,9 +155,15 @@ elseif($action == "EndQue") {
 	  }
 
 	  echo lang("Updated !", "inc_wannabe", "Text to display in wannabe");
+	  
+
+	} else {
+	  
+	  echo lang("Updated: You will not be a crew member.", "inc_wannabe", "Text to display in wannabe");
+	  query("UPDATE users SET wannabe = '0' WHERE ID = '$user'");
 
 	}
-
+}
 
 
 ?>
