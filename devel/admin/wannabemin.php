@@ -66,7 +66,7 @@ elseif($action == "listWannabes") {
 }
 
 elseif($action == "viewUserApplication") {
-	$user = $_GET['user'];
+	$user = mysql_escape_string ($_GET['user']);
 	$q = query("SELECT * FROM wannabe WHERE ID = $user");
 	$r = mysql_fetch_row($q);
 	
@@ -124,14 +124,14 @@ while($ru = fetch($qu)) {
 	echo "</table>";
 	
 } elseif($action == "addComment") {
-	$user = $_GET['user'];
+	$user = mysql_escape_string ($_GET['user']);
 	query("INSERT INTO wannabeAdmin SET adminID = '".getcurrentuserid()."', userID = '$user'");
 	refresh("admin.php?adminmode=wannabemin&action=viewUserApplication&user=$user", 0);
 } elseif($action == "editAdminInfo") {
-	$user = $_GET['user'];
-	$shoudBeCrew = $_POST['shoudBeCrew'];
-	$moreinfo = $_POST['moreinfo'];
-	$adminID = getcurrentuserid();
+	$user = mysql_escape_string ($_GET['user']);
+	$shoudBeCrew = mysql_escape_string ($_POST['shoudBeCrew']);
+	$moreinfo = mysql_escape_string  ($_POST['moreinfo']);
+	$adminID = mysql_escape_string (getcurrentuserid());
 	query("UPDATE wannabeAdmin SET
 			moreinfo = '$moreinfo',
 			shoudBeCrew = '$shoudBeCrew',

@@ -1,10 +1,10 @@
 <?php
 
-require 'config/config.php';
+require_once 'config/config.php';
 if(!acl_access("tasks")) die($admin[noaccess]);
 
 $action = $_GET['action'];
-$edit = $_GET['edit'];
+$edit = mysql_escape_string ($_GET['edit']);
 
 if(!isset($action)) {
 	//echo lang("My tasks", "admin_tasks", "My tasks heading");
@@ -39,7 +39,7 @@ if(!isset($action)) {
 }
 
 elseif($action == "add") {
-	$name = $_POST['name'];
+	$name = mysql_escape_string ($_POST['name']);
 	$exists = query("SELECT * FROM tasks WHERE name = '$name'");
 	if(num($exists) != 0) nicedie(lang("Sorry, but the task has already been added.", "admin_tasks", "Task-error: task already added").refresh("admin.php?adminmode=tasks", 2));
 
@@ -97,14 +97,14 @@ elseif($action == "edit" && isset($edit)) {
 }
 
 elseif($action == "addcomment" && isset($edit)) {
-	$comment = $_POST['comment'];
+	$comment = mysql_escape_string ($_POST['comment']);
 	query("INSERT INTO tasks_log SET userID = ".getcurrentuserid().", taskID = $edit, logUNIX = ".time().", logText = '$comment'");
 	refresh("admin.php?adminmode=tasks&action=edit&edit=$edit", 2);
 	echo lang("Comment added", "admin_tasks", "Text to display after a comment has been added.");
 }
 // admin.php?adminmode=tasks&action=changeuser&edit=<taskID>&changeuser=<userID>
 elseif($action == "changeuser" && isset($edit) && isset($_GET['changeuser'])) {
-	$chuser = $_GET['changeuser'];
+	$chuser = mysql_escape_string ($_GET['changeuser']);
 
 	query("UPDATE tasks SET userID = $chuser WHERE ID = $edit");
 	query("INSERT INTO tasks_log SET userID = ".getcurrentuserid().", taskID = $edit, logUNIX = ".time().", logText = '".lang("Changed assigned to user to: ", "admin_tasks", "What to put into the SQL-table when a user changes who a task is assigned to").IDtonick($chuser)."'");
@@ -114,7 +114,7 @@ elseif($action == "changeuser" && isset($edit) && isset($_GET['changeuser'])) {
 }
 
 elseif($action == "changeComplete" && isset($edit)) {
-	$complete = $_POST['complete'];
+	$complete = mysql_escape_string ($_POST['complete']);
 
 	query("UPDATE tasks SET complete = $complete WHERE ID = $edit");
 	query("INSERT INTO tasks_log SET userID = ".getcurrentuserid().", taskID = $edit, logUNIX = ".time().", logText = '".
