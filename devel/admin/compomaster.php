@@ -4,6 +4,7 @@ require_once 'config/config.php';
 
 if (!acl_access("compomaster"))
 {
+	// XXX: lang() - Generic string
 	nicedie ($admin['noaccess']);
 }
 
@@ -23,23 +24,23 @@ if (!isset($action))
 		echo "<a href=?adminmode=compomaster&action=toggleopen&edit=$r->ID>";
 		if ($r->isOpen == 1)
 		{
-			echo $form['23'];
+			echo lang ("Close", "admin_compomaster", "form[23]");
 		}
 		else
 		{
-			echo $form['22'];
+			echo lang ("Open", "admin_compomaster", "form[22]");
 		}
 		echo "</a>";
 		echo "</td><td>";
-		echo "<a href=?adminmode=compomaster&action=seed&edit=$r->ID>".$compo['18']."</a>";
+		echo "<a href=?adminmode=compomaster&action=seed&edit=$r->ID>".lang ("Seeding", "admin_compomaster", "compo[18]")."</a>";
 		echo "</td><td>";
-		echo $compo['19']." ";
+		echo lang("Signed up:", "admin_compomaster", "compo[19]")." ";
 		$qU = query("SELECT * FROM compoReg WHERE compoID = ".escape_string ($r->ID));
 		$qC = query("SELECT DISTINCT clanID FROM compoReg WHERE compoID = ".escape_string ($r->ID));
-		echo num($qU)." ".$compo['20'];
+		echo num($qU)." ".lang("users", "admin_compomaster", "compo[20]");
 		if ($r->gameType > 1)
 		{
-			echo " ".$compo['21']." ".num($qC)." ".$compo['22'];
+			echo " ".lang("distributed on", "admin_compomaster", "compo[21]")." ".num($qC)." "lang("clans", "admin_compomaster", "compo[22]");
 		}
 		echo "</td></tr>";
 	} // End while fetch()
@@ -47,8 +48,8 @@ if (!isset($action))
 
 	echo "<br><br><hr><br>";
 	echo "<form method=POST action=admin.php?adminmode=compomaster&action=addnew>
-		<input type=text name=componame> ".$form['68']."
-		<br><input type=submit value='".$form['7']."'>
+		<input type=text name=componame> ".lang("Name of the compo", "admin_compomaster", "form[68]")."
+		<br><input type=submit value='"lang("Add", "admin_compomaster", "form[7]")."'>
 		</form>";
 
 } // End action not set
@@ -57,7 +58,7 @@ elseif ($action == "addnew")
 	$componame = $_POST['componame'];
 	if (empty($componame))
 	{
-		nicedie($form['69']);
+		nicedielang("Lacking name of the compo.", "admin_compomaster", "form[69]");
 	}
 	query("INSERT INTO compo SET name = '".escape_string($componame)."'");
 	refresh("admin.php?adminmode=compomaster",5, 0);
@@ -68,16 +69,16 @@ elseif (($action == "edit") && (isset($_GET['edit'])))
 	{
 		echo "<font color=red>".$_GET['text']."</font><br>";
 	}
-	echo "<div align=left><a href=admin.php?adminmode=compomaster>".$msg['32']."</a></div><br>";
+	echo "<div align=left><a href=admin.php?adminmode=compomaster>".lang("Back to the list.", "admin_compomaster", "msg[32]")."</a></div><br>";
 	
 	$edit = $_GET['edit'];
 	$q = query("SELECT * FROM compo WHERE ID = '".escape_string($edit)."'");
 	$r = fetch($q);
 
 	echo "<form method=POST action=admin.php?adminmode=compomaster&action=doedit&edit=$edit>";
-	echo "<input type=text name=componame value='$r->name'> ".$form['68']."
+	echo "<input type=text name=componame value='$r->name'> ".lang("Name of the compo", "admin_compomaster", "form[68]")."
 	<br><input type=text name=players value='$r->players'> ".$form['70']."
-	<br><input type=text name=roundPlayers value='$r->roundPlayers'> ".$form['71']."
+	<br><input type=text name=roundPlayers value='$r->roundPlayers'> ".lang("Number of teams in each round", "admin_compomaster", "form[71]")."
 	<br>";
 	echo "<select name=gameType>";
 	
@@ -92,7 +93,7 @@ elseif (($action == "edit") && (isset($_GET['edit'])))
 	} // End for
 	echo "</select>";
 	echo "<br><textarea name=rules rows=30 cols=80>$r->rules</textarea>";
-	echo "<br><input type=submit value='".$form['15']."'>";
+	echo "<br><input type=submit value='".lang("Save", "admin_compomaster", "form[15]")."'>";
 	echo "</form>";
 
 } // end action == edit
@@ -149,9 +150,9 @@ elseif ($action == "seed")
 			echo "</td><td>";
 			echo $r->seed;
 			echo "</td><td>";
-			echo "<a href=?adminmode=compomaster&action=seededit&seed=up&edit=$edit&user=$r->userID>".$compo['23']."</a>";
+			echo "<a href=?adminmode=compomaster&action=seededit&seed=up&edit=$edit&user=$r->userID>".lang("Seed higher.", "admin_compomaster", "compo[23]")."</a>";
 			echo "</td><td>";
-			echo "<a href=?adminmode=compomaster&action=seededit&seed=down&edit=$edit&user=$r->userID>".$compo['24']."</a>";
+			echo "<a href=?adminmode=compomaster&action=seededit&seed=down&edit=$edit&user=$r->userID>".lang("Seed lower.", "admin_compomaster", "compo[24]")."</a>";
 			echo "</td></tr>";
 		} // end while fetch
 		echo "</table>";
@@ -159,14 +160,14 @@ elseif ($action == "seed")
 } // End if action = seed
 elseif ($action == "seededit")
 {
-	echo $msg['33'];
+	echo lang ("Updating...", "admin_compomaster", "msg[33]");
 	$seed = $_GET['seed'];
 	$compo = $_GET['edit'];
 	$user = $_GET['user'];
 	$clan = $_GET['clan'];
 	if ((isset($user)) && ($user > 1))
 	{
-		// Dette er en oneplayer-compo
+		// This is a oneplayer-compo
 		if($seed == "up")
 		{
 			query("UPDATE compoReg SET seed = seed + 10 WHERE compoID = '".escape_string($compo)." AND userID = '".escape_string($user)."'");
