@@ -27,6 +27,7 @@ $checkbox[] = "usepage_partyweb";
 $checkbox[] = "seatreg_open";
 $checkbox[] = "usepage_wannabe";
 $checkbox[] = "usepage_compopoll";
+$checkbox[] = "disable_userstyle";
 
 if (!isset($action))
 {

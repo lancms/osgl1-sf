@@ -144,27 +144,27 @@ if (($action == "view") || (!isset($action)))
 	}
 
 	echo "</select>";
+	if(!config("disable_userstyle")) {
+		echo "<tr><td class=profileLeft width=30%>$profile[14]</td><td class=profileRight>";
 
-	echo "<tr><td class=profileLeft width=30%>$profile[14]</td><td class=profileRight>";
+		echo "<select name=userDesign>";
 
-	echo "<select name=userDesign>";
-
-	for ($y=0;$y<count($styles);$y++)
-	{
-		echo "<option value=$styles[$y]";
-
-		if($row->userDesign == $styles[$y])
+		for ($y=0;$y<count($styles);$y++)
 		{
-			echo " SELECTED";
+			echo "<option value=$styles[$y]";
+
+			if($row->userDesign == $styles[$y])
+			{
+				echo " SELECTED";
+			}
+
+			echo ">$styles[$y]</option>";
 		}
 
-		echo ">$styles[$y]</option>";
+		echo "</select>";
+
+		echo "</td></tr>";
 	}
-
-	echo "</select>";
-
-	echo "</td></tr>";
-
 	echo "</table>";
 
 	echo "<br><input type=submit value='$form[15]'>";
