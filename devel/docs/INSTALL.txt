@@ -1,0 +1,70 @@
+*** Requirements ***
+
+
+PHP 	  (above 4 should hopefully work..... built and tested on: rpm -q php	php-4.1.2-7.3.6)
+
+
+Webserver (tested and built on: rpm -q apache apache-1.3.27-2)
+
+
+MySQL     (tested and built on: rpm -q mysql-server mysql-server-3.23.54a-3.73)
+
+
+
+
+
+
+
+
+*** Installation ***
+
+
+1: Read this document, and README.txt!
+
+
+2: accept the license
+
+
+3: create a database with the table-structure in docs/mysql_tables.sql
+
+
+4: edit config/config.php
+
+
+5: Add your own user, enter the database and edit isCrew, and set that to "2" (without the quotes).
+
+
+6: Chmod/chown the files in static so that it can be read/written to by the webserver
+
+
+7: Drink a coke, and start customising you're new LAN-party website =)
+
+
+Most of how the customising can be done is described in README.txt!
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+*** WARNING ****
+
+
+
+
+
+This software has been written on Linux/*NIX, and may or may not work on Windows-systems.
+
+
+It may work on Windows, with some rewriting of code!

@@ -1,0 +1,101 @@
+td
+
+{
+
+	width : 48;
+
+	height : 24;
+
+}
+
+.tdUser
+
+{
+
+	background : dodgerblue;
+
+	color : black;
+
+}
+
+.tdCrew
+
+{
+
+	background : orange;
+
+	color : black;	
+
+}
+
+.tdWall
+
+{
+
+	background : black;
+
+	color : white;
+
+}
+
+.tdVoid
+
+{
+
+	background : darkgray;	
+
+}
+
+.tdCanteene
+
+{
+
+	background : yellow;
+
+}
+
+.tdDoor
+
+{
+
+	background : pink;
+
+}
+
+.tdUserTaken
+
+{
+
+	background : white;
+
+}
+
+.tdCrewTaken
+
+{
+
+	background : green;
+
+}
+
+
+
+body {
+
+	font-size: 14;
+
+}
+
+a {
+
+	font-size: 14;
+
+}
+
+
+
+p {
+
+	font-size: 12;
+
+}

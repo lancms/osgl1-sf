@@ -1,0 +1,76 @@
+The idea with this project, was to create an open source project for use by LAN-parties.....
+
+
+
+
+
+
+
+
+After we got started writing it, we found out that it wasn't the best thing...
+
+
+
+
+
+
+
+
+
+
+
+Here is the license:
+
+
+
+
+
+You may freely use, change the code or whatever you want with this code, but:
+
+
+you *MAY NOT* use it if you're LAN-party has for purpose to make money, 
+
+
+and split the money between the crew/admins!
+
+
+
+
+
+If that is you're LANs purpose, please do a rm -R / del NOW!
+
+
+
+
+
+
+
+
+If you're LAN is for fun, with *NO* money being given to the crew, or to give the money to charity,
+
+
+you may freely use this software under the terms of the GPL. You should also write somewhere on you're page that you are useing this system, so that the people that visit 
+
+
+it will know who to blame when they find bugs :)
+
+
+
+
+
+But you're welcome to give Laaknor and/or CronoMan a free ticket to you're LAN! just send us a mail :)
+
+
+
+
+
+
+
+
+Remember: Making money from a LAN-party is WRONG! 
+
+
+(but remeber that you have to have a margin in you're budget. 
+
+
+We don't expect you to deficit because you use this software.... =)
