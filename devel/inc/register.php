@@ -67,7 +67,7 @@ if ($action == "regme")
 			lastName = '".mysql_escape_string($lastName)."',
 			password = '".mysql_escape_string($cpass)."',
 			verified = '".mysql_escape_string($r)."',
-			registered = '".mysql_escape_string(now())."',
+			registered = 'NOW()',
 			street = '".mysql_escape_string($street)."',
 			postNr = '".mysql_escape_string($postNr)."',
 			postPlace = '".mysql_escape_string($postPlace)."',
