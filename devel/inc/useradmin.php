@@ -182,11 +182,16 @@ if($doLogs) adminLog("Admin så på konfigurasjonen til brukeren",2, $editID);
 
 
 elseif($action == "edit") {
+	$q = query("SELECT * FROM users WHERE ID = $editID");
+	$r = fetch($q);
 	$name = $_POST['name'];
 	$mail = $_POST['mail'];
 	$aboutme = htmlspecialchars($_POST['aboutme']);
 //	$rank = $_POST['rank'];
 //	if(getuserrank() == 0) $rank = getuserrank();
+	
+	if(acl_access("ACL")) $myGroup = $_POST['myGroup'];
+	else $myGroup = $r->myGroup;
 	$crewField = $_POST['crewfield'];
 	$cellphone = $_POST['cellphone'];
 	$allowPublic = $_POST['allowPublic'];
@@ -208,7 +213,8 @@ elseif($action == "edit") {
 		postPlace = '$postPlace',
 		birthDAY = '$birthDAY',
 		birthMONTH = '$birthMONTH',
-		birthYEAR = '$birthYEAR'
+		birthYEAR = '$birthYEAR',
+		myGroup = $myGroup
 
 		WHERE ID = $editID") or die(mysql_error());
 
