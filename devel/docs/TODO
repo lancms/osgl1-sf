@@ -1,0 +1,13 @@
+
+- Fix the lang-system:
++ Not everything is translated (who the hell was stupid enough to hardcode the language into Norwegian?)
++ Only one language is supported, this should be changed somehow so that it is possible to "fall back" on english if the translation isn't complete. This should also make it possible for the user to change the language on his own profile...
+
+-Add following features:
++Canteen (should be possible to use most of the code from my existing system, but I'm not ready to give out the source for it yet [want to have the databases to make stats of])
++Forum (needs complete rewrite)
++Task-list (admins might like to add tasks that has to be done, and assign it to somebody).
++WannabeCrew (needs a complete rewrite)
++Logging (everything should be logged)
++Stats (need a complete rewrite)
+
