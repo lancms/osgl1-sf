@@ -50,14 +50,15 @@ function dblog($type = 1,$logNew = "NOTHING LOGGED", $logOld = NULL) {
     return 1;
 }
 
-function verify($nick, $email, $password, $firstname, $lastname)
+function verify($nick, $email, $firstname, $lastname, $password=NULL)
 
 {
     if($nick == "") // check nick.
         return 8;
     elseif($email == "") // check there is an e-mail
         return 9;
-    elseif(strlen($password) < $min_pass_length) // check the length of the password.
+    
+	 elseif(($password != NULL) && (strlen($password) < $min_pass_length)) // check the length of the password.
         return 10;
 
     elseif(!(strchr($email, "@") && strchr($email, "."))) // check if the email contains at least one @ and at least one dot.

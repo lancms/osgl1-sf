@@ -177,6 +177,12 @@ elseif($action == "edit") {
 	$birthDAY = $_POST['birthDAY'];
 	$birthMONTH = $_POST['birthMONTH'];
 	$birthYEAR = $_POST['birthYEAR'];
+	
+	$verify = verify($nick, $mail, $firstName, $lastName);
+	if($verify != "allowed") {
+		nicedie($form[$verify]);
+	}
+	
 	$query = query("UPDATE users SET
 		nick='".$nick."',
 		firstName = '$firstName',
