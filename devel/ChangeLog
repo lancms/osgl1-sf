@@ -1,0 +1,819 @@
+2004-12-25 21:29  laaknor
+
+	* admin/compopolladmin.php:
+	  Made workaround in compopolladmin because of bug 1090594.
+
+2004-12-25 16:48  laaknor
+
+	* inc/register.php, inc/useradmin.php, lang/english.php,
+	  lang/norwegian.php:
+	  i18n'ed register and useradmin
+
+2004-12-25 16:38  laaknor
+
+	* inc/compopoll.php, lang/english.php, lang/norwegian.php:
+	  More i18n'ing
+
+2004-12-25 16:35  laaknor
+
+	* admin/compopolladmin.php, lang/english.php, lang/norwegian.php,
+	  style/menu.php:
+	  Some i18n'ing
+
+2004-12-25 16:30  laaknor
+
+	* inc/userlogin.php, lang/english.php, lang/norwegian.php:
+	  Some i18n'ing
+
+2004-12-25 16:19  laaknor
+
+	* inc/userlogin.php, lang/english.php, lang/norwegian.php:
+	  i18n "search"-function
+
+2004-12-25 16:15  laaknor
+
+	* admin.php, lang/english.php, lang/norwegian.php:
+	  Fixed $admin[9] used twice, and a extra <br> in the admin-menu
+
+2004-12-25 11:37  alfapus
+
+	* admin/partyweb.php: Fixed typo from my earlier cleanups.
+
+2004-12-25 00:36  alfapus
+
+	* admin.php: Lost a <br> in the last commit of admin.php
+
+2004-12-25 00:24  alfapus
+
+	* inc/adressbook.php, lang/english.php, lang/norwegian.php: I18n.
+
+	  By the way, adressbook is a typo. Should probably be changed
+	  sometime.
+
+2004-12-24 15:30  alfapus
+
+	* admin/wannabemin.php: Changed a die() to nicedie() and looked
+	  around.  Will do some i18n later.
+
+2004-12-24 15:28  alfapus
+
+	* admin/userlist.php: My cleaning broke online-userlist.  Fixed by
+	  adjusting to fetch_object() instead of fetch_row().
+
+2004-12-24 15:25  alfapus
+
+	* admin/userlist.php, lang/english.php, lang/norwegian.php: Gah,
+	  forgot what I did again...  Probably i18n-, nicedie()- and
+	  query()-cleaning...
+
+2004-12-24 15:16  alfapus
+
+	* admin/static.php, lang/english.php: I18n-, nicedie()- and
+	  query()-cleaning.
+
+2004-12-24 15:06  alfapus
+
+	* admin/random.php, lang/english.php, lang/norwegian.php: I18n-,
+	  nicedie()- and query()-cleaning.
+
+	  "Not maintained anymore" - Should we remove it and reimplement it
+	  some other time?
+
+2004-12-24 15:03  alfapus
+
+	* admin/poll.php: nicedie()- and query()-cleanup.
+
+2004-12-24 14:59  alfapus
+
+	* admin/news.php: nicedie()- and query()-cleanup...
+
+2004-12-24 14:55  alfapus
+
+	* admin/: news.php, poll.php: Fixed EOL from Mac.
+
+2004-12-24 14:51  alfapus
+
+	* admin/partyweb.php, lang/english.php, lang/norwegian.php: I18n,
+	  nicedie()s and query()s.
+
+2004-12-23 23:09  alfapus
+
+	* admin/faq.php, lang/english.php, lang/norwegian.php: I have no
+	  idea what I just did...  Probably some i18n and nicedie()- and
+	  query()-cleanups.
+
+	  (Yes, I'm sick of i18n.)
+
+2004-12-23 22:54  alfapus
+
+	* admin/compopolladmin.php: Fixed a die() to nicedie().  I18n.
+
+2004-12-23 22:50  alfapus
+
+	* admin/compo.php: Changed a couple of mysql_query()s on my way...
+
+2004-12-23 22:48  alfapus
+
+	* admin/compomaster.php, lang/english.php, lang/norwegian.php: I18n
+	  of admin/compomaster...  By the way, what the heck should I
+	  translate "seed bedre" with? :-)
+
+2004-12-23 21:48  alfapus
+
+	* admin/acl.php, lang/english.php, lang/norwegian.php: I8n on
+	  admin/acl.php
+
+2004-12-23 21:29  alfapus
+
+	* seat.php, lang/english.php, lang/norwegian.php: Did i18n on
+	  seat.php.
+
+2004-12-23 20:07  alfapus
+
+	* seat.php: Fixed some i18n and changed a mysql_query() to query().
+
+2004-12-23 20:02  alfapus
+
+	* index.php: Fixed some i18n and changed some mysql_query()s to
+	  query().
+
+2004-12-23 19:59  alfapus
+
+	* do.php, lang/english.php, lang/norwegian.php: Fixed some i18n on
+	  login-errors.
+
+2004-12-23 19:47  alfapus
+
+	* config/globelan6-map.txt: Removed old examplefile for the old
+	  seatingsystem.
+
+2004-12-23 16:33  laaknor
+
+	* docs/TODO:
+
+	  Added this file with what we need to do with the system
+
+2004-12-23 14:59  alfapus
+
+	* config/config.php: Fixed typo in $base_path (heh, base_bath
+	  doesn't exactly do the same. ;-)) that caused some wierd
+	  problems. :-)
+
+2004-12-23 13:42  alfapus
+
+	* inc/profile.php: Fixed an typo in an if().
+
+2004-12-23 13:31  alfapus
+
+	* inc/useradmin.php: Removed old non-ACL crews ability to set
+	  crewfield.  This should be set from groups or something...
+
+	  Fixed RFE #1088073.
+
+	  Removed some other old non-ACL things.
+
+2004-12-23 13:05  alfapus
+
+	* inc/useradmin.php, lang/norwegian.php, lang/english.php: Did some
+	  i18n.  Cleaned up some mysql_query()s.
+
+	  Note to self: Do i18n on logmessages.
+
+2004-12-22 22:07  laaknor
+
+	* lang/: english.php, norwegian.php:
+
+	  Missing some stuff from the compopoll-system
+
+2004-12-22 22:01  laaknor
+
+	* lang/: english.php, norwegian.php:
+	  Some required stuff in the CompoAdmin-system was missing
+
+2004-12-22 21:33  alfapus
+
+	* seat.php:
+	  Replaced a die() with nicedie().
+
+2004-12-22 21:24  alfapus
+
+	* docs/mysql_tables.sql, lang/english.php, lang/norwegian.php:
+	  Removed what I believe to be the last references to the old
+	  kiosk-system...
+
+2004-12-22 21:14  laaknor
+
+	* config/: barend.gif, barmid.gif, barmidblack.gif, barstart.gif:
+	  Files added for the first version of the pollsystem, never used
+
+2004-12-22 21:11  alfapus
+
+	* admin.php, admin/kiosk.php, inc/kiosk.php:
+	  Removing bad, unused kiosk-system...	Perhaps Laaknors news
+	  kiosk-system one day will be implemented? :-)
+
+2004-12-22 20:53  alfapus
+
+	* do.php, lang/english.php, lang/norwegian.php:
+	  Added some nicedie()s and i18n.
+
+2004-12-22 20:24  alfapus
+
+	* inc/clan.php:
+	  Fixed a couple of i18n-errors and replaced a couple of die()s.
+
+2004-12-22 20:14  alfapus
+
+	* lang/english.php, inc/clan.php, lang/norwegian.php:
+	  Merged hrognlidalens i18n... Could hrognlidalen please confirm
+	  this?
+
+2004-12-22 18:16  alfapus
+
+	* imagemap.php, seatimage.php, config/defaultmap.txt:
+	  Found no references to these files anywhere... Probably leftovers
+	  from the old seatsystem.
+
+2004-12-22 18:08  alfapus
+
+	* config/config.php:
+	  Removed $usemap. Not in use anymore.	Removed $devel_version. Not
+	  in use anymore.  Removed referals to old webshop-system.  Removed
+	  some settings for (what I believe to be) the old seatsystem.
+
+2004-12-22 17:57  alfapus
+
+	* config/config.php:
+	  Cleaned up config/config.php a bit.  I have not yet removed any
+	  old parts from it. Will do that in a moment.
+
+2004-12-21 23:29  laaknor
+
+	* inc/news.php:
+	  Fixed End of Line to UNIX from Macintosh (who the hell is the
+	  idiot that set it to Mac?)
+
+2004-12-21 23:09  alfapus
+
+	* config/functions.php:
+
+	  Changed query() to use nicedie.
+
+2004-12-21 23:03  alfapus
+
+	* inc/profile.php:
+	  Allowed isChief and adminUsers to see non-public profiles...
+
+2004-12-21 21:18  alfapus
+
+	* admin/config.php:
+	  Removed redundant usepage_compo-checkbox.
+
+2004-12-21 21:15  alfapus
+
+	* do.php:
+	  Followup to the removal of unused errorcodes: Needed to change
+	  elseif to if. :-)
+
+2004-12-21 21:10  alfapus
+
+	* do.php, config/session.php:
+	  Removed references to non-used errorcode for log_in().
+
+2004-12-21 20:50  alfapus
+
+	* inc/: adressbook.php, clan.php, compo.php, compopoll.php,
+	  faq.php, kiosk.php, poll.php, profile.php, register.php,
+	  showusers.php, useradmin.php, userlogin.php, wannabe.php:
+	  Replaced a lot of die()s with nicedie()s...  (Yes, I got tired of
+	  seeing the broken design... :-))
+
+2004-12-21 20:00  alfapus
+
+	* admin.php:
+	  Another die()-replace...
+
+2004-12-21 19:54  alfapus
+
+	* index.php:
+	  Fixed some more bad die()-usage...
+
+2004-12-21 19:52  alfapus
+
+	* do.php:
+	  Fixed some bad die()-usage...
+
+2004-12-21 19:35  alfapus
+
+	* inc/profile.php:
+	  Changed some old die()s with nicedie().
+
+2004-12-21 19:30  alfapus
+
+	* admin.php, config/functions.php:
+	  Added nicedie($reason) that.. well... exits nicely with a given
+	  reason. :-) Changed a bad die() in admin.php to nicedie().
+
+2004-12-21 19:20  alfapus
+
+	* config/functions.php, inc/profile.php:
+
+	  Fixes #1089212 and #1089225.
+
+2004-12-21 18:41  alfapus
+
+	* inc/profile.php:
+
+	  Laaknor said this wasn't even adjusted to the new seatsystem that
+	  was used on GlobeLAN 7. :-)
+
+2004-12-21 18:39  alfapus
+
+	* inc/profile.php:
+	  Fixes another couple of die()-bugs...  Also updated
+	  AllowPublic-permissions to the new ACL-system.
+
+2004-12-21 18:20  alfapus
+
+	* inc/profile.php, lang/english.php, lang/norwegian.php:
+	  Fixes a problem with too quick die()-ing of the page if a wanted
+	  profile uid wasn't set.
+
+2004-12-21 17:58  laaknor
+
+	* admin/acl.php:
+
+	  Added display of which users are a member of this group.
+
+2004-12-21 17:54  alfapus
+
+	* inc/adressbook.php:
+
+	  Shows root-users in the addressbook regardless of
+	  listaddress-flag.
+
+2004-12-21 17:45  alfapus
+
+	* inc/adressbook.php:
+
+	  Fixes problem with Group in crewaddressbook.	The problem was
+	  caused by a leftover from non-ACL times. :-)
+
+2004-12-21 17:26  alfapus
+
+	* inc/adressbook.php:
+	  Removed address and zipcode from listing...  Will fix profiles to
+	  show this sometime soon. :-)
+
+2004-12-21 17:22  alfapus
+
+	* lang/: english.php, norwegian.php:
+	  This is related to the problems with crewaddressbook...  Forgot
+	  to commit these at that time. :-)
+
+2004-12-21 16:39  laaknor
+
+	* inc/profile.php:
+	  Changed from Mac end of line to UNIX
+
+2004-12-21 16:26  alfapus
+
+	* inc/adressbook.php:
+
+	  Fixes #1088748.  Group doesn't show, but I guess Laaknor could
+	  help me with that in a couple of seconds. ;-)
+
+2004-12-21 01:37  alfapus
+
+	* inc/adressbook.php: Allows crew (ACL) access to crewaddressbook.
+
+2004-12-21 00:07  alfapus
+
+	* style_incs/show_vote.php: Fixes bug #1088100.
+
+2004-12-20 23:56  laaknor
+
+	* docs/mysql_tables.sql:
+
+	  Added a default vote (Do you like this system? YES!/OOOOOOOOOH
+	  YES!!!), and altered pollA.votes from tinyint(6) to int(6).
+	  Aparently, it didn't like more than 127 votes.....
+
+2004-12-20 22:22  alfapus
+
+	* docs/TODO.txt:
+	  Removing TODO.txt.  Probably outdated, and we need to stick our
+	  heads together to make a plan of what to work with from now on.
+	  :-)
+
+2004-12-20 22:18  alfapus
+
+	* docs/CHANGELOG.txt:
+	  Removing old changelog.  Thanks to CVS we'll have this in the
+	  attic when we create the new, updated changelog before the first
+	  release. :-) Note to self: Remember to put out new changelog
+	  before release.
+
+2004-12-20 21:28  alfapus
+
+	* seatmap.php: Just changed a comment to confirm to my
+	  documentation. ;-)
+
+2004-12-20 21:10  alfapus
+
+	* docs/CUSTOMIZE:
+	  Did I mention "Added CUSTOMIZE"? ;-)
+
+2004-12-20 21:07  alfapus
+
+	* docs/: INSTALL, LICENSE:
+	  Added CUSTOMIZE.  Added URL in some docs...
+
+2004-12-20 19:04  alfapus
+
+	* docs/INSTALL: Added php4-gd as a requirement.
+
+2004-12-20 18:42  alfapus
+
+	* do.php, lang/english.php, lang/norwegian.php: Fixes bug #1088510
+
+2004-12-20 18:05  laaknor
+
+	* inc/useradmin.php:
+	  Fixed bug 1088519, changes to "Rank" doesn't get saved
+
+2004-12-20 00:47  alfapus
+
+	* docs/: GPL, LICENSE, LICENSE.txt, README:
+	  Copied some lines from docs/README to the new docs/LICENSE.
+	  Added the current version of GPL (v2) to docs/GPL.  Added some
+	  noses to Lars Åges smileys and such in docs/README. :-)
+
+2004-12-20 00:05  alfapus
+
+	* docs/: INSTALL, INSTALL.txt:
+	  Rewrote INSTALL.
+
+2004-12-19 23:43  laaknor
+
+	* inc/compopoll.php:
+
+	  Added that file that has been giving warnings the last week
+
+2004-12-19 22:31  laaknor
+
+	* config/config.php:
+
+	  changed default language to English instead of Norwegian
+
+2004-12-19 22:04  laaknor
+
+	* docs/README:
+
+	  Just added a little history-note and wrote some other things in
+	  intro-part
+
+2004-12-19 21:33  alfapus
+
+	* docs/README:
+	  Added a note about how to get the current version from CVS.
+
+2004-12-19 21:11  alfapus
+
+	* docs/: README, README.txt:
+	  Rewrote README.txt and changed filename.  Laaknor: Historical
+	  input? :-) Starting on INSTALL and CUSTOMIZE now, documentation
+	  is broken untill that's done.
+
+2004-12-19 20:38  laaknor
+
+	* admin/acl.php:
+
+	  Added rename and delete group to ACL-admin
+
+2004-12-19 20:08  laaknor
+
+	* inc/useradmin.php, lang/english.php, lang/norwegian.php:
+
+	  Updated useradmin so that it is possible to change what group a
+	  user is member of, and added the lang-variables for the
+	  ACL-system, as it seems I've forgotten it previously. As far as I
+	  can see, the system should no longer be broken, and it should fix
+	  bug 1086523. I'll write possebility of deleting and renameing
+	  groups next.
+
+2004-12-19 19:11  laaknor
+
+	* docs/mysql_tables.sql:
+
+	  Changed around a little bit, so that anonymous and users has
+	  their own default group. This will enable us to disable the old
+	  config-system, and instead use ACLs for that too :)
+
+2004-12-19 16:16  laaknor
+
+	* partyweb/index.php:
+
+	  Fixed bug  1086527, where partyweb just loops back because there
+	  hasn't been entered any pages in the partyweb system.
+
+	  btw: think partywebsystem needs a complete rewrite.... :/
+
+2004-12-19 16:04  laaknor
+
+	* inc/userlogin.php:
+
+	  Fixed bug  1086516
+
+2004-12-14 21:27  laaknor
+
+	* room.ini, seatformats.php, seatmap.php, seatsel.php,
+	  admin/acl.php, admin/compomaster.php, admin/compopolladmin.php:
+
+	  Added a few files that where missing
+
+2004-12-14 20:55  laaknor
+
+	* style/menu.php: One bug updates the other. Last update was a
+	  completly other file for style/menu.php, and so this time I had
+	  to fix [page] to ['page'] again :/
+
+2004-12-14 20:53  laaknor
+
+	* style/menu.php:
+
+	  Maybe we should have a menu that supports ACLs too? Didn't show
+	  up much on my website :/
+
+2004-12-14 20:45  laaknor
+
+	* config/config.php, config/functions.php, config/session.php,
+	  lang/norwegian.php, style/menu.php: A lot of diffrent variables
+	  where specified incorrectly (mostly $title[page][] that I changed
+	  to ['page']). It now works on my Windows workstation :)
+
+2004-12-14 20:35  laaknor
+
+	* config/config.php: Updated config/config.php so that $base_path
+	  has an ending /
+
+2004-12-14 20:24  laaknor
+
+	* inc/useradmin.php: proper format is "else(if(something) &&
+	  if(somethingelse))" not else(if(something)_)_ &&
+	  if(somethingelse)) :/
+
+2004-12-14 19:59  laaknor
+
+	* admin/userlist.php: Changed file format from MAC to UNIX....
+
+2004-12-14 19:51  laaknor
+
+	* admin/userlist.php: Updated admin/userlist.php and hopefully got
+	  rid of the errors in Linux. All project members using a OS filled
+	  with errors (you know who you are), please remember to use a
+	  texteditor that supports UNIX linebreaks :)
+
+2004-12-14 18:45  laaknor
+
+	* config/config.php:
+	  Altered $base_path to be $_SERVER['DOCUMENT_ROOT'] instad of
+	  hardcoding the path. Probably going to need it to be fully able
+	  to automate the process with setting up a testwebsite, and to use
+	  it on my windowsbased laptop :)
+
+2004-12-14 18:28  laaknor
+
+	* config/functions.php:
+
+	  removed mail_body() as it now is specified in lang/*.php
+
+2004-12-14 18:17  laaknor
+
+	* docs/mysql_tables.sql:
+
+	  ACL-tablestructure on it's way :)
+
+2004-12-14 16:37  laaknor
+
+	* admin.php, do.php, index.php, seat.php, admin/config.php,
+	  admin/faq.php, admin/forum.php, admin/kiosk.php, admin/news.php,
+	  admin/partyweb.php, admin/poll.php, admin/random.php,
+	  admin/static.php, admin/userlist.php, admin/wannabemin.php,
+	  config/config.php, config/functions.php, config/seat.css,
+	  config/session.php, config/stats_every.php,
+	  config/stats_sessionstart.php, inc/clan.php, inc/compo.php,
+	  inc/poll.php, inc/profile.php, inc/register.php,
+	  inc/useradmin.php, inc/userlogin.php, inc/wannabe.php:
+
+	  Starting the work with ACLs. Still have to recreate the old
+	  SQL-table for it, so this means that the CVS-version is now
+	  _BROKEN_. *darn that backup*
+
+2004-12-14 16:14  laaknor
+
+	* style/: default/images/Thumbs.db, default/images/blue.gif,
+	  default/images/cs_white_round.gif, default/images/hjorne.gif,
+	  default/images/logo.jpg, default/images/logo_bak.gif,
+	  default/images/strike_pic23a.jpg, default/images/test.gif,
+	  wacie/images/login.gif, wacie/images/logo.jpg,
+	  wacie/images/meny.gif, wacie/images/sitestat.gif,
+	  wacie/images/userstat.gif:
+
+	  Nah, would you look at that, images!
+
+2004-12-14 15:41  alfapus
+
+	* docs/TODO.txt: Just showing off CVS. :-)
+
+2004-12-13 22:58  alfapus
+
+	* docs/CHANGELOG.txt: Starting a new life with documentation - and
+	  testing CVS with syncmail
+
+2004-12-13 22:01  laaknor
+
+	* imagemap.php, style/default/bottom.php, style/default/menu.php,
+	  style/default/style.css, style/default/top.php,
+	  style/wacie/Style.css, style/wacie/bottom.php,
+	  style/wacie/menu.php, style/wacie/top.php:
+
+	  Set a lot of files to binary files (cvs admin -kb .[gif|jpg]).
+	  Added two new styles that hadn't been added
+
+2004-12-13 21:47  alfapus
+
+	* docs/README.txt: Just making sure I still remember how to do
+	  this... Oh BTW, added the sf.net-URL in docs/README.txt ;-)
+
+2004-12-13 19:19  laaknor
+
+	* config/functions.php, lang/english.php, lang/norwegian.php:
+
+	  Added english translation
+
+2004-12-13 18:32  laaknor
+
+	* seatimage.php, admin/wannabemin.php, images/no.gif,
+	  images/yes.gif, inc/wannabe.php:
+
+	  Just going through more files that have been added
+
+2004-12-13 18:27  laaknor
+
+	* admin.php, do.php, seat.php, admin/config.php, config/config.php,
+	  config/functions.php, config/session.php, docs/mysql_tables.sql,
+	  inc/adressbook.php, inc/kiosk.php, inc/poll.php, inc/profile.php,
+	  inc/register.php, inc/useradmin.php, lang/norwegian.php,
+	  style/bottom.php, style/menu.php, style/top.php,
+	  style/wasp/bottom.php, style/wasp/menu.php, style/wasp/style.css,
+	  style/wasp/top.php:
+
+	  A while since I've updated the repository. A lot of changes? yup,
+	  that whould describe it best :)
+
+2004-04-12 15:30  laaknor
+
+	* docs/mysql_tables.sql: Added if table exists drop table so that
+	  it could be easier to automatically create the demopage on the
+	  website....
+
+2004-04-11 01:23  laaknor
+
+	* docs/: CHANGELOG.txt, TODO.txt: Just cleaning up
+
+2004-04-11 01:10  laaknor
+
+	* docs/LICENSE.txt: Fixed a lot of linebreaks that shouldn't be
+	  there...
+
+2004-04-11 00:04  laaknor
+
+	* admin.php, do.php, forum.php, index.php, seat.php,
+	  sql_upgrade.php, sql_upgrade.phps, admin/compo.php,
+	  admin/config.php, admin/faq.php, admin/forum.php,
+	  admin/kiosk.php, admin/news.php, admin/partyweb.php,
+	  admin/poll.php, admin/random.php, admin/static.php,
+	  admin/userlist.php, config/barend.gif, config/barmid.gif,
+	  config/barmidblack.gif, config/barstart.gif, config/config.php,
+	  config/defaultmap.txt, config/functions.php,
+	  config/globelan6-map.txt, config/seat-top.php, config/seat.css,
+	  config/session.php, config/stats_every.php,
+	  config/stats_sessionstart.php, docs/CHANGELOG.txt,
+	  docs/INSTALL.txt, docs/LICENSE.txt, docs/README.txt,
+	  docs/TODO.txt, docs/mysql_tables.sql, inc/adressbook.php,
+	  inc/clan.php, inc/compo.php, inc/faq.php, inc/kiosk.php,
+	  inc/login.php, inc/news.php, inc/poll.php, inc/profile.php,
+	  inc/register.php, inc/showusers.php, inc/useradmin.php,
+	  inc/userlogin.php, lang/english.php, lang/norwegian.php,
+	  partyweb/index.php, partyweb/style/bottom.php,
+	  partyweb/style/index.php, partyweb/style/logo.jpg,
+	  partyweb/style/menu.php, partyweb/style/style.css,
+	  partyweb/style/top.php, style/bottom.php, style/menu.php,
+	  style/style.css, style/top.php, style/wasp/index.html,
+	  style/wasp/menu.php, style/wasp/top.php, style/wasp/bottom.php,
+	  style/wasp/style.css, style/wasp/images/blue.gif,
+	  style/wasp/images/cs_white_round.gif,
+	  style/wasp/images/hjorne.gif, style/wasp/images/logo.jpg,
+	  style/wasp/images/Thumbs.db, style/wasp/images/logo.psd,
+	  style/wasp/images/logo_bak.gif,
+	  style/wasp/images/strike_pic23a.jpg, style/wasp/images/test.gif,
+	  style/GlobeLAN6/background.gif, style/GlobeLAN6/banner.jpg,
+	  style/GlobeLAN6/bottom.php, style/devel/bottom.php,
+	  style/devel/menu.old.php, style/devel/menu.php,
+	  style/devel/style.css, style/devel/top.php,
+	  style/GlobeLAN6/breakeven-banner.jpg, style/GlobeLAN6/dott.gif,
+	  style/GlobeLAN6/logo.gif, style/GlobeLAN6/logo.jpg,
+	  style/GlobeLAN6/logo.psd, style/GlobeLAN6/menu.php,
+	  style/GlobeLAN6/style.css, style/GlobeLAN6/top.php,
+	  style/GlobeLAN6/menu/WS_FTP.LOG,
+	  style/GlobeLAN6/menu/background_design.gif,
+	  style/GlobeLAN6/menu/bottom_design.gif,
+	  style/GlobeLAN6/menu/login_design.gif,
+	  style/GlobeLAN6/menu/long_background_bottom_desi.gif,
+	  style/GlobeLAN6/menu/long_background_design.gif,
+	  style/GlobeLAN6/menu/long_background_middle_desi.gif,
+	  style/GlobeLAN6/menu/long_background_topp_design.gif,
+	  style/GlobeLAN6/menu/long_bottom_design.gif,
+	  style/GlobeLAN6/menu/long_end_bottom_design.gif,
+	  style/GlobeLAN6/menu/long_end_middle_design.gif,
+	  style/GlobeLAN6/menu/long_end_topp_design.gif,
+	  style/GlobeLAN6/menu/long_front_bottom_design.gif,
+	  style/GlobeLAN6/menu/long_front_middle_design.gif,
+	  style/GlobeLAN6/menu/long_front_topp_design.gif,
+	  style/GlobeLAN6/menu/long_topp_design.gif,
+	  style/GlobeLAN6/menu/menu_design.gif,
+	  style/GlobeLAN6/menu/orginal.psd,
+	  style/GlobeLAN6/menu/orginal_lang.psd,
+	  style/GlobeLAN6/menu/topp_design.gif,
+	  style/GlobeLAN6/menu/userinfo_design.gif,
+	  style/fargeblind/bottom.php, style/fargeblind/menu.php,
+	  style/fargeblind/style.css, style/fargeblind/top.php,
+	  style_incs/online_users.php, style_incs/show_vote.php: Inital
+	  import.
+
+2004-04-11 00:04  laaknor
+
+	* admin.php, do.php, forum.php, index.php, seat.php,
+	  sql_upgrade.php, sql_upgrade.phps, admin/compo.php,
+	  admin/config.php, admin/faq.php, admin/forum.php,
+	  admin/kiosk.php, admin/news.php, admin/partyweb.php,
+	  admin/poll.php, admin/random.php, admin/static.php,
+	  admin/userlist.php, config/barend.gif, config/barmid.gif,
+	  config/barmidblack.gif, config/barstart.gif, config/config.php,
+	  config/defaultmap.txt, config/functions.php,
+	  config/globelan6-map.txt, config/seat-top.php, config/seat.css,
+	  config/session.php, config/stats_every.php,
+	  config/stats_sessionstart.php, docs/CHANGELOG.txt,
+	  docs/INSTALL.txt, docs/LICENSE.txt, docs/README.txt,
+	  docs/TODO.txt, docs/mysql_tables.sql, inc/adressbook.php,
+	  inc/clan.php, inc/compo.php, inc/faq.php, inc/kiosk.php,
+	  inc/login.php, inc/news.php, inc/poll.php, inc/profile.php,
+	  inc/register.php, inc/showusers.php, inc/useradmin.php,
+	  inc/userlogin.php, lang/english.php, lang/norwegian.php,
+	  partyweb/index.php, partyweb/style/bottom.php,
+	  partyweb/style/index.php, partyweb/style/logo.jpg,
+	  partyweb/style/menu.php, partyweb/style/style.css,
+	  partyweb/style/top.php, style/bottom.php, style/menu.php,
+	  style/style.css, style/top.php, style/wasp/index.html,
+	  style/wasp/menu.php, style/wasp/top.php, style/wasp/bottom.php,
+	  style/wasp/style.css, style/wasp/images/blue.gif,
+	  style/wasp/images/cs_white_round.gif,
+	  style/wasp/images/hjorne.gif, style/wasp/images/logo.jpg,
+	  style/wasp/images/Thumbs.db, style/wasp/images/logo.psd,
+	  style/wasp/images/logo_bak.gif,
+	  style/wasp/images/strike_pic23a.jpg, style/wasp/images/test.gif,
+	  style/GlobeLAN6/background.gif, style/GlobeLAN6/banner.jpg,
+	  style/GlobeLAN6/bottom.php, style/devel/bottom.php,
+	  style/devel/menu.old.php, style/devel/menu.php,
+	  style/devel/style.css, style/devel/top.php,
+	  style/GlobeLAN6/breakeven-banner.jpg, style/GlobeLAN6/dott.gif,
+	  style/GlobeLAN6/logo.gif, style/GlobeLAN6/logo.jpg,
+	  style/GlobeLAN6/logo.psd, style/GlobeLAN6/menu.php,
+	  style/GlobeLAN6/style.css, style/GlobeLAN6/top.php,
+	  style/GlobeLAN6/menu/WS_FTP.LOG,
+	  style/GlobeLAN6/menu/background_design.gif,
+	  style/GlobeLAN6/menu/bottom_design.gif,
+	  style/GlobeLAN6/menu/login_design.gif,
+	  style/GlobeLAN6/menu/long_background_bottom_desi.gif,
+	  style/GlobeLAN6/menu/long_background_design.gif,
+	  style/GlobeLAN6/menu/long_background_middle_desi.gif,
+	  style/GlobeLAN6/menu/long_background_topp_design.gif,
+	  style/GlobeLAN6/menu/long_bottom_design.gif,
+	  style/GlobeLAN6/menu/long_end_bottom_design.gif,
+	  style/GlobeLAN6/menu/long_end_middle_design.gif,
+	  style/GlobeLAN6/menu/long_end_topp_design.gif,
+	  style/GlobeLAN6/menu/long_front_bottom_design.gif,
+	  style/GlobeLAN6/menu/long_front_middle_design.gif,
+	  style/GlobeLAN6/menu/long_front_topp_design.gif,
+	  style/GlobeLAN6/menu/long_topp_design.gif,
+	  style/GlobeLAN6/menu/menu_design.gif,
+	  style/GlobeLAN6/menu/orginal.psd,
+	  style/GlobeLAN6/menu/orginal_lang.psd,
+	  style/GlobeLAN6/menu/topp_design.gif,
+	  style/GlobeLAN6/menu/userinfo_design.gif,
+	  style/fargeblind/bottom.php, style/fargeblind/menu.php,
+	  style/fargeblind/style.css, style/fargeblind/top.php,
+	  style_incs/online_users.php, style_incs/show_vote.php: Initial
+	  revision
+
