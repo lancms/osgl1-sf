@@ -450,15 +450,15 @@ elseif($action == "DoViewUsers") {
 		}
 
   	}
-	$query		= sprintf ("SELECT * FROM wannabeComment WHERE user = %s", escape_string($user));
+	$query		= sprintf ("SELECT * FROM wannabeComment WHERE user = %s AND adminID = %s",  escape_string($UID), escape_string(getcurrentuserid()));
 	$result 	= 	query($query);
 	$var 		= 	fetch($result);
 
 	$Comment	=	$var->comment;
-	$like		=	$var->like;
+	$approve		=	$var->approve;
 
-	if($like == 1) $Check1 = " checked";
-	elseif($like == 2) $Check2 = " checked";
+	if($approve == 1) $Check1 = " checked";
+	elseif($approve == 2) $Check2 = " checked";
 
 	  $list	   .= "
 	  <form name='AddComment' method='post' action='admin.php?adminmode=wannabemin&action=AddComment'>
@@ -473,8 +473,8 @@ elseif($action == "DoViewUsers") {
 		<td>".lang("Do You like this wannabe ?", "admin_wannabemin", "Text to display in wannabemin&action=DoViewUsers")."</td>
 	   </tr>
 	   <tr>
-		<td><input type='radio' name='like' value='1'".$Check1.">".lang("Yes", "admin_wannabemin", "Text to display in wannabemin&action=DoViewUsers")."</td>
-		<td><input type='radio' name='like' value='2'".$Check2.">".lang("Nope", "admin_wannabemin", "Text to display in wannabemin&action=DoViewUsers")."</td>
+		<td><input type='radio' name='approve' value='1'".$Check1.">".lang("Yes", "admin_wannabemin", "Text to display in wannabemin&action=DoViewUsers")."</td>
+		<td><input type='radio' name='approve' value='2'".$Check2.">".lang("Nope", "admin_wannabemin", "Text to display in wannabemin&action=DoViewUsers")."</td>
 	   </tr>
 	   <tr>
 		<td><input type='submit' name='Submit' value='".lang("Add", "admin_wannabemin", "Text used in wannabemin")."'></td>
@@ -493,17 +493,17 @@ elseif($action == "DoViewUsers") {
   while($r = fetch($q)) {
 		echo "
 		  <tr>
-			<td><b>". IDtonick($r->by) .":</b></td>
+			<td><b>". IDtonick($r->adminID) .":</b></td>
 		  </tr>
 		  <tr>
 			<td><em>". $r->comment ."</em></td>
 		  </tr>
 		  ";
-		  if($r->like == 1) $like = lang("Yes", "admin_wannabemin", "Text used in wannabemin");
-		  elseif($r->like == 2) $like = lang("Nope", "admin_wannabemin", "Text used in wannabemin");
+		  if($r->approve == 1) $approve = lang("Yes", "admin_wannabemin", "Text used in wannabemin");
+		  elseif($r->approve == 2) $approve = lang("Nope", "admin_wannabemin", "Text used in wannabemin");
 		echo "
 		 <tr>
-		  <td>". lang("Do you like this wannabe?", "admin_wannabemin", "Text used in wannabemin"). " <b>". $like ."</b></td>
+		  <td>". lang("Do you like this wannabe?", "admin_wannabemin", "Text used in wannabemin"). " <b>". $approve ."</b></td>
 		 </tr>
 		 ";
 
@@ -519,20 +519,20 @@ elseif($action == "AddComment") {
 
 	$ID		=	$_POST['UserID'];
 	$Com	=	$_POST['Comment'];
-	$Like	=	$_POST['like'];
+	$Like	=	$_POST['approve'];
 
 	if(empty($ID) || empty($Com) || empty($Like)) nicedie(lang("Did you forget something ? Like writing a comment ?", "admin_wannabemin", "Text used in wannabemin"));
 
-	$query	=	"SELECT * FROM `wannabeComment` WHERE `user` = '$ID' AND `by` = '$user'";
+	$query	=	"SELECT * FROM `wannabeComment` WHERE `user` = '$ID' AND adminID = '$user'";
 	$result	=	query($query);
 	$num	=	num($result);
 
 	if($num != 0) {
-		$query = sprintf ("UPDATE wannabeComment SET comment = '%s', like = '%s' WHERE user = %s AND by = %s", escape_string($Com), escape_string($Like), escape_string($ID), escape_string($user));
+		$query = sprintf ("UPDATE wannabeComment SET comment = '%s', approve = '%s' WHERE user = %s AND adminID = %s", escape_string($Com), escape_string($Like), escape_string($ID), escape_string($user));
 	}
 	else
 	{
-		$query = sprintf ("INSERT INTO wannabeComment (ID, comment, like, user, by) VALUES (NULL, '%s', '%s', '%s', '%s')", escape_string($Com), escape_string($Like), escape_string($ID), escape_string($user));
+		$query = sprintf ("INSERT INTO wannabeComment (ID, comment, approve, user, adminID) VALUES (NULL, '%s', '%s', '%s', '%s')", escape_string($Com), escape_string($Like), escape_string($ID), escape_string($user));
 	}
 	$result	=	query($query);
 
@@ -557,17 +557,17 @@ elseif($action == "ViewComment") {
 	  while($r = fetch($q)) {
 			echo "
 			  <tr>
-				<td><b>". IDtonick($r->by) .":</b></td>
+				<td><b>". IDtonick($r->adminID) .":</b></td>
 			  </tr>
 			  <tr>
 				<td><em>". $r->comment ."</em></td>
 			  </tr>
 			  ";
-			  if($r->like == 1) $like = lang("Yes", "admin_wannabemin", "Text used in wannabemin");
-			  elseif($r->like == 2) $like = lang("Nope", "admin_wannabemin", "Text used in wannabemin");
+			  if($r->approve == 1) $approve = lang("Yes", "admin_wannabemin", "Text used in wannabemin");
+			  elseif($r->approve == 2) $approve = lang("Nope", "admin_wannabemin", "Text used in wannabemin");
 			echo "
 			 <tr>
-			  <td>". lang("Do you like this wannabe?", "admin_wannabemin", "Text used in wannabemin"). " <b>". $like ."</b></td>
+			  <td>". lang("Do you like this wannabe?", "admin_wannabemin", "Text used in wannabemin"). " <b>". $approve ."</b></td>
 			 </tr>
 			 ";
 
