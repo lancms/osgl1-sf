@@ -38,7 +38,11 @@ if($action == "view" || !isset($action)) {
 	echo "<form method=post action=index.php?inc=useradmin&action=edit&user=$row->ID>";
 	echo '<table>';
 	user_table($profile['8'],"<input type=text name=nick value='$row->nick'>");
-	user_table($profile[3],"<input type=text name=name value='$row->name'>");
+	#user_table($profile[3],"<input type=text name=name value='$row->name'>");
+	user_table(lang("Firstname", "inc_useradmin", "Users firstname in useradmin?action=view"), "<input type=text name=firstName value='$row->firstName'>");
+	user_table(lang("Lastname", "inc_useradmin", "Users lastname in useradmin?action=view"), "<input type=text name=lastName value='$row->lastName'>");
+
+
 	// We want a little bit of security, so we have this one on it's own page with verifcation.
 	//user_table($profile[6], "<input type=text name=mail value='$row->EMail'>");
 	user_table($profile[4], "<textarea name=aboutme rows=10 cols=60>$row->aboutMe</textarea>");
@@ -154,7 +158,9 @@ elseif($action == "edit") {
 	$q = query("SELECT * FROM users WHERE ID = $editID");
 	$r = fetch($q);
 	$nick = $_POST['nick'];
-	$name = $_POST['name'];
+	#$name = $_POST['name'];
+	$firstName = $_POST['firstName'];
+	$lastName = $_POST['lastName'];
 	$mail = $_POST['mail'];
 	$aboutme = htmlspecialchars($_POST['aboutme']);
 //	$rank = $_POST['rank'];
@@ -173,7 +179,8 @@ elseif($action == "edit") {
 	$birthYEAR = $_POST['birthYEAR'];
 	$query = query("UPDATE users SET
 		nick='".$nick."',
-		name = '$name',
+		firstName = '$firstName',
+		lastName = '$lastName',
 		aboutMe = '$aboutme',
 		cellphone = '$cellphone',
 		allowPublic = $allowPublic,
