@@ -78,7 +78,7 @@ elseif ($action == "main")
 		echo "</td><td>";
 		if (($row->seatX == -1) && ($row->seatY == -1))
 		{
-			$hasSeat = lang("No seat", "inc_userlogin", "Text to display if the user doesn't have any seat");
+			$hasSeat = lang("No seat", "inc_userlogin", "Text to display if the user does not have any seat");
 		}
 		else
 		{
