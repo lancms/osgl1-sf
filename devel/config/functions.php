@@ -64,7 +64,13 @@ function verify($mode="register", $userid, $nick, $firstname, $lastname, $email=
     elseif(($mode = "register") && (!(strchr($email, "@")) && (strchr($email, ".")))) // check if the email contains at least one @ and at least one dot.
         return 11;
 
-	elseif((!strchr($firstname, " ")) || (!strchr($lastname, " ")))
+	elseif ((!isset($lastname)) || (!isset($firstname)))
+		return 12;
+
+	elseif (($firstname == "") || ($lastname == ""))
+		return 12;
+		
+	elseif ((preg_match('/[[:digit:]]/', $firstname)) || (preg_match('/[[:digit:]]/', $lastname)))
 	 	return 12;
 
 	else		// if we find no of the above errors, compare user name with the database.
