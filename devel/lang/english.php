@@ -62,6 +62,7 @@ $form[56] = "Order amount";
 $form[57] = "Order nick";
 $form[58] = "Thanks for the food";
 $form[59] = "Verify";
+$form['60'] = "Show";
 
 /* Diffrent kinds of messages..... */
 $msg[0] = "Logged in as: ";
@@ -95,6 +96,7 @@ $msg['27'] = "You are now logged out.";
 $msg['28'] = "Could not create random number.";
 $msg['29'] = "Hacking?";
 $msg['30'] = "Wrong username or password.";
+$msg['31'] = "Back to the main page.";
 
 $rank[0] = "User";
 $rank[1] = "Crew";
@@ -127,16 +129,31 @@ $title[page][17] = "WannabeCrew";
 /* Messages on admin-interface */
 $admin[noaccess] = "DIIIIIIIIIIIIIE!! No access!";
 $admin[contact][mail] = "laaknor@globelan.net";
+
 /* Messages in seat-system */
-$seat[0] = "Free";
-$seat[1] = "Crew";
-$seat[2] = "Reserved";
-$seat[3] = "User";
-$seat[4] = "Door";
-$seat[5] = "Wall";
-$seat[6] = "Canteen";
-$seat[7] = "Corridor";
-$seat[8] = "Cancel reservation";
+$seat['0'] = "Not opened seat";
+$seat['1'] = "Taken seat";
+$seat['2'] = "Open seat";
+$seat['3'] = "Door";
+$seat['4'] = "Wall";
+$seat['5'] = "Canteen";
+$seat['6'] = "Crew";
+//$seat['7'] = "";
+//$seat['8'] = "";
+$seat['9'] = "The seatreservation has not yet opened!";
+$seat['10'] = "Remaining seats:";
+$seat['11'] = "Taken seats:";
+$seat['12'] = "Zoom (show names)";
+$seat['13'] = "Cancel seat";
+$seat['14'] = "sits here.";
+$seat['15'] = "Take this seat";
+
+$colour['1'] = "Red";
+$colour['2'] = "Blue";
+$colour['3'] = "Dark blue";
+$colour['4'] = "Black";
+$colour['5'] = "Light green";
+$colour['6'] = "Orange";
 
 /* Messages in profile */
 $profile[0] = "The user has disabled his profile, and you are not an admin";

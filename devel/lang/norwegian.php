@@ -62,6 +62,7 @@ $form[56] = "Bestill antall";
 $form[57] = "Bestill nick";
 $form[58] = "Takk for maten";
 $form[59] = "Verifiser";
+$form['60'] = "Vis";
 
 /* Diffrent kinds of messages..... */
 $msg[0] = "Logget inn som: ";
@@ -95,6 +96,7 @@ $msg['27'] = "Du er nå logget ut.";
 $msg['28'] = "Kunne ikke generere tilfeldig tall.";
 $msg['29'] = "Hacking?";
 $msg['30'] = "Feil brukernavn eller passord.";
+$msg['31'] = "Tilbake til hovedsiden."
 
 $rank[0] = "Deltager";
 $rank[1] = "Crew";
@@ -127,16 +129,31 @@ $title['page'][17] = "WannabeCrew";
 /* Messages on admin-interface */
 $admin['noaccess'] = "DØØØØØØØØØØØ; ingen tilgang!";
 $admin['contact']['mail'] = "laaknor@globelan.net";
+
 /* Messages in seat-system */
-$seat[0] = "Ledig";
-$seat[1] = "Crew";
-$seat[2] = "Reservert";
-$seat[3] = "Deltager";
-$seat[4] = "Dør";
-$seat[5] = "Vegg";
-$seat[6] = "Kantine";
-$seat[7] = "Gang";
-$seat[8] = "Meld avbud";
+$seat['0'] = "Ikke åpnet plass";
+$seat['1'] = "Opptatt plass";
+$seat['2'] = "Åpen plass";
+$seat['3'] = "Dør";
+$seat['4'] = "Vegg";
+$seat['5'] = "Kiosk";
+$seat['6'] = "Crew";
+//$seat['7'] = "";
+//$seat['8'] = "";
+$seat['9'] = "Plassregistreringa har ikke åpnet enda!";
+$seat['10'] = "Ledige plasser:";
+$seat['11'] = "Opptatte plasser:";
+$seat['12'] = "Zoom (vis navn)";
+$seat['13'] = "Avbestill plassen";
+$seat['14'] = "sitter her.";
+$seat['15'] = "Ta denne plassen";
+
+$colour['1'] = "Rød";
+$colour['2'] = "Blå";
+$colour['3'] = "Mørkeblå";
+$colour['4'] = "Svart";
+$colour['5'] = "Lysegrønn";
+$colour['6'] = "Oransje";
 
 /* Messages in profile */
 $profile[0] = "Brukeren har deaktivert profilen sin, og du er nok ikke admin *mobb mobb*";

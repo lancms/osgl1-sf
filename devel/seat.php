@@ -12,7 +12,7 @@ $seatopen = config("seatreg_open");
 
 if(!isset($action)) {
 
-	if(!$seatopen) echo "<b>".$seat['9']."</b><br>";
+	if(!$seatopen) echo "<b>".$seat['9']."</b><br><br>";
 	
 $crewseats = config("crewseats");
 $normalseats = config("normalseats");
@@ -21,29 +21,31 @@ $dbs = query("SELECT count(*) FROM users WHERE seatX != -1 AND seatY != -1 AND i
 $q = fetch($dbs);
 $cnt = $q[0];
 
-echo "Ledige seter : ".($normalseats-$cnt)." (altså er $cnt tatt)<br>\n";
+echo $seat['10']." ".($normalseats-$cnt)."<br>\n";
+echo $seat['11']." ".($cnt)."<br><br>\n";
 ?>
-<a href=index.php>Back to tha main page</a><br>
+
+<a href=index.php><?php echo $msg['31']; ?></a><br>
 <map name=roommap>
 <?php
 include "seatmap.php";
 ?>
 </map>
 <form action=seat.php method=get>
-<input type=checkbox <?php if(isset($_GET["zoom"]) && $_GET["zoom"] == "on") { echo "checked"; }; ?> name=zoom> Zoom (vis navn)<br><br>
-<input type=submit value="vis">
+<input type=checkbox <?php if(isset($_GET["zoom"]) && $_GET["zoom"] == "on") { echo "checked"; }; ?> name=zoom> <?php echo $seat['12']; ?><br><br>
+<input type=submit value="<?php echo $form['60']; ?>">
 </form>
 
 <?php
 $hasSeatQ = query("SELECT * FROM users WHERE ID = ".getcurrentuserid());
 $hasSeat = fetch($hasSeatQ);
-if($hasSeat->seatX != -1) echo "<a href=seat.php?action=cancel>Avbestill plassen</a><br>";
+if($hasSeat->seatX != -1) echo "<a href=seat.php?action=cancel>".$seat['13']."</a><br>";
 if(isset($_GET["x"])) {
 	$coords = "?x=".$_GET["x"]."&y=".$_GET["y"];
 	$q = query("SELECT * FROM users WHERE seatX = '$getX' AND seatY = '$getY'");
 	$r = fetch($q);
-	if(num($q) != 0) echo "<a href=index.php?inc=profile&uid=$r->ID>".$r->nick."</a> sitter her<br>";
-	elseif($canSit && num($q) == 0) echo "<a href=seat.php$coords&action=seat>Ledig, jeg tar'n</a><br>";
+	if(num($q) != 0) echo "<a href=index.php?inc=profile&uid=$r->ID>".$r->nick."</a> ".$seat['14']."<br>";
+	elseif($canSit && num($q) == 0) echo "<a href=seat.php$coords&action=seat>".$seat['15']."</a><br>";
 	}
 	
 else
@@ -54,12 +56,12 @@ else
 <?php
 
 
-echo "<br><font color=red>Rød</font>: ikke åpnet plass
-<br><font color=blue>Blå</font>: deltagerplass; bare å ta
-<br><font color=darkblue>Mørkblå</font>: dør
-<br><font color=black>Svart</font>: vegg
-<br><font color=#00FFAA>Lys grønt</font>: kiosken
-<br><font color=orange>Oransj</font>: crew
+echo "<br><font color=red>".$colour['1']."</font>: ".$seat['0']."
+<br><font color=blue>".$colour['2']."</font>: ".$seat['2']."
+<br><font color=darkblue>".$colour['3']."</font>: ".$seat['3']."
+<br><font color=black>".$colour['4']."</font>: ".$seat['4']."
+<br><font color=#00FFAA>".$colour['5']."</font>: ".$seat['5']."
+<br><font color=orange>".$colour['6']."</font>: ".$seat['6']."
 ";
 }
 elseif($action == "seat" && $canSit) {
