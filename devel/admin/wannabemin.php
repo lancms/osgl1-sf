@@ -502,27 +502,34 @@ elseif ($action == "DoViewUsers")
 	echo "<table>";
 	while ($r = fetch($q))
 	{
+		if($r->approve == 1) $smiley = "<img src=images/yes.gif>";
+		elseif($r->approve == 2) $smiley = "<img src=images/no.gif>";
+		else $smiley = ""; // If not set/not "voted"
 		echo "
 			<tr>
-				<td><b>". IDtonick($r->adminID) .":</b></td>
+				<td><b>". IDtonick($r->adminID) ." ".$smiley.":</b></td>
 			</tr>
 			<tr>
 				<td><em>". $r->comment ."</em></td>
 			</tr>
+			
 			";
+		// Removeing this, and putting a small smiley "up there" instead
+		/*
 		if ($r->approve == 1)
 		{
-			$approve = lang("Yes", "admin_wannabemin", "Text used in wannabemin");
+			//$approve = lang("Yes", "admin_wannabemin", "Text used in wannabemin");
 		}
 		elseif ($r->approve == 2)
 		{
-			$approve = lang("Nope", "admin_wannabemin", "Text used in wannabemin");
+			//$approve = lang("Nope", "admin_wannabemin", "Text used in wannabemin");
 		}
 		echo "
 			<tr>
 				<td>". lang("Do you like this wannabe?", "admin_wannabemin", "Text used in wannabemin"). " <b>". $approve ."</b></td>
 			</tr>
 			";
+		*/
   	}
 	echo "</table>";
 }
