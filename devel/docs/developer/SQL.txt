@@ -60,5 +60,7 @@ or
 
 query("SELECT password FROM users WHERE nick LIKE '".escape_string($username)."'");
 
+Remember to use escape_string() around the variable you use in an query(), not the variable you work with in PHP.
+
 
 No preference is in the code about how you should use this function, but make the code as "clean" and readable as possible ;)
