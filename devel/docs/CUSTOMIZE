@@ -1,0 +1,34 @@
+### Customization ###
+
+http://www.sourceforge.net/projects/osglobelan
+
+## Page design ##
+
+Inside the directory style/ you'll find a directory for each design.
+Each design needs top.php, bottom.php, menu.php and style.css.
+
+There is at the moment no real documentation of how to make your own style, but you should be able to figure it out by looking at the existing styles (default).
+We know that the comments in the default style currently is in Norwegian, and we'll fix that (or document it properly) as soon as possible.
+
+Everything related to the design should be customizable, so please file a bugreport at our project site if you find anything that's not...
+
+
+## Seatmap ##
+
+Edit room.ini to your likings.
+
+# Character explanations #
+	-			:	Wall
+	d			:	Door
+	k			:	Canteen/Shop
+	d			:	Open seat
+	n			:	Closed seat
+	c			:	Crew seat
+	(Space)	:	Blank space, probably floor/ground
+ 
+
+## Static pages ##
+
+Activate static pages from the config-menu.
+Add static pages through the interface.
+If you want spaces (" ") in the link, use "_" in the filename.
