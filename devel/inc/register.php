@@ -55,7 +55,7 @@ if($action == "regme")
                  nicedie($msg[5]);
 
 
-       $dbs = mysql_query("INSERT INTO users SET
+       $dbs = query("INSERT INTO users SET
        nick = '$username',
        EMail = '$email',
        name = '$realname',
@@ -69,10 +69,10 @@ if($action == "regme")
 	birthDAY = '$birthDAY',
 	birthMONTH = '$birthMONTH',
 	birthYEAR = '$birthYEAR'
-	")
-           or nicedie("Could not create new user : ".mysql_error());
+	");
 
           echo $msg[6];
+	  dblog(6, $_COOKIE[$cookiename].":::".$username.":::".$email.":::".$name.":::".$r.":::".$street.":::".$postNr.":::".$postPlace.":::".$cellphone.":::".$birthDAY.":::".$birthMONTH.":::".$birthYEAR);
 
     }
 }
