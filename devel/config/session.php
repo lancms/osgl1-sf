@@ -28,13 +28,13 @@ Various functions for session information
 $URL = NULL;
 
 $userIP = $HTTP_SERVER_VARS['REMOTE_ADDR'];
-$URL = $_SERVER['PHP_SELF'];
-foreach ($_SERVER['argv'] as $name => $value) {
+//$URL = $_SERVER['PHP_SELF'];
+//foreach ($_SERVER['ARGV'] as $name => $value) {
 //	if($name == "?") echo "?";
 //	else
-$URL .= $name."=".$value." ";
-}
-
+//$URL .= $name."=".$value." ";
+//}
+$URL = $_SERVER['REQUEST_URI'];
 
 
 if(!isset($_COOKIE[$cookiename]))
