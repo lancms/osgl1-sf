@@ -108,6 +108,24 @@ if($action == "view" || !isset($action)) {
 
 	}
 	*/
+	if(acl_access("ACL")) {
+		// User is allowed to make changes to ACL
+		$groups = query("SELECT * FROM groups");
+		echo "<select name=myGroup>";
+		//$Gnum = num($groups);
+		for($y=1;$Group=fetch($groups);$y++) {
+			//$Group = fetch($groups)
+			echo "<option value=$Group->ID";
+			if($row->myGroup == $y) echo " SELECTED";
+			echo ">$Group->groupname</option>";
+		}
+		echo "</select>"; 
+	} else {
+		$groups = query("SELECT * FROM groups WHERE ID = $row->myGroup");
+		$Group = fetch($groups);
+		echo $Group->groupname;
+		
+	}
 
 	echo "</td></tr>";
 

@@ -226,6 +226,61 @@ $mail[0] = "Du har blitt registrert som bruker på GlobeLAN 7!";
 $mail[1] = "$admin[contact][mail]";
 $mail[2] = "GlobeLAN7";
 
+$acl[0]['name'] = "Root";
+$acl[0]['access'] = "root";
+
+$acl[1]['name'] = "Er crew";
+$acl[1]['access'] = "isCrew";
+
+$acl[2]['name'] = "Er chief";
+$acl[2]['access'] = "isChief";
+
+$acl[3]['name'] = "Er admin";
+$acl[3]['access'] = "Er Admin";
+
+$acl[4]['name'] = "Display admin-menu";
+$acl[4]['access'] = "displayAdmin";
+
+$acl[5]['name'] = "Enable useradmin";
+$acl[5]['access'] = "adminUsers";
+
+$acl[6]['name'] = "Logge ut og inn brukere";
+$acl[6]['access'] = "loginUser";
+
+$acl[7]['name'] = "CompoAdmin";
+$acl[7]['access'] = "compomaster";
+
+$acl[8]['name'] = "CompoPoll";
+$acl[8]['access'] = "compopoll";
+
+$acl[9]['name'] = "Webside moduladmin";
+$acl[9]['access'] = "config";
+
+$acl[10]['name'] = "FAQ-admin";
+$acl[10]['access'] = "faq";
+
+$acl[11]['name'] = "NEWS-admin";
+$acl[11]['access'] = "news";
+
+$acl[12]['name'] = "PartyWebAdmin";
+$acl[12]['access'] = "partyweb";
+
+$acl[13]['name'] = "Avstemningsadmin";
+$acl[13]['access'] = "poll";
+
+$acl[14]['name'] = "StaticAdmin";
+$acl[14]['access'] = "static";
+
+$acl[15]['name'] = "Se hvem som er online";
+$acl[15]['access'] = "onlineUsers";
+
+$acl[16]['name'] = "WannabeAdmin";
+$acl[16]['access'] = "wannabe";
+
+$acl[17]['name'] = "ACL-admin";
+$acl[17]['access'] = "ACL";
+
+
 
 
 function mail_body($random) {
