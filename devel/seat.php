@@ -1,4 +1,8 @@
-ction = $_GET['action'];
+<?php
+require_once 'config/config.php';
+$getX = $_GET['x'];
+$getY = $_GET['y'];
+$action = $_GET['action'];
 //echo "X = $getX AND Y = $getY";
 if(config("seatreg_open") && getcurrentuserid() != 1) $canSit = TRUE;
 elseif(acl_access("isCrew")) $canSit = TRUE;

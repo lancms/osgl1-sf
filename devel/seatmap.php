@@ -6,7 +6,7 @@ if(isset($_GET["zoom"]))
 	if($_GET["zoom"] == "on")
 		$zoom = "&zoom=on";
 
-$rn = getuserrank();
+$rn = acl_access("isCrew");
 
 for($i=0;$i<$height;$i++)
 {
@@ -16,7 +16,7 @@ for($i=0;$i<$height;$i++)
 		//$j = x
 		//$i = y
 		$c = $myfile[$i][$j];	// find out what the fuck this character is
-		
+
 		switch($c)
 		{
 			case "-":	// wall
@@ -40,14 +40,14 @@ for($i=0;$i<$height;$i++)
 			default:	// probably ground.
 				$cur = 4;
 				break;
-				
+
 		}
 		$x = $j * $addwidth;	// we calculate once, so that we save some speed.
 		$y = $i * $yscale;
 		$xx = $x + $addwidth;
 		$yy = $y + $yscale;
-		
-		
+
+
 		if(($seat_avail[$cur] > 0) && ($rn + 1  >= $seat_avail[$cur]))	// if seat is availble
 		{
 			echo "<area href='seat.php?x=$j&y=$i$zoom' shape=rect coords='$x,$y,$xx,$yy'>\n";
