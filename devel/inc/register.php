@@ -69,6 +69,7 @@ if ($action == "regme")
 			password = '".escape_string($cpass)."',
 			verified = '".escape_string($r)."',
 			registered = '".escape_string(time())."',
+			name = '".escape_string($realname)."',
 			street = '".escape_string($street)."',
 			postNr = '".escape_string($postNr)."',
 			postPlace = '".escape_string($postPlace)."',
