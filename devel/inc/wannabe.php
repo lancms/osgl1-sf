@@ -36,8 +36,10 @@ if(!isset($action)) {
 	echo "</table>";
 }
 
-if((!isset($action)) && ($r->wannabe == 1) {
+if((!isset($action)) && ($r->wannabe == 1))
+{
 	$q2 = query("SELECT * FROM wannabe WHERE ID = '".mysql_escape_string(getcurrentuserid())."'");
+	
 	$r2 = fetch($q2);
 	
 	echo "<table>";
@@ -109,14 +111,16 @@ elseif($action == "editwannabe") {
 	$myRequests = $_POST['myRequests'];
 	
 	$check = query("SELECT * FROM wannabe WHERE ID = '".mysql_escape_string(getcurrentuserid())."'");
-	if(num($check) == 0) query("INSERT INTO wannabe SET ID = '".(mysql_escape_string(getcurrentuserid())."'");
-	
+	if(num($check) == 0)
+	{
+		query("INSERT INTO wannabe SET ID = '".mysql_escape_string(getcurrentuserid())."'");
+	}
 	query("UPDATE wannabe SET
 		aboutme = '".mysql_escape_string($aboutme)."',
 		canKioskCrew = '".mysql_escape_string($canKioskCrew)."',
 		canTechCrew = '".mysql_escape_string($canTechCrew)."',
 		canNetCrew = '".mysql_escape_string($canNetCrew)."',
-		canSecCrew = '".mysql_escape_string($canSecCrew)".',
+		canSecCrew = '".mysql_escape_string($canSecCrew)."',
 		canPartyCrew = '".mysql_escape_string($canPartyCrew)."',
 		experience = '".mysql_escape_string($experience)."',
 		why = '".mysql_escape_string($why)."',
@@ -124,12 +128,12 @@ elseif($action == "editwannabe") {
 		canCarryTablesCrew = '".mysql_escape_string($canCarryTablesCrew)."',
 		canGameCrew = '".mysql_escape_string($canGameCrew)."',
 		turnOn = '".mysql_escape_string($turnOn)."',
-		karaoke = '."mysql_escape_string($karaoke)."',
+		karaoke = '".mysql_escape_string($karaoke)."',
 		canCake = '".mysql_escape_string($canCake)."',
 		leaderType = '".mysql_escape_string($leaderType)."',
 		myRequests = '".mysql_escape_string($myRequests)."',
 		
-		lastUpdated = '".time()."' WHERE ID = ".mysql_escape_string((getcurrentuserid())"'"));
+		lastUpdated = '".mysql_escape_string(time())."' WHERE ID = ".mysql_escape_string((getcurrentuserid())."'"));
 	refresh("index.php?inc=wannabe", 0);
 
 }
