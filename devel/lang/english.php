@@ -126,6 +126,12 @@ $partyweb['5'] = "New page added.";
 $userlist['0'] = "Last view";
 $userlist['1'] = "Page";
 
+$addressbook['0'] = "Group";
+$addressbook['1'] = "Emailaddress";
+$addressbook['2'] = "Phonenumber";
+$addressbook['3'] = "Id";
+$addressbook['4'] = "Nick";
+
 $rank[0] = "User";
 $rank[1] = "Crew";
 $rank[2] = "Admin";
@@ -155,8 +161,19 @@ $title[page][16] = "PartyWeb";
 $title[page][17] = "WannabeCrew";
 
 /* Messages on admin-interface */
-$admin[noaccess] = "DIIIIIIIIIIIIIE!! No access!";
-$admin[contact][mail] = "laaknor@globelan.net";
+$admin['noaccess'] = "DIIIIIIIIIIIIIE!! No access!";
+$admin['contact']['mail'] = "laaknor@globelan.net";
+$admin['0'] = "Partyweb";
+$admin['1'] = "FAQ";
+$admin['2'] = "Static pages";
+$admin['3'] = "Users";
+$admin['4'] = "Online users";
+$admin['5'] = "Polls";
+$admin['6'] = "News";
+$admin['7'] = "Accessmanagement";
+$admin['8'] = "Compos";
+$admin['9'] = "Compopolls";
+$admin['9'] = "System configuration";
 
 /* Messages in seat-system */
 $seat['0'] = "Not opened seat";

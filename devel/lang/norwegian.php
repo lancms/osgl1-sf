@@ -126,6 +126,10 @@ $partyweb['5'] = "Ny side lagt til.";
 $userlist['0'] = "Siste visning";
 $userlist['1'] = "Side";
 
+$addressbook['0'] = "Gruppe";
+$addressbook['1'] = "Epostadresse";
+$addressbook['2'] = "Telefonnummer";
+
 $rank[0] = "Deltager";
 $rank[1] = "Crew";
 $rank[2] = "Admin";
@@ -157,6 +161,17 @@ $title['page'][17] = "WannabeCrew";
 /* Messages on admin-interface */
 $admin['noaccess'] = "DØØØØØØØØØØØ; ingen tilgang!";
 $admin['contact']['mail'] = "laaknor@globelan.net";
+$admin['0'] = "Partyweb";
+$admin['1'] = "FAQ";
+$admin['2'] = "Statiske sider";
+$admin['3'] = "Brukere";
+$admin['4'] = "Påloggede brukere";
+$admin['5'] = "Avstemninger";
+$admin['6'] = "Nyheter";
+$admin['7'] = "Tilgangsrettigheter";
+$admin['8'] = "Compoer";
+$admin['9'] = "Compoavstemninger";
+$admin['9'] = "Systemkonfigurasjon";
 
 /* Messages in seat-system */
 $seat['0'] = "Ikke åpnet plass";
