@@ -58,8 +58,8 @@ elseif($action == "doedit" && isset($_POST['edit'])) {
 	$lastEditBy = getcurrentuserid();
 	$text = addslashes($edittext);
 	query("UPDATE static SET text = '$text', lastEdit = '$lastEdit', lastEditBy = '$lastEditBy' WHERE header = '$edit'");
-
-	refresh("admin.php?adminmode=static");
+	echo lang("Updated page. Saving to database, stand by", "admin_static", "Text to display when a static file is saved");
+	refresh("admin.php?adminmode=static", 2);
 }
 elseif($action == "new" && isset($_POST['filename'])) {
 	$file = $_POST['filename'];
