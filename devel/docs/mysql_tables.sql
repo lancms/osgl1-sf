@@ -348,6 +348,8 @@ DROP TABLE IF EXISTS users;
 CREATE TABLE users (
   ID int(11) NOT NULL auto_increment,
   name varchar(40) NOT NULL default '',
+  firstName varchar(40) NOT NULL default '',
+  lastName varchar(40) NOT NULL default '',
   nick varchar(25) NOT NULL default '',
   EMail varchar(50) NOT NULL default '',
   userDesign varchar(25) NOT NULL default 'default',
