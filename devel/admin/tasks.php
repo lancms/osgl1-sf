@@ -136,7 +136,7 @@ elseif($action == "changeComplete" && isset($edit))
 	$complete = $_POST['complete'];
 
 	query("UPDATE tasks SET complete = '".escape_string($complete)."' WHERE ID = '".escape_string($edit)."'");
-	query("INSERT INTO tasks_log SET userID = '".escape_string(getcurrentuserid())."', taskID = '".escape_string($edit)."', logUNIX = '".escape_string(time())."', logText = '".escape_string(lang("Changed completed percentage to: $complete", "admin_tasks", "Text to insert into the tasks_log-table after the %-completed is changed"))."'");
+	query("INSERT INTO tasks_log SET userID = '".escape_string(getcurrentuserid())."', taskID = '".escape_string($edit)."', logUNIX = '".escape_string(time())."', logText = '".escape_string(lang("Changed completed percentage to: ", "admin_tasks", "Text to insert into the tasks_log-table after the %-completed is changed").$complete)."'");
 	echo lang("Changed completeness successfully", "admin_tasks", "Text to display after we have changed the completed-percentage");
 	refresh("admin.php?adminmode=tasks&action=edit&edit=$edit", 2);
 }
