@@ -28,7 +28,7 @@ if (($action == "view") || (!isset($action)))
 	{
 		echo "<font color=red>$profile[7]</font>";
 	}
-	
+
 	if($_GET['mode'] == "pwdsuccess")
 	{
 		echo "<font color=red>$profile[7]</font>";
@@ -69,7 +69,7 @@ if (($action == "view") || (!isset($action)))
 		{
 			$select = "SELECTED";
 		}
-		
+
 		$birthdayinfo .= "<option value=$i $select>$i</option>\n";
 	}
 	$birthdayinfo .= "</select>";
@@ -201,13 +201,13 @@ elseif ($action == "edit")
 	$birthDAY = $_POST['birthDAY'];
 	$birthMONTH = $_POST['birthMONTH'];
 	$birthYEAR = $_POST['birthYEAR'];
-	
+
 	$verify = verify("edit", $editID, $nick, $firstName, $lastName);
 	if($verify != "allowed")
 	{
 		nicedie($form[$verify]);
 	}
-	
+
 	$query = query("UPDATE users SET
 		nick='".mysql_escape_string($nick)."',
 		firstName = '".mysql_escape_string($firstName)."',
@@ -222,7 +222,7 @@ elseif ($action == "edit")
 		birthDAY = '".mysql_escape_string($birthDAY)."',
 		birthMONTH = '".mysql_escape_string($birthMONTH)."',
 		birthYEAR = '".mysql_escape_string($birthYEAR)."',
-		myGroup = '".mysql_escape_string($myGroup)."',
+		myGroup = '".mysql_escape_string($myGroup)."'
 		WHERE ID = '".$editID."'");
 
 	refresh("index.php?inc=useradmin&user=$editID", "0");
@@ -291,7 +291,7 @@ elseif ($action == "dochangemail")
 
 	$newmail = $_POST['newmail'];
 
-	if($newmail == $check->EMail) 
+	if($newmail == $check->EMail)
 	{
 		echo $form[35];
 		refresh("index.php?inc=useradmin&user=$editID");
