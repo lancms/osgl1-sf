@@ -147,6 +147,7 @@ DROP TABLE IF EXISTS news;
 CREATE TABLE news (
   ID int(11) NOT NULL auto_increment,
   header text,
+  logUNIX int(25) default 0,
   text text,
   poster int(11) default NULL,
   PRIMARY KEY  (ID)

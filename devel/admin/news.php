@@ -27,7 +27,7 @@ if ($action == "add")
 
 	$me = getcurrentuserid();
 
-	$query = query("INSERT INTO news SET header = '".escape_string($header)."', text = '".escape_string($text)."', poster = '".escape_string($me)."'");
+	$query = query("INSERT INTO news SET header = '".escape_string($header)."', text = '".escape_string($text)."', poster = '".escape_string($me)."', logUNIX = ".time());
 
 	refresh("admin.php?adminmode=news", "0");
 }
