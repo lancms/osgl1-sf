@@ -318,8 +318,8 @@ CREATE TABLE static (
 DROP TABLE IF EXISTS stats;
 CREATE TABLE stats (
   ID int(5) NOT NULL auto_increment,
-  config varchar(30) default NULL,
-  value varchar(30) default NULL,
+  config varchar(60) default NULL,
+  value varchar(60) default NULL,
   hits int(11) default NULL,
   PRIMARY KEY  (ID)
 ) TYPE=MyISAM;
@@ -449,3 +449,4 @@ INSERT INTO pollA SET QID = 1, Atext = 'OOOOOOOOOOH YES!!!', votes = 5000;
 
 -- No need to create a query just to check if this exists?
 INSERT INTO stats SET config = 'hits', value = 'pageviews', hits = 0;
+INSERT INTO stats SET config = 'hits', value = 'total', hits = 0;
