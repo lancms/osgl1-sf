@@ -32,7 +32,7 @@ elseif($action == "add") {
 	refresh("admin.php?adminmode=acl", 0);
 }
 
-elseif($action == "edit") {
+elseif($action == "edit" && isset($edit)) {
 	echo "<a href=admin.php?adminmode=acl>Tilbake til Gruppeadmin</a><br>";
 	
 	echo "<form method=POST action=admin.php?adminmode=acl&action=updateGroup&edit=$edit>";
@@ -51,6 +51,16 @@ elseif($action == "edit") {
 	echo "</table>";
 	echo "<br><input type=submit value='Lagre gruppen'>";
 	echo "</form>";
+	
+	$q2 = query("SELECT * FROM users WHERE myGroup = $edit");
+	echo "Members: (".num($q2).")";
+	echo "<table>";
+	while($r2 = fetch($q2)) {
+		echo "<tr><td>";
+		display_nick($r2->ID);
+		echo "</td></tr>";
+	}
+	echo "</table>";
 	
 }
 
