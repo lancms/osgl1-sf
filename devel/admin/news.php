@@ -46,6 +46,7 @@ elseif ($action == "list")
 		echo "</td><td>";
 
 		echo "<a href=admin.php?adminmode=news&action=delete&editID=$r->ID>$form[16]</a>";
+		echo " <a href=admin.php?adminmode=news&action=edit&editID=$r->ID>$form[17]</a>";
 
 		echo "</td></tr>";
 	}
@@ -69,5 +70,38 @@ elseif (($action == "delete") && (isset($editID)))
 	query("DELETE FROM news WHERE ID = '".escape_string($editID)."'");
 	refresh("admin.php?adminmode=news", 0);
 }
+elseif (($action == "edit") && (isset($editID)))
+{
+	$query= sprintf ("SELECT * FROM news WHERE ID=%s", escape_string($editID));
+	$result = query ($query);
+	$row = fetch ($result);
+
+	echo '
+	<form method=post action=admin.php?adminmode=news&action=editsave&editID='.$editID.'>
+
+	<input type=text name=header size=60 value='.$row->header.'>
+
+	<br><textarea name=text rows=7 cols=60>'.$row->text.'</textarea>
+
+	<br><input type=submit value='.$form[15].'>
+
+	</form>
+	';
+}
+elseif (($action == "editsave") && (isset($editID)))
+{
+	/* errorchecking is for whimps. */
+	$header = $_POST['header'];
+
+	$text = $_POST['text'];
+
+	$me = getcurrentuserid();
+	
+	$query = sprintf ('UPDATE news SET text="%s", header="%s", poster=%s, logUNIX=%s WHERE ID=%s', escape_string($text), escape_string($header), $me, time(), escape_string($editID));
+
+	query ($query);
+	refresh("admin.php?adminmode=news", "0");
+}
+
 
 ?>
