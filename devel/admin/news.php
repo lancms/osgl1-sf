@@ -79,7 +79,7 @@ elseif (($action == "edit") && (isset($editID)))
 	echo '
 	<form method=post action=admin.php?adminmode=news&action=editsave&editID='.$editID.'>
 
-	<input type=text name=header size=60 value='.$row->header.'>
+	<input type=text name=header size=60 value="'.$row->header.'">
 
 	<br><textarea name=text rows=7 cols=60>'.$row->text.'</textarea>
 
