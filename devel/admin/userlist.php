@@ -34,7 +34,7 @@ elseif ($action == "online")
 
 	echo "<table>";
 	echo "<tr><th>$profile[8]</th><th>IP</th><th>".$userlist['0']."</th><th>".$userlist['1']."</th></tr>";
-	$query = query("SELECT * FROM session ORDER BY userID");
+	$query = query("SELECT * FROM session ORDER BY logUNIX");
 	$num = num($query);
 
 	for($i=0;$i<$num;$i++)
