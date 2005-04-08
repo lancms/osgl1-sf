@@ -16,22 +16,24 @@ if(!isset($action)) {
 
 $crewseats = config("crewseats");
 
-//$normalseats = config("normalseats"); //Outdated, using room.ini instead..
-
 $file = file("room.ini");
-foreach($file as $line) {
-$normalseats1 = substr($line,$key);
-$normalseats2 = $normalseats2 + substr_count($normalseats1, "d");
-};
 
-$dbs = query("SELECT count(*) FROM users WHERE seatX != -1 AND seatY != -1");
-$q = fetch($dbs);
-$cnt = $q[0];
+foreach ($file as $line)
+{
+	$count_total = $count_total + substr_count ($line, "d");
+}
+echo lang("Seats, total:", "seat", "")." ".$count_total."<br>\n"; 
 
-print $seat['10']." ".($normalseats2-$cnt)."<br>";
-print $seat['11']." ".($cnt)."<br><br>";
+$count_taken_query = sprintf ('SELECT COUNT(*) AS Taken FROM users WHERE users.seatX != "-1" AND users.seatY != "-1" AND users.myGroup = 2');
+$count_taken_result = query ($count_taken_query);
+$count_taken = fetch ($count_taken_result);
+echo lang("Seats, taken:", "seat", "")." ".$count_taken->Taken."<br>\n";
+
+$count_free = $count_total - $count_taken->Taken;
+echo lang("Seats, free:", "seat", "")." ".$count_free."<br>\n";
+
 ?>
-
+<br>
 <a href=index.php><?php echo lang("Back to main page", "seat", "Link to get back to main page in seat.php"); ?></a><br>
 <map name=roommap>
 <?php
