@@ -7,7 +7,7 @@
 --
 -- Table structure for table `lang`
 --
-
+DROP TABLE IF EXISTS lang;
 CREATE TABLE lang (
   ID int(11) NOT NULL auto_increment,
   string text,
@@ -84,7 +84,7 @@ INSERT INTO lang VALUES (157,'News','norwegian','style_menu','Nyheter','menuitem
 INSERT INTO lang VALUES (158,'Register','norwegian','style_menu','Registrer bruker','menuitem in write_menu');
 INSERT INTO lang VALUES (159,'Seatmap','norwegian','style_menu','Plassregistrering','menuitem in write_menu');
 INSERT INTO lang VALUES (160,'Forum','norwegian','style_menu','Forum','menuitem in write_menu');
-INSERT INTO lang VALUES (161,'Statistics','norwegian','style_menu','Statestikk','Menuitem for stats');
+INSERT INTO lang VALUES (161,'Statistics','norwegian','style_menu','Statistikk','Menuitem for stats');
 INSERT INTO lang VALUES (162,'Edit profile','norwegian','style_menu','Rediger profil','menuitem in write_menu');
 INSERT INTO lang VALUES (163,'Userlogin','norwegian','style_menu','Brukerinnlogging','menuitem in write_menu');
 INSERT INTO lang VALUES (164,'Crewaddressbook','norwegian','style_menu','Crewaddressebok','menuitem in write_menu');
@@ -107,7 +107,7 @@ INSERT INTO lang VALUES (180,'Add','norwegian','admin_compomaster','Legg til','f
 INSERT INTO lang VALUES (181,'Back to the list.','norwegian','admin_compomaster','Tilbake til lista','msg[32]');
 INSERT INTO lang VALUES (182,'Number of teams in each round','norwegian','admin_compomaster','Antall lag i hver runde','form[71]');
 INSERT INTO lang VALUES (183,'Save','norwegian','admin_compomaster','Lagre','form[15]');
-INSERT INTO lang VALUES (184,'usepage_show_stats','norwegian','admin_config','Bruk modul: Statestikk','checkbox-item in admin/config.php, as they are displayed on the page');
+INSERT INTO lang VALUES (184,'usepage_show_stats','norwegian','admin_config','Bruk modul: Statistikk','checkbox-item in admin/config.php, as they are displayed on the page');
 INSERT INTO lang VALUES (185,'Save','norwegian','admin_config','Lagre','form[15]');
 INSERT INTO lang VALUES (186,'You are now logged out.','norwegian','root_do','Du er nå logget ut','Logout-message');
 INSERT INTO lang VALUES (187,'Please enter the verificationcode that was sent to your emailaddress.','norwegian','root_do','Venligst skriv inn verifiseringskoden som ble sendt til din e-post-adresse','');
