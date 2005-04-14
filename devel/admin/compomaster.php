@@ -92,7 +92,7 @@ elseif (($action == "edit") && (isset($_GET['edit'])))
 		echo ">$compotype[$i]</option>\n";
 	} // End for
 	echo "</select>";
-	echo "<br><textarea name=rules rows=30 cols=80>$r->rules</textarea>";
+	echo "<br><textarea name=rules rows=30 cols=80>".stripslashes($r->rules)."</textarea>";
 	echo "<br><input type=submit value='".lang("Save", "admin_compomaster", "form[15]")."'>";
 	echo "</form>";
 
