@@ -74,10 +74,10 @@ elseif (($action == "edit") && (isset($_GET['edit'])))
 	echo "<table><form method=POST action=index.php?inc=clan&action=doedit&edit=$r->ID>";
 	echo "<tr><td>";
 	echo "$clan[2]";
-	echo "<input type=text name=name value='$r->name'>";
+	echo "<br><input type=text name=name value='$r->name'>";
 	echo "$form[25]";
-	echo "<input type=text name=password value='$r->password'>";
-	echo "<textarea name=about rows=5 cols=35>$r->about</textarea>";
+	echo "<br><input type=text name=password value='$r->password'>";
+	echo "<br><textarea name=about rows=5 cols=35>$r->about</textarea>";
 	echo "</td></tr><tr><td>";
 	echo "<input type=submit value='".$clan[8]."'>";
 	echo "</form></table>";
