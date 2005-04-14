@@ -73,9 +73,9 @@ elseif (($action == "edit") && (isset($_GET['edit'])))
 
 	echo "<table><form method=POST action=index.php?inc=clan&action=doedit&edit=$r->ID>";
 	echo "<tr><td>";
-	echo "$clan[2]";
+	echo "<br>$clan[2]";
 	echo "<br><input type=text name=name value='$r->name'>";
-	echo "$form[25]";
+	echo "<br>$form[25]";
 	echo "<br><input type=text name=password value='$r->password'>";
 	echo "<br><textarea name=about rows=5 cols=35>$r->about</textarea>";
 	echo "</td></tr><tr><td>";
