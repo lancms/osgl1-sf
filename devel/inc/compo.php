@@ -60,7 +60,7 @@ elseif (($action == "viewrules") && (isset($compo)))
 	echo "<a href=?inc=compo>Tilbake til hovedsiden</a><br>";
 	$q = query("SELECT * FROM compo WHERE ID = '".escape_string($compo)."'");
 	$r = fetch($q);
-	echo $r->rules;
+	echo nl2br($r->rules);
 }
 
 elseif (($action == "compoinfo") && (isset($compo)))
