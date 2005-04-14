@@ -302,14 +302,15 @@ function can_register_clan()
 function mayEditClan($clanID)
 {
 	$userID = getcurrentuserid();
-	$rank = getuserrank();
+#	$rank = getuserrank(); // No longer used, just quick and dirty hack to avoid errors
 	$q = query("SELECT * FROM Clan WHERE ID = '".escape_string($clanID)."'");
 	$r = fetch($q);
-	if ($rank > 0)
-	{
-		return 1;
-	}
-	elseif ($r->moderator == $userID)
+#	if ($rank > 0)
+#	{
+#		return 1;
+#	}
+#	else
+	if ($r->moderator == $userID)
 	{
 		return 1;
 	}
