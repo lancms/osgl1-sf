@@ -107,11 +107,11 @@ elseif (($action == "compoinfo") && (isset($compo)))
 			echo "</td><td>";
 			if (num($clanPlayersQ) == $maxPlayers)
 			{
-				echo "<img src=images/ja.gif>";
+				echo "<img src=images/yes.gif>";
 			}
 			else
 			{
-				echo "<img src=images/nei.gif>";
+				echo "<img src=images/no.gif>";
 			}
 			echo "</td></tr>";
 		} // End while for displaying clans
