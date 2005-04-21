@@ -101,6 +101,11 @@ elseif ($action == "login") {
 	
 	echo "<table>";
 	osgl_table("<a href=index.php?inc=userlogin>".lang("Back to searchpage", "inc_userlogin", "link to go back to userlogin main")."</a>","");
+	if(acl_access("adminUsers")) $editLink = "<a href=index.php?inc=useradmin&user=$r->ID>".lang("Edit user", "inc_userlogin", "Text to display if acl_access(adminUsers) to jump to the useradmin-page")."</a>";
+	
+	if($r->isHere == 0) osgl_table($editLink, "<a href=?inc=userlogin&action=doLogin&user=$user>".lang("Mark as arrived", "inc_userlogin", "link to mark user as arrived")."</a>");
+	else osgl_table($editLink, "<a href=?inc=userlogin&action=doLogout&user=$user>".lang("Mark as departed", "inc_userlogin", "link to mark user as departed")."</a>");
+	
 	osgl_table(lang("Users First name", "inc_userlogin", "Field to show in userlogin for first name"), $r->firstName);
 	osgl_table(lang("Users Last name", "inc_userlogin", "Field to show in userlogin for last name"), $r->lastName);
 	osgl_table(lang("Users birthday/birthmonth/birthyear", "inc_userlogin", "Field to show in userlogin for birthday"), $r->birthDAY."/".$r->birthMONTH."/".$r->birthYEAR);
@@ -108,8 +113,6 @@ elseif ($action == "login") {
 	osgl_table(lang("Users Postaddress (number place)", "inc_userlogin", "Field to show in userlogin for postaddress"), $r->postNr." ".$r->postPlace);
 	osgl_table(lang("Users seatreservation", "inc_userlogin", "Field to show in userlogin for first name"), $r->seatX." / ".$r->seatY);
 	
-	if($r->isHere == 0) osgl_table("", "<a href=?inc=userlogin&action=doLogin&user=$user>".lang("Mark as arrived", "inc_userlogin", "link to mark user as arrived")."</a>");
-	else osgl_table("", "<a href=?inc=userlogin&action=doLogout&user=$user>".lang("Mark as departed", "inc_userlogin", "link to mark user as departed")."</a>");
 	
 	echo "<form method=POST action=index.php?inc=userlogin&action=loginComments&user=$user>";
 	osgl_table(lang("Crewcomments", "inc_userlogin", "textarea for admins/crew to put in their comments about the user in userlogin"), "<textarea name=comments cols=65 rows=10>$r->loginComments</textarea>");
