@@ -355,6 +355,8 @@ CREATE TABLE users (
   mac varchar(17) default NULL,
   hasvirus int(2) default NULL,
   myGroup int(11) default '2',
+  loginComments text,
+  loginColor smallint(1) default 0,
   PRIMARY KEY  (ID)
 ) TYPE=MyISAM;
 
