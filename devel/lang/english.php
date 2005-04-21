@@ -380,7 +380,10 @@ $acl[18]['access'] = "listaddress";
 $acl[18]['name'] = "Tasklist-member";
 $acl[18]['access'] = "tasks";
 
-
+/* These are the colors that may be used to describe users in userlogin */
+$userloginclr[0] = "yellow";
+$userloginclr[1] = "red";
+$userloginclr[2] = "green";
 
 $compotype[0] = "FFA";
 $compotype[1] = "1on1";

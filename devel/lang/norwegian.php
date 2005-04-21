@@ -376,6 +376,12 @@ $acl[17]['access'] = "ACL";
 $acl[18]['name'] = "List i adresselista";
 $acl[18]['access'] = "listaddress";
 
+/* These are the colors that may be used to describe users in userlogin */
+$userloginclr[0] = "yellow";
+$userloginclr[1] = "red";
+$userloginclr[2] = "green";
+
+
 $compotype[0] = "FFA";
 $compotype[1] = "1on1";
 $compotype[2] = "2vs2";
