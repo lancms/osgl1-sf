@@ -110,8 +110,10 @@ elseif ($action == "login") {
 	osgl_table(lang("Users Last name", "inc_userlogin", "Field to show in userlogin for last name"), $r->lastName);
 	osgl_table(lang("Users birthday/birthmonth/birthyear", "inc_userlogin", "Field to show in userlogin for birthday"), $r->birthDAY."/".$r->birthMONTH."/".$r->birthYEAR);
 	osgl_table(lang("Users email", "inc_userlogin", "Field to show in userlogin for email"), $r->EMail);
+	osgl_table(lang("Users home address", "inc_userlogin", "Field to show in userlogin for street"), $r->street);
 	osgl_table(lang("Users Postaddress (number place)", "inc_userlogin", "Field to show in userlogin for postaddress"), $r->postNr." ".$r->postPlace);
 	osgl_table(lang("Users seatreservation", "inc_userlogin", "Field to show in userlogin for first name"), $r->seatX." / ".$r->seatY);
+
 	
 	
 	echo "<form method=POST action=index.php?inc=userlogin&action=loginComments&user=$user>";
