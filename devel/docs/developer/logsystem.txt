@@ -23,3 +23,4 @@ Here are the numeric strings for what is logged:
 birthDAY:::birthMONTH:::birthYEAR:::myGroup:::userDesign"
 12 = User has arrived ("logged in"). Syntax: "User arrived"
 13 = User has departed ("logged out"). Syntax: "User departed"
+14 = Userlogin-comment changed. Syntax: targetuser:::comment"
