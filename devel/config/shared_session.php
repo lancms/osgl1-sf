@@ -51,7 +51,7 @@ else
 // update current session so it will not be deleted during the clean-up.
 if(getcurrentuserid())
 {
-    query("UPDATE session SET logUNIX = '".escape_string(time())."', userURL = '".escape_string($URL)."' WHERE userID = '".escape_string(getcurrentuserid())."' AND IP = '".escape_string($userIP)."'");
+    query("UPDATE session SET logUNIX = '".escape_string(time())."', userURL = '".escape_string($URL)."' WHERE sID = '".escape_string($_COOKIE[$cookiename])."'");
 }
 
 
