@@ -28,7 +28,7 @@ if(!isset($_COOKIE[$cookiename]))
 	$createUID = 1;
 
 	query("INSERT INTO session (userID, sID, logUNIX, IP) VALUES('".escape_string($createUID)."', '".escape_string($new_session)."', '".escape_string(time())."', '".escape_string($userIP)."')");
-	dblog(2, $new_session.":::".$_SERVER['HTTP_REFERER']);
+	if(config("debugging_logs")) dblog(2, $new_session.":::".$_SERVER['HTTP_REFERER']);
 }
 else
 {
@@ -43,7 +43,7 @@ else
 	else
 	{
 		setcookie($cookiename, "", time()-$session_alive_time);
-		dblog(3, $sID.":::".$_SERVER['HTTP_REFERER']);
+		if(config("debugging_logs")) dblog(3, $sID.":::".$_SERVER['HTTP_REFERER']);
 	}
 }
 
@@ -184,7 +184,7 @@ function log_out()
 	{
 		return 0;
 	}
-	dblog(5, session_id());
+	if(config("debugging_logs")) dblog(5, session_id());
 
 	// Update session
 	query("UPDATE session SET userID = 1 WHERE sID = '".escape_string(session_id())."'");
