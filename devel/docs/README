@@ -25,9 +25,10 @@ The GPLv2 is provided in docs/GPL.
 
 ## Latest version ##
 
-We haven't yet released any files, but you are welcome to try out the current version from CVS. (You probably are already, by the way. ;-))
+There are files that are released, but they are probably old. CVS is always update with the latest and the greatest, so you should probably check it out ;)
 Instructions on how to use CVS are available at http://sourceforge.net/cvs/?group_id=77474.
 
+If you reeeeeaally don't like to use CVS, you can check out our homepage at http://osglobelan.sf.net to see where you may download the nightly build. If you do not like to use a "development"-version, you can download the tarball from the SourceForge project files-page. http://sf.net/projects/osglobelan/
 
 ## Installing ##
 
