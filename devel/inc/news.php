@@ -40,7 +40,7 @@ if($action == "view")
 	{
 		$row = fetch($query);
 
-		echo "<font class=newsHeader>".stripslashes($row->header)".</font>";
+		echo "<font class=newsHeader>".stripslashes($row->header).".</font>";
 		echo "<br>";
 		$queryNick = query("SELECT * FROM users WHERE ID = '".escape_string($row->poster)."'");
 
