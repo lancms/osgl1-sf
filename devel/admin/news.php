@@ -41,7 +41,7 @@ elseif ($action == "list")
 	{
 		echo "<tr><td>";
 
-		echo $r->header;
+		echo stripslashes($r->header);
 
 		echo "</td><td>";
 
