@@ -58,7 +58,7 @@ if($action == "view")
 
 		echo "<font class=newsPoster>".$msg[14].$nick_poster."</font>";
 		echo "<br>";
-		echo "<font class=newsText>".nl2br($row->text)."</font>";
+		echo "<font class=newsText>".stripslashes(nl2br($row->text))."</font>";
 		if ($i < $num-1)
 		{
 			echo "<br><hr><br>";
