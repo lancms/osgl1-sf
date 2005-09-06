@@ -376,6 +376,15 @@ $acl[17]['access'] = "ACL";
 $acl[18]['name'] = "List i adresselista";
 $acl[18]['access'] = "listaddress";
 
+$acl[19]['name'] = "Tasklist-member";
+$acl[19]['access'] = "tasks";
+
+$acl[20]['name'] = "Kiosk-crew";
+$acl[20]['access'] = "kioskCrew";
+
+$acl[21]['name'] = "Kiosk-Admin";
+$acl[21]['access'] = "kioskAdmin";
+
 /* These are the colors that may be used to describe users in userlogin */
 $userloginclr[0] = "yellow";
 $userloginclr[1] = "red";
