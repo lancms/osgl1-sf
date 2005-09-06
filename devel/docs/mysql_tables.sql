@@ -424,6 +424,131 @@ logUNIX int(25) unsigned default '0',
 PRIMARY KEY ( `ID` )
 ) TYPE = MYISAM ;
 
+-- Adding kiosk-stuff
+
+DROP TABLE IF EXISTS `kiosk_history_sales`;
+CREATE TABLE `kiosk_history_sales` (
+  `ID` int(11) NOT NULL auto_increment,
+  `salesperson` int(11) default '1',
+  `logUNIX` int(25) default '0',
+  `wareID` varchar(50) default NULL,
+  `warePrice` int(5) default NULL,
+  `crewSalg` tinyint(1) default '0',
+  `kasse` int(11) default '1',
+  `rabatt` smallint(1) default '0',
+  PRIMARY KEY  (`ID`)
+) TYPE=MyISAM;
+
+--
+-- Table structure for table `history_salg_overall`
+--
+
+DROP TABLE IF EXISTS `kiosk_history_sales_overall`;
+CREATE TABLE `kiosk_history_sales_overall` (
+  `ID` int(11) NOT NULL auto_increment,
+  `salesperson` int(11) default NULL,
+  `crewsale` tinyint(1) default NULL,
+  `money` int(10) default NULL,
+  `box` int(11) default '1',
+  `rabatt` smallint(1) default '0',
+  PRIMARY KEY  (`ID`)
+) TYPE=MyISAM;
+
+--
+-- Table structure for table `kasselog`
+--
+
+DROP TABLE IF EXISTS `kiosk_boxlog`;
+CREATE TABLE `kiosk_boxlog` (
+  `ID` int(11) NOT NULL auto_increment,
+  `logtext` text,
+  `logtime` int(15) default '0',
+  `userID` int(11) default '1',
+  PRIMARY KEY  (`ID`)
+) TYPE=MyISAM;
+
+--
+-- Table structure for table `kasser`
+--
+
+DROP TABLE IF EXISTS `kiosk_box`;
+CREATE TABLE `kiosk_box` (
+  `ID` int(11) NOT NULL auto_increment,
+  `boxname` varchar(35) default '0',
+  `content` int(10) default '0',
+  PRIMARY KEY  (`ID`)
+) TYPE=MyISAM;
+
+--
+-- Table structure for table `meny_innhold`
+--
+
+DROP TABLE IF EXISTS `kiosk_menu_content`;
+CREATE TABLE `kiosk_menu_content` (
+  `menuID` int(11) NOT NULL default '0',
+  `wareID` int(11) NOT NULL default '0',
+  `amount` tinyint(2) default '1',
+  PRIMARY KEY  (`menuID`,`wareID`)
+) TYPE=MyISAM;
+
+--
+-- Table structure for table `menyer`
+--
+
+DROP TABLE IF EXISTS `kiosk_menu`;
+CREATE TABLE `kiosk_menu` (
+  `ID` int(11) NOT NULL auto_increment,
+  `menuname` varchar(35) default NULL,
+  PRIMARY KEY  (`ID`)
+) TYPE=MyISAM;
+
+--
+-- Table structure for table `rabatter`
+--
+
+DROP TABLE IF EXISTS `kiosk_rabatter`;
+CREATE TABLE `kiosk_rabatter` (
+  `ID` int(11) NOT NULL auto_increment,
+  `name` varchar(35) default NULL,
+  `active` smallint(1) default '0',
+  `wareID` varchar(50) default NULL,
+  `startTime` int(15) default '0',
+  `stopTime` int(15) default '0',
+  `newPrice` int(5) default NULL,
+  PRIMARY KEY  (`ID`)
+) TYPE=MyISAM;
+
+
+--
+-- Table structure for table `temp_kurv`
+--
+
+DROP TABLE IF EXISTS `temp_basket`;
+CREATE TABLE `temp_basket` (
+  `ID` int(11) NOT NULL auto_increment,
+  `sID` varchar(50) default NULL,
+  `wareID` varchar(50) default NULL,
+  `amount` int(5) default '1',
+  `unixtime` int(15) default NULL,
+  PRIMARY KEY  (`ID`)
+) TYPE=MyISAM;
+
+
+--
+-- Table structure for table `warez`
+--
+
+DROP TABLE IF EXISTS `kiosk_warez`;
+CREATE TABLE `kiosk_warez` (
+  `barcode` varchar(50) NOT NULL default '',
+  `name` varchar(50) default NULL,
+  `price` int(5) default NULL,
+  `cPrice` int(5) default '0',
+  `inPrice` int(5) default '0',
+  `active` smallint(1) default '1',
+  PRIMARY KEY  (`barcode`)
+) TYPE=MyISAM;
+
 
 
 
@@ -447,3 +572,7 @@ INSERT INTO stats SET config = 'hits', value = 'total', hits = 0;
 
 -- Adding the default status with "nothing"
 INSERT INTO statusTypes SET ID = 1, name = '';
+
+-- Adding the default kiosk-money-box
+INSERT INTO kiosk_box SET ID = 1, boxname = 'Default Moneybox', content = 0;
+

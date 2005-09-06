@@ -411,6 +411,9 @@ $tickettype[0] = "Ingen billett"; // the default, should be "not ticket"
 $tickettype[1] = "Normal billett";
 $tickettype[2] = "Ingen PC";
 
+$crewsale[0] = "Crewsalg er av";
+$crewsale[1] = "Crewsalg er PÅ!";
+
 
 function mail_body($random) {
     return "Velkommen som bruker på GlobeLAN DEVEL!\n\r

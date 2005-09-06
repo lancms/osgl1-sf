@@ -75,6 +75,10 @@ if(!isset($adminmode))
 	{
 		echo "<br><a href=admin.php?adminmode=tasks>".lang("Taskmanager", "admin_index", "Menuitem in admin.php to list and add tasks")."</a>";
 	}
+	if(acl_access("kioskAdmin"))
+	{
+		echo "<br><a href=admin.php?adminmode=kiosk>".lang("Kioskadmin", "admin_index", "Menuitem in admin.php to mange the kiosk")."</a>";
+	}
 }
 elseif ($adminmode != "")
 {

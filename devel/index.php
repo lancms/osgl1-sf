@@ -2,10 +2,11 @@
 
 require_once ('./config/config.php');
 
-require_once ($base_path."style/top.php");
 
 if (isset($_GET['inc']))
 {
+
+	require_once ($base_path."style/top.php");
 	if (strchr($_GET['inc'], "."))
 	{
 		// XXX: Generic string. Should be lang()ified.
@@ -16,6 +17,7 @@ if (isset($_GET['inc']))
 }
 elseif (isset($_GET['page']))
 {
+	require_once ($base_path."style/top.php");
 	$page = $_GET['page'];
 	$query = query("SELECT * FROM static WHERE header LIKE '".escape_string($page)."'");
 	$object = fetch($query);
@@ -28,8 +30,13 @@ elseif (isset($_GET['page']))
 		echo $object->text;
 	}
 }
+elseif( isset($_GET['kiosk'])) {
+	if(strchr($_GET['kiosk'], ".")) nicedie($msg['29']);
+	require_once ("kiosk/".$_GET['kiosk'].".php");
+}
 else
 {
+	require_once ($base_path."style/top.php");
 	$query = query("SELECT * FROM static WHERE header LIKE 'index'");
 	$o = fetch($query);
 	echo display_text($o->text);
