@@ -52,6 +52,7 @@ else
 //    if(getuserrank() >= 1) {
         // This user has crew access! write meny-stuff for crew here!
 if(acl_access("loginUser")) write_menu("index.php?inc=userlogin", lang("Userlogin", "style_menu", "menuitem in write_menu"));
+if((acl_access("kioskCrew") || acl_access("kioskAdmin")) && config("usepage_kiosk")) write_menu("index.php?kiosk=kiosk", lang("Kiosk", "style_menu", "menuitem for kiosk in write_menu"));
 if(acl_access("isCrew")) write_menu("index.php?inc=adressbook", lang("Crewaddressbook", "style_menu", "menuitem in write_menu"));
 if(acl_access("displayAdmin")) write_menu("admin.php", lang("ADMIN", "style_menu", "menuitem in write_menu"));
 write_menu("do.php?action=logout", lang("Logout", "style_menu", "menuitem in write_menu"));
