@@ -30,6 +30,7 @@ $checkbox[] = "usepage_compopoll";
 $checkbox[] = "disable_userstyle";
 $checkbox[] = "usepage_show_stats";
 $checkbox[] = "debugging_logs";
+$checkbox[] = "usepage_kiosk";
 
 if (!isset($action))
 {
