@@ -137,6 +137,13 @@ $seatsize = 10;
  */
 $min_pass_length = 5;
 
+/*
+ * resend_delay
+ *
+ * 
+ * 60sek*60min*12hours
+ */
+$resend_delay = 43200;
 
 /*
  * admin['info']['mail']
