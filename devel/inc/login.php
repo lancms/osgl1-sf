@@ -3,8 +3,8 @@ require_once ('config/config.php');
 $q = getcurrentuserid();
 $action = $_GET['action'];
 
-if ($q == 1)
-{
+if(empty($action)) {
+  if ($q == 1) {
 ?>
     <form method=post action=do.php?action=login>
     <br>
@@ -15,6 +15,8 @@ if ($q == 1)
     <input type=submit value='<?php echo $form[0]; ?>'>
     </form>
 <?php
+  }
+  
 }
 
 if($action == "resendPwd") {
@@ -77,9 +79,13 @@ elseif ($action == "doResendPwd") {
           $query  = "UPDATE users SET tempPassword = '" . $md5Pwd . "' WHERE EMail = '" . $mail . "'";
           $result = query($query);
           
-          /* FIX THIS */
-          mail();
           
+          /*  FIX THIS  */
+          $subject = "Password";
+          $message = "Password: " . $tempPwd;
+          
+          mail($mail, $subject, $message);
+                 
           echo lang("The password has been sendt to your mail" , "inc_login" , "Sendt mail");
 
         } else {
@@ -144,18 +150,21 @@ elseif($action == "doVerifyPwd") {
     
     $i      = fetch($result);
     
-    $dbUser = $i->nick;
-    $dbTempPwd = md5($i->tempPwd);
+    $dbUser    = $i->nick;
+    $dbTempPwd = $i->tempPassword;
+    
+    $tempPwdMp5 = md5($tempPwd);
     
     if($dbUser == $username) {
     
-      if($tempPwd == $dbTempPwd) {
+      if($tempPwdMp5 == $dbTempPwd) {
       
         echo lang("Success, please change your password. Ane PLEASE remember it this time" , "inc_login" , "Success text") . " <br>
         <form method='post' action='?inc=login&action=doChangePwd'>
           " . lang("New Password:" , "inc_login" , "Password text") . " <input type='text' name='pwd1'> <br>
           " . lang("Repeat Password" , "inc_login" , "Password text") . " <input type='text' name='pwd2'> <br>
           <input type='submit' value='" . lang("Change" , "inc_login" , "Submit button text") . "'>
+          <input type='hidden' value='" . $email . "' name='mail'>
         </form>
         ";
       
@@ -181,11 +190,12 @@ elseif($action == "doChangePwd") {
 
   $pwd1   = $_POST['pwd1'];
   $pwd2   = $_POST['pwd2'];
-  $MD5Pwd = MD5($pwd1);
+  $mail   = $_POST['mail'];
+  $md5Pwd = md5($pwd1);
   
   if($pwd1 == $pwd2) {
     
-    $query  = "UPDATE users SET password = '" . $md5Pwd . "' WHERE EMail = '" . $email . "'";
+    $query  = "UPDATE users SET password = '" . $md5Pwd . "' , tempPassword = '' WHERE EMail = '" . $mail . "'";
     $result = query($query);
     
     echo lang("Your password has now been changed, you can now login" , "inc_login" , "Success changed");
