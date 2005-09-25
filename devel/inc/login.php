@@ -13,6 +13,8 @@ if(empty($action)) {
     <input type=password name=password size=10>
     <br>
     <input type=submit value='<?php echo $form[0]; ?>'>
+    
+    <?php echo "<a href='?inc=login&action=resendPwd'> " . lang("Lost Password?" , "inc_login" , "lost password text") . "</a>"; ?>
     </form>
 <?php
   }
@@ -27,6 +29,8 @@ if($action == "resendPwd") {
     " . lang("Your mail adress:" , "inc_login" , "Mail adress text") . "
     <input type='text' name='mail'>
     <input type='submit' value='" . lang("Send password" , "inc_login" , "Submit button text") . "'>
+    <br>
+    <a href='?inc=login&action=verifyPwd'>" . lang("Activate new password?" , "inc_login" , "Activate text") . "</a>
   </form>    
   ";
 
