@@ -127,10 +127,23 @@ elseif($action == "verifyPwd") {
   echo "
   <form method='post' action='?inc=login&action=doVerifyPwd'>
     " . lang("Forgotten your password?" , "inc_login" , "Forgotten password text") . " <br>
-    " . lang("Your mail adress:" , "inc_login" , "Mail adress text") . " <input type='text' name='email'> <br>
-    " . lang("Username:" , "inc_login" , "Username text") . " <input type='text' name='username'> <br>
-    " . lang("Temp password:" , "inc_login" , "Temp Password text") . " <input type='text' name='tempPwd'> <br>
-    <input type='submit' value='" . lang("Verify" , "inc_login" , "Submit button text") . "'>
+  <table>
+    <tr>
+      <td>" . lang("Your mail adress:" , "inc_login" , "Mail adress text") . "</td>
+      <td> <input type='text' name='email'> </td>
+    </tr>
+    <tr>
+      <td>" . lang("Username:" , "inc_login" , "Username text") . "</td>
+      <td> <input type='text' name='username'> </td>
+    </tr>
+    <tr>
+      <td>" . lang("Temp password:" , "inc_login" , "Temp Password text") . "</td>
+      <td> <input type='text' name='tempPwd'> </td>
+    </tr>
+    <tr>
+      <td><input type='submit' value='" . lang("Verify" , "inc_login" , "Submit button text") . "'></td>
+    </tr>
+  </table>
   </form>
   ";
   
@@ -165,10 +178,20 @@ elseif($action == "doVerifyPwd") {
       
         echo lang("Success, please change your password. Ane PLEASE remember it this time" , "inc_login" , "Success text") . " <br>
         <form method='post' action='?inc=login&action=doChangePwd'>
-          " . lang("New Password:" , "inc_login" , "Password text") . " <input type='text' name='pwd1'> <br>
-          " . lang("Repeat Password" , "inc_login" , "Password text") . " <input type='text' name='pwd2'> <br>
-          <input type='submit' value='" . lang("Change" , "inc_login" , "Submit button text") . "'>
+        <table border='0'>
+          <tr>
+            <td>" . lang("New Password:" , "inc_login" , "Password text") . "</td>
+            <td> <input type='text' name='pwd1'> </td>
+          </tr>
+          <tr>
+            <td>" . lang("Repeat Password" , "inc_login" , "Password text") . "</td>
+            <td> <input type='text' name='pwd2'> </td>
+          </tr>
+          <tr>
+            <td> <input type='submit' value='" . lang("Change" , "inc_login" , "Submit button text") . "'> </td>
+          </tr>
           <input type='hidden' value='" . $email . "' name='mail'>
+          </table>
         </form>
         ";
       
