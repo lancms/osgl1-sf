@@ -21,9 +21,9 @@ $editID = $_GET['editID'];
 if ($action == "add")
 {
 
-	$header = $_POST['header'];
+	$header = stripslashes($_POST['header']);
 
-	$text = $_POST['text'];
+	$text = stripslashes($_POST['text']);
 
 	$me = getcurrentuserid();
 
