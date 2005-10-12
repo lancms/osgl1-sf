@@ -93,7 +93,7 @@ if (!isset($action))
 			$result4 = query($query4);
 			$Answ = fetch($result4);
 
-			$Text = $Answ->ans;
+			$Text = stripslashes($Answ->ans);
 
 			$list .= "
 				<tr>
@@ -151,7 +151,7 @@ elseif ($action == "EndQue")
 
 				if ($num >= 1)
 				{
-					$query2 = sprintf ("UPDATE wannabeUsers SET ans = '%s' WHERE queID = %s AND user = %s", escape_string($ans), escape_string($ID), escape_string($user));
+					$query2 = sprintf ("UPDATE wannabeUsers SET ans = '%s' WHERE queID = %s AND user = %s", stripslashes(escape_string($ans)), escape_string($ID), escape_string($user));
 				}
 				else
 				{
