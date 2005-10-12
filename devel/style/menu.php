@@ -30,13 +30,14 @@ if(config("usepage_news"))
     write_menu("index.php?inc=news&many=ALL",lang("News", "style_menu", "menuitem in write_menu"));
 
 if(config("usepage_faq")) write_menu("index.php?inc=faq",lang("FAQ", "style_menu", "menuitem in write_menu"));
-if(config("usepage_register")) write_menu("index.php?inc=register",lang("Register", "style_menu", "menuitem in write_menu"));
+if(config("usepage_register") && getcurrentuserid() == 1) write_menu("index.php?inc=register",lang("Register", "style_menu", "menuitem in write_menu"));
 if(config("usepage_poll")) write_menu("index.php?inc=poll",lang("Polls", "style_menu", "menuitem in write_menu"));
 if(config("usepage_seat")) write_menu("seat.php", lang("Seatmap", "style_menu", "menuitem in write_menu"));
 if(config("usepage_compo")) write_menu("index.php?inc=compo", lang("Composystem", "style_menu", "menuitem in write_menu"));
 if(config("usepage_forum")) write_menu("forum.php", lang("Forum", "style_menu", "menuitem in write_menu"));
 if(config("usepage_partyweb")) write_menu("partyweb/", lang("Partyweb", "style_menu", "menuitem in write_menu"));
 if(config("usepage_show_stats")) write_menu("index.php?inc=stats", lang("Statistics", "style_menu", "Menuitem for stats"));
+write_menu("http://forum.globelan.net", "Forum");
 if(getcurrentuserid() == 1) {
 
 }
@@ -64,4 +65,4 @@ write_menu("do.php?action=logout", lang("Logout", "style_menu", "menuitem in wri
 //  }
 
 }
-
+echo "</font>";
