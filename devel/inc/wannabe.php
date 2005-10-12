@@ -162,7 +162,7 @@ elseif ($action == "EndQue")
 				
 		   }
 		}
-		echo lang("Updated !", "inc_wannabe", "Text to display in wannabe");
+		echo lang("Updated! Wait for the questions to show up", "inc_wannabe", "Text to display in wannabe");
 		refresh("index.php?inc=wannabe", 2);
 	}
 	else
