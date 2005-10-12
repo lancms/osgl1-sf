@@ -365,8 +365,11 @@ elseif ($action == "ViewUsers")
 		{
 			$Nick = $UInfo->nick;
 			$ID = $UInfo->ID;
+			$check = query("SELECT * FROM wannabeUsers WHERE user = '$ID'");
+			
 
 			if(acl_access("isCrew", $ID)); // Do nothing
+			elseif(num($check) == 0); // Else do nothing
 			else {
 
 				$list .= "
