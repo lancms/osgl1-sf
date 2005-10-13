@@ -483,7 +483,7 @@ elseif ($action == "DoViewUsers")
 	$result = query($query);
 	$var = fetch($result);
 
-	$Comment = $var->comment;
+	$Comment = stripslashes($var->comment);
 	$approve = $var->approve;
 
 	if ($approve == 1)
@@ -535,7 +535,7 @@ elseif ($action == "DoViewUsers")
 				<td><b>". IDtonick($r->adminID) ." ".$smiley.":</b></td>
 			</tr>
 			<tr>
-				<td><em>". $r->comment ."</em></td>
+				<td><em>". stripslashes($r->comment) ."</em></td>
 			</tr>
 
 			";
