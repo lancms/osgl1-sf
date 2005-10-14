@@ -413,6 +413,7 @@ elseif ($action == "DoViewUsers")
 	$q = query("SELECT * FROM users WHERE ID = ".escape_string($UID));
 	$r = fetch($q);
 	echo "<table>";
+	osgl_table("<a href=admin.php?adminmode=wannabemin&action=ViewUsers>".lang("Back to userlist", "admin_wanabemin", "DoViewUsers->link->back to list of users")."</a>", "");
 	osgl_table(lang("Nick: ", "admin_wannabemin", "DoViewUsers->profile->nick"), $r->nick);
 	osgl_table(lang("Name: ", "admin_wannabemin", "DoViewUsers->profile->name"), $r->name);
 	osgl_table(lang("Birthday: ", "admin_wannabemin", "DoViewUsers->profile->birthday"), $r->birthDAY." / ".$r->birthMONTH." ".$r->birthYEAR );
