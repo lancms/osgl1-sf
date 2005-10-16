@@ -151,7 +151,7 @@ elseif ($action == "EndQue")
 
 				if ($num >= 1)
 				{
-					$query2 = sprintf ("UPDATE wannabeUsers SET logUNIX = ".time()." ans = '%s' WHERE queID = %s AND user = %s", stripslashes(escape_string($ans)), escape_string($ID), escape_string($user));
+					$query2 = sprintf ("UPDATE wannabeUsers SET logUNIX = ".time().", ans = '%s' WHERE queID = %s AND user = %s", stripslashes(escape_string($ans)), escape_string($ID), escape_string($user));
 				}
 				else
 				{
