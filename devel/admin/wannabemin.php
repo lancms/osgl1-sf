@@ -368,15 +368,22 @@ elseif ($action == "ViewUsers")
 			$check = query("SELECT * FROM wannabeUsers WHERE user = '$ID'");
 			
 
-			if(acl_access("isCrew", $ID)); // Do nothing
-			elseif(num($check) == 0); // Else do nothing
+			if(acl_access("isCrew", $ID)); // User already crew
+			elseif(num($check) == 0); // User has not answered questions yet
 			else {
+				$checkup = query("SELECT logUNIX FROM wannabeUsers WHERE user = $ID");
+				$cR = fetch($checkup);
+				$checkup2 = query("SELECT logUNIX FROM wannabeComment WHERE user = $ID AND adminID = ".getcurrentuserid());
+				$c2R = fetch($checkup2);
+				$imgcheckup = NULL;
+				if($cR->logUNIX >= $c2R->logUNIX) $imgcheckup = "<img src=images/deal.gif>";
 
 				$list .= "
 					<tr>
 						"; //<td><a href='admin.php?adminmode=wannabemin&action=DoViewUsers&id=$ID'>$ID</a></td>
 						$q = query("SELECT * FROM wannabeComment WHERE user = ".escape_string($UInfo->ID));
 						$image = NULL;
+						$image .= $imgcheckup;
 						while($r = fetch($q)) {
 							if($r->approve == 1) $image .= "<img src=images/yes.gif>";
 							elseif($r->approve == 2) $image .= "<img src=images/no.gif>";
