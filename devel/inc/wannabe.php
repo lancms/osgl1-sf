@@ -116,6 +116,29 @@ if (!isset($action))
 </form>
 		";
 	echo $list;
+	echo lang("Comments from admins:", "inc_wannabe", "wannabe->comments from admins");
+	echo "<table>";
+	$q = query("SELECT * FROM wannabeComment WHERE user = ".getcurrentuserid()." AND display = 1");
+	if(num($q) == 0) {
+		echo "<tr><td>".lang("No comments yet, or noone wants you to see their comments", "inc_wannabe")."</td></tr>";
+	} else {
+		while($r = fetch($q)) {
+			echo "<tr><td>";
+			$image = NULL;
+			if($r->approve == 1) $image .= "<img src=images/yes.gif>";
+                        elseif($r->approve == 2) $image .= "<img src=images/no.gif>";
+                        elseif($r->approve == 0) $image .= "<img src=images/dontknow.gif>";
+			echo IDtonick($r->adminID);
+			echo "</td><td>";
+			echo $image;
+			echo "</td><td>";
+			echo $r->comment;
+			echo "</td></tr>";
+		} // End while
+	} // End else (if num > 0);
+	echo "</table>";
+
+			
 }
 elseif ($action == "EndQue")
 {
