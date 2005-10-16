@@ -494,6 +494,9 @@ elseif ($action == "DoViewUsers")
 
 	$Comment = stripslashes($var->comment);
 	$approve = $var->approve;
+        if($var->display == 1) $display = " checked";
+	else $display = "";
+		
 
 	if ($approve == 1)
 	{
@@ -522,6 +525,7 @@ elseif ($action == "DoViewUsers")
 				<td><input type='radio' name='approve' value='0'".$Check0.">!".lang("Not decided yet", "admin_wannabemin", "Text to display in wannabemin&action=DoViewUsers")."</td>
 				<td><input type='radio' name='approve' value='2'".$Check2.">".lang("Nope", "admin_wannabemin", "Text to display in wannabemin&action=DoViewUsers")."</td>
 			</tr>
+			<tr><td><input type=checkbox name=display value=1 $display>".lang("Let the user see your comment?", "admin_wannabemin", "Let the user see what the admin means?"). "</td>
 			<tr>
 				<td><input type='submit' name='Submit' value='".lang("Add", "admin_wannabemin", "Text used in wannabemin")."'></td>
 			</tr>
@@ -572,6 +576,9 @@ elseif ($action == "AddComment")
 	$ID = $_POST['UserID'];
 	$Com = $_POST['Comment'];
 	$Like = $_POST['approve'];
+	$display = $_POST['display'];
+	if($display) $display = 1;
+	else $display = 0;
 
 	if ((empty($ID)) || (empty($Com)))
 	{
@@ -584,11 +591,11 @@ elseif ($action == "AddComment")
 	$lastUpdate = time();
 	if ($num != 0)
 	{
-		$query = sprintf ("UPDATE wannabeComment SET comment = '%s', approve = '%s', logUNIX = '$lastUpdate' WHERE user = %s AND adminID = %s", escape_string($Com), escape_string($Like), escape_string($ID), escape_string($user));
+		$query = sprintf ("UPDATE wannabeComment SET comment = '%s', display = $display, approve = '%s', logUNIX = '$lastUpdate' WHERE user = %s AND adminID = %s", escape_string($Com), escape_string($Like), escape_string($ID), escape_string($user));
 	}
 	else
 	{
-		$query = sprintf ("INSERT INTO wannabeComment (ID, comment, approve, user, adminID, logUNIX) VALUES (NULL, '%s', '%s', '%s', '%s', '$lastUpdate')", escape_string($Com), escape_string($Like), escape_string($ID), escape_string($user));
+		$query = sprintf ("INSERT INTO wannabeComment (ID, comment, approve, user, adminID, logUNIX, display) VALUES (NULL, '%s', '%s', '%s', '%s', '$lastUpdate', $display)", escape_string($Com), escape_string($Like), escape_string($ID), escape_string($user));
 	}
 	$result = query($query);
 	echo lang("Comment added", "admin_wannabemin", "Text used in wannabemin");
