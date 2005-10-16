@@ -151,11 +151,11 @@ elseif ($action == "EndQue")
 
 				if ($num >= 1)
 				{
-					$query2 = sprintf ("UPDATE wannabeUsers SET ans = '%s' WHERE queID = %s AND user = %s", stripslashes(escape_string($ans)), escape_string($ID), escape_string($user));
+					$query2 = sprintf ("UPDATE wannabeUsers SET logUNIX = ".time()." ans = '%s' WHERE queID = %s AND user = %s", stripslashes(escape_string($ans)), escape_string($ID), escape_string($user));
 				}
 				else
 				{
-					$query2 = sprintf ("INSERT INTO wannabeUsers (ID, user, ans, queID) VALUES (NULL, %s, '%s', %s)", escape_string($user), escape_string($ans), escape_string($ID));
+					$query2 = sprintf ("INSERT INTO wannabeUsers (ID, user, ans, queID, logUNIX) VALUES (NULL, %s, '%s', %s, ".time().")", escape_string($user), escape_string($ans), escape_string($ID));
 				}
 				// XXX: This part need some explanation!
 				$result2 = query ($query2);
