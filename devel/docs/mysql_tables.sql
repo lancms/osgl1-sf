@@ -504,6 +504,7 @@ CREATE TABLE `wannabeComment` (
   `user` int(10) NOT NULL default '0',
   `adminID` int(10) NOT NULL default '0',
   `logUNIX` int(25) unsigned default '0',
+  display tinyint(1) default 0,
   PRIMARY KEY  (`ID`)
 ) TYPE=MyISAM;
 
