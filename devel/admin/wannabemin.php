@@ -393,7 +393,8 @@ elseif ($action == "ViewUsers")
 						$q = query("SELECT * FROM wannabeComment WHERE user = ".escape_string($UInfo->ID)." AND adminID = ".escape_string(getcurrentuserid()));
 						$r = fetch($q);
 						$rowColor = NULL;
-						if($r->approve == 0) $rowColor = " bgcolor=yellow";
+						if(num($q) == 0) $rowColor = "";
+						elseif($r->approve == 0) $rowColor = " bgcolor=yellow";
 						elseif($r->approve == 1) $rowColor = " bgcolor=green";
 						elseif($r->approve == 2) $rowColor = " bgcolor=red";
 						$list .= "
