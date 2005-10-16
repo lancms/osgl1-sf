@@ -385,9 +385,10 @@ elseif ($action == "ViewUsers")
 						$image = NULL;
 						$image .= $imgcheckup;
 						while($r = fetch($q)) {
-							if($r->approve == 1) $image .= "<img src=images/yes.gif>";
-							elseif($r->approve == 2) $image .= "<img src=images/no.gif>";
-							elseif($r->approve == 0) $image .= "<img src=images/dontknow.gif>";
+							$adminnick = IDtonick($r->adminID)." ".$r->adminID;
+							if($r->approve == 1) $image .= "<img src=images/yes.gif alt='$adminick'>";
+							elseif($r->approve == 2) $image .= "<img src=images/no.gif alt='$adminnick'>";
+							elseif($r->approve == 0) $image .= "<img src=images/dontknow.gif alt='$adminnick'>";
 
 						}
 						$q = query("SELECT * FROM wannabeComment WHERE user = ".escape_string($UInfo->ID)." AND adminID = ".escape_string(getcurrentuserid()));
