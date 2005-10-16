@@ -376,7 +376,7 @@ elseif ($action == "ViewUsers")
 				$checkup2 = query("SELECT logUNIX FROM wannabeComment WHERE user = $ID AND adminID = ".getcurrentuserid());
 				$c2R = fetch($checkup2);
 				$imgcheckup = NULL;
-				if($cR->logUNIX >= $c2R->logUNIX) $imgcheckup = "<img src=images/deal.gif>";
+				if($cR->logUNIX >= $c2R->logUNIX && $c2R->logUNIX > 0) $imgcheckup = "<img src=images/deal.gif>";
 
 				$list .= "
 					<tr>
