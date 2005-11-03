@@ -18,7 +18,7 @@ if ($action == "login")
 	}
 	else
 	{
-		nicedie();
+		nicedie("Wrong username or password");
 	}
 
 	$res = log_in($username, $pwd);
