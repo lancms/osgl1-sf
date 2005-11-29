@@ -18,14 +18,14 @@ if ($action == "login")
 	}
 	else
 	{
-		nicedie("Wrong username or password");
+		nicedie("Wrong username or password <br> <a href='index.php?inc=login&action=resendPwd'>Forgotten your password?</a>");
 	}
 
 	$res = log_in($username, $pwd);
 
 	if ($res == -1) // the password is incorrect
 	{
-		nicedielang ("Wrong username or password.", "root_do", "Wrong username or password-warning");
+		nicedielang ("Wrong username or password.<br> <a href='index.php?inc=login&action=resendPwd'>Forgotten your password?</a>", "root_do", "Wrong username or password-warning");
 	}
 	elseif ($res == -2) // User not verified
 	{
