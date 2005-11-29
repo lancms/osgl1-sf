@@ -189,11 +189,11 @@ elseif($action == "doVerifyPwd") {
         <table border='0'>
           <tr>
             <td>" . lang("New Password:" , "inc_login" , "Password text") . "</td>
-            <td> <input type='text' name='pwd1'> </td>
+            <td> <input type='password' name='pwd1'> </td>
           </tr>
           <tr>
             <td>" . lang("Repeat Password" , "inc_login" , "Password text") . "</td>
-            <td> <input type='text' name='pwd2'> </td>
+            <td> <input type='password' name='pwd2'> </td>
           </tr>
           <tr>
             <td> <input type='submit' value='" . lang("Change" , "inc_login" , "Submit button text") . "'> </td>
