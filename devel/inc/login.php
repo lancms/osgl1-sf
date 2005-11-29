@@ -85,13 +85,21 @@ elseif ($action == "doResendPwd") {
           
           
           /*  FIX THIS  */
-          $subject = "Password";
-          $message = "Password: " . $tempPwd;
+          $subject = "Password Request";
+          $message = "
+          You must enter the passwordkey to change your password.
+          Passwordkey: " . $tempPwd;
           
-          mail($mail, $subject, $message);
-                 
-          echo lang("The password has been sendt to your mail" , "inc_login" , "Sendt mail");
+          if(mail("$mail", $subject, $message, "From: ".$mail[2])) {
+          
+            echo lang("The password has been sendt to your mail" , "inc_login" , "Sendt mail");
+          
+          } else {
 
+            echo lang("Could not send mail, please try again" , "inc_login" , "Cannot send mail");
+          
+          }       
+          
         } else {
           
           echo lang("You can not use this function more today" , "inc_login" , "Too soon");
