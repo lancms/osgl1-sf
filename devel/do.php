@@ -54,11 +54,11 @@ elseif ($action == "logout")
 		echo lang ("You are now logged out.", "root_do", "Logout-message");
 	}
 }
-elseif (($action == "verify") && (isset ($_GET['uid'])))
+elseif ($action == "verify" && isset ($_GET['uid']))
 {
 	require_once ($base_path."style/top.php");
 	$uid = $_GET['uid'];
-	
+
 	echo lang ("Please enter the verificationcode that was sent to your emailaddress.", "root_do", "");
 	echo "<br>";
 	// XXX: Perhaps we should provide admin-email here?
