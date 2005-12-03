@@ -13,7 +13,7 @@ $query = query ("SELECT users.ID AS '".lang("ID", "addressbook", "UserID-column 
 	users.nick AS '".lang("nick", "addressbook", "nick-column in SELECT in addressbook")."',
 	groups.groupname AS '".lang("Groupname", "addressbook", "Groupname-column in SELECT in addressbook")."',
 	users.EMail AS '".lang("EMail", "addressbook", "EMail-column in SELECT in addressbook")."',
-	users.cellphone AS '".lang("Phonenumber", "addressbook", "Phonenumber-column in SELECT in addressbook")."' FROM users, groups, acls WHERE users.myGroup=groups.ID AND acls.groupID=groups.ID AND (acls.access='listaddress' OR acls.access='root') AND acls.value=1 GROUP BY users.ID ORDER BY users.ID");
+	users.cellphone AS '".lang("Phonenumber", "addressbook", "Phonenumber-column in SELECT in addressbook")."' FROM users, groups, acls WHERE users.myGroup=groups.ID AND acls.groupID=groups.ID AND (acls.access='listaddress' OR acls.access='root') AND acls.value=1 GROUP BY users.ID ORDER BY groups.groupname");
 
 $num = num ($query);
 
