@@ -64,6 +64,6 @@ $seat_avail[3] = 3;
 $seat_avail[4] = 0;
 $seat_avail[5] = 0;
 $seat_avail[6] = 0;
-$seat_avail[7] = 0;
+$seat_avail[7] = -1;
 
 ?>
