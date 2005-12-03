@@ -89,7 +89,7 @@ elseif($action == "doverify")
 	{
 		require_once ($base_path."style/top.php");
 		echo lang ("You have been verified.", "root_do", "Text to show when verified");
-		$query = query("UPDATE users SET users.verified=0 WHERE ID='".escape_string($my_userID)."'");
+		$query = query("UPDATE users SET users.verified=0,lastLoggedIn = ".time()." WHERE ID='".escape_string($my_userID)."'");
 		$sID = $_COOKIE[$cookiename];
 		$login = query("UPDATE session SET userID=".$my_userID." WHERE sID='".escape_string ($sID)."'");
 	}
