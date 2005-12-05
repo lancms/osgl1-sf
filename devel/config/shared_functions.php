@@ -420,4 +420,91 @@ function nicedielang ($string, $module, $desc="")
 	nicedie ($reason);
 }
 
+function seatInfo($id) {
+	
+	$query = "SELECT * FROM users WHERE id LIKE '" . $id . "'";
+	$result = mysql_query($query) or
+	          nicedie(mysql_error());
+	
+	$num = mysql_num_rows($result);
+	
+	if($num >= 1) {
+		
+		$i = mysql_fetch_array($result);
+		
+		$seatX = $i['seatX'];
+		$seatY = $i['seatY'];
+		
+		$row     	= 0;
+		$seatNum 	= 0;
+		$oldSeatNum = 1;
+		
+		if($seatX == "-1" || $seatY == "-1") {
+			
+			return "Ingen Plass";
+			
+		} else {
+	
+			require_once $base_path . "seatformats.php";
+			
+			for( $i = 0; $i < $height; $i++ ) {
+				
+				$k = strlen($myfile[$i]);
+				
+				for( $j = 0; $j < $k; $j++ ) {
+					//$j = x
+					//$i = y
+	
+					$c = $myfile[$i][$j];	// find out what the fuck this character is
+	
+					switch($c) {
+						// user
+						case "d":
+						$cur = 1;
+						break;
+						
+						// crew
+						case "c":
+						$cur = 2;
+						break;
+					}
+					
+					/*
+					$x = $j * $addwidth;
+					$y = $i * $yscale;
+					*/
+					
+					if($cur == 1) {
+					
+						$seatNum++;
+						$cur = 0;
+					
+					}
+					
+					if($j == $seatX && $i == $seatY) {
+						
+						return "Rad: " . $row . "\n Sete: " . $seatNum;
+						
+					}
+
+				}
+				
+				if($seatNum != $oldSeatNum) {
+				
+					$row++;
+					
+					$oldSeatNum = $seatNum;
+					
+				}
+										
+			}
+			
+		}
+	
+	}
+
+}
+		
+
+
 ?>
