@@ -47,7 +47,11 @@ for ($i=0; $i < $num_rows; $i++)
 
 		if ($y==0)
 		{
-			echo "<td><a href=index.php?inc=profile&uid=$k>$k</a></td>\n";
+			$crewID = $k;
+		/*	echo "<td><a href=index.php?inc=profile&uid=$k>$k</a></td>\n"; */
+		}
+		elseif($y == 1) {
+			echo "<td><a href=index.php?inc=profile&uid=$crewID>$k</a></td>\n";
 		}
 		else
 		{
