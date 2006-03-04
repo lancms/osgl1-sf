@@ -366,7 +366,7 @@ elseif ($action == "ViewUsers")
 			$Nick = $UInfo->nick;
 			$ID = $UInfo->ID;
 			$check = query("SELECT * FROM wannabeUsers WHERE user = '$ID'");
-			
+
 
 			if(acl_access("isCrew", $ID)); // User already crew
 			elseif(num($check) == 0); // User has not answered questions yet
@@ -497,7 +497,7 @@ elseif ($action == "DoViewUsers")
 	$approve = $var->approve;
         if($var->display == 1) $display = " checked";
 	else $display = "";
-		
+
 
 	if ($approve == 1)
 	{
@@ -571,6 +571,15 @@ elseif ($action == "DoViewUsers")
 		*/
   	}
 	echo "</table>";
+	if(acl_access('isAdmin')) {
+		echo "<form method=POST action=admin.php?adminmode=wannabemin&action=placecrew>";
+		echo "<select name=place>";
+		$q = query("SELECT * FROM groups");
+		while($r = fetch($q)) {
+			echo "<option value=$r->ID>$r->groupname</option>";
+		}
+		echo "</select><input type=submit value='".lang("Place in crew", "admin_wannabemin")."'></form>";
+	} // End if acl_access(isAdmin)
 }
 elseif ($action == "AddComment")
 {
