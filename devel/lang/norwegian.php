@@ -329,7 +329,7 @@ $acl[2]['name'] = "Er chief";
 $acl[2]['access'] = "isChief";
 
 $acl[3]['name'] = "Er admin";
-$acl[3]['access'] = "Er Admin";
+$acl[3]['access'] = "isAdmin";
 
 $acl[4]['name'] = "Display admin-menu";
 $acl[4]['access'] = "displayAdmin";
