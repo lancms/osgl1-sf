@@ -22,7 +22,7 @@ echo "<table border=1 cellspacing=1>";
 $column_count = num_fields ($query);
 
 echo "<tr>";
-for ($column_num = 0;$column_num < $column_count;$column_num++)
+for ($column_num = 1;$column_num < $column_count;$column_num++)
 {
 	/* XXX: Userfunction for this! */
 	$field_name = mysql_field_name($query, $column_num);
