@@ -4,7 +4,7 @@ require_once ("config.php");
 
 function db_connect()
 {
-    global $sql_host;
+    global $sql_server;
     global $sql_user;
     global $sql_pass;
     global $sql_db;
