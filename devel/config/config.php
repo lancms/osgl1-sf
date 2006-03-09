@@ -17,7 +17,7 @@
  *
  */
 //$base_path = "/var/www/devel/";
-$base_path = $_SERVER['DOCUMENT_ROOT']."/";
+$base_path = $_SERVER['DOCUMENT_ROOT']."/"."devel/";
 
 
 /*
@@ -128,6 +128,20 @@ $usestats = TRUE;
  */
 $seatsize = 10;
 
+/*
+ * usercheckbox
+ *
+ * Three webmaster-customizable checkboxes on register and useradmin
+ *
+ */
+
+
+#$userCheckbox1 = "Text to display for this checkbox";
+#$userCheckbox1_default = "CHECKED"; // At registertime
+#$userCheckbox2 = "Text to display for this checkbox";
+#$userCheckbox2_default = "CHECKED"; // At registertime
+#$userCheckbox3 = "Text to display for this checkbox";
+#$userCheckbox3_default = "CHECKED"; // At registertime
 
 /*
  * min_pass_length
@@ -140,7 +154,7 @@ $min_pass_length = 5;
 /*
  * resend_delay
  *
- * 
+ *
  * 60sek*60min*12hours
  */
 $resend_delay = 43200;
