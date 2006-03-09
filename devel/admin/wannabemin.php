@@ -652,7 +652,7 @@ elseif ($action == "ViewComment")
 
 elseif($action == "placecrew" && acl_access("isAdmin")) {
 	$place = $_POST['place'];
-	$UID = $_GET['UID'];
+	$UID = $_GET['user'];
 	query("UPDATE users SET myGroup = ".escape_string($place)." WHERE ID = ".escape_string($UID));
 	$q = query("SELECT * FROM groups WHERE ID = ".escape_string($place));
 	$r = fetch($q);
