@@ -31,6 +31,10 @@ if ($action == "regme")
 	$street = $_POST['street'];
 	$postNr = $_POST['postNr'];
 	$postPlace = $_POST['postPlace'];
+	$userCheckbox1 = $_POST['userCheckbox1'];
+	$userCheckbox2 = $_POST['userCheckbox2'];
+	$userCheckbox3 = $_POST['userCheckbox3'];
+
 
 
 	$checkmail = query("SELECT * FROM users WHERE EMail LIKE '".escape_string($email)."'");
@@ -76,7 +80,10 @@ if ($action == "regme")
 			cellphone = '".escape_string($cellphone)."',
 			birthDAY = '".escape_string($birthDAY)."',
 			birthMONTH = '".escape_string($birthMONTH)."',
-			birthYEAR = '".escape_string($birthYEAR)."'
+			birthYEAR = '".escape_string($birthYEAR)."',
+			userCheckbox1 = '".escape_string($userCheckbox1)."',
+			userCheckbox2 = '".escape_string($userCheckbox2)."',
+			userCheckbox3 = '".escape_string($userCheckbox3)."'
 		");
 
 		echo $msg[6];
@@ -121,6 +128,15 @@ if ($action == "regme")
 	{
 		echo "<option value=$y $selected>$y</option>\n";
 	}
+
+	if($userCheckbox1) echo "<tr><td>$userCheckbox1</td><td><input type=checkbox name=userCheckbox1 value=1 $userCheckbox1_default></td></tr>";
+	else echo "<input type=hidden name=userCheckbox1 value=0>";
+
+	if($userCheckbox2) echo "<tr><td>$userCheckbox2</td><td><input type=checkbox name=userCheckbox2 value=1 $userCheckbox2_default></td></tr>";
+	else echo "<input type=hidden name=userCheckbox2 value=0>";
+
+	if($userCheckbox3) echo "<tr><td>$userCheckbox3</td><td><input type=checkbox name=userCheckbox3 value=1 $userCheckbox3_default></td></tr>";
+	else echo "<input type=hidden name=userCheckbox3 value=0>";
 	?>
 	<tr><td><input type=submit value=" Register "></td></tr>
 	</table>
