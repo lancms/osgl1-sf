@@ -572,7 +572,7 @@ elseif ($action == "DoViewUsers")
   	}
 	echo "</table>";
 	if(acl_access('isAdmin')) {
-		echo "<form method=POST action=admin.php?adminmode=wannabemin&action=placecrew>";
+		echo "<form method=POST action=admin.php?adminmode=wannabemin&action=placecrew&user=$UID>";
 		echo "<select name=place>";
 		$q = query("SELECT * FROM groups");
 		while($r = fetch($q)) {
@@ -649,4 +649,13 @@ elseif ($action == "ViewComment")
 		}
 		echo "</table>";
 }
-?>
+
+elseif($action == "placecrew" && acl_access("isAdmin")) {
+	$place = $_POST['place'];
+	$UID = $_GET['UID'];
+	query("UPDATE users SET myGroup = ".escape_string($place)." WHERE ID = ".escape_string($UID));
+	$q = query("SELECT * FROM groups WHERE ID = ".escape_string($place));
+	$r = fetch($q);
+	echo lang("You have placeded him/her in crew: ", "admin_wannabemin", "").$r->groupname;
+	refresh("admin.php?adminmode=wannabemin&action=ViewUsers", 2);
+} // End if action == placecrew
