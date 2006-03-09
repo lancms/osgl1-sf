@@ -469,6 +469,9 @@ CREATE TABLE `users` (
   `loginColor` smallint(1) default '0',
   `tempPassword` varchar(32) NOT NULL default '',
   `lastPasswordReset` int(25) NOT NULL default '0',
+  `userCheckbox1` smallint(1) default '0',
+  `userCheckbox2` smallint(1) default '0',
+  `userCheckbox3` smallint(1) default '0',
   PRIMARY KEY  (`ID`)
 ) TYPE=MyISAM;
 
