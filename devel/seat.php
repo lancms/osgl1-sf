@@ -103,7 +103,7 @@ elseif($action == "cancel")
 }
 else
 {
-    nicedie();
+    nicedie("seat has no idea what action you really want. Maybe you should take a look again....");
 }
 
 ?>

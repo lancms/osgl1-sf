@@ -193,7 +193,7 @@ elseif ($action == "seededit")
 }
 else
 {
-	nicedie();
+	nicedie("admin/Compomaster has no idea what you are talking about.");
 }
 
 ?>

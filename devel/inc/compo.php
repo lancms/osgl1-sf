@@ -204,7 +204,7 @@ elseif (($action == "iDontWannaPlay") && (isset($compo)))
 }
 else
 {
-	nicedie();
+	nicedie("inc/compo has no fucking idea what action you are talking about");
 }
 
 ?>

@@ -74,7 +74,7 @@ elseif ($action == "edit")
 	
 	if (!isset($editID))
 	{
-		nicedie();
+		nicedie("admin/FAQ failed. No editID set.");
 	}
 	
 	$select = query("SELECT * FROM faq WHERE ID = '".escape_string($editID)."'");

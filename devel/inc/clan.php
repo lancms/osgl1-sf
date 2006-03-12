@@ -109,7 +109,7 @@ elseif (($action == "doedit") && (isset($_GET['edit'])))
 }
 else
 {
-nicedie();
+nicedie("inc/clan has no fucking idea what action you are talking about");
 }
 
 ?>
