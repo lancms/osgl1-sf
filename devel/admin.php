@@ -90,7 +90,7 @@ elseif ($adminmode != "")
 }
 else
 {
-	nicedie();
+	nicedie("Admin.php doesn't have a clue what you want.");
 }
 require_once ($base_path."style/bottom.php");
 ?>
