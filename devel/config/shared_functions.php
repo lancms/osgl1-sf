@@ -379,6 +379,7 @@ function nicedie ($reason = "Something bad happened. Please contact the administ
 {
 	require_once ($base_path."style/top.php");
 	echo $reason;
+	dblog(15,$reason);
    require_once ($base_path."style/bottom.php");
 	die();
 }
