@@ -4,8 +4,7 @@ require_once ('config/config.php');
 
 if (!config("usepage_compo"))
 {
-	// FIXME: lang().
-	nicedie("Vi bruker IKKE compooppsettet, nei!");
+	nicedielang("We do not use the composystem, no!", "inc_compo");
 }
 
 $action = $_GET['action'];
@@ -33,8 +32,7 @@ if (!isset($action))
 		if (getcurrentuserid() == 1);
 		else
 		{
-			// FIXME: lang().
-			echo "Du har ikke registrert plass, og kan derfor ikke melde deg på i compoene....";
+			echo lang("You have not registered for a seat, and may therefor not sign up for any compos...", "inc_compo");
 		}
 	}
 	$q = query("SELECT * FROM compo");
@@ -130,24 +128,21 @@ elseif (($action == "compoinfo") && (isset($compo)))
 	
 	if (($isPlayingCompo) && ($canCompete))
 	{
-		// FIXME: lang().
-		echo "<br><a href=?inc=compo&action=iDontWannaPlay&compo=$compo>nei, nei, nei; dette vil jeg ikke være med på mer!</a>";
+		echo "<br><a href=?inc=compo&action=iDontWannaPlay&compo=$compo>".lang("No, no, no; I don't want to be a part of this any more!", "inc_compo")."</a>";
 	}
 	elseif ((!$isPlayingCompo) && ($canCompete))
 	{
 		if ($r->gameType <= 1)
 		{
-		// FIXME: lang()
-			echo "<br><a href=?inc=compo&action=signmeup&compo=$compo>Meld meg på!</a>";
+			echo "<br><a href=?inc=compo&action=signmeup&compo=$compo>".lang("Sign me up!", "inc_compo")."</a>";
 		}
 		else
 		{
-		// FIXME: lang()
-			echo "<br><br><b>Meld meg på</b><table>";
+			echo "<br><br><b>".lang("Sign me up", "inc_compo")."</b><table>";
 			echo "<form method=POST action=index.php?inc=compo&compo=$compo&action=signmeup>";
-			echo "<tr><td><input type=text name=klan></td><td> Klan</td>";
-			echo "<tr><td><input type=password name=pass></td><td>klanpassord (fåes av klanleder)</td></tr>";
-			echo "<tr><td></td><td><input type=submit value='I want to play!'></form></td></tr>";
+			echo "<tr><td><input type=text name=klan></td><td> ".lang("Clan", "inc_compo")."</td>";
+			echo "<tr><td><input type=password name=pass></td><td>".lang("Clanpassword (ask your clanleader)", "inc_compo")."</td></tr>";
+			echo "<tr><td></td><td><input type=submit value='".lang("I want to play!", "inc_compo")."'></form></td></tr>";
 			echo "</table>";
 		}
 	}
@@ -157,8 +152,7 @@ elseif (($action == "signmeup") && (isset($compo)))
 {
 	if (!$canCompete)
 	{
-		// FIXME: lang()
-		nicedie("Nope; Du får ikke lov til å konkurrere....");
+		nicedielang("No; Youre not allowed to join this compo");
 	}
 
 	$q = query("SELECT * FROM compo WHERE ID = '".escape_string($compo)."'");
@@ -177,8 +171,7 @@ elseif (($action == "signmeup") && (isset($compo)))
 		$numCheck = query("SELECT * FROM compoReg WHERE compoID = '".escape_string($compo)."' AND clanID = '".escape_string($clan->ID)."'");
 		if(num($numCheck) >= $r->players)
 		{
-			// FIXME: lang()
-			nicedie("Det er ikke tillatt med flere spillere i klanen enn ".$r->players."!");
+			nicedie(lang("It is not allowed with more players in the clan than ", "inc_compo").$r->players."!");
 		}
 
 		if(num($check) != 0)
@@ -187,19 +180,16 @@ elseif (($action == "signmeup") && (isset($compo)))
 		}
 		else
 		{
-			// FIXME: lang()
-			nicedie("feil klannavn/passord");
+			nicedielang("wrong clanname/password", "inc_compo");
 		}
 	}
-	// FIXME: lang()
-	echo "Du er påmeldt";
+	echo lang("You have been signed up", "inc_compo");
 	refresh("?inc=compo&action=compoinfo&compo=$compo", 0);
 }
 elseif (($action == "iDontWannaPlay") && (isset($compo)))
 {
 	query("DELETE FROM compoReg WHERE compoID = '".escape_string($compo)."' AND userID = '".escape_string(getcurrentuserid())."'");
-	// FIXME: lang()
-	echo "Du er meldt av compoen";
+	echo lang("You have been signed off this compo", "inc_compo");
 	refresh("?inc=compo&action=compoinfo&compo=$compo", 0);
 }
 else
