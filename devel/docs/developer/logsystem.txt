@@ -24,3 +24,4 @@ birthDAY:::birthMONTH:::birthYEAR:::myGroup:::userDesign"
 12 = User has arrived ("logged in"). Syntax: "User arrived"
 13 = User has departed ("logged out"). Syntax: "User departed"
 14 = Userlogin-comment changed. Syntax: targetuser:::comment"
+15 = nicedie($reason). Syntax: reason
