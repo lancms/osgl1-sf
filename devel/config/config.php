@@ -124,7 +124,7 @@ $usestats = TRUE;
 /*
  * seatsize
  *
- * [FIXME]
+ * How many pixels a seat in seatsystem should be (if not zoomed)
  */
 $seatsize = 10;
 
