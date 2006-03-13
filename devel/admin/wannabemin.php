@@ -344,13 +344,7 @@ elseif ($action == "ViewUsers")
 
 	$count = num($result);
 
-	$list = "
-		<table>
-			<tr>
-				<td>".lang("View Users", "admin_wannabemin", "Text to display in wannabemin&action=ViewUsers")."</td>
-			</tr>
-		";
-
+	$list = "";
 	if ($count == 0)
 	{
 		$list .= "
