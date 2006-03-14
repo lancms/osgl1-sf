@@ -45,11 +45,11 @@ elseif ($action == 'user')
 		
 		echo "<select name='userid'>\n";
 		
-		$query = sprintf ("SELECT ID, CONCAT(firstName, ' ', lastNAME) as name FROM users");
+		$query = sprintf ("SELECT ID, nick FROM users");
 		$result = query ($query);
 		while ($user = fetch ($result))
 		{
-			echo "<option value='$user->ID'>$user->ID $user->name</option>\n";
+			echo "<option value='$user->ID'>$user->ID $user->nick</option>\n";
 		}
 
 		echo "</select>\n";
@@ -65,7 +65,7 @@ elseif ($action == 'user')
 		
 		echo "<select name='userid'>\n";
 		
-		$query = sprintf ("SELECT ID, CONCAT(firstName, ' ', lastNAME) as name FROM users");
+		$query = sprintf ("SELECT ID, nick FROM users");
 		$result = query ($query);
 		while ($user = fetch ($result))
 		{
@@ -73,7 +73,7 @@ elseif ($action == 'user')
 			{
 				$checked = 'SELECTED';
 			}
-			echo "<option $checked value='$user->ID'>$user->ID $user->name</option>\n";
+			echo "<option $checked value='$user->ID'>$user->ID $user->nick</option>\n";
 			unset ($checked);
 		}
 
