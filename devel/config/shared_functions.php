@@ -434,7 +434,8 @@ function showlog ($num, $userid=false)
 		while ($log = fetch ($result))
 		{
 			$time = date ('d.m.y H:i:s', $log->logUNIX);
-			echo "<tr><td>$log->userID</td><td>$time</td><td>$log->logType</td><td>$log->logWhat</td><td>$log->userIP</td></tr>\n";
+			$nick = IDtonick ($log->userID);
+			echo "<tr><td>$nick</td><td>$time</td><td>$log->logType</td><td>$log->logWhat</td><td>$log->userIP</td></tr>\n";
 		}
 	}
 	elseif ((is_numeric($num)) && (is_numeric($userid)))
@@ -444,7 +445,8 @@ function showlog ($num, $userid=false)
 		while ($log = fetch ($result))
 		{
 			$time = date ('d.m.y H:i:s', $log->logUNIX);
-			echo "<tr><td>$log->userID</td><td>$time</td><td>$log->logType</td><td>$log->logWhat</td><td>$log->userIP</td></tr>\n";
+			$nick = IDtonick ($log->userID);
+			echo "<tr><td>$nick</td><td>$time</td><td>$log->logType</td><td>$log->logWhat</td><td>$log->userIP</td></tr>\n";
 		}
 	}
 	
