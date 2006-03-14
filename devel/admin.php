@@ -70,6 +70,10 @@ if(!isset($adminmode))
 	{
 		echo "<br><a href=admin.php?adminmode=config>".lang("System Configurations", "admin_index", "Menuitem in admin.php to change config")."</a>";
 	}
+	if (acl_access("logs"))
+	{
+		echo "<br><a href=admin.php?adminmode=logs>".lang("View logs", "admin_index", "Menuitem in admin.php to view logs")."</a>";
+	}
 
 	if(acl_access("tasks"))
 	{
