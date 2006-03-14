@@ -375,12 +375,18 @@ function resolve_groupname ($uid)
    return $r->groupname;
 }
 
-function nicedie ($reason = "Something bad happened. Please contact the administrators.")
+function nicedie ($reason = "Something bad happened. Please contact the administrators.", $logreason=false)
 {
 	require_once ($base_path."style/top.php");
 	echo $reason;
-	dblog(15,$reason);
-   require_once ($base_path."style/bottom.php");
+
+	if (!$logreason)
+	{
+		$logreason = $reason;
+	}
+	dblog(15,$logreason);
+	
+	require_once ($base_path."style/bottom.php");
 	die();
 }
 
