@@ -113,7 +113,7 @@ function forumText($text)
 
 function IDtonick($ID)
 {
-	$query = query("SELECT * FROM users WHERE ID = '".escape_string($ID)."'");
+	$query = query("SELECT nick FROM users WHERE ID = '".escape_string($ID)."'");
 	$row = fetch($query);
 
 	return $row->nick;
