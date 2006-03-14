@@ -42,7 +42,7 @@ if ($action == "login")
 	}
 	else
 	{
-		nicedie ("do,wha,di,di,di,dam,di,da,do.php, action=login, but what the fuck is that errormsg?  res=$res");
+		nicedie ("Something failed. Please go back and try again. If it still doesn't work, please contact the administrators.", "Login failed. res=$res");
 	}
 }
 elseif ($action == "logout")
