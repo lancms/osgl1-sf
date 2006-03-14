@@ -36,6 +36,10 @@ if ($action == "login")
 	{
 		header ("Location: index.php");
 	}
+	elseif ($res == 0)
+	{
+		header ("Location: index.php");
+	}
 	else
 	{
 		nicedie ("do,wha,di,di,di,dam,di,da,do.php, action=login, but what the fuck is that errormsg?  res=$res");
