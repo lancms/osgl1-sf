@@ -421,6 +421,33 @@ function nicedielang ($string, $module, $desc="")
 	nicedie ($reason);
 }
 
+function showlog ($num, $userid=false)
+{
+	if ($num == 'all')
+	{
+		nicedie("Heh, not implemented yet!");
+	}
+	elseif ((is_numeric($num)) && (!$userid))
+	{
+		$query = sprintf ("SELECT * FROM logs ORDER BY ID DESC LIMIT %s", $num);
+		$result = query ($query);
+		while ($log = fetch ($result))
+		{
+			echo "<tr><td>$log->userID</td><td>$log->logUNIX</td><td>$log->logType</td><td>$log->logWhat</td><td>$log->userIP</td></tr>\n";
+		}
+	}
+	elseif ((is_numeric($num)) && (is_numeric($userid)))
+	{
+		$query = sprintf ("SELECT * FROM logs WHERE userID=%s ORDER BY ID DESC LIMIT %s", $userid, 1);
+		$result = query ($query);
+		while ($log = fetch ($result))
+		{
+			echo "<tr><td>$log->userID</td><td>$log->logUNIX</td><td>$log->logType</td><td>$log->logWhat</td><td>$log->userIP</td></tr>\n";
+		}
+	}
+	
+}
+
 function seatInfo($id) {
 	
 	$query = "SELECT * FROM users WHERE id LIKE '" . $id . "'";
