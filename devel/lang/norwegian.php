@@ -388,6 +388,23 @@ $acl[21]['access'] = "kioskAdmin";
 $acl[22]['name'] = "Vise logger";
 $acl[22]['access'] = "logs";
 
+$logtype[0] = '(dbdefault)';
+$logtype[1] = '(funcdefault)';
+$logtype[2] = 'Ny sesjon';
+$logtype[3] = 'Fjerna gammel sesjon';
+$logtype[4] = 'Bruker logget inn';
+$logtype[5] = 'Bruker logget ut';
+$logtype[6] = 'Bruker registrert';
+$logtype[7] = 'Ny statisk fil';
+$logtype[8] = 'Fjernet statisk fil';
+$logtype[9] = 'Bruker bytta plass';
+$logtype[10] = 'Hackingfors&oslash;k';
+$logtype[11] = 'Brukerinfo endret';
+$logtype[12] = 'Bruker ankommet';
+$logtype[13] = 'Bruker reist';
+$logtype[14] = 'Innsjekkingskommentar forandret';
+$logtype[15] = 'Nicedie';
+
 /* These are the colors that may be used to describe users in userlogin */
 $userloginclr[0] = "yellow";
 $userloginclr[1] = "red";
