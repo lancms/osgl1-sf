@@ -38,7 +38,7 @@ if ($action == "login")
 	}
 	else
 	{
-		nicedie ("do,wha,di,di,di,dam,di,da,do.php, action=login, but what the fuck is that errormsg?");
+		nicedie ("do,wha,di,di,di,dam,di,da,do.php, action=login, but what the fuck is that errormsg?  res=$res");
 	}
 }
 elseif ($action == "logout")
