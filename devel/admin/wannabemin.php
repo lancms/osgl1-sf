@@ -344,7 +344,7 @@ elseif ($action == "ViewUsers")
 
 	$count = num($result);
 
-	$list = "";
+	$list = "<table>";
 	if ($count == 0)
 	{
 		$list .= "
