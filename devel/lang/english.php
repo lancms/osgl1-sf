@@ -389,6 +389,25 @@ $acl[21]['access'] = "kioskAdmin";
 $acl[22]['name'] = "View logs";
 $acl[22]['access'] = "logs";
 
+$logtype[0] = '(dbdefault)';
+$logtype[1] = '(funcdefault)';
+$logtype[2] = 'New session';
+$logtype[3] = 'Removed old session';
+$logtype[4] = 'User logged in';
+$logtype[5] = 'User logged out';
+$logtype[6] = 'User registered';
+$logtype[7] = 'New static file';
+$logtype[8] = 'Removed static file';
+$logtype[9] = 'User changed seat';
+$logtype[10] = 'Hackingattempt';
+$logtype[11] = 'Userinfo changed';
+$logtype[12] = 'User arrived';
+$logtype[13] = 'User departed';
+$logtype[14] = 'Userlogincomment changed';
+$logtype[15] = 'Nicedie';
+
+
+
 /* These are the colors that may be used to describe users in userlogin */
 $userloginclr[0] = "yellow";
 $userloginclr[1] = "red";
