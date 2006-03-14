@@ -423,6 +423,9 @@ function nicedielang ($string, $module, $desc="")
 
 function showlog ($num, $userid=false)
 {
+
+	global $logtype;
+
 	if ($num == 'all')
 	{
 		nicedie("Heh, not implemented yet!");
@@ -435,7 +438,15 @@ function showlog ($num, $userid=false)
 		{
 			$time = date ('d.m.y H:i:s', $log->logUNIX);
 			$nick = IDtonick ($log->userID);
-			echo "<tr><td>$nick</td><td>$time</td><td>$log->logType</td><td>$log->logWhat</td><td>$log->userIP</td></tr>\n";
+			if (isset($logtype[$log->logType]))
+			{
+				$action = $logtype[$log->logType];
+			}
+			else
+			{
+				$action = $log->logType;
+			}
+			echo "<tr><td>$nick</td><td>$time</td><td>$action</td><td>$log->logWhat</td><td>$log->userIP</td></tr>\n";
 		}
 	}
 	elseif ((is_numeric($num)) && (is_numeric($userid)))
@@ -446,7 +457,15 @@ function showlog ($num, $userid=false)
 		{
 			$time = date ('d.m.y H:i:s', $log->logUNIX);
 			$nick = IDtonick ($log->userID);
-			echo "<tr><td>$nick</td><td>$time</td><td>$log->logType</td><td>$log->logWhat</td><td>$log->userIP</td></tr>\n";
+			if (isset($logtype[$log->logType]))
+			{
+				$action = $logtype[$log->logType];
+			}
+			else
+			{
+				$action = $log->logType;
+			}
+			echo "<tr><td>$nick</td><td>$time</td><td>$action</td><td>$log->logWhat</td><td>$log->userIP</td></tr>\n";
 		}
 	}
 	
