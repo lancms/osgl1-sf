@@ -44,7 +44,8 @@ function dblog($type = 1,$logNew = "NOTHING LOGGED", $logOld = NULL)
     $IP = $_SERVER['REMOTE_ADDR'];
     $userID = getcurrentuserid();
     $dowhat = stripslashes($logNew);
-    query("INSERT INTO logs SET userIP = '".escape_string($IP)."', userID = '".escape_string($userID)."', logType = '".escape_string($type)."', logWhat = '".escape_string($dowhat)."', oldLog = '".escape_string($logOld)."', logUNIX = ".escape_string(time()));
+    $server = $_SERVER['server_name'].$_SERVER['REQUEST_URI'];
+    query("INSERT INTO logs SET userIP = '".escape_string($IP)."', userID = '".escape_string($userID)."', logType = '".escape_string($type)."', logWhat = '".escape_string($dowhat)."', oldLog = '".escape_string($logOld)."', URL = '$server', logUNIX = ".escape_string(time()));
     return 1;
 }
 
