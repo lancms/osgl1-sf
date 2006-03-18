@@ -23,6 +23,7 @@ foreach ($file as $line)
 	$count_total = $count_total + substr_count ($line, "d");
 }
 echo lang("Seats, total:", "seat", "")." ".$count_total."<br>\n"; 
+config("total_seats", $count_total); // set total_seats in DB
 
 $count_taken_query = sprintf ('SELECT COUNT(*) AS Taken FROM users WHERE users.seatX != "-1" AND users.seatY != "-1" AND users.myGroup = 2');
 $count_taken_result = query ($count_taken_query);
