@@ -25,3 +25,5 @@ birthDAY:::birthMONTH:::birthYEAR:::myGroup:::userDesign"
 13 = User has departed ("logged out"). Syntax: "User departed"
 14 = Userlogin-comment changed. Syntax: targetuser:::comment"
 15 = nicedie($reason). Syntax: reason
+16 = wannabe added. syntax: none
+17 = wannabe changed. syntax: none
