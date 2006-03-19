@@ -145,6 +145,9 @@ elseif ($action == "EndQue")
 	
 	if ($Agree == 1)
 	{
+		$test = query("SELECT * FROM users WHERE wannabe = 1 AND ID = $user");
+		if(num($test) == 0) dblog(16, "wannabe added");
+		
 		// Shortcut?
 		$q4 = sprintf("UPDATE users SET wannabe = '1' WHERE ID = %s", escape_string($user)); // Just as easy
 		$result4 = query($q4);
@@ -185,6 +188,7 @@ elseif ($action == "EndQue")
 		   }
 		}
 		echo lang("Updated! Wait for the questions to show up", "inc_wannabe", "Text to display in wannabe");
+		dblog(17, "Wannabe updated application");
 		refresh("index.php?inc=wannabe", 2);
 	}
 	else
@@ -192,7 +196,9 @@ elseif ($action == "EndQue")
 		echo lang("Updated: You will not be a crew member.", "inc_wannabe", "Text to display in wannabe");
 		// Shortcut?
 		query(sprintf("UPDATE users SET wannabe = '0' WHERE ID = %s", escape_string($user)));
+		dblog(18, "Wannabe removed application");
 		refresh("index.php?inc=wannabe", 2);
+		
 	}
 }
 ?>
