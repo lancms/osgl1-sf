@@ -458,7 +458,7 @@ function showlog ($num, $userid=false)
 	}
 	elseif ((is_numeric($num)) && (is_numeric($userid)))
 	{
-		$query = sprintf ("SELECT * FROM logs WHERE userID=%s ORDER BY ID DESC LIMIT %s", $userid, 1);
+		$query = sprintf ("SELECT * FROM logs WHERE userID=%s ORDER BY ID DESC LIMIT %s", $userid, $num);
 		$result = query ($query);
 		while ($log = fetch ($result))
 		{
