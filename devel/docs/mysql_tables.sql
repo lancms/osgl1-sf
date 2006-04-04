@@ -288,7 +288,7 @@ CREATE TABLE `partyweb` (
 CREATE TABLE `partyweb_screens` (
   `ID` int(3) NOT NULL auto_increment,
   `name` varchar(25) default '',
-  PRIMAY KEY (`ID`)
+  PRIMARY KEY (`ID`)
 ) TYPE=MyISAM;
 
 -- 
