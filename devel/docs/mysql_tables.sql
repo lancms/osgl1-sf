@@ -252,6 +252,7 @@ CREATE TABLE `logs` (
   `logWhat` text,
   `oldLog` text,
   `logUNIX` int(25) default '0',
+  `URL` text,
   PRIMARY KEY  (`ID`)
 ) TYPE=MyISAM;
 
