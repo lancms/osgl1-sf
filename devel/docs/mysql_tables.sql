@@ -282,6 +282,27 @@ CREATE TABLE `partyweb` (
 ) TYPE=MyISAM;
 
 --
+-- Table structure for table `partyweb_screens`
+--
+
+CREATE TABLE `partyweb_screens` (
+  `ID` int(3) NOT NULL auto_increment,
+  `name` varchar(25) default '',
+  PRIMAY KEY (`ID`)
+) TYPE=MyISAM;
+
+-- 
+-- Table structure for table `partyweb_showscreen`
+--
+
+CREATE TABLE `partyweb_showscreen` (
+  `screenID` int(11) NOT NULL,
+  `slideID` int(11) NOT NULL,
+  `show` tinyint(1) default '0',
+  PRIMARY KEY (`screenID`, `slideID`)
+) TYPE=MyISAM;
+
+--
 -- Table structure for table `pollA`
 --
 
