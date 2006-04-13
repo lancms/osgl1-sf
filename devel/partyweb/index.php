@@ -4,6 +4,7 @@ require_once ('../config/config.php');
 
 $mode = $_GET['mode'];
 $viewpage = $_GET['viewpage'];
+$screen = $_GET['screen'];
 
 $to_random = NULL;
 
@@ -29,7 +30,7 @@ die();
 
 require_once ($base_path.'partyweb/style/top.php');
 
-if (empty($mode)) {
+if (empty($mode)|| ($mode == "party" && !isset($_GET['screen']))) {
 	require_once ($base_path.'partyweb/style/menu.php');
 }
 
@@ -42,24 +43,21 @@ if ($viewpage)
 
 	echo text2html($r->text);
 }
-elseif ($mode == "party")
+elseif ($mode == "party" && isset($screen))
 {
-	$q = query("SELECT ID FROM partyweb WHERE display_partymode = 1");
+	$q = query("SELECT * FROM partyweb_showscreen WHERE partyshow = 1 AND screenID = $screen ORDER BY lastseen ASC LIMIT 0,1");
 
-	while($r = fetch($q))
-	{
-	$to_random[] = $r->ID;
-	}
+	$r = fetch($q);
 
-	$rand = rand(0, count($to_random)-1);
 
-	$display = $to_random[$rand];
+	$display = $r->slideID;
 
 	$query = query("SELECT * FROM partyweb WHERE ID = '".escape_string($display)."'");
 
 	$page = fetch($query);
 	echo '<td height="100%" align="center" valign="top" class="tbl_main">';
 	echo text2html($page->text);
+	query("UPDATE partyweb_showscreen SET lastseen = ".time()." WHERE screenID = '$screen' AND slideID = '$display'");
 }
 elseif($mode == "nopage")
 {

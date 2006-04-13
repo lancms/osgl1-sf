@@ -13,12 +13,15 @@ echo "<tr><td><a href=$link>$text</a></td>
               </tr>";
 }
 
+$mode = $_GET['mode'];
+$screen = $_GET['screen'];
 
-
-$q = query("SELECT * FROM partyweb WHERE display_menu = 1");
+if(!isset($mode)) $q = query("SELECT * FROM partyweb WHERE display_menu = 1");
+elseif(isset($mode) && !isset($screen)) $q = query("SELECT * FROM partyweb_screens");
 
 while($r = fetch($q)) {
-partymenu("?viewpage=$r->ID", $r->menuname);
+if(!isset($mode)) partymenu("?viewpage=$r->ID", $r->menuname);
+else partymenu("?mode=party&screen=$r->ID",$r->name);
 
 }
 

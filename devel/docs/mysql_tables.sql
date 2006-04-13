@@ -278,7 +278,6 @@ CREATE TABLE `partyweb` (
   `menuname` varchar(64) default NULL,
   `text` text,
   `display_menu` tinyint(1) default '0',
-  `display_partymode` tinyint(1) default '0',
   PRIMARY KEY  (`ID`)
 ) TYPE=MyISAM;
 
@@ -299,7 +298,8 @@ CREATE TABLE `partyweb_screens` (
 CREATE TABLE `partyweb_showscreen` (
   `screenID` int(11) NOT NULL,
   `slideID` int(11) NOT NULL,
-  `show` tinyint(1) default '0',
+  `partyshow` tinyint(1) default '0',
+  `lastseen` int(25) unsigned default '0',
   PRIMARY KEY (`screenID`, `slideID`)
 ) TYPE=MyISAM;
 

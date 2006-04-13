@@ -4,8 +4,10 @@
 <link rel="StyleSheet" href="style/style.css" type="text/css">
 <?php
 $mode = $_GET['mode'];
+$screen = $_GET['screen'];
 if($mode == "party")  {
-echo '<meta http-equiv=refresh content="60; url=?mode=party">';
+if(isset($screen)) $add = "&screen=$screen";
+echo "<meta http-equiv=refresh content=\"60; url=?mode=party$add\">";
 
 }
 ?>
