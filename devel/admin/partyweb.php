@@ -17,7 +17,7 @@ if (!isset($action))
 	$q = query("SELECT * FROM partyweb_screens");
 	
 	echo "<table>";
-	echo "<tr><th>ID/edit</th><th>".lang("Menuname", "admin_partyweb", "partyweb[0]")."</th><th>".lang("Display in menu", "admin_partyweb", "partyweb[1]")."</th>";
+	echo "<tr><th>ID/edit</th><th>".lang("Menuname", "admin_partyweb", "partyweb[0]")."</th><th>".lang("Menu", "admin_partyweb", "partyweb[1]")."</th>";
 	while($rS = fetch($q)) {
 	echo "<th>$rS->name</th>";
 	}
@@ -31,7 +31,8 @@ if (!isset($action))
 		echo "</td><td>";
 		echo $r->menuname;
 		echo "</td><td>";
-		echo $true_false[$r->display_menu];
+		if($r->display_menu == 1) echo "<img src=images/yes.gif>";
+		else echo "<img src=images/no.gif>";
 		echo "</td>";
 		$q = query("SELECT * FROM partyweb_showscreen WHERE slideID = $r->ID ORDER BY screenID ASC");
 		while($r = fetch($q)) {
