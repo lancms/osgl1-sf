@@ -34,6 +34,7 @@ if ($action == "regme")
 	$userCheckbox1 = $_POST['userCheckbox1'];
 	$userCheckbox2 = $_POST['userCheckbox2'];
 	$userCheckbox3 = $_POST['userCheckbox3'];
+	$gender = $_POST['gender'];
 
 
 
@@ -83,7 +84,8 @@ if ($action == "regme")
 			birthYEAR = '".escape_string($birthYEAR)."',
 			userCheckbox1 = '".escape_string($userCheckbox1)."',
 			userCheckbox2 = '".escape_string($userCheckbox2)."',
-			userCheckbox3 = '".escape_string($userCheckbox3)."'
+			userCheckbox3 = '".escape_string($userCheckbox3)."',
+			gender = '".escape_string($gender)."'
 		");
 
 		echo $msg[6];
@@ -109,6 +111,12 @@ if ($action == "regme")
     <tr><td><?php echo $form['74']; ?></td><td><input type=text name=street></td></tr>
     <tr><td><?php echo $form['75']; ?></td><td><input type=text name=postNr size=5><input type=text name=postPlace>
     <tr><td><?php echo $form['76']; ?></td><td><input type=text name=cellphone></td></tr>
+    <tr><td><?php echo lang("Gender", "inc_register"); ?></td><td><select name=gender>
+    <?php
+    echo "<option value=0>".lang("Doesn't consern you", "inc_register")."</option>";
+    echo "<option value=1>". lang("Female", "inc_register")."</option>";
+    echo "<option value=2>".lang("Male", "inc_register")."</option>";
+    ?></select></td></tr>
 	<tr><td><?php echo $form['77']; ?></td><td><select name=birthDAY><option value=0></option>
 
 	<?php
