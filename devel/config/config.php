@@ -144,6 +144,19 @@ $seatsize = 10;
 #$userCheckbox3_default = "CHECKED"; // At registertime
 
 /*
+ * extra meny-links
+ *
+ * This option allows you to add more menuitems to the public menu. Ex: link to a picture gallery, or a forum
+ *
+ */
+
+$menyitem[0]['url'] = "http://forum.globelan.net";
+$menuitem[0]['text'] = "Forum";
+
+$menuitem[1]['url'] = "http://bilder.globelan.net";
+$menuitem[1]['text'] = "Picture Gallery";
+
+/*
  * min_pass_length
  *
  * Minimum length of passwords.
