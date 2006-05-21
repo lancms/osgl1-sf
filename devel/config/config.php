@@ -17,7 +17,7 @@
  *
  */
 //$base_path = "/var/www/devel/";
-$base_path = $_SERVER['DOCUMENT_ROOT'];
+$base_path = $_SERVER['DOCUMENT_ROOT']."/";
 
 
 /*
