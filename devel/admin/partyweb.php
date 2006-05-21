@@ -94,8 +94,11 @@ elseif (($action == "save") && (isset($edit)) && (!isset($_POST['delete'])))
 	while($r = fetch($q)) {
 		$post = $_POST['screen'.$r->ID];
 		if($post != 1) $post = 0;
-		query("INSERT INTO partyweb_showscreen SET partyshow = $post, screenID = $r->ID, slideID = '".escape_string($edit)."'
-			ON DUPLICATE KEY UPDATE partyshow = $post");
+		$test = query("SELECT * FROM partyweb_showscreen WHERE screenID = $r->ID AND slideID = '".escape_string($edit)."'");
+		if(num($test) == 0)
+			query("INSERT INTO partyweb_showscreen SET partyshow = $post, screenID = $r->ID, slideID = '".escape_string($edit)."'");
+		else 
+			query("UPDATE partyweb_showscreen SET partyshow = $post WHERE screenID = $r->ID AND slideID = '".escape_string($edit)."'");
 	}
 
 #	echo $display_menu;
