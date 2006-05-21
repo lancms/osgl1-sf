@@ -466,6 +466,7 @@ CREATE TABLE `users` (
   `registered` int(25) default '0',
   `seatX` int(4) default '-1',
   `AllowPublic` tinyint(1) default '0',
+  `gender` tinyint(1) default '0',
   `aboutMe` text,
   `isHere` tinyint(4) default '0',
   `crewField` text,
