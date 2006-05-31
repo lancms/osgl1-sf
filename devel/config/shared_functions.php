@@ -10,7 +10,7 @@ function db_connect()
     global $sql_db;
     global $is_db_connected;
 
-    $connect = mysql_connect($sql_host, $sql_user, $sql_pass) or nicedie("Connect: ".mysql_error());
+    $connect = mysql_connect($sql_server, $sql_user, $sql_pass) or nicedie("Connect: ".mysql_error());
     $db = mysql_select_db($sql_db) or nicedie("DB_SELECT: ".mysql_error());
 
     $is_db_connected = 1;
