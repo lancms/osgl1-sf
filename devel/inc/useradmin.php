@@ -105,11 +105,11 @@ if (($action == "view") || (!isset($action)))
 		$groups = query("SELECT * FROM groups");
 		echo "<select name=myGroup>";
 		//$Gnum = num($groups);
-		for($y=1;$Group=fetch($groups);$y++)
+		while($Group = fetch($groups))
 		{
 			//$Group = fetch($groups)
 			echo "<option value=$Group->ID";
-			if($row->myGroup == $y)
+			if($row->myGroup == $Group->ID)
 			{
 				echo " SELECTED";
 			}
