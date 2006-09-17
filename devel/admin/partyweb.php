@@ -16,7 +16,7 @@ if (!isset($action))
 	$query = query("SELECT * FROM partyweb ORDER BY menuname ASC");
 	$q = query("SELECT * FROM partyweb_screens");
 	
-	echo "<table>";
+	echo "<table border=1>";
 	echo "<tr><th>ID/edit</th><th>".lang("Menuname", "admin_partyweb", "partyweb[0]")."</th><th>".lang("Menu", "admin_partyweb", "partyweb[1]")."</th>";
 	while($rS = fetch($q)) {
 	echo "<th>$rS->name</th>";
