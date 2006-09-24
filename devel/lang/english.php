@@ -433,9 +433,3 @@ $crewsale[0] = "Crewsale is off";
 $crewsale[1] = "Crewsale is ON!";
 
 
-function mail_body($random) {
-    return "Welcome as a user of GlobeLAN DEVEL!\n\r
-    You have either changed you EMail, or added a new user, so please login with you username and password and enter: ".$random." as you verificationnumber!\r\n\r\n
-    Thank you\r\n
-    The Crew";
-}

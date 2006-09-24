@@ -196,11 +196,24 @@ $admin['info']['nick'] = "OSGlobeLAN";
  */
 $admin['info']['name'] = "OSGlobeLAN Administrator";
 
+/*
+ * mail-stuff
+ *
+ * 0 = Subject of mail
+ * 1 = From ?
+ * 2 = From ?
+ */
 $mail[0] = "You have been registered as a user of OSGlobeLAN!";
 $mail[1] = "$admin[contact][mail]";
 $mail[2] = "OSGlobeLAN";
 
 
+function mail_body($random) {
+    return "Welcome as a user of OSGlobeLAN!\n\r
+    You have either changed your email, or created a new user, so please login with your username and password, and enter: ".$random." as your verification-number!\r\n\r\n
+    Thanks you\r\n
+    The Crew";
+}
 
 /*
  * Do not edit below this!
