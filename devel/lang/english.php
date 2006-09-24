@@ -316,10 +316,6 @@ $clan[7] = "This clan allready exists";
 $clan[8] = "Save Clan";
 $clan[9] = "Clan Updated";
 
-$mail[0] = "You have been registered as a user on GL-DEVEL!";
-$mail[1] = "$admin[contact][mail]";
-$mail[2] = "devel";
-
 $acl[0]['name'] = "Root";
 $acl[0]['access'] = "root";
 

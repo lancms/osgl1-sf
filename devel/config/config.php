@@ -196,6 +196,10 @@ $admin['info']['nick'] = "OSGlobeLAN";
  */
 $admin['info']['name'] = "OSGlobeLAN Administrator";
 
+$mail[0] = "You have been registered as a user of OSGlobeLAN!";
+$mail[1] = "$admin[contact][mail]";
+$mail[2] = "OSGlobeLAN";
+
 
 
 /*

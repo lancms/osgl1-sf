@@ -315,10 +315,6 @@ $clan[7] = "Denne klanen eksisterer allerede";
 $clan[8] = "Lagre klan";
 $clan[9] = "Klanen er oppdatert";
 
-$mail[0] = "Du har blitt registrert som bruker på GlobeLAN 7!";
-$mail[1] = "$admin[contact][mail]";
-$mail[2] = "GlobeLAN7";
-
 $acl[0]['name'] = "Root";
 $acl[0]['access'] = "root";
 
