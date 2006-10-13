@@ -12,16 +12,15 @@ if (($action == "display") || (!isset($action)))
 
 	echo "<table>";
 	$query = query("SELECT * FROM users WHERE ID != 1 ORDER BY ID ASC");
-
-	$num = num($query);
-	echo "<tr><th>$profile[8]</th>";
-	echo "</tr>";
-	for($i=0;$i<$num;$i++)
+	// <a href=index.php?inc=useradmin&user=$row->ID>$row->nick</a></td>";
+	echo "<tr><th>".lang("Nick", "admin_userlist")."</th>";
+	echo "<th>".lang("Name", "admin_userlist")."</th>";
+	echo "<th>".lang("EMail", "admin_userlist")."</th></tr>";
+	while($row = fetch($query))
 	{
-		$row = fetch($query);
-
 		echo "<tr><td><a href=index.php?inc=useradmin&user=$row->ID>$row->nick</a></td>";
-		echo "</tr>";
+		echo "<td>$row->name</td>";
+		echo "<td>$row->EMail</td>";
 	}
 	echo "</table>";
 }
