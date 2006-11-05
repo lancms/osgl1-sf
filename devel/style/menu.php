@@ -16,7 +16,7 @@ write_menu("index.php",lang("Main Page", "style_menu", "menuitem in write_menu")
 
 /* Insert the static files; they usually contains info, so they should be the first the user comes to */
 if(config("usepage_static"))  {
-	if(acl_access("isCrew)) $staticFiles = '1,0';
+	if(acl_access("isCrew")) $staticFiles = '1,0';
 	else $staticFiles = '0';
     $q = mysql_query("SELECT * FROM static WHERE header != 'index' AND showPage = 1 AND crewOnly IN ($staticFiles)") or die(mysql_error());
     while($r = mysql_fetch_object($q)) {
