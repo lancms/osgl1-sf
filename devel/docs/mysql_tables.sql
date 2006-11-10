@@ -488,6 +488,7 @@ CREATE TABLE `users` (
   `mac` varchar(17) default NULL,
   `hasvirus` int(2) default NULL,
   `myGroup` int(11) default '2',
+  `userIsToBeDasked` tinyint(1) default '0',
   `loginComments` text,
   `loginColor` smallint(1) default '0',
   `tempPassword` varchar(32) NOT NULL default '',

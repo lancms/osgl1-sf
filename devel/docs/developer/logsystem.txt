@@ -28,3 +28,4 @@ birthDAY:::birthMONTH:::birthYEAR:::myGroup:::userDesign"
 16 = wannabe added. syntax: none
 17 = wannabe changed. syntax: none
 18 = wannabe removed. syntax: none
+19 = users dasklevel changed. syntax: new level

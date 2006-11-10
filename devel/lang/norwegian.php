@@ -427,6 +427,11 @@ $tickettype[0] = "Ingen billett"; // the default, should be "not ticket"
 $tickettype[1] = "Normal billett";
 $tickettype[2] = "Ingen PC";
 
+/* Dasklevels a user may have */
+$dasklevels[0] = "Ingen dasking";
+$dasklevels[1] = "Lett dasking";
+$dasklevels[2] = "Hard dasking";
+
 $crewsale[0] = "Crewsalg er av";
 $crewsale[1] = "Crewsalg er PÅ!";
 

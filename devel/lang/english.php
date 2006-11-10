@@ -429,6 +429,12 @@ $tickettype[0] = "No ticket"; // the default, should be "not ticket"
 $tickettype[1] = "Normal ticket";
 $tickettype[2] = "No PC";
 
+
+/* Dasklevels a user may have */
+$dasklevels[0] = "No dask";
+$dasklevels[1] = "Soft dask";
+$dasklevels[2] = "Hard dask";
+
 $crewsale[0] = "Crewsale is off";
 $crewsale[1] = "Crewsale is ON!";
 
