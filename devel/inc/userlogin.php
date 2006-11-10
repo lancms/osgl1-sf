@@ -22,7 +22,7 @@ if ($action == "search")
 
 elseif ($action == "ticketselect")
 {
-	$user = $_REQUEST['userID'];
+	$user = $_REQUEST['user'];
 	$adminID = getcurrentuserid();
 	$ticket = $_POST['ticket'];
 	$search = $_GET['search'];
@@ -74,7 +74,7 @@ elseif ($action == "main")
 		echo "</td><td><input type=submit value='".$msg['38']."'>";
 		echo "</form></td>";
 		*/
-		if($row->tickettype == 0)
+		if($row->ticketType == 0)
 		{
 			echo "<td bgcolor=green><a href=index.php?inc=userlogin&action=login&user=$row->ID>$form[41]</a>";
 		}
@@ -118,13 +118,13 @@ elseif ($action == "login") {
 	else osgl_table($editLink, "<a href=?inc=userlogin&action=doLogout&user=$user>".lang("Mark as departed", "inc_userlogin", "link to mark user as departed")."</a>");
 */
 
-	$ticketarray = "<form method=POST action=index.php?inc=userlogin&action=ticketselect&userID=$row->ID&search=$search>";
+	$ticketarray = "<form method=POST action=index.php?inc=userlogin&action=ticketselect&user=$r->ID&search=$search>";
 
 			$ticketarray .= "<select name=ticket>";
 			for($i=0;$i<count($tickettype);$i++)
 			{
 				$ticketarray .= "<option value=$i";
-				if($row->ticketType == $i)
+				if($r->ticketType == $i)
 				{
 					$ticketarray .= " SELECTED";
 				}
