@@ -28,9 +28,13 @@ elseif ($action == "ticketselect")
 	$search = $_GET['search'];
 
 	query("UPDATE users SET ticketType = '".escape_string($ticket)."', ticketAuthorize = '".escape_string($adminID)."' WHERE ID = '".escape_string($user)."'");
-	if(isset($search))
+	if(!empty($search))
 	{
 		refresh("index.php?inc=userlogin&action=main&search=$search", 0);
+	}
+	elseif(!empty($user))
+	{
+		refresh("index.php?inc=userlogin&action=main&search=$user", 0);
 	}
 	else
 	{
@@ -41,7 +45,7 @@ elseif ($action == "main")
 {
 	$search = $_REQUEST['search'];
 
-	$query = query("SELECT * FROM users WHERE ID != 1 AND nick LIKE '%".escape_string($search)."%' OR ID != 1 AND name LIKE '%".escape_string($search)."%'");
+	$query = query("SELECT * FROM users WHERE ID != 1 AND (nick LIKE '%".escape_string($search)."%' OR name LIKE '%".escape_string($search)."%' OR ID = '$search')");
 	$num = num($query);
 	echo "<a href=index.php?inc=userlogin>Tilbake til søkesiden</a>";
 
@@ -70,7 +74,7 @@ elseif ($action == "main")
 		echo "</td><td><input type=submit value='".$msg['38']."'>";
 		echo "</form></td>";
 		*/
-		if($row->isHere == 0)
+		if($row->tickettype == 0)
 		{
 			echo "<td bgcolor=green><a href=index.php?inc=userlogin&action=login&user=$row->ID>$form[41]</a>";
 		}
@@ -108,7 +112,7 @@ elseif ($action == "login") {
 	elseif($r->userIsToBeDasked == 2) echo " bgcolor=red>";
 	echo ">";
 	osgl_table("<a href=index.php?inc=userlogin>".lang("Back to searchpage", "inc_userlogin", "link to go back to userlogin main")."</a>","");
-	if(acl_access("adminUsers")) $editLink = "<a href=index.php?inc=useradmin&user=$r->ID>".lang("Edit user", "inc_userlogin", "Text to display if acl_access(adminUsers) to jump to the useradmin-page")."</a>";
+	if(acl_access("adminUsers")) $editLink = "<a href=index.php?inc=useradmin&user=$escUser>".lang("Edit user", "inc_userlogin", "Text to display if acl_access(adminUsers) to jump to the useradmin-page")."</a>";
 /*
 	if($r->isHere == 0) osgl_table($editLink, "<a href=?inc=userlogin&action=doLogin&user=$user>".lang("Mark as arrived", "inc_userlogin", "link to mark user as arrived")."</a>");
 	else osgl_table($editLink, "<a href=?inc=userlogin&action=doLogout&user=$user>".lang("Mark as departed", "inc_userlogin", "link to mark user as departed")."</a>");
