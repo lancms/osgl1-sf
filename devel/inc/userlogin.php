@@ -135,7 +135,7 @@ elseif ($action == "login") {
 			$ticketarray .= "<input type=hidden name=userID value=$row->ID>";
 			$ticketarray .= "<input type=submit value='".$msg['38']."'>";
 		$ticketarray .= "</form>";
-	osgl_table("", $ticketarray);
+	osgl_table($editLink, $ticketarray);
 	osgl_table(lang("Users First name", "inc_userlogin", "Field to show in userlogin for first name"), $r->firstName);
 	osgl_table(lang("Users Last name", "inc_userlogin", "Field to show in userlogin for last name"), $r->lastName);
 	osgl_table(lang("Users birthday/birthmonth/birthyear", "inc_userlogin", "Field to show in userlogin for birthday"), $r->birthDAY."/".$r->birthMONTH."/".$r->birthYEAR);
