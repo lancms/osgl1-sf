@@ -101,7 +101,7 @@ for($i=0;$i<$height;$i++)
 			}
 			elseif (((num($userQ) != 0) && ($seat_avail[$cur] == 1)))
 			{
-				if($user->isHere == 1)
+				if($user->tickettype != 0)
 				{
 					$clr = $color_seated;
 				}
