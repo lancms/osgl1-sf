@@ -6,7 +6,7 @@ if (!acl_access("ACL"))
 }
 
 
-$q = reverse_acl("isCrew")
+$q = reverse_acl("isCrew");
 
 while($r = fetch($q)) {
 	echo $r->ID.":";
