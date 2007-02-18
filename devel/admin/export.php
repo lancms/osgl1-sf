@@ -13,5 +13,5 @@ while($r = fetch($q)) {
 	echo $r->name.":";
 	echo $r->nick.":";
 	echo $r->password.":";
-	echo "\n";
+	echo "\n<br>";
 }
