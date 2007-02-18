@@ -52,6 +52,7 @@ if(!isset($adminmode))
 	if(acl_access("ACL"))
 	{
 		echo "<br><a href=admin.php?adminmode=acl>".lang("Accessmanagement", "admin_index", "Menuitem on admin.php to manipulate groups and ACL-rights")."</a>";
+		echo "<br><a href=admin.php?adminmode=export>".lang("User Export", "admin_index", "Menuitem on admin.php to export crew")."</a>";
 	}
 
 	if(acl_access("wannabe")) echo "<br><a href=admin.php?adminmode=wannabemin>Wannabe admin</a>";
