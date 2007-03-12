@@ -98,12 +98,12 @@ if (($action == "view") || (!isset($action)))
 	}
 	osgl_table($form['77'], $birthdayinfo);
 
-	echo "<tr><td class=profileLeft width=30%>$profile[9]</td><td class=profileRight>";
+	echo "<tr><td class=profileLeft width=30%>$profile[9]</td><td class=profileRight>\n";
 
 	if(acl_access("ACL")) {
 		// User is allowed to make changes to ACL
 		$groups = query("SELECT * FROM groups");
-		echo "<select name=myGroup>";
+		echo "<select name=myGroup>\n";
 		//$Gnum = num($groups);
 		while($Group = fetch($groups))
 		{
@@ -113,9 +113,9 @@ if (($action == "view") || (!isset($action)))
 			{
 				echo " SELECTED";
 			}
-			echo ">$Group->groupname</option>";
+			echo ">$Group->groupname</option>\n";
 		}
-		echo "</select>";
+		echo "</select>\n";
 	}
 	else
 	{
@@ -125,11 +125,11 @@ if (($action == "view") || (!isset($action)))
 
 	}
 
-	echo "</td></tr>";
+	echo "</td></tr>\n";
 
-	echo "<tr><td class=profileLeft width=30%>$profile[13]</td><td class=profileRight>";
+	echo "<tr><td class=profileLeft width=30%>$profile[13]</td><td class=profileRight>\n";
 
-	echo "<select name=allowPublic>";
+	echo "<select name=allowPublic>\n";
 
 	for($y=0;$y<count($allowPublicFor);$y++)
 	{
@@ -140,14 +140,14 @@ if (($action == "view") || (!isset($action)))
 			echo " SELECTED";
 		}
 
-		echo ">$allowPublicFor[$y]</option>";
+		echo ">$allowPublicFor[$y]</option>\n";
 	}
 
 	echo "</select>";
 	if(!config("disable_userstyle")) {
-		echo "<tr><td class=profileLeft width=30%>$profile[14]</td><td class=profileRight>";
+		echo "<tr><td class=profileLeft width=30%>$profile[14]</td><td class=profileRight>\n";
 
-		echo "<select name=userDesign>";
+		echo "<select name=userDesign>\n";
 
 		for ($y=0;$y<count($styles);$y++)
 		{
@@ -158,16 +158,16 @@ if (($action == "view") || (!isset($action)))
 				echo " SELECTED";
 			}
 
-			echo ">$styles[$y]</option>";
+			echo ">$styles[$y]</option>\n";
 		}
 
-		echo "</select>";
+		echo "</select>\n";
 
-		echo "</td></tr>";
+		echo "</td></tr>\n";
 	}
-	echo "</table>";
+	echo "</table>\n";
 
-	echo "<br><input type=submit value='$form[15]'>";
+	echo "<br><input type=submit value='$form[15]'>\n";
 
 }
 elseif ($action == "edit")
