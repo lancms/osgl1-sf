@@ -237,6 +237,7 @@ while ($read = readdir($dir))
 {
 	// FIXME: I believe there are nicer ways to do this. :-)
    if (($read == ".") || ($read == "..") || (!is_dir($style_folders.$read)));
+	elseif (preg_match ('/^\.(.*)/', $read));
    else
 	{
       $styles[] = $read;
