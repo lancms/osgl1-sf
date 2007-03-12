@@ -16,8 +16,9 @@ if (!isset($action))
 }
 if ($action == "search")
 {
-	echo "<form method=POST action=index.php?inc=userlogin&action=main>";
-	echo "<input type=text name=search> <input type=submit value='".$msg['37']."'>";
+	echo "<form method=POST action=index.php?inc=userlogin&action=main>\n";
+	echo "<input type=text name=search> <input type=submit value='".$msg['37']."'>\n";
+	echo "</form>\n";
 }
 
 elseif ($action == "ticketselect")
