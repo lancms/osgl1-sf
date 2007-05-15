@@ -29,8 +29,8 @@ birthDAY:::birthMONTH:::birthYEAR:::myGroup:::userDesign"
 17 = wannabe changed. syntax: none
 18 = wannabe removed. syntax: none
 19 = users dasklevel changed. syntax: new level
-20 = admin added wannabe-comment. syntax: wannabeComment.approve::comment // 0 = dontknow, 1 = yes, 2 = no
-21 = admin changed wannabe-comment. syntax: wannabeComment.approve::comment // 0 = dontknow, 1 = yes, 2 = no
+20 = admin added wannabe-comment. syntax: userID::wannabeComment.approve::comment // 0 = dontknow, 1 = yes, 2 = no
+21 = admin changed wannabe-comment. syntax: userID::wannabeComment.approve::comment // 0 = dontknow, 1 = yes, 2 = no
 22 = new news added. syntax: header::content
 23 = news edited. syntax: ID::header::content
 24 = news deleted. syntax: ID::header::content
