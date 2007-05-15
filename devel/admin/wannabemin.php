@@ -596,10 +596,12 @@ elseif ($action == "AddComment")
 	if ($num != 0)
 	{
 		$query = sprintf ("UPDATE wannabeComment SET comment = '%s', display = $display, approve = '%s', logUNIX = '$lastUpdate' WHERE user = %s AND adminID = %s", escape_string($Com), escape_string($Like), escape_string($ID), escape_string($user));
+		dblog(20, $Like."::".$Com);
 	}
 	else
 	{
 		$query = sprintf ("INSERT INTO wannabeComment (ID, comment, approve, user, adminID, logUNIX, display) VALUES (NULL, '%s', '%s', '%s', '%s', '$lastUpdate', $display)", escape_string($Com), escape_string($Like), escape_string($ID), escape_string($user));
+		dblog(21, $Like."::".$Com);
 	}
 	$result = query($query);
 	echo lang("Comment added", "admin_wannabemin", "Text used in wannabemin");

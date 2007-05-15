@@ -28,7 +28,7 @@ if ($action == "add")
 	$me = getcurrentuserid();
 
 	$query = query("INSERT INTO news SET header = '".escape_string($header)."', text = '".escape_string($text)."', poster = '".escape_string($me)."', logUNIX = ".time());
-
+	dblog(22, $header."::".$text);
 	refresh("admin.php?adminmode=news", "0");
 }
 elseif ($action == "list")
@@ -67,7 +67,11 @@ elseif ($action == "list")
 }
 elseif (($action == "delete") && (isset($editID)))
 {
+	$q = query("SELECT * FROM news WHERE ID = '".escape_string($editID)."'");
+	$r = fetch($q);
+	
 	query("DELETE FROM news WHERE ID = '".escape_string($editID)."'");
+	dblog(24, $r->ID."::".$r->header."::".$r->text);
 	refresh("admin.php?adminmode=news", 0);
 }
 elseif (($action == "edit") && (isset($editID)))
@@ -100,6 +104,7 @@ elseif (($action == "editsave") && (isset($editID)))
 	$query = sprintf ('UPDATE news SET text="%s", header="%s", poster=%s, logUNIX=%s WHERE ID=%s', escape_string($text), escape_string($header), $me, time(), escape_string($editID));
 
 	query ($query);
+	dblog(23, $editID."::".$header."::".$text);
 	refresh("admin.php?adminmode=news", "0");
 }
 
