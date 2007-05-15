@@ -104,7 +104,7 @@ elseif (($action == "editsave") && (isset($editID)))
 	$query = sprintf ('UPDATE news SET text="%s", header="%s", poster=%s, logUNIX=%s WHERE ID=%s', escape_string($text), escape_string($header), $me, time(), escape_string($editID));
 
 	query ($query);
-	dblog(23, $editID."::".$header."::".$text);
+	dblog(23, $editID."::".$header."::".$text); // log
 	refresh("admin.php?adminmode=news", "0");
 }
 
