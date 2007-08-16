@@ -39,8 +39,8 @@ if(config("usepage_forum")) write_menu("forum.php", lang("Forum", "style_menu", 
 if(config("usepage_partyweb")) write_menu("partyweb/", lang("Partyweb", "style_menu", "menuitem in write_menu"));
 if(config("usepage_show_stats")) write_menu("index.php?inc=stats", lang("Statistics", "style_menu", "Menuitem for stats"));
 #write_menu("http://forum.globelan.net", "Forum");
-for($i=0;$i<=count($menyitem);$i++) {
-	write_menu($menyitem[$i]['url'], $menuitem[$i]['text']);
+for($i=0;$i<=count($menuitem);$i++) {
+	write_menu($menuitem[$i]['url'], $menuitem[$i]['text']);
 }
 if(getcurrentuserid() == 1) {
 

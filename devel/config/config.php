@@ -150,7 +150,7 @@ $seatsize = 10;
  *
  */
 
-$menyitem[0]['url'] = "http://forum.globelan.net";
+$menuitem[0]['url'] = "http://forum.globelan.net";
 $menuitem[0]['text'] = "Forum";
 
 $menuitem[1]['url'] = "http://bilder.globelan.net";
