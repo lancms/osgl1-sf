@@ -23,7 +23,7 @@ for ($i=0;$i<$rows;$i++)
 	$q = $result[2];
 	$a = $result[3];
 
-	echo "<br><li><a href=#$ID>Q: $q</a>\n";
+	echo "<br><li><a href='#FAQ$ID'>Q: $q</a>\n";
 }
 
 $query = query("SELECT * FROM faq ORDER BY ID");
@@ -43,7 +43,7 @@ for ($k=0;$k<$rows;$k++)
 		echo "<hr>";
 	}
 
-	echo "\n\n<br><a name=#$ID><b>Q: $q</a></b><br>";
+	echo "\n\n<br><a name='#FAQ$ID'><b>Q: $q</b></a><br>";
 	if ($_COOKIE['userrank'] == 2)
 	{
 		$select = query("SELECT nick FROM users WHERE ID = '".escape_string($posted_by)."'");
