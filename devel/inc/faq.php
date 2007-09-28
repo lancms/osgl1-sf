@@ -43,7 +43,7 @@ for ($k=0;$k<$rows;$k++)
 		echo "<hr>";
 	}
 
-	echo "\n\n<br><a name='#FAQ$ID'><b>Q: $q</b></a><br>";
+	echo "\n\n<br><a name='FAQ$ID' id='FAQ$ID'><b>Q: $q</b></a><br>";
 	if ($_COOKIE['userrank'] == 2)
 	{
 		$select = query("SELECT nick FROM users WHERE ID = '".escape_string($posted_by)."'");
