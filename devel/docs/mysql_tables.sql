@@ -560,6 +560,14 @@ CREATE TABLE `wannabeUsers` (
   PRIMARY KEY  (`ID`)
 ) TYPE=MyISAM;
 
+CREATE TABLE `pedometers` (
+   `ID` int(10) NOT NULL auto_increment,
+   `unixTIME` int(25) unsigned default '0',
+   `userID` int(11) default '1',
+   `steps` int(7) default '0',
+   PRIMARY KEY (`ID`)
+) TYPE=MyISAM;
+
 
 
 

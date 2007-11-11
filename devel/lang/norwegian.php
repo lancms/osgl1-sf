@@ -384,6 +384,9 @@ $acl[21]['access'] = "kioskAdmin";
 $acl[22]['name'] = "Vise logger";
 $acl[22]['access'] = "logs";
 
+$acl[23]['name'] = "Registrer pedometer";
+$acl[23]['access'] = "pedometer_write";
+
 $logtype[0] = '(dbdefault)';
 $logtype[1] = '(funcdefault)';
 $logtype[2] = 'Ny sesjon';

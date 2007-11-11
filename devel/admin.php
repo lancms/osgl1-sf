@@ -84,6 +84,10 @@ if(!isset($adminmode))
 	{
 		echo "<br><a href=admin.php?adminmode=kiosk>".lang("Kioskadmin", "admin_index", "Menuitem in admin.php to mange the kiosk")."</a>";
 	}
+	if(acl_access("pedometer_write"))
+	{
+		echo "<br><a href=admin.php?adminmode=pedometer>".lang("Pedometer admin", "admin_index", "Menuitem in admin.php to manage pedometer")."</a>";
+	}
 }
 elseif ($adminmode != "")
 {
