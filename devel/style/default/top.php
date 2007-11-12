@@ -11,6 +11,12 @@ require_once 'config/config.php';
     <title>OSGlobeLan</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 	<link rel="stylesheet" type="text/css" href="style/default/style.css">
+	<script src="http://www.google-analytics.com/urchin.js" type="text/javascript">
+	</script>
+	<script type="text/javascript">
+	_uacct = "UA-2253518-8";
+	urchinTracker();
+</script>
   </head>
 
   <body>
@@ -29,5 +35,5 @@ require_once 'config/config.php';
 
 		</ul>
 	  </div>
-	
+
 	  <div id="content">
