@@ -9,7 +9,7 @@
 
 <h2>About OSGlobeLAN</h2>
 
-<p><b>The original description:</b> A LAN-party organizing system. Has seatregistration, composignup, polls, support for multiple designs and much more. The system is primarily used by <a class='link' href='www.globelan.net'>GlobeLAN</a>, but we try to make it as useable as possible for other parties too.</p>
+<p><b>The original description:</b> A LAN-party organizing system. Has seatregistration, composignup, polls, support for multiple designs and much more. The system is primarily used by <a class='link' href='http://www.globelan.net'>GlobeLAN</a>, but we try to make it as useable as possible for other parties too.</p>
 
 <p><b>Current version: </b>
 <br />Development of the 1.0 codebase have been halted, only serious security issues will be fixed.
