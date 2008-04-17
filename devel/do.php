@@ -1,5 +1,6 @@
 <?php
 
+
 require_once 'config/config.php';
 
 $action = $_GET['action'];
