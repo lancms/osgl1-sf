@@ -388,6 +388,10 @@ $acl[22]['access'] = "logs";
 $acl[23]['name'] = "Register pedometer";
 $acl[23]['access'] = "pedometer_write";
 
+$acl[24]['name'] = "Allow seatreg";
+$acl[24]['access'] = "seatreg_allowed";
+
+
 $logtype[0] = '(dbdefault)';
 $logtype[1] = '(funcdefault)';
 $logtype[2] = 'New session';

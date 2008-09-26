@@ -579,6 +579,7 @@ INSERT INTO groups SET ID = 1, groupname = 'Anonymous';
 INSERT INTO groups SET ID = 2, groupname = 'User';
 INSERT INTO groups SET ID = 3, groupname = 'Superuser';
 INSERT INTO acls SET groupID = 3, access = 'root', value = 1;
+INSERT INTO acls SET groupID = 2, access = 'seatreg_allowed', value = 1;
 
 -- Add something into the polldatabase...
 INSERT INTO pollQ SET ID = 1, text = 'Do you like this system?', isOpen = 1, maxVotes = 1;

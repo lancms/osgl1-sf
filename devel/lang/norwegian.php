@@ -387,6 +387,9 @@ $acl[22]['access'] = "logs";
 $acl[23]['name'] = "Registrer pedometer";
 $acl[23]['access'] = "pedometer_write";
 
+$acl[24]['name'] = "Tillatt plassregistrering";
+$acl[24]['access'] = "seatreg_allowed";
+
 $logtype[0] = '(dbdefault)';
 $logtype[1] = '(funcdefault)';
 $logtype[2] = 'Ny sesjon';
