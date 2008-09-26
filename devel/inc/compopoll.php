@@ -19,7 +19,7 @@ $action = $_GET['action'];
 if (!isset($action))
 {
 	echo $msg['41'];
-	echo "<table>";
+	echo "<table border=1>";
 	echo "<form method=POST action=index.php?inc=compopoll&action=editvote>";
 	$q = query("SELECT * FROM compoPoll");
 	while ($r = fetch($q))
