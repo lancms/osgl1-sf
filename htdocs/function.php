@@ -6,6 +6,9 @@ function printmenu ()
 
 	$menu['index']['title'] = 'Main';
 	$menu['index']['url'] = 'index.php';
+	
+	$menu['screens']['title'] = 'Screenshots';
+	$menu['screens']['url'] = 'screenshots.php';
 
 	$menu['sf']['title'] = 'Project site';
 	$menu['sf']['url'] = 'http://www.sourceforge.net/projects/osglobelan/';
